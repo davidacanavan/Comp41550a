@@ -18,6 +18,8 @@
 		2B394B6C16ACE7390032D71E /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B394B6B16ACE7390032D71E /* Default-568h@2x.png */; };
 		2B394B6F16ACE7390032D71E /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2B394B6D16ACE7390032D71E /* MainStoryboard.storyboard */; };
 		2B394B7216ACE7390032D71E /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B394B7116ACE7390032D71E /* ViewController.m */; };
+		2B394B7A16ACE7BD0032D71E /* PolygonView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B394B7916ACE7BD0032D71E /* PolygonView.m */; };
+		2B394B7D16ACE7D10032D71E /* PolygonShape.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B394B7C16ACE7D10032D71E /* PolygonShape.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,6 +39,10 @@
 		2B394B6E16ACE7390032D71E /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
 		2B394B7016ACE7390032D71E /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		2B394B7116ACE7390032D71E /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		2B394B7816ACE7BD0032D71E /* PolygonView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PolygonView.h; sourceTree = "<group>"; };
+		2B394B7916ACE7BD0032D71E /* PolygonView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PolygonView.m; sourceTree = "<group>"; };
+		2B394B7B16ACE7D10032D71E /* PolygonShape.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PolygonShape.h; sourceTree = "<group>"; };
+		2B394B7C16ACE7D10032D71E /* PolygonShape.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PolygonShape.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,6 +95,10 @@
 				2B394B7016ACE7390032D71E /* ViewController.h */,
 				2B394B7116ACE7390032D71E /* ViewController.m */,
 				2B394B5C16ACE7390032D71E /* Supporting Files */,
+				2B394B7816ACE7BD0032D71E /* PolygonView.h */,
+				2B394B7916ACE7BD0032D71E /* PolygonView.m */,
+				2B394B7B16ACE7D10032D71E /* PolygonShape.h */,
+				2B394B7C16ACE7D10032D71E /* PolygonShape.m */,
 			);
 			path = HelloPoly;
 			sourceTree = "<group>";
@@ -176,6 +186,8 @@
 				2B394B6216ACE7390032D71E /* main.m in Sources */,
 				2B394B6616ACE7390032D71E /* AppDelegate.m in Sources */,
 				2B394B7216ACE7390032D71E /* ViewController.m in Sources */,
+				2B394B7A16ACE7BD0032D71E /* PolygonView.m in Sources */,
+				2B394B7D16ACE7D10032D71E /* PolygonShape.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
