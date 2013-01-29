@@ -43,12 +43,12 @@
 	
 	if( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone )
     {
-		background = [CCSprite spriteWithFile:@"Default.png"];
+		background = [CCSprite spriteWithFile: @"Default.png"];
 		background.rotation = 90;
 	} else {
-		background = [CCSprite spriteWithFile:@"Default-Landscape~ipad.png"];
+		background = [CCSprite spriteWithFile: @"Default-Landscape~ipad.png"];
 	}
-	background.position = ccp(size.width/2, size.height/2);
+	background.position = ccp(size.width / 2, size.height / 2);
 
 	// add the label as a child to this Layer
 	[self addChild: background];
@@ -60,7 +60,7 @@
 -(void) makeTransition:(ccTime)dt
 {
     CCDirector *director = [CCDirector sharedDirector];
-	[director replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:[HelloWorldLayer scene] withColor:ccWHITE]];
+	[director replaceScene: [CCTransitionFade transitionWithDuration: 1.0 scene: [HelloWorldLayer scene] withColor:ccWHITE]];
 }
 
 @end
