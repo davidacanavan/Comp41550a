@@ -59,7 +59,7 @@
 		2B18316016BAE7D200B20DBC = {
 			isa = PBXGroup;
 			children = (
-				2B18317516BAE7D300B20DBC /* Calc Part 1 */,
+				2B18317516BAE7D300B20DBC /* Calc Part 0 */,
 				2B18316E16BAE7D300B20DBC /* Frameworks */,
 				2B18316C16BAE7D300B20DBC /* Products */,
 			);
@@ -83,7 +83,7 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		2B18317516BAE7D300B20DBC /* Calc Part 1 */ = {
+		2B18317516BAE7D300B20DBC /* Calc Part 0 */ = {
 			isa = PBXGroup;
 			children = (
 				2B18317E16BAE7D300B20DBC /* AppDelegate.h */,
@@ -95,6 +95,7 @@
 				2B18319516BAE85A00B20DBC /* CalcModel.h */,
 				2B18319616BAE85A00B20DBC /* CalcModel.m */,
 			);
+			name = "Calc Part 0";
 			path = "Calc Part 1";
 			sourceTree = "<group>";
 		};
