@@ -22,14 +22,14 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		2B18316B16BAE7D300B20DBC /* Calc Part 1.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Calc Part 1.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2B18316B16BAE7D300B20DBC /* Calc Part 0.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Calc Part 0.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2B18316F16BAE7D300B20DBC /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		2B18317116BAE7D300B20DBC /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		2B18317316BAE7D300B20DBC /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		2B18317716BAE7D300B20DBC /* Calc Part 1-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Calc Part 1-Info.plist"; sourceTree = "<group>"; };
+		2B18317716BAE7D300B20DBC /* Calc Part 0-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Calc Part 0-Info.plist"; sourceTree = "<group>"; };
 		2B18317916BAE7D300B20DBC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		2B18317B16BAE7D300B20DBC /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		2B18317D16BAE7D300B20DBC /* Calc Part 1-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Calc Part 1-Prefix.pch"; sourceTree = "<group>"; };
+		2B18317D16BAE7D300B20DBC /* Calc Part 0-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Calc Part 0-Prefix.pch"; sourceTree = "<group>"; };
 		2B18317E16BAE7D300B20DBC /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		2B18317F16BAE7D300B20DBC /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		2B18318116BAE7D300B20DBC /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
@@ -68,7 +68,7 @@
 		2B18316C16BAE7D300B20DBC /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				2B18316B16BAE7D300B20DBC /* Calc Part 1.app */,
+				2B18316B16BAE7D300B20DBC /* Calc Part 0.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -101,10 +101,10 @@
 		2B18317616BAE7D300B20DBC /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				2B18317716BAE7D300B20DBC /* Calc Part 1-Info.plist */,
+				2B18317716BAE7D300B20DBC /* Calc Part 0-Info.plist */,
 				2B18317816BAE7D300B20DBC /* InfoPlist.strings */,
 				2B18317B16BAE7D300B20DBC /* main.m */,
-				2B18317D16BAE7D300B20DBC /* Calc Part 1-Prefix.pch */,
+				2B18317D16BAE7D300B20DBC /* Calc Part 0-Prefix.pch */,
 				2B18318116BAE7D300B20DBC /* Default.png */,
 				2B18318316BAE7D300B20DBC /* Default@2x.png */,
 				2B18318516BAE7D300B20DBC /* Default-568h@2x.png */,
@@ -115,9 +115,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		2B18316A16BAE7D200B20DBC /* Calc Part 1 */ = {
+		2B18316A16BAE7D200B20DBC /* Calc Part 0 */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 2B18318F16BAE7D300B20DBC /* Build configuration list for PBXNativeTarget "Calc Part 1" */;
+			buildConfigurationList = 2B18318F16BAE7D300B20DBC /* Build configuration list for PBXNativeTarget "Calc Part 0" */;
 			buildPhases = (
 				2B18316716BAE7D200B20DBC /* Sources */,
 				2B18316816BAE7D200B20DBC /* Frameworks */,
@@ -127,9 +127,9 @@
 			);
 			dependencies = (
 			);
-			name = "Calc Part 1";
+			name = "Calc Part 0";
 			productName = "Calc Part 1";
-			productReference = 2B18316B16BAE7D300B20DBC /* Calc Part 1.app */;
+			productReference = 2B18316B16BAE7D300B20DBC /* Calc Part 0.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -141,7 +141,7 @@
 				LastUpgradeCheck = 0450;
 				ORGANIZATIONNAME = ie.ucd.csi.comp41550;
 			};
-			buildConfigurationList = 2B18316516BAE7D200B20DBC /* Build configuration list for PBXProject "Calc Part 1" */;
+			buildConfigurationList = 2B18316516BAE7D200B20DBC /* Build configuration list for PBXProject "Calc Part 0" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -153,7 +153,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				2B18316A16BAE7D200B20DBC /* Calc Part 1 */,
+				2B18316A16BAE7D200B20DBC /* Calc Part 0 */,
 			);
 		};
 /* End PBXProject section */
@@ -261,10 +261,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Calc Part 1/Calc Part 1-Prefix.pch";
-				INFOPLIST_FILE = "Calc Part 1/Calc Part 1-Info.plist";
+				GCC_PREFIX_HEADER = "Calc Part 1/Calc Part 0-Prefix.pch";
+				INFOPLIST_FILE = "Calc Part 1/Calc Part 0-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Calc Part 0";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -273,10 +273,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Calc Part 1/Calc Part 1-Prefix.pch";
-				INFOPLIST_FILE = "Calc Part 1/Calc Part 1-Info.plist";
+				GCC_PREFIX_HEADER = "Calc Part 1/Calc Part 0-Prefix.pch";
+				INFOPLIST_FILE = "Calc Part 1/Calc Part 0-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Calc Part 0";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -284,7 +284,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		2B18316516BAE7D200B20DBC /* Build configuration list for PBXProject "Calc Part 1" */ = {
+		2B18316516BAE7D200B20DBC /* Build configuration list for PBXProject "Calc Part 0" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				2B18318D16BAE7D300B20DBC /* Debug */,
@@ -293,13 +293,14 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		2B18318F16BAE7D300B20DBC /* Build configuration list for PBXNativeTarget "Calc Part 1" */ = {
+		2B18318F16BAE7D300B20DBC /* Build configuration list for PBXNativeTarget "Calc Part 0" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				2B18319016BAE7D300B20DBC /* Debug */,
 				2B18319116BAE7D300B20DBC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
