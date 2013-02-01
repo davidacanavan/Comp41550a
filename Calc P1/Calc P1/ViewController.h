@@ -13,9 +13,14 @@
 
 @property (nonatomic, strong) IBOutlet CalcModel *calcModel;
 @property (nonatomic, weak) IBOutlet UILabel *calcDisplay;
+@property (weak, nonatomic) IBOutlet UILabel *degreeRadiansDisplay;
+@property (weak, nonatomic) IBOutlet UILabel *binaryCalculationProgressDisplay;
+@property (weak, nonatomic) IBOutlet UILabel *memoryDisplay;
 @property (nonatomic) BOOL isInTheMiddleOfTypingSomething;
+@property (nonatomic) BOOL isDotUsedInCurrentNumber;
 
 - (IBAction)digitPressed:(UIButton *)sender;
 - (IBAction)operationPressed:(UIButton *)sender;
+- (IBAction)otherPressed:(UIButton *)sender;
 
 @end

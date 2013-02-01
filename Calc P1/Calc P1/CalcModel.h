@@ -12,8 +12,13 @@
 
 @property (nonatomic) double operand;
 @property (nonatomic) double waitingOperand;
+@property (nonatomic) double memoryStore;
 @property (nonatomic, strong) NSString *waitingOperation;
+@property (nonatomic, readonly) BOOL didOperationResultInError;
+@property (nonatomic, strong, readonly) NSString *operationErrorMessage;
+@property (nonatomic) BOOL isCalcInDegreeMode;
 
 -(double)performOperation:(NSString *)operation;
+-(void)performClear;
 
 @end
