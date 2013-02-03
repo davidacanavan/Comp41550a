@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "CalcModel.h"
+#import "CalcModelListener.h"
 
-@interface ViewController : UIViewController
+@interface ViewController : UIViewController <CalcModelListener>
 
 @property (nonatomic, strong) IBOutlet CalcModel *calcModel;
 @property (nonatomic, weak) IBOutlet UILabel *calcDisplay;
@@ -21,6 +22,6 @@
 
 - (IBAction)digitPressed:(UIButton *)sender;
 - (IBAction)operationPressed:(UIButton *)sender;
-- (IBAction)otherPressed:(UIButton *)sender;
+- (IBAction)backPressed:(UIButton *)sender;
 
 @end

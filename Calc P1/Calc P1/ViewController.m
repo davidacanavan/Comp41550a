@@ -51,76 +51,64 @@
 
 - (IBAction)operationPressed:(UIButton *)sender
 {
+    double screenValue = [self.calcDisplay.text doubleValue];
+    
     if(self.isInTheMiddleOfTypingSomething)
     {
-        self.calcModel.operand = [self.calcDisplay.text doubleValue];
+        self.calcModel.operand = screenValue;
         self.isInTheMiddleOfTypingSomething = NO;
         self.isDotUsedInCurrentNumber = NO;
     }
     
     NSString *operation = sender.titleLabel.text;
-    double result = [self.calcModel performOperation:operation];
+    double result = [self.calcModel performOperation:operation withScreenValueOf:screenValue];
     self.calcDisplay.text = [NSString stringWithFormat:@"%g", result];
     
     // Since if there is an error, the calculation will just return the operand we currently have. This way we can check for the error here.
     if (_calcModel.didOperationResultInError)
         [self showAlertDialogWithMessage:_calcModel.operationErrorMessage];
+    
+    _binaryCalculationProgressDisplay.text = [_calcModel isWaitingOperationPending] ? [_calcModel getWaitingOperationAsString] : @"";
 }
 
-- (IBAction)otherPressed:(UIButton *)sender
+// I kept this entirely seperate as it's not really
+- (IBAction)backPressed:(UIButton *)sender
 {
-    NSString *operation = sender.titleLabel.text;
-    
-    if ([operation isEqualToString:@"C"])
+    if ([_calcDisplay.text length] == 1) // Then we can't move back, but we can put it to 0
     {
-        [_calcModel performClear]; // Ask the model to clear out all the internals
-        _calcDisplay.text = @"0"; // Set the text of the label to 0
-        _memoryDisplay.text = @"M: 0";
+        _calcDisplay.text = @"0";
         self.isInTheMiddleOfTypingSomething = NO;
     }
-    else if ([operation isEqualToString:@"Store"])
-    {
-        _calcModel.memoryStore = [_calcDisplay.text doubleValue]; // Overwrite the mem value
-        _memoryDisplay.text = [NSString stringWithFormat: @"M: %g", _calcModel.memoryStore]; // Tell the memory display label to show the new value
-    }
-    else if ([operation isEqualToString:@"Rec"])
-    {
-        _calcDisplay.text = [NSString stringWithFormat:@"%g", _calcModel.memoryStore];
-        _isInTheMiddleOfTypingSomething = YES;
-    }
-    else if ([operation isEqualToString:@"M+"])
-    {
-        _calcModel.memoryStore += [_calcDisplay.text doubleValue];
-        _memoryDisplay.text = [NSString stringWithFormat: @"M: %g", _calcModel.memoryStore]; // Tell the memory display label to show the new value
-    }
-    else if ([operation isEqualToString:@"D/R"])
-    {
-        NSString *updatedUIText = nil;
-        
-        // If in radians move to degrees & vice-versa, then update the ui
-        if (_calcModel.isCalcInDegreeMode) // switch to radians
-        {
-            _calcModel.isCalcInDegreeMode = NO;
-            updatedUIText = @"Rad";
-        }
-        else
-        {
-            _calcModel.isCalcInDegreeMode = YES;
-            updatedUIText = @"Deg";
-        }
-        
-        _degreeRadiansDisplay.text = updatedUIText;
-    }
-    else if ([operation isEqualToString:@"Back"])
-    {
-        if ([_calcDisplay.text length] == 1) // Then we can't move back, but we can put it to 0
-        {
-            _calcDisplay.text = @"0";
-            self.isInTheMiddleOfTypingSomething = NO;
-        }
-        else // Otherwise trim the last character off it
-            _calcDisplay.text = [_calcDisplay.text substringToIndex:_calcDisplay.text.length - 1];
-    }
+    else // Otherwise trim the last character off it
+        _calcDisplay.text = [_calcDisplay.text substringToIndex:_calcDisplay.text.length - 1];
+}
+
+-(void)onClearOperation // So here we just tell the UI we're putting everything to 0, the actual clearing is done by the model itself
+{
+    _calcDisplay.text = @"0"; 
+    _memoryDisplay.text = @"M: 0";
+    self.isInTheMiddleOfTypingSomething = NO;
+}
+
+-(void)onStoreOperation
+{
+    _memoryDisplay.text = [NSString stringWithFormat: @"M: %g", _calcModel.memoryStore]; // Tell the memory display label to show the new value
+}
+
+-(void)onMemoryRecallOperation // This doesn't actually effect the model
+{
+    //_calcDisplay.text = [NSString stringWithFormat:@"%g", _calcModel.memoryStore];
+    _isInTheMiddleOfTypingSomething = YES;
+}
+
+-(void)onMemoryPlusOperation
+{
+    _memoryDisplay.text = [NSString stringWithFormat: @"M: %g", _calcModel.memoryStore]; // Tell the memory display label to show the new value
+}
+
+-(void)onDegreeRadianOperation
+{
+    _degreeRadiansDisplay.text = _calcModel.isCalcInDegreeMode ? @"Deg" : @"Rad";
 }
 
 // Shows the alert dialog with custom message
@@ -133,6 +121,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    _calcModel.listener = self;
 	// Do any additional setup after loading the view, typically from a nib.
 }
 

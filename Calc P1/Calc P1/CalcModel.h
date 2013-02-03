@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "CalcModelListener.h"
 
 @interface CalcModel : NSObject
 
@@ -17,8 +18,10 @@
 @property (nonatomic, readonly) BOOL didOperationResultInError;
 @property (nonatomic, strong, readonly) NSString *operationErrorMessage;
 @property (nonatomic) BOOL isCalcInDegreeMode;
+@property (nonatomic, weak) id <CalcModelListener> listener;
 
--(double)performOperation:(NSString *)operation;
--(void)performClear;
+-(double)performOperation:(NSString *)operation withScreenValueOf:(double)screenValue;
+-(BOOL)isWaitingOperationPending;
+-(NSString *) getWaitingOperationAsString;
 
 @end

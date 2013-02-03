@@ -19,8 +19,9 @@ const double RADIAN_TO_DEGREE_CONVERSION_FACTOR = M_PI / 180;
 @synthesize didOperationResultInError = _didOperationResultInError;
 @synthesize operationErrorMessage = _operationErrorMessage;
 @synthesize isCalcInDegreeMode = _isCalcInDegreeMode;
+@synthesize listener = _listener;
 
--(double)performOperation:(NSString *)operation
+-(double)performOperation:(NSString *)operation withScreenValueOf:(double)screenValue
 {
     _didOperationResultInError = NO; // initially assume we haven't had a calcultion error
     
@@ -47,7 +48,32 @@ const double RADIAN_TO_DEGREE_CONVERSION_FACTOR = M_PI / 180;
         self.operand = sin(self.operand * (!_isCalcInDegreeMode ? 1 : RADIAN_TO_DEGREE_CONVERSION_FACTOR));
     else if ([operation isEqualToString:@"cos"])
         self.operand = cos(self.operand * (!_isCalcInDegreeMode ? 1 : RADIAN_TO_DEGREE_CONVERSION_FACTOR));
-    else
+    else if ([operation isEqualToString:@"C"])
+    {
+        [self performClear]; // Clear out the memory and tell the listener
+        [_listener onClearOperation];
+    }
+    else if ([operation isEqualToString:@"Rec"])
+    {
+        _operand = _memoryStore;
+        [_listener onMemoryRecallOperation]; // Tell the listener this just went down
+    }
+    else if ([operation isEqualToString:@"Store"])
+    {
+        _memoryStore = screenValue; // Overwrite the mem value with what's on screen.
+        [_listener onStoreOperation];
+    }
+    else if ([operation isEqualToString:@"M+"])
+    {
+        _memoryStore += screenValue;
+        [_listener onMemoryPlusOperation];
+    }
+    else if ([operation isEqualToString:@"D/R"])
+    {
+        _isCalcInDegreeMode = !_isCalcInDegreeMode; // Toggle the boolean
+        [_listener onDegreeRadianOperation];
+    }
+    else // This is if we get a binary operator or equals
     {
         [self performWaitingOperation];
         self.waitingOperation = operation;
@@ -67,6 +93,18 @@ const double RADIAN_TO_DEGREE_CONVERSION_FACTOR = M_PI / 180;
         self.operand = self.waitingOperand * self.operand;
     else if([@"/" isEqualToString:self.waitingOperation])
         if(self.operand) self.operand = self.waitingOperand / self.operand;
+    
+    _waitingOperation = nil; // Clear the waiting operation so we can check if it's running
+}
+
+-(BOOL)isWaitingOperationPending
+{
+    return _waitingOperation != nil;
+}
+
+-(NSString *) getWaitingOperationAsString
+{
+    return [NSString stringWithFormat:@"%g %@ %g", _waitingOperand, _waitingOperation, _operand];
 }
 
 -(void)performClear
@@ -82,5 +120,6 @@ const double RADIAN_TO_DEGREE_CONVERSION_FACTOR = M_PI / 180;
     _operationErrorMessage = message;
     _didOperationResultInError = YES;
 }
+
 
 @end
