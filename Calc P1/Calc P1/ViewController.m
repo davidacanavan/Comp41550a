@@ -68,10 +68,10 @@
     if (_calcModel.didOperationResultInError)
         [self showAlertDialogWithMessage:_calcModel.operationErrorMessage];
     
-    _binaryCalculationProgressDisplay.text = [_calcModel isWaitingOperationPending] ? [_calcModel getWaitingOperationAsString] : @"";
+    _binaryCalculationProgressDisplay.text = _calcModel.waitingOperationStatus;
 }
 
-// I kept this entirely seperate as it's not really
+// I kept this action entirely seperate as it's not really an operation that the calc does
 - (IBAction)backPressed:(UIButton *)sender
 {
     if ([_calcDisplay.text length] == 1) // Then we can't move back, but we can put it to 0

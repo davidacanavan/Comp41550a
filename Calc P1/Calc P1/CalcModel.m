@@ -20,10 +20,12 @@ const double RADIAN_TO_DEGREE_CONVERSION_FACTOR = M_PI / 180;
 @synthesize operationErrorMessage = _operationErrorMessage;
 @synthesize isCalcInDegreeMode = _isCalcInDegreeMode;
 @synthesize listener = _listener;
+@synthesize waitingOperationStatus = _waitingOperationStatus;
 
 -(double)performOperation:(NSString *)operation withScreenValueOf:(double)screenValue
 {
     _didOperationResultInError = NO; // initially assume we haven't had a calcultion error
+    _waitingOperationStatus = @"";
     
     if ([operation isEqualToString:@"sqrt"])
     {
@@ -85,26 +87,16 @@ const double RADIAN_TO_DEGREE_CONVERSION_FACTOR = M_PI / 180;
 
 -(void)performWaitingOperation
 {
-    if([@"+" isEqualToString:self.waitingOperation])
+    if ([@"+" isEqualToString:self.waitingOperation])
         self.operand = self.waitingOperand + self.operand;
-    else if([@"-" isEqualToString:self.waitingOperation])
+    else if ([@"-" isEqualToString:self.waitingOperation])
         self.operand = self.waitingOperand - self.operand;
-    else if([@"*" isEqualToString:self.waitingOperation])
+    else if ([@"*" isEqualToString:self.waitingOperation])
         self.operand = self.waitingOperand * self.operand;
-    else if([@"/" isEqualToString:self.waitingOperation])
-        if(self.operand) self.operand = self.waitingOperand / self.operand;
+    else if ([@"/" isEqualToString:self.waitingOperation])
+        if (self.operand) self.operand = self.waitingOperand / self.operand;
     
-    _waitingOperation = nil; // Clear the waiting operation so we can check if it's running
-}
-
--(BOOL)isWaitingOperationPending
-{
-    return _waitingOperation != nil;
-}
-
--(NSString *) getWaitingOperationAsString
-{
-    return [NSString stringWithFormat:@"%g %@ %g", _waitingOperand, _waitingOperation, _operand];
+    _waitingOperationStatus = [NSString stringWithFormat:@"%g %@ %g", _waitingOperand, _waitingOperation, _operand];
 }
 
 -(void)performClear

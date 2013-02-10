@@ -19,9 +19,8 @@
 @property (nonatomic, strong, readonly) NSString *operationErrorMessage;
 @property (nonatomic) BOOL isCalcInDegreeMode;
 @property (nonatomic, weak) id <CalcModelListener> listener;
+@property (nonatomic, readonly) NSString *waitingOperationStatus;
 
 -(double)performOperation:(NSString *)operation withScreenValueOf:(double)screenValue;
--(BOOL)isWaitingOperationPending;
--(NSString *) getWaitingOperationAsString;
 
 @end
