@@ -13,7 +13,7 @@
 
 +(id)scene
 {
-    return [[[self alloc] init] autorelease];
+    return [[self alloc] init];
 }
 
 -(id)init
@@ -25,6 +25,14 @@
     }
     
     return self;
+}
+
+- (void)peerPickerController:(GKPeerPickerController *)picker didConnectPeer:(NSString *)peerID toSession:(GKSession *)session
+{
+}
+- (void)peerPickerControllerDidCancel:(GKPeerPickerController *)picker
+{
+    
 }
 
 @end
