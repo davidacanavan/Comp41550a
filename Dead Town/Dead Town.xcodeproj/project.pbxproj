@@ -131,11 +131,12 @@
 		2BE0771816B74A720073F28F /* vec4.c in Sources */ = {isa = PBXBuildFile; fileRef = 2BE0771716B74A720073F28F /* vec4.c */; };
 		2BE0771D16B74A720073F28F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BE0771C16B74A720073F28F /* main.m */; };
 		2BE0772016B74A720073F28F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BE0771F16B74A720073F28F /* AppDelegate.m */; };
-		2BE0772316B74A720073F28F /* HelloWorldLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BE0772216B74A720073F28F /* HelloWorldLayer.m */; };
 		2BE0772616B74A720073F28F /* IntroLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BE0772516B74A720073F28F /* IntroLayer.m */; };
 		2BE0773E16B7673D0073F28F /* DTMenuScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BE0773D16B7673D0073F28F /* DTMenuScene.m */; };
 		2BE0774116B767540073F28F /* DTLevelSelectScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BE0774016B767540073F28F /* DTLevelSelectScene.m */; };
 		2BE0774416B768840073F28F /* DTGameScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BE0774316B768840073F28F /* DTGameScene.m */; };
+		2BF7A8C716C8631500D3063F /* DTMenuLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BF7A8C616C8631500D3063F /* DTMenuLayer.m */; };
+		2BF7A8C916C864D800D3063F /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2BF7A8C816C864D800D3063F /* Default-568h@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -397,8 +398,6 @@
 		2BE0771C16B74A720073F28F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		2BE0771E16B74A720073F28F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		2BE0771F16B74A720073F28F /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		2BE0772116B74A720073F28F /* HelloWorldLayer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HelloWorldLayer.h; sourceTree = "<group>"; };
-		2BE0772216B74A720073F28F /* HelloWorldLayer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HelloWorldLayer.m; sourceTree = "<group>"; };
 		2BE0772416B74A720073F28F /* IntroLayer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IntroLayer.h; sourceTree = "<group>"; };
 		2BE0772516B74A720073F28F /* IntroLayer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IntroLayer.m; sourceTree = "<group>"; };
 		2BE0773C16B7673D0073F28F /* DTMenuScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTMenuScene.h; sourceTree = "<group>"; };
@@ -407,6 +406,9 @@
 		2BE0774016B767540073F28F /* DTLevelSelectScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTLevelSelectScene.m; sourceTree = "<group>"; };
 		2BE0774216B768840073F28F /* DTGameScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTGameScene.h; sourceTree = "<group>"; };
 		2BE0774316B768840073F28F /* DTGameScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTGameScene.m; sourceTree = "<group>"; };
+		2BF7A8C516C8631500D3063F /* DTMenuLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTMenuLayer.h; sourceTree = "<group>"; };
+		2BF7A8C616C8631500D3063F /* DTMenuLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTMenuLayer.m; sourceTree = "<group>"; };
+		2BF7A8C816C864D800D3063F /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -432,6 +434,7 @@
 		2BE0758516B74A6D0073F28F = {
 			isa = PBXGroup;
 			children = (
+				2BF7A8C816C864D800D3063F /* Default-568h@2x.png */,
 				2BE075A616B74A6D0073F28F /* Dead Town */,
 				2BE0759316B74A6D0073F28F /* Frameworks */,
 				2BE0759116B74A6D0073F28F /* Products */,
@@ -466,10 +469,9 @@
 			isa = PBXGroup;
 			children = (
 				2BE0773616B7667D0073F28F /* base classes */,
-				2BE0772116B74A720073F28F /* HelloWorldLayer.h */,
-				2BE0772216B74A720073F28F /* HelloWorldLayer.m */,
 				2BE0773716B766880073F28F /* layers */,
 				2BE0773816B766930073F28F /* scenes */,
+				2BF7A8BF16C849EC00D3063F /* Maps */,
 				2BE075A716B74A6D0073F28F /* Resources */,
 				2BE075C116B74A6D0073F28F /* libs */,
 				2BE0771A16B74A720073F28F /* Supporting Files */,
@@ -854,6 +856,8 @@
 		2BE0773716B766880073F28F /* layers */ = {
 			isa = PBXGroup;
 			children = (
+				2BF7A8C516C8631500D3063F /* DTMenuLayer.h */,
+				2BF7A8C616C8631500D3063F /* DTMenuLayer.m */,
 			);
 			name = layers;
 			sourceTree = "<group>";
@@ -869,6 +873,13 @@
 				2BE0774316B768840073F28F /* DTGameScene.m */,
 			);
 			name = scenes;
+			sourceTree = "<group>";
+		};
+		2BF7A8BF16C849EC00D3063F /* Maps */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Maps;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -934,6 +945,7 @@
 				2BE075BD16B74A6D0073F28F /* Icon@2x.png in Resources */,
 				2BE075C016B74A6D0073F28F /* iTunesArtwork in Resources */,
 				2BE076FE16B74A710073F28F /* ChangeLog in Resources */,
+				2BF7A8C916C864D800D3063F /* Default-568h@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1046,11 +1058,11 @@
 				2BE0771816B74A720073F28F /* vec4.c in Sources */,
 				2BE0771D16B74A720073F28F /* main.m in Sources */,
 				2BE0772016B74A720073F28F /* AppDelegate.m in Sources */,
-				2BE0772316B74A720073F28F /* HelloWorldLayer.m in Sources */,
 				2BE0772616B74A720073F28F /* IntroLayer.m in Sources */,
 				2BE0773E16B7673D0073F28F /* DTMenuScene.m in Sources */,
 				2BE0774116B767540073F28F /* DTLevelSelectScene.m in Sources */,
 				2BE0774416B768840073F28F /* DTGameScene.m in Sources */,
+				2BF7A8C716C8631500D3063F /* DTMenuLayer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
