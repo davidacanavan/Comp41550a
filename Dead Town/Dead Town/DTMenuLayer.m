@@ -8,6 +8,8 @@
 
 #import "DTMenuLayer.h"
 #import "DTLevelSelectScene.h"
+#import "GooeyStatics.h"
+
 @implementation DTMenuLayer
 
 -(id)init
@@ -24,8 +26,8 @@
         [self addChild: titleLabel];
         
         // Two menu items for one and two player modes
-        CCMenuItemFont *onePlayerMenuItem = [self menuItemWithString:@"One Player" fontName:fontName target:self selector:@selector(onePlayerModeSelected) fontSize:22];
-        CCMenuItemFont *twoPlayerMenuItem = [self menuItemWithString:@"Two Player" fontName:fontName target:self selector:@selector(onePlayerModeSelected) fontSize:22];
+        CCMenuItemFont *onePlayerMenuItem = [GooeyStatics menuItemWithString:@"One Player" fontName:fontName target:self selector:@selector(onePlayerModeSelected) fontSize:22];
+        CCMenuItemFont *twoPlayerMenuItem = [GooeyStatics menuItemWithString:@"Two Player" fontName:fontName target:self selector:@selector(twoPlayerModeSelected) fontSize:22];
         CCMenu *menu = [CCMenu menuWithItems:onePlayerMenuItem, twoPlayerMenuItem, nil];
         [menu alignItemsVerticallyWithPadding:5]; // Stack the menu items on top of each other
         [menu setPosition:ccp(screen.width / 2, screen.height / 3)];
@@ -35,23 +37,25 @@
     return self;
 }
 
--(CCMenuItemFont *)menuItemWithString:(NSString *)string fontName:(NSString *)fontName target:(id)target selector:(SEL)selector fontSize:(int)fontSize
-{
-    CCMenuItemFont *item = [CCMenuItemFont itemWithString:string target:target selector:selector];
-    [item setFontName:fontName];
-    [item setFontSize:fontSize];
-    return item;
-}
-
 // The one player mode has been selected - now we just have to replace the scene with the level select scene
 -(void)onePlayerModeSelected
 {
-    [[CCDirector sharedDirector] replaceScene: [DTLevelSelectScene scene]]; 
+    CCDirector *director = [CCDirector sharedDirector];
+    [director replaceScene: [CCTransitionFade transitionWithDuration: 1.0 scene: [DTLevelSelectScene scene] withColor:ccWHITE]];
 }
 
+// In this case we scan for another device using gamekit
 -(void)twoPlayerModeSelected
 {
-    
 }
 
+
+
 @end
+
+
+
+
+
+
+

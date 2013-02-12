@@ -137,6 +137,8 @@
 		2BE0774416B768840073F28F /* DTGameScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BE0774316B768840073F28F /* DTGameScene.m */; };
 		2BF7A8C716C8631500D3063F /* DTMenuLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BF7A8C616C8631500D3063F /* DTMenuLayer.m */; };
 		2BF7A8C916C864D800D3063F /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2BF7A8C816C864D800D3063F /* Default-568h@2x.png */; };
+		2BF7A8D016C9BB2600D3063F /* DTLevelSelectLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BF7A8CF16C9BB2600D3063F /* DTLevelSelectLayer.m */; };
+		2BF7A8D316C9BB7A00D3063F /* GooeyStatics.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BF7A8D216C9BB7900D3063F /* GooeyStatics.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -409,6 +411,10 @@
 		2BF7A8C516C8631500D3063F /* DTMenuLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTMenuLayer.h; sourceTree = "<group>"; };
 		2BF7A8C616C8631500D3063F /* DTMenuLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTMenuLayer.m; sourceTree = "<group>"; };
 		2BF7A8C816C864D800D3063F /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		2BF7A8CE16C9BB2500D3063F /* DTLevelSelectLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTLevelSelectLayer.h; sourceTree = "<group>"; };
+		2BF7A8CF16C9BB2600D3063F /* DTLevelSelectLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTLevelSelectLayer.m; sourceTree = "<group>"; };
+		2BF7A8D116C9BB7900D3063F /* GooeyStatics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GooeyStatics.h; sourceTree = "<group>"; };
+		2BF7A8D216C9BB7900D3063F /* GooeyStatics.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GooeyStatics.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -849,6 +855,8 @@
 				2BE0771F16B74A720073F28F /* AppDelegate.m */,
 				2BE0772416B74A720073F28F /* IntroLayer.h */,
 				2BE0772516B74A720073F28F /* IntroLayer.m */,
+				2BF7A8D116C9BB7900D3063F /* GooeyStatics.h */,
+				2BF7A8D216C9BB7900D3063F /* GooeyStatics.m */,
 			);
 			name = "base classes";
 			sourceTree = "<group>";
@@ -858,6 +866,8 @@
 			children = (
 				2BF7A8C516C8631500D3063F /* DTMenuLayer.h */,
 				2BF7A8C616C8631500D3063F /* DTMenuLayer.m */,
+				2BF7A8CE16C9BB2500D3063F /* DTLevelSelectLayer.h */,
+				2BF7A8CF16C9BB2600D3063F /* DTLevelSelectLayer.m */,
 			);
 			name = layers;
 			sourceTree = "<group>";
@@ -1063,6 +1073,8 @@
 				2BE0774116B767540073F28F /* DTLevelSelectScene.m in Sources */,
 				2BE0774416B768840073F28F /* DTGameScene.m in Sources */,
 				2BF7A8C716C8631500D3063F /* DTMenuLayer.m in Sources */,
+				2BF7A8D016C9BB2600D3063F /* DTLevelSelectLayer.m in Sources */,
+				2BF7A8D316C9BB7A00D3063F /* GooeyStatics.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

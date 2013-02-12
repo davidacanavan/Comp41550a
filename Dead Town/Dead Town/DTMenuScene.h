@@ -7,9 +7,8 @@
 //
 
 #import "CCScene.h"
-#import "GameKit/GameKit.h"
 
-@interface DTMenuScene : CCScene <GKPeerPickerControllerDelegate, GKSessionDelegate>
+@interface DTMenuScene : CCScene 
 
 +(id) scene;
 

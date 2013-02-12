@@ -27,12 +27,4 @@
     return self;
 }
 
-- (void)peerPickerController:(GKPeerPickerController *)picker didConnectPeer:(NSString *)peerID toSession:(GKSession *)session
-{
-}
-- (void)peerPickerControllerDidCancel:(GKPeerPickerController *)picker
-{
-    
-}
-
 @end

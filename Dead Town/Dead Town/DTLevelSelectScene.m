@@ -7,6 +7,7 @@
 //
 
 #import "DTLevelSelectScene.h"
+#import "DTLevelSelectLayer.h"
 
 @implementation DTLevelSelectScene
 
@@ -19,7 +20,8 @@
 {
     if (self = [super init])
     {
-        
+        DTLevelSelectLayer *layer = [DTLevelSelectLayer node];
+        [self addChild:layer];
     }
     
     return self;
