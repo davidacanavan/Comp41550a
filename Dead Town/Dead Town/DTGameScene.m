@@ -7,6 +7,7 @@
 //
 
 #import "DTGameScene.h"
+#import "DTGameLayer.h"
 
 @implementation DTGameScene
 
@@ -19,7 +20,8 @@
 {
     if (self = [super init])
     {
-        
+        DTGameLayer *gameLayer = [DTGameLayer node];
+        [self addChild:gameLayer];
     }
     
     return self;

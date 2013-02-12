@@ -9,6 +9,7 @@
 #import "DTLevelSelectLayer.h"
 #import "DTMenuScene.h"
 #import "GooeyStatics.h"
+#import "DTGameScene.h"
 
 @implementation DTLevelSelectLayer
 
@@ -41,9 +42,15 @@
 }
 
 // Called when the user chooses a level
--(void)levelSelected:(CCMenu *)menuItem
+-(void)levelSelected:(CCMenuItemFont *)menuItem
 {
+    NSString *levelName = menuItem.label.string;
+    CCDirector *director = [CCDirector sharedDirector];
     
+    if ([levelName isEqualToString:@"Hospital"])
+    {
+        [director replaceScene: [CCTransitionFade transitionWithDuration: 1.0 scene: [DTGameScene scene] withColor:ccWHITE]];
+    }
 }
 
 // Called when the user presses back to go to the main menn

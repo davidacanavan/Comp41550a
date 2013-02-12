@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2B980D2C16CA93500028BB93 /* DTHospitalF1.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 2B980D2B16CA93500028BB93 /* DTHospitalF1.tmx */; };
+		2B980D3116CA944A0028BB93 /* DTGameLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B980D3016CA944A0028BB93 /* DTGameLayer.m */; };
+		2B980D3516CAA2540028BB93 /* tile_markers.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B980D3316CAA2540028BB93 /* tile_markers.png */; };
+		2B980D3616CAA2540028BB93 /* tmw_desert_spacing.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B980D3416CAA2540028BB93 /* tmw_desert_spacing.png */; };
+		2B980D3A16CAA63F0028BB93 /* DTPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B980D3916CAA63F0028BB93 /* DTPlayer.m */; };
 		2BE0759516B74A6D0073F28F /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BE0759416B74A6D0073F28F /* QuartzCore.framework */; };
 		2BE0759716B74A6D0073F28F /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BE0759616B74A6D0073F28F /* OpenGLES.framework */; };
 		2BE0759916B74A6D0073F28F /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BE0759816B74A6D0073F28F /* OpenAL.framework */; };
@@ -142,6 +147,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2B980D2B16CA93500028BB93 /* DTHospitalF1.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = DTHospitalF1.tmx; sourceTree = "<group>"; };
+		2B980D2F16CA944A0028BB93 /* DTGameLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTGameLayer.h; sourceTree = "<group>"; };
+		2B980D3016CA944A0028BB93 /* DTGameLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTGameLayer.m; sourceTree = "<group>"; };
+		2B980D3316CAA2540028BB93 /* tile_markers.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tile_markers.png; sourceTree = "<group>"; };
+		2B980D3416CAA2540028BB93 /* tmw_desert_spacing.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tmw_desert_spacing.png; sourceTree = "<group>"; };
+		2B980D3816CAA63F0028BB93 /* DTPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTPlayer.h; sourceTree = "<group>"; };
+		2B980D3916CAA63F0028BB93 /* DTPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTPlayer.m; sourceTree = "<group>"; };
 		2BE0759016B74A6D0073F28F /* Dead Town.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Dead Town.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2BE0759416B74A6D0073F28F /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		2BE0759616B74A6D0073F28F /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -437,6 +449,33 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2B980D2E16CA94040028BB93 /* game scene layers */ = {
+			isa = PBXGroup;
+			children = (
+				2B980D2F16CA944A0028BB93 /* DTGameLayer.h */,
+				2B980D3016CA944A0028BB93 /* DTGameLayer.m */,
+			);
+			name = "game scene layers";
+			sourceTree = "<group>";
+		};
+		2B980D3216CAA2370028BB93 /* sprites */ = {
+			isa = PBXGroup;
+			children = (
+				2B980D3316CAA2540028BB93 /* tile_markers.png */,
+				2B980D3416CAA2540028BB93 /* tmw_desert_spacing.png */,
+			);
+			name = sprites;
+			sourceTree = "<group>";
+		};
+		2B980D3716CAA5D60028BB93 /* characters */ = {
+			isa = PBXGroup;
+			children = (
+				2B980D3816CAA63F0028BB93 /* DTPlayer.h */,
+				2B980D3916CAA63F0028BB93 /* DTPlayer.m */,
+			);
+			name = characters;
+			sourceTree = "<group>";
+		};
 		2BE0758516B74A6D0073F28F = {
 			isa = PBXGroup;
 			children = (
@@ -474,10 +513,12 @@
 		2BE075A616B74A6D0073F28F /* Dead Town */ = {
 			isa = PBXGroup;
 			children = (
+				2B980D3716CAA5D60028BB93 /* characters */,
 				2BE0773616B7667D0073F28F /* base classes */,
 				2BE0773716B766880073F28F /* layers */,
 				2BE0773816B766930073F28F /* scenes */,
 				2BF7A8BF16C849EC00D3063F /* Maps */,
+				2B980D3216CAA2370028BB93 /* sprites */,
 				2BE075A716B74A6D0073F28F /* Resources */,
 				2BE075C116B74A6D0073F28F /* libs */,
 				2BE0771A16B74A720073F28F /* Supporting Files */,
@@ -864,6 +905,7 @@
 		2BE0773716B766880073F28F /* layers */ = {
 			isa = PBXGroup;
 			children = (
+				2B980D2E16CA94040028BB93 /* game scene layers */,
 				2BF7A8C516C8631500D3063F /* DTMenuLayer.h */,
 				2BF7A8C616C8631500D3063F /* DTMenuLayer.m */,
 				2BF7A8CE16C9BB2500D3063F /* DTLevelSelectLayer.h */,
@@ -888,6 +930,7 @@
 		2BF7A8BF16C849EC00D3063F /* Maps */ = {
 			isa = PBXGroup;
 			children = (
+				2B980D2B16CA93500028BB93 /* DTHospitalF1.tmx */,
 			);
 			name = Maps;
 			sourceTree = "<group>";
@@ -956,6 +999,9 @@
 				2BE075C016B74A6D0073F28F /* iTunesArtwork in Resources */,
 				2BE076FE16B74A710073F28F /* ChangeLog in Resources */,
 				2BF7A8C916C864D800D3063F /* Default-568h@2x.png in Resources */,
+				2B980D2C16CA93500028BB93 /* DTHospitalF1.tmx in Resources */,
+				2B980D3516CAA2540028BB93 /* tile_markers.png in Resources */,
+				2B980D3616CAA2540028BB93 /* tmw_desert_spacing.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1075,6 +1121,8 @@
 				2BF7A8C716C8631500D3063F /* DTMenuLayer.m in Sources */,
 				2BF7A8D016C9BB2600D3063F /* DTLevelSelectLayer.m in Sources */,
 				2BF7A8D316C9BB7A00D3063F /* GooeyStatics.m in Sources */,
+				2B980D3116CA944A0028BB93 /* DTGameLayer.m in Sources */,
+				2B980D3A16CAA63F0028BB93 /* DTPlayer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
