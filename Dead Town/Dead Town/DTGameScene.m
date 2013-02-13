@@ -23,7 +23,7 @@
     {
         // So this scene has a few layers to deal with - the controls, info and map layer
         DTGameLayer *gameLayer = [DTGameLayer node];
-        DTControlsLayer *controlsLayer = [DTControlsLayer node];
+        DTControlsLayer *controlsLayer = [DTControlsLayer initWithGameLayer:gameLayer];
         [self addChild:gameLayer z:-1]; // Make sure the map is behind the controls
         [self addChild:controlsLayer];
     }

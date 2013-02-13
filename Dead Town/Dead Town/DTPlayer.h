@@ -8,15 +8,19 @@
 
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
+#import "ColoredCircleSprite.h"
 
 @interface DTPlayer : CCNode
+{
+    @private
+    CCLayer *_parent;
+}
 
-// The sprite for the player
-@property(nonatomic, strong) CCSprite *sprite;
+@property(nonatomic, strong, readonly) ColoredCircleSprite *sprite;
 
-+(id)initWithPlayerAtPoint:(CGPoint *)point;
++(id)initWithPlayerAtPoint:(CGPoint)point parentLayer:(CCLayer *)parent;
+-(void)movePlayerToPoint:(CGPoint)point;
+-(void)turnToFacePoint:(CGPoint)point;
 -(void)fire;
--(void)turnToFacePoint:(CGPoint *)point;
-
 
 @end
