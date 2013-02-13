@@ -17,14 +17,14 @@
 
 -(void)setUpSneakyJoystick
 {
-    CGSize screen = [[CCDirector sharedDirector].winSize;
+    CGSize screen = [CCDirector sharedDirector].winSize;
     SneakyJoystickSkinnedBase *joystick = [[SneakyJoystickSkinnedBase alloc] init];
     
 }
 
 -(void)setupSneakyFireButton
 {
-    CGSize screen = [[CCDirector sharedDirector].winSize;
+    CGSize screen = [CCDirector sharedDirector].winSize;
     SneakyButtonSkinnedBase *fireButton = [[SneakyButtonSkinnedBase alloc] init];
     
 }
