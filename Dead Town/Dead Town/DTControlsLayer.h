@@ -7,7 +7,9 @@
 //
 
 #import "CCLayer.h"
+#import "cocos2d.h"
+#import <Foundation/Foundation.h>
 
-@interface DTJoystickLayer : CCLayer
+@interface DTControlsLayer : CCLayer
 
 @end

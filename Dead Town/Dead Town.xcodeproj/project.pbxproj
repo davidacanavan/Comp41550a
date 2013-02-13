@@ -12,7 +12,7 @@
 		2B980D3516CAA2540028BB93 /* tile_markers.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B980D3316CAA2540028BB93 /* tile_markers.png */; };
 		2B980D3616CAA2540028BB93 /* tmw_desert_spacing.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B980D3416CAA2540028BB93 /* tmw_desert_spacing.png */; };
 		2B980D3A16CAA63F0028BB93 /* DTPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B980D3916CAA63F0028BB93 /* DTPlayer.m */; };
-		2B980D3D16CAAE3A0028BB93 /* DTJoystickLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B980D3C16CAAE3A0028BB93 /* DTJoystickLayer.m */; };
+		2B980D3D16CAAE3A0028BB93 /* DTControlsLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B980D3C16CAAE3A0028BB93 /* DTControlsLayer.m */; };
 		2B980D4116CAB1390028BB93 /* SneakyJoystick.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B980D4016CAB1390028BB93 /* SneakyJoystick.m */; };
 		2B980D4416CAB2190028BB93 /* SneakyButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B980D4316CAB2180028BB93 /* SneakyButton.m */; };
 		2B980D4716CB0F7B0028BB93 /* SneakyJoystickSkinnedBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B980D4616CB0F7B0028BB93 /* SneakyJoystickSkinnedBase.m */; };
@@ -160,8 +160,8 @@
 		2B980D3416CAA2540028BB93 /* tmw_desert_spacing.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tmw_desert_spacing.png; sourceTree = "<group>"; };
 		2B980D3816CAA63F0028BB93 /* DTPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTPlayer.h; sourceTree = "<group>"; };
 		2B980D3916CAA63F0028BB93 /* DTPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTPlayer.m; sourceTree = "<group>"; };
-		2B980D3B16CAAE3A0028BB93 /* DTJoystickLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTJoystickLayer.h; sourceTree = "<group>"; };
-		2B980D3C16CAAE3A0028BB93 /* DTJoystickLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTJoystickLayer.m; sourceTree = "<group>"; };
+		2B980D3B16CAAE3A0028BB93 /* DTControlsLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTControlsLayer.h; sourceTree = "<group>"; };
+		2B980D3C16CAAE3A0028BB93 /* DTControlsLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTControlsLayer.m; sourceTree = "<group>"; };
 		2B980D3F16CAB1390028BB93 /* SneakyJoystick.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SneakyJoystick.h; sourceTree = "<group>"; };
 		2B980D4016CAB1390028BB93 /* SneakyJoystick.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SneakyJoystick.m; sourceTree = "<group>"; };
 		2B980D4216CAB2180028BB93 /* SneakyButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SneakyButton.h; sourceTree = "<group>"; };
@@ -472,8 +472,8 @@
 			children = (
 				2B980D2F16CA944A0028BB93 /* DTGameLayer.h */,
 				2B980D3016CA944A0028BB93 /* DTGameLayer.m */,
-				2B980D3B16CAAE3A0028BB93 /* DTJoystickLayer.h */,
-				2B980D3C16CAAE3A0028BB93 /* DTJoystickLayer.m */,
+				2B980D3B16CAAE3A0028BB93 /* DTControlsLayer.h */,
+				2B980D3C16CAAE3A0028BB93 /* DTControlsLayer.m */,
 			);
 			name = "game scene";
 			sourceTree = "<group>";
@@ -1161,7 +1161,7 @@
 				2BF7A8D316C9BB7A00D3063F /* GooeyStatics.m in Sources */,
 				2B980D3116CA944A0028BB93 /* DTGameLayer.m in Sources */,
 				2B980D3A16CAA63F0028BB93 /* DTPlayer.m in Sources */,
-				2B980D3D16CAAE3A0028BB93 /* DTJoystickLayer.m in Sources */,
+				2B980D3D16CAAE3A0028BB93 /* DTControlsLayer.m in Sources */,
 				2B980D4116CAB1390028BB93 /* SneakyJoystick.m in Sources */,
 				2B980D4416CAB2190028BB93 /* SneakyButton.m in Sources */,
 				2B980D4716CB0F7B0028BB93 /* SneakyJoystickSkinnedBase.m in Sources */,
