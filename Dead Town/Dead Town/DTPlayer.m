@@ -10,4 +10,30 @@
 
 @implementation DTPlayer
 
++(id)initWithPlayerAtPoint:(CGPoint *)point
+{
+    return [[self alloc] initWithPlayerAtPoint:point];
+}
+
+-(id)initWithPlayerAtPoint:(CGPoint *)point
+{
+    if ((self = [super init]))
+    {
+        
+    }
+    
+    return self;
+}
+
+-(void)fire
+{
+    
+}
+
+
+-(void)turnToFacePoint:(CGPoint *)point;
+{
+    
+}
+
 @end

@@ -12,6 +12,12 @@
 		2B980D3516CAA2540028BB93 /* tile_markers.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B980D3316CAA2540028BB93 /* tile_markers.png */; };
 		2B980D3616CAA2540028BB93 /* tmw_desert_spacing.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B980D3416CAA2540028BB93 /* tmw_desert_spacing.png */; };
 		2B980D3A16CAA63F0028BB93 /* DTPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B980D3916CAA63F0028BB93 /* DTPlayer.m */; };
+		2B980D3D16CAAE3A0028BB93 /* DTJoystickLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B980D3C16CAAE3A0028BB93 /* DTJoystickLayer.m */; };
+		2B980D4116CAB1390028BB93 /* SneakyJoystick.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B980D4016CAB1390028BB93 /* SneakyJoystick.m */; };
+		2B980D4416CAB2190028BB93 /* SneakyButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B980D4316CAB2180028BB93 /* SneakyButton.m */; };
+		2B980D4716CB0F7B0028BB93 /* SneakyJoystickSkinnedBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B980D4616CB0F7B0028BB93 /* SneakyJoystickSkinnedBase.m */; };
+		2B980D4A16CB0FC30028BB93 /* SneakyButtonSkinnedBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B980D4916CB0FC30028BB93 /* SneakyButtonSkinnedBase.m */; };
+		2B980D4D16CB10CA0028BB93 /* ColoredCircleSprite.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B980D4C16CB10CA0028BB93 /* ColoredCircleSprite.m */; };
 		2BE0759516B74A6D0073F28F /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BE0759416B74A6D0073F28F /* QuartzCore.framework */; };
 		2BE0759716B74A6D0073F28F /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BE0759616B74A6D0073F28F /* OpenGLES.framework */; };
 		2BE0759916B74A6D0073F28F /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BE0759816B74A6D0073F28F /* OpenAL.framework */; };
@@ -154,6 +160,18 @@
 		2B980D3416CAA2540028BB93 /* tmw_desert_spacing.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tmw_desert_spacing.png; sourceTree = "<group>"; };
 		2B980D3816CAA63F0028BB93 /* DTPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTPlayer.h; sourceTree = "<group>"; };
 		2B980D3916CAA63F0028BB93 /* DTPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTPlayer.m; sourceTree = "<group>"; };
+		2B980D3B16CAAE3A0028BB93 /* DTJoystickLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTJoystickLayer.h; sourceTree = "<group>"; };
+		2B980D3C16CAAE3A0028BB93 /* DTJoystickLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTJoystickLayer.m; sourceTree = "<group>"; };
+		2B980D3F16CAB1390028BB93 /* SneakyJoystick.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SneakyJoystick.h; sourceTree = "<group>"; };
+		2B980D4016CAB1390028BB93 /* SneakyJoystick.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SneakyJoystick.m; sourceTree = "<group>"; };
+		2B980D4216CAB2180028BB93 /* SneakyButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SneakyButton.h; sourceTree = "<group>"; };
+		2B980D4316CAB2180028BB93 /* SneakyButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SneakyButton.m; sourceTree = "<group>"; };
+		2B980D4516CB0F7B0028BB93 /* SneakyJoystickSkinnedBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SneakyJoystickSkinnedBase.h; sourceTree = "<group>"; };
+		2B980D4616CB0F7B0028BB93 /* SneakyJoystickSkinnedBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SneakyJoystickSkinnedBase.m; sourceTree = "<group>"; };
+		2B980D4816CB0FC30028BB93 /* SneakyButtonSkinnedBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SneakyButtonSkinnedBase.h; sourceTree = "<group>"; };
+		2B980D4916CB0FC30028BB93 /* SneakyButtonSkinnedBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SneakyButtonSkinnedBase.m; sourceTree = "<group>"; };
+		2B980D4B16CB10C90028BB93 /* ColoredCircleSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColoredCircleSprite.h; sourceTree = "<group>"; };
+		2B980D4C16CB10CA0028BB93 /* ColoredCircleSprite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ColoredCircleSprite.m; sourceTree = "<group>"; };
 		2BE0759016B74A6D0073F28F /* Dead Town.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Dead Town.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2BE0759416B74A6D0073F28F /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		2BE0759616B74A6D0073F28F /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -449,13 +467,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		2B980D2E16CA94040028BB93 /* game scene layers */ = {
+		2B980D2E16CA94040028BB93 /* game scene */ = {
 			isa = PBXGroup;
 			children = (
 				2B980D2F16CA944A0028BB93 /* DTGameLayer.h */,
 				2B980D3016CA944A0028BB93 /* DTGameLayer.m */,
+				2B980D3B16CAAE3A0028BB93 /* DTJoystickLayer.h */,
+				2B980D3C16CAAE3A0028BB93 /* DTJoystickLayer.m */,
 			);
-			name = "game scene layers";
+			name = "game scene";
 			sourceTree = "<group>";
 		};
 		2B980D3216CAA2370028BB93 /* sprites */ = {
@@ -474,6 +494,23 @@
 				2B980D3916CAA63F0028BB93 /* DTPlayer.m */,
 			);
 			name = characters;
+			sourceTree = "<group>";
+		};
+		2B980D3E16CAB1180028BB93 /* sneakyness */ = {
+			isa = PBXGroup;
+			children = (
+				2B980D3F16CAB1390028BB93 /* SneakyJoystick.h */,
+				2B980D4016CAB1390028BB93 /* SneakyJoystick.m */,
+				2B980D4216CAB2180028BB93 /* SneakyButton.h */,
+				2B980D4316CAB2180028BB93 /* SneakyButton.m */,
+				2B980D4516CB0F7B0028BB93 /* SneakyJoystickSkinnedBase.h */,
+				2B980D4616CB0F7B0028BB93 /* SneakyJoystickSkinnedBase.m */,
+				2B980D4816CB0FC30028BB93 /* SneakyButtonSkinnedBase.h */,
+				2B980D4916CB0FC30028BB93 /* SneakyButtonSkinnedBase.m */,
+				2B980D4B16CB10C90028BB93 /* ColoredCircleSprite.h */,
+				2B980D4C16CB10CA0028BB93 /* ColoredCircleSprite.m */,
+			);
+			name = sneakyness;
 			sourceTree = "<group>";
 		};
 		2BE0758516B74A6D0073F28F = {
@@ -513,6 +550,7 @@
 		2BE075A616B74A6D0073F28F /* Dead Town */ = {
 			isa = PBXGroup;
 			children = (
+				2B980D3E16CAB1180028BB93 /* sneakyness */,
 				2B980D3716CAA5D60028BB93 /* characters */,
 				2BE0773616B7667D0073F28F /* base classes */,
 				2BE0773716B766880073F28F /* layers */,
@@ -905,7 +943,7 @@
 		2BE0773716B766880073F28F /* layers */ = {
 			isa = PBXGroup;
 			children = (
-				2B980D2E16CA94040028BB93 /* game scene layers */,
+				2B980D2E16CA94040028BB93 /* game scene */,
 				2BF7A8C516C8631500D3063F /* DTMenuLayer.h */,
 				2BF7A8C616C8631500D3063F /* DTMenuLayer.m */,
 				2BF7A8CE16C9BB2500D3063F /* DTLevelSelectLayer.h */,
@@ -1123,6 +1161,12 @@
 				2BF7A8D316C9BB7A00D3063F /* GooeyStatics.m in Sources */,
 				2B980D3116CA944A0028BB93 /* DTGameLayer.m in Sources */,
 				2B980D3A16CAA63F0028BB93 /* DTPlayer.m in Sources */,
+				2B980D3D16CAAE3A0028BB93 /* DTJoystickLayer.m in Sources */,
+				2B980D4116CAB1390028BB93 /* SneakyJoystick.m in Sources */,
+				2B980D4416CAB2190028BB93 /* SneakyButton.m in Sources */,
+				2B980D4716CB0F7B0028BB93 /* SneakyJoystickSkinnedBase.m in Sources */,
+				2B980D4A16CB0FC30028BB93 /* SneakyButtonSkinnedBase.m in Sources */,
+				2B980D4D16CB10CA0028BB93 /* ColoredCircleSprite.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

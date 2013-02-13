@@ -14,6 +14,7 @@
 // The sprite for the player
 @property(nonatomic, strong) CCSprite *sprite;
 
++(id)initWithPlayerAtPoint:(CGPoint *)point;
 -(void)fire;
 -(void)turnToFacePoint:(CGPoint *)point;
 
