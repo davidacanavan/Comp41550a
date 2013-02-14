@@ -2,6 +2,11 @@
 <map version="1.0" orientation="orthogonal" width="32" height="32" tilewidth="32" tileheight="32">
  <tileset firstgid="1" name="Transparents" tilewidth="32" tileheight="32">
   <image source="tile_markers.png" width="96" height="32"/>
+  <tile id="2">
+   <properties>
+    <property name="IsWall" value="Yes"/>
+   </properties>
+  </tile>
  </tileset>
  <tileset firstgid="4" name="Desert Tiles" tilewidth="32" tileheight="32" spacing="1" margin="1">
   <image source="tmw_desert_spacing.png" width="265" height="199"/>

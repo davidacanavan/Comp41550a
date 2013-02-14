@@ -17,6 +17,7 @@
 }
 
 @property(nonatomic, strong, readonly) ColoredCircleSprite *sprite;
+@property(nonatomic, readonly) CGPoint previousPosition;
 
 +(id)initWithPlayerAtPoint:(CGPoint)point parentLayer:(CCLayer *)parent;
 -(void)movePlayerToPoint:(CGPoint)point;

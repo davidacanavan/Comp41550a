@@ -21,9 +21,10 @@
     CCTMXLayer *_floor;
     CCTMXLayer *_walls;
     DTPlayer *_player;
+    CGSize _screen;
 }
 
--(void)centerViewport:(CGPoint)position;
+-(void)centerViewportOnPosition:(CGPoint)position;
 -(void)updatePlayerPositionForJoystick:(SneakyJoystick *)joystick andDelta:(float)delta;
 
 @end
