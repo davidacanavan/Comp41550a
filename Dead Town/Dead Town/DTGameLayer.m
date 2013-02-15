@@ -14,24 +14,24 @@
 {
     if ((self = [super init]))
     {
-        // Create the tile map...
+        // Create the tile map and get the dimensions needed...
         _tileMap = [CCTMXTiledMap tiledMapWithTMXFile:@"DTHospitalF1.tmx"];
-        _tileMapWidth = _tileMap.mapSize.width;
+        _tileMapWidth = _tileMap.mapSize.width; // Measured in tiles!
         _tileMapHeight = _tileMap.mapSize.height;
-        _tileDimension = _tileMap.tileSize.width / CC_CONTENT_SCALE_FACTOR(); // Since they're square this is ok
+        _tileDimension = _tileMap.tileSize.width / CC_CONTENT_SCALE_FACTOR(); // Since they're square this is ok - measured in pixels and scaled for retina!
         _floor = [_tileMap layerNamed:@"Floor"];
         _walls = [_tileMap layerNamed:@"Walls"];
-        _walls.visible = YES; // Make sure no-one can see the transparent tiles!!!
+        _walls.visible = NO; // Make sure no-one can see the transparent tiles!!!
         [self addChild:_tileMap];
         
-        // Create the players
+        // Create the players TODO: second player!!!
         _player = [DTPlayer initWithPlayerAtPoint:ccp(100, 100) parentLayer:self];
         [self addChild:_player];
         
         // Get some other variables we'll need
         _screen = [CCDirector sharedDirector].winSize;
         
-        // Center the map over the player
+        // Center the map over the player TODO: Add a spawn point for the players on the map
         [self centerViewportOnPosition:_player.position];
     }
     
@@ -71,16 +71,28 @@
 // Converts the layer point to a tile coordinate (they go from top left)
 -(CGPoint)tileCoordinateForPoint:(CGPoint)point
 {
-    int x = point.x / _tileDimension;
-    int y = (_tileMapHeight * _tileDimension - point.y) / _tileDimension;
+    // So if the x or y are beyond the screen bounds then fix them to -1 as an off limit coordinate, otherwise we just adjust to normal
+    int x = (point.x < 0) ? -1 : point.x / _tileDimension;
+    int mapDimensionInPoints = _tileMapHeight * _tileDimension;
+    int y = (point.y > mapDimensionInPoints) ? -1 : (mapDimensionInPoints - point.y) / _tileDimension;
     return ccp(x, y);
 }
 
 -(BOOL)isWallAtTileCoordinate:(CGPoint)tileCoordinate
 {
+    // Check the edge of the map and pretend that an out of bounds tile is a wall
+    if ([self isTileOutOfBounds:tileCoordinate]) 
+        return YES;
+    
+    // Here I check the actual tile to see if it's a wall or not
     int gid = [_walls tileGIDAt:tileCoordinate];
     NSDictionary *dict = [_tileMap propertiesForGID:gid];
     return [dict valueForKey:@"IsWall"] != nil;
+}
+
+-(BOOL)isTileOutOfBounds:(CGPoint)tileCoordinate
+{
+    return tileCoordinate.x < 0 || tileCoordinate.y < 0 || tileCoordinate.x >= _tileMapWidth || tileCoordinate.y >= _tileMapHeight; // TODO: Check the top end as well!
 }
 
 
