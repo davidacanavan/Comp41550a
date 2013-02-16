@@ -40,7 +40,7 @@
     _sprite.position = point;
 }
 
--(CGPoint)getPlayerPoint
+-(CGPoint)getPlayerPosition
 {
     return _sprite.position;
 }
@@ -48,15 +48,31 @@
 -(void)fire
 {
     DTBullet *bullet = [DTBullet bulletWithPlayerPosition:_sprite.position andAngle:_sprite.rotation withGameLayer:_gameLayer];
-    [self addChild:bullet];
+    [_gameLayer addChild:bullet];
 }
 
 -(void)turnToFacePoint:(CGPoint)point;
 {
+    // If you ever have to go through this nightmare again remember that the cocos2d sprite rotation works with an angle the positive side of the x axis as a positive angle from the easterly side of the x-axis!!!
+    CGPoint spritePosition = _sprite.position;
+    float xDifference = (float) (point.x - spritePosition.x);
+    float tanToHorizontalAxis = (point.y - spritePosition.y) / ((float) xDifference); // (y2 - y1) / (x2 - x1)
+    // Get the inverse tan of the ratio. Convert back to degrees. Add 180 to ensure the direction is correct!
+    float angleValue = CC_RADIANS_TO_DEGREES(atanf(tanToHorizontalAxis));
     
+    if (xDifference < 0)
+        angleValue += 180;
+    
+    _sprite.rotation = angleValue;
 }
 
 @end
+
+
+
+
+
+
 
 
 

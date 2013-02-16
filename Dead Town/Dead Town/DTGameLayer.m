@@ -60,6 +60,7 @@
     CGPoint velocity = ccpMult(joystick.velocity, 140);
     CGPoint newPosition = ccp(oldPosition.x + velocity.x * delta,
                               oldPosition.y + velocity.y * delta);
+    [_player turnToFacePoint:newPosition]; // Tell him where to look
     [_player movePlayerToPoint:newPosition]; // Update the player position
     [self centerViewportOnPosition:newPosition];
 }
