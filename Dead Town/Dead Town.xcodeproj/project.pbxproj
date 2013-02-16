@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2B51EC4D16CFFB7C00B037F9 /* DTBullet.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B51EC4C16CFFB7C00B037F9 /* DTBullet.m */; };
 		2B980D2C16CA93500028BB93 /* DTHospitalF1.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 2B980D2B16CA93500028BB93 /* DTHospitalF1.tmx */; };
 		2B980D3116CA944A0028BB93 /* DTGameLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B980D3016CA944A0028BB93 /* DTGameLayer.m */; };
 		2B980D3516CAA2540028BB93 /* tile_markers.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B980D3316CAA2540028BB93 /* tile_markers.png */; };
@@ -153,6 +154,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2B51EC4B16CFFB7C00B037F9 /* DTBullet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTBullet.h; sourceTree = "<group>"; };
+		2B51EC4C16CFFB7C00B037F9 /* DTBullet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTBullet.m; sourceTree = "<group>"; };
 		2B980D2B16CA93500028BB93 /* DTHospitalF1.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = DTHospitalF1.tmx; sourceTree = "<group>"; };
 		2B980D2F16CA944A0028BB93 /* DTGameLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTGameLayer.h; sourceTree = "<group>"; };
 		2B980D3016CA944A0028BB93 /* DTGameLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTGameLayer.m; sourceTree = "<group>"; };
@@ -492,6 +495,8 @@
 			children = (
 				2B980D3816CAA63F0028BB93 /* DTPlayer.h */,
 				2B980D3916CAA63F0028BB93 /* DTPlayer.m */,
+				2B51EC4B16CFFB7C00B037F9 /* DTBullet.h */,
+				2B51EC4C16CFFB7C00B037F9 /* DTBullet.m */,
 			);
 			name = characters;
 			sourceTree = "<group>";
@@ -1167,6 +1172,7 @@
 				2B980D4716CB0F7B0028BB93 /* SneakyJoystickSkinnedBase.m in Sources */,
 				2B980D4A16CB0FC30028BB93 /* SneakyButtonSkinnedBase.m in Sources */,
 				2B980D4D16CB10CA0028BB93 /* ColoredCircleSprite.m in Sources */,
+				2B51EC4D16CFFB7C00B037F9 /* DTBullet.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

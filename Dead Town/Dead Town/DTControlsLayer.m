@@ -34,10 +34,13 @@
 
 -(void)tick:(float)delta
 {
-    if (!CGPointEqualToPoint(_joystick.stickPosition, CGPointZero)) // So we're moving the character a little bit - so tell the game layer to move him!
-    {
+    // So we're moving the character a little bit - so tell the game layer to move him!
+    if (!CGPointEqualToPoint(_joystick.stickPosition, CGPointZero)) 
         [_gameLayer updatePlayerPositionForJoystick:_joystick andDelta:delta];
-    }
+    
+    // Check to see if we're firing a bullet
+    if (_fireButton.active)
+        [_gameLayer fireBullet];
 }
 
 // Create the joystick and add it to the layer
@@ -60,12 +63,15 @@
 // Create the shoot button and add it to the layer
 -(void)setupSneakyFireButton
 {
+    int padding = 15, buttonRadius = 24;
     CGSize screen = [CCDirector sharedDirector].winSize;
-    SneakyButtonSkinnedBase *fireButton = [[SneakyButtonSkinnedBase alloc] init];
-    fireButton.defaultSprite = [ColoredCircleSprite circleWithColor: ccc4(255, 255, 0, 255)radius:24];
-    CGSize fireButtonSize = fireButton.contentSize;
-    fireButton.position = ccp(screen.width - 15 - fireButtonSize.width / 2, 15 + fireButtonSize.height / 2);
-    [self addChild:fireButton];
+    SneakyButtonSkinnedBase *fireButtonSkin = [[SneakyButtonSkinnedBase alloc] init];
+    fireButtonSkin.defaultSprite = [ColoredCircleSprite circleWithColor: ccc4(255, 255, 0, 255)radius:buttonRadius];
+    CGSize fireButtonSize = fireButtonSkin.contentSize;
+    fireButtonSkin.position = ccp(screen.width - padding - fireButtonSize.width / 2, padding + fireButtonSize.height / 2);
+    _fireButton = [[SneakyButton alloc] initWithRect:CGRectMake(0, 0, buttonRadius * 2, buttonRadius * 2)];
+    fireButtonSkin.button = _fireButton;
+    [self addChild:fireButtonSkin];
 }
 
 

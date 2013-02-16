@@ -7,8 +7,10 @@
 //
 
 #import "DTGameLayer.h"
+#import "DTBullet.h"
 
 @implementation DTGameLayer
+
 
 -(id)init
 {
@@ -25,7 +27,7 @@
         [self addChild:_tileMap];
         
         // Create the players TODO: second player!!!
-        _player = [DTPlayer initWithPlayerAtPoint:ccp(100, 100) parentLayer:self];
+        _player = [DTPlayer playerWithPlayerAtPoint:ccp(100, 100) withGameLayer:self];
         [self addChild:_player];
         
         // Get some other variables we'll need
@@ -33,11 +35,17 @@
         
         // Center the map over the player TODO: Add a spawn point for the players on the map
         [self centerViewportOnPosition:_player.position];
+        
+        // Schedule the tick so we can check for pausing and gameover
+        [self schedule:@selector(tick:)];
+        
+        _isGameOver = NO;
     }
     
     return self;
 }
 
+// Called by the controls layer when the joystick is moved
 -(void)updatePlayerPositionForJoystick:(SneakyJoystick *)joystick andDelta:(float)delta
 {
     CGPoint oldPosition = _player.sprite.position;
@@ -54,6 +62,13 @@
                               oldPosition.y + velocity.y * delta);
     [_player movePlayerToPoint:newPosition]; // Update the player position
     [self centerViewportOnPosition:newPosition];
+}
+
+// Called by the controls layer when the fire button has been pressed
+-(void)fireBullet
+{
+    [_player fire];
+    printf("Fire!\n");
 }
 
 -(void)centerViewportOnPosition:(CGPoint) position
@@ -95,6 +110,16 @@
     return tileCoordinate.x < 0 || tileCoordinate.y < 0 || tileCoordinate.x >= _tileMapWidth || tileCoordinate.y >= _tileMapHeight; // TODO: Check the top end as well!
 }
 
+-(void)gameOver
+{
+    
+}
+
+-(void)tick:(float)delta
+{
+    if (_isGameOver) // So check for the game over condition and end if it's all done
+        [self gameOver];
+}
 
 
 @end

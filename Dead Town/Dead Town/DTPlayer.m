@@ -8,6 +8,7 @@
 
 #import "DTPlayer.h"
 #import "ColoredCircleSprite.h"
+#import "DTBullet.h"
 
 @implementation DTPlayer
 
@@ -15,18 +16,18 @@
 @synthesize previousPosition = _previousPosition;
 
 // Class method to allocate the class and call the constructor
-+(id)initWithPlayerAtPoint:(CGPoint)point parentLayer:(CCLayer *)parent
++(id)playerWithPlayerAtPoint:(CGPoint)point withGameLayer:(DTGameLayer *)gameLayer
 {
-    return [[self alloc] initWithPlayerAtPoint:point parentLayer:parent];
+    return [[self alloc] initWithPlayerAtPoint:point withGameLayer:gameLayer];
 }
 
--(id)initWithPlayerAtPoint:(CGPoint)point parentLayer:(CCLayer *)parent
+-(id)initWithPlayerAtPoint:(CGPoint)point withGameLayer:(DTGameLayer *)gameLayer
 {
     if ((self = [super init]))
     {
         _sprite = [[ColoredCircleSprite alloc] initWithColor:ccc4(100, 40, 56, 255) radius:13];
         _sprite.position = point;
-        _parent = parent;
+        _gameLayer = gameLayer;
         [self addChild:_sprite];
     }
     
@@ -39,15 +40,28 @@
     _sprite.position = point;
 }
 
--(void)fire
+-(CGPoint)getPlayerPoint
 {
-    
+    return _sprite.position;
 }
 
-// TODO: I'll have to implement this when i actually have an image for the player
+-(void)fire
+{
+    DTBullet *bullet = [DTBullet bulletWithPlayerPosition:_sprite.position andAngle:_sprite.rotation withGameLayer:_gameLayer];
+    [self addChild:bullet];
+}
+
 -(void)turnToFacePoint:(CGPoint)point;
 {
     
 }
 
 @end
+
+
+
+
+
+
+
+
