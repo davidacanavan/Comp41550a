@@ -19,9 +19,10 @@
     DTGameLayer *_gameLayer; // TODO: should i pass this stuff through the scene instead?
     SneakyJoystick *_joystick;
     SneakyButton *_fireButton;
+    SneakyButton *_pauseButton;
     CGSize _screen;
 }
 
-+(id)initWithGameLayer:(DTGameLayer *)gameLayer;
++(id)controlsLayerWithGameLayer:(DTGameLayer *)gameLayer;
 
 @end

@@ -11,6 +11,7 @@
 
 @implementation DTGameLayer
 
+@synthesize isFiring = _isFiring;
 
 -(id)init
 {
@@ -40,6 +41,8 @@
         [self schedule:@selector(tick:)];
         
         _isGameOver = NO;
+        _isFiring = NO;
+        _currentPlayerFireGap = MIN_PLAYER_FIRE_GAP; // Set the player to have not been firing at all
     }
     
     return self;
@@ -68,8 +71,6 @@
 // Called by the controls layer when the fire button has been pressed
 -(void)fireBullet
 {
-    [_player fire];
-    printf("Fire!\n");
 }
 
 -(void)centerViewportOnPosition:(CGPoint) position
@@ -120,6 +121,19 @@
 {
     if (_isGameOver) // So check for the game over condition and end if it's all done
         [self gameOver];
+    
+    // So I use this variable to control how often the player can fire.
+    float minPlayerFireGap = MIN_PLAYER_FIRE_GAP; // _currentPlayerFireGap is set to MIN_PLAYER.. initially
+    _currentPlayerFireGap = MIN(minPlayerFireGap, _currentPlayerFireGap + delta);
+    
+    // So when it hits the minimum gap and the user wants to fire I allow it
+    if (_isFiring && _currentPlayerFireGap == minPlayerFireGap)
+    {
+        [_player fire]; // So let him fire
+        printf("Fire!\n");
+        _isFiring = NO; // He's not firing anymore!
+        _currentPlayerFireGap = 0; // Put this to 0 so he can't fire for the MIN gap
+    }
 }
 
 

@@ -13,7 +13,7 @@
 
 @implementation DTControlsLayer
 
-+(id)initWithGameLayer:(DTGameLayer *)gameLayer
++(id)controlsLayerWithGameLayer:(DTGameLayer *)gameLayer
 {
     return [[self alloc] initWithGameLayer:gameLayer];
 }
@@ -22,11 +22,14 @@
 {
     if ((self = [super init]))
     {
-        [self setUpSneakyJoystick];
-        [self setupSneakyFireButton];
-        [self schedule:@selector(tick:)];
+        // Save some local variables
         _gameLayer = gameLayer;
         _screen = [CCDirector sharedDirector].winSize;
+        
+        [self setUpSneakyJoystick];
+        [self setUpSneakyFireButton];
+        [self setUpSneakyPauseButton];
+        [self schedule:@selector(tick:)];
     }
     
     return self;
@@ -40,7 +43,7 @@
     
     // Check to see if we're firing a bullet
     if (_fireButton.active)
-        [_gameLayer fireBullet];
+        _gameLayer.isFiring = YES;
 }
 
 // Create the joystick and add it to the layer
@@ -61,18 +64,48 @@
 }
 
 // Create the shoot button and add it to the layer
--(void)setupSneakyFireButton
+-(void)setUpSneakyFireButton
 {
     int padding = 15, buttonRadius = 24;
-    CGSize screen = [CCDirector sharedDirector].winSize;
     SneakyButtonSkinnedBase *fireButtonSkin = [[SneakyButtonSkinnedBase alloc] init];
     fireButtonSkin.defaultSprite = [ColoredCircleSprite circleWithColor: ccc4(255, 255, 0, 255)radius:buttonRadius];
     CGSize fireButtonSize = fireButtonSkin.contentSize;
-    fireButtonSkin.position = ccp(screen.width - padding - fireButtonSize.width / 2, padding + fireButtonSize.height / 2);
+    fireButtonSkin.position = ccp(_screen.width - padding - fireButtonSize.width / 2, padding + fireButtonSize.height / 2);
     _fireButton = [[SneakyButton alloc] initWithRect:CGRectMake(0, 0, buttonRadius * 2, buttonRadius * 2)];
     fireButtonSkin.button = _fireButton;
     [self addChild:fireButtonSkin];
 }
 
+-(void)setUpSneakyPauseButton
+{
+    int padding = 15, buttonRadius = 12;
+    SneakyButtonSkinnedBase *pauseButtonSkin = [[SneakyButtonSkinnedBase alloc] init];
+    pauseButtonSkin.defaultSprite = [ColoredCircleSprite circleWithColor: ccc4(255, 255, 0, 255)radius:buttonRadius];
+    CGSize pauseButtonSize = pauseButtonSkin.contentSize;
+    pauseButtonSkin.position = ccp(_screen.width - padding - pauseButtonSize.width / 2, _screen.height - padding - pauseButtonSize.height / 2);
+    _pauseButton = [[SneakyButton alloc] initWithRect:CGRectMake(0, 0, buttonRadius * 2, buttonRadius * 2)];
+    pauseButtonSkin.button = _pauseButton;
+    [self addChild:pauseButtonSkin];
+}
+
 
 @end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
