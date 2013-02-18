@@ -10,16 +10,20 @@
 #import "cocos2d.h"
 #import "SneakyJoystick.h"
 #import "SneakyButton.h"
+#import "SneakyButtonSkinnedBase.h"
+#import "SneakyJoystickSkinnedBase.h"
 #import "DTGameLayer.h"
 
-@interface DTControlsLayer : CCLayer
+@interface DTControlsLayer : CCLayer <CCTargetedTouchDelegate>
 {
     @private
     // The map layer - this makes it easy to update the player position
     DTGameLayer *_gameLayer; // TODO: should i pass this stuff through the scene instead?
+    SneakyJoystickSkinnedBase *_joystickSkin;
     SneakyJoystick *_joystick;
     SneakyButton *_fireButton;
     SneakyButton *_pauseButton;
+    CCDirector *_director;
     CGSize _screen;
 }
 

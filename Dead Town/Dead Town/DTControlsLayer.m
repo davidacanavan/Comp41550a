@@ -7,8 +7,6 @@
 //
 
 #import "DTControlsLayer.h"
-#import "SneakyButtonSkinnedBase.h"
-#import "SneakyJoystickSkinnedBase.h"
 #import "ColoredCircleSprite.h"
 
 @implementation DTControlsLayer
@@ -24,11 +22,17 @@
     {
         // Save some local variables
         _gameLayer = gameLayer;
-        _screen = [CCDirector sharedDirector].winSize;
+        _director = [CCDirector sharedDirector];
+        _screen = _director.winSize;
         
+        // Create the buttons and what-nots
         [self setUpSneakyJoystick];
         [self setUpSneakyFireButton];
         [self setUpSneakyPauseButton];
+        
+        // Set up touch events
+        [_director.touchDispatcher addTargetedDelegate:self priority:0 swallowsTouches:NO];
+        
         [self schedule:@selector(tick:)];
     }
     
@@ -53,14 +57,15 @@
     int padding = 15, joystickRadius = 36, joystickThumbRadius = joystickRadius / 3;
     
     // Create the joystick skin from plain old dots
-    SneakyJoystickSkinnedBase *joystickSkin = [[SneakyJoystickSkinnedBase alloc] init];
-    joystickSkin.backgroundSprite = [ColoredCircleSprite circleWithColor:ccc4(255, 255, 0, 120) radius:joystickRadius];
-    joystickSkin.thumbSprite = [ColoredCircleSprite circleWithColor:ccc4(0, 0, 100, 255) radius:joystickThumbRadius];
-    CGSize joystickSize = joystickSkin.contentSize;
-    joystickSkin.position = ccp(padding + joystickSize.width / 2, padding + joystickSize.height / 2);
+    _joystickSkin = [[SneakyJoystickSkinnedBase alloc] init];
+    _joystickSkin.backgroundSprite = [ColoredCircleSprite circleWithColor:ccc4(255, 255, 0, 120) radius:joystickRadius];
+    _joystickSkin.thumbSprite = [ColoredCircleSprite circleWithColor:ccc4(0, 0, 100, 255) radius:joystickThumbRadius];
+    CGSize joystickSize = _joystickSkin.contentSize;
+    _joystickSkin.position = ccp(padding + joystickSize.width / 2, padding + joystickSize.height / 2);
     _joystick = [[SneakyJoystick alloc] initWithRect:CGRectMake(0, 0, joystickRadius * 2, joystickRadius * 2)];
-    joystickSkin.joystick = _joystick;
-    [self addChild:joystickSkin];
+    _joystickSkin.joystick = _joystick;
+    [self addChild:_joystickSkin];
+    _joystickSkin.visible = NO;
 }
 
 // Create the shoot button and add it to the layer
@@ -88,6 +93,25 @@
     [self addChild:pauseButtonSkin];
 }
 
+-(BOOL)ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event
+{
+    CGPoint touchPoint = [_director convertToGL:[touch locationInView:[_director view]]];
+    
+    if (touchPoint.x < _screen.width / 2) // Only let the left half of the screen receive the touch events
+    {
+        _joystickSkin.position = touchPoint;
+        _joystickSkin.visible = YES;
+    }
+    return YES;
+}
+
+-(void)ccTouchEnded:(UITouch *)touch withEvent:(UIEvent *)event
+{
+    _joystickSkin.visible = NO;
+}
+
+-(void)ccTouchCancelled:(UITouch *)touch withEvent:(UIEvent *)event{}
+-(void)ccTouchMoved:(UITouch *)touch withEvent:(UIEvent *)event {}
 
 @end
 

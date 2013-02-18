@@ -32,10 +32,10 @@
 }
 
 @property(nonatomic) BOOL isFiring;
+@property(nonatomic) BOOL isPausing;
 
 -(void)centerViewportOnPosition:(CGPoint)position;
 -(void)updatePlayerPositionForJoystick:(SneakyJoystick *)joystick andDelta:(float)delta;
--(void)fireBullet;
 -(BOOL)isWallAtTileCoordinate:(CGPoint)tileCoordinate;
 -(CGPoint)tileCoordinateForPoint:(CGPoint)point;
 

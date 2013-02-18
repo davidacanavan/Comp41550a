@@ -12,6 +12,7 @@
 @implementation DTGameLayer
 
 @synthesize isFiring = _isFiring;
+@synthesize isPausing = _isPausing;
 
 -(id)init
 {
@@ -66,11 +67,6 @@
     [_player turnToFacePoint:newPosition]; // Tell him where to look
     [_player movePlayerToPoint:newPosition]; // Update the player position
     [self centerViewportOnPosition:newPosition];
-}
-
-// Called by the controls layer when the fire button has been pressed
--(void)fireBullet
-{
 }
 
 -(void)centerViewportOnPosition:(CGPoint) position
