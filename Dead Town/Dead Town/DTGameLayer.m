@@ -8,11 +8,13 @@
 
 #import "DTGameLayer.h"
 #import "DTBullet.h"
+#import "SimpleAudioEngine.h"
 
 @implementation DTGameLayer
 
 @synthesize isFiring = _isFiring;
 @synthesize isPausing = _isPausing;
+@synthesize controlsLayer = _controlsLayer;
 
 -(id)init
 {
@@ -38,12 +40,12 @@
         // Center the map over the player TODO: Add a spawn point for the players on the map
         [self centerViewportOnPosition:_player.position];
         
-        // Schedule the tick so we can check for pausing and gameover
-        [self schedule:@selector(tick:)];
-        
         _isGameOver = NO;
         _isFiring = NO;
         _currentPlayerFireGap = MIN_PLAYER_FIRE_GAP; // Set the player to have not been firing at all
+        _options = [DTOptions sharedOptions];
+        
+        [self unpause];
     }
     
     return self;
@@ -113,10 +115,46 @@
     
 }
 
+-(void)pause
+{
+    _isPausing = NO;
+    [self unschedule:@selector(tick:)];
+    _pausedLayer = [DTPausedLayer pausedLayerWithGameLayer:self andControlsLayer:_controlsLayer];
+    [[self parent] addChild:_pausedLayer z:1];
+    
+    if (_options.playBackgroundMusic)
+        [[SimpleAudioEngine sharedEngine] stopBackgroundMusic];
+}
+
+-(void)unpause
+{
+    // Schedule the tick so we can check for pausing and gameover
+    [self schedule:@selector(tick:)];
+    
+    if (_options.playBackgroundMusic)
+        [[SimpleAudioEngine sharedEngine] playBackgroundMusic:@"BackingTrack.m4a" loop:YES];
+    
+}
+
+-(void)unpauseAll
+{
+    [self unpause];
+    [_controlsLayer unpause];
+}
+
 -(void)tick:(float)delta
 {
     if (_isGameOver) // So check for the game over condition and end if it's all done
+    {
         [self gameOver];
+        return;
+    }
+    
+    if (_isPausing) // Check for a pause request
+    {
+        [self pause];
+        return;
+    }
     
     // So I use this variable to control how often the player can fire.
     float minPlayerFireGap = MIN_PLAYER_FIRE_GAP; // _currentPlayerFireGap is set to MIN_PLAYER.. initially
@@ -126,7 +164,6 @@
     if (_isFiring && _currentPlayerFireGap == minPlayerFireGap)
     {
         [_player fire]; // So let him fire
-        printf("Fire!\n");
         _isFiring = NO; // He's not firing anymore!
         _currentPlayerFireGap = 0; // Put this to 0 so he can't fire for the MIN gap
     }

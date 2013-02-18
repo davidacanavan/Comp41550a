@@ -10,6 +10,7 @@
 #import "cocos2d.h"
 #import "ColoredCircleSprite.h"
 #import "DTGameLayer.h"
+#import "DTOptions.h"
 
 @class DTGameLayer;
 
@@ -17,6 +18,7 @@
 {
     @private
     DTGameLayer *_gameLayer;
+    DTOptions *_options;
 }
 
 @property(nonatomic, strong, readonly) ColoredCircleSprite *sprite;

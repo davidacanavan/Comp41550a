@@ -11,6 +11,8 @@
 
 @implementation DTControlsLayer
 
+@synthesize isPausing = _isPausing;
+
 +(id)controlsLayerWithGameLayer:(DTGameLayer *)gameLayer
 {
     return [[self alloc] initWithGameLayer:gameLayer];
@@ -30,10 +32,8 @@
         [self setUpSneakyFireButton];
         [self setUpSneakyPauseButton];
         
-        // Set up touch events
-        [_director.touchDispatcher addTargetedDelegate:self priority:0 swallowsTouches:NO];
-        
-        [self schedule:@selector(tick:)];
+        // The layer essentially begins in a paused state
+        [self unpause];
     }
     
     return self;
@@ -45,9 +45,31 @@
     if (!CGPointEqualToPoint(_joystick.stickPosition, CGPointZero)) 
         [_gameLayer updatePlayerPositionForJoystick:_joystick andDelta:delta];
     
-    // Check to see if we're firing a bullet
+    // Check to see if we're firing a bullet - then fire!
     if (_fireButton.active)
+    {
         _gameLayer.isFiring = YES;
+        _fireButton.active = NO; // Fix to stop double-fire
+    }
+    
+    // Check for a pause
+    if (_pauseButton.active)
+    {
+        [self pause];
+        _gameLayer.isPausing = YES;
+    }
+}
+
+-(void)pause
+{
+    [self unschedule:@selector(tick:)];
+    [_director.touchDispatcher removeDelegate:self];
+}
+
+-(void)unpause
+{
+    [_director.touchDispatcher addTargetedDelegate:self priority:0 swallowsTouches:NO]; // Register touch events
+    [self schedule:@selector(tick:)]; // Schedule the tick to run on the game loop
 }
 
 // Create the joystick and add it to the layer
@@ -107,7 +129,10 @@
 
 -(void)ccTouchEnded:(UITouch *)touch withEvent:(UIEvent *)event
 {
-    _joystickSkin.visible = NO;
+    CGPoint touchPoint = [_director convertToGL:[touch locationInView:[_director view]]];
+    
+    if (touchPoint.x < _screen.width / 2) // Stops the joystick from disappearing when you take a shot
+        _joystickSkin.visible = NO;
 }
 
 -(void)ccTouchCancelled:(UITouch *)touch withEvent:(UIEvent *)event{}

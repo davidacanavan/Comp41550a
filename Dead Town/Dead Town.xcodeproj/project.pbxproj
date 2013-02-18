@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		2B51EC4D16CFFB7C00B037F9 /* DTBullet.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B51EC4C16CFFB7C00B037F9 /* DTBullet.m */; };
+		2B86436116D23A02008FEB55 /* DTPausedLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B86436016D23A02008FEB55 /* DTPausedLayer.m */; };
+		2B86436416D25798008FEB55 /* Pew.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 2B86436316D25797008FEB55 /* Pew.m4a */; };
+		2B86436716D25B00008FEB55 /* BackingTrack.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 2B86436616D25B00008FEB55 /* BackingTrack.m4a */; };
+		2B86436A16D25B46008FEB55 /* DTOptions.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B86436916D25B46008FEB55 /* DTOptions.m */; };
 		2B980D2C16CA93500028BB93 /* DTHospitalF1.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 2B980D2B16CA93500028BB93 /* DTHospitalF1.tmx */; };
 		2B980D3116CA944A0028BB93 /* DTGameLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B980D3016CA944A0028BB93 /* DTGameLayer.m */; };
 		2B980D3516CAA2540028BB93 /* tile_markers.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B980D3316CAA2540028BB93 /* tile_markers.png */; };
@@ -147,6 +151,8 @@
 		2BE0773E16B7673D0073F28F /* DTMenuScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BE0773D16B7673D0073F28F /* DTMenuScene.m */; };
 		2BE0774116B767540073F28F /* DTLevelSelectScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BE0774016B767540073F28F /* DTLevelSelectScene.m */; };
 		2BE0774416B768840073F28F /* DTGameScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BE0774316B768840073F28F /* DTGameScene.m */; };
+		2BE40E6316D19A96003C5065 /* tile_markers-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 2BE40E6116D19A96003C5065 /* tile_markers-hd.png */; };
+		2BE40E6416D19A96003C5065 /* tmw_desert_spacing-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 2BE40E6216D19A96003C5065 /* tmw_desert_spacing-hd.png */; };
 		2BF7A8C716C8631500D3063F /* DTMenuLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BF7A8C616C8631500D3063F /* DTMenuLayer.m */; };
 		2BF7A8C916C864D800D3063F /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2BF7A8C816C864D800D3063F /* Default-568h@2x.png */; };
 		2BF7A8D016C9BB2600D3063F /* DTLevelSelectLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BF7A8CF16C9BB2600D3063F /* DTLevelSelectLayer.m */; };
@@ -156,6 +162,12 @@
 /* Begin PBXFileReference section */
 		2B51EC4B16CFFB7C00B037F9 /* DTBullet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTBullet.h; sourceTree = "<group>"; };
 		2B51EC4C16CFFB7C00B037F9 /* DTBullet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTBullet.m; sourceTree = "<group>"; };
+		2B86435F16D23A02008FEB55 /* DTPausedLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTPausedLayer.h; sourceTree = "<group>"; };
+		2B86436016D23A02008FEB55 /* DTPausedLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTPausedLayer.m; sourceTree = "<group>"; };
+		2B86436316D25797008FEB55 /* Pew.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = Pew.m4a; path = sounds/Pew.m4a; sourceTree = "<group>"; };
+		2B86436616D25B00008FEB55 /* BackingTrack.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = BackingTrack.m4a; path = sounds/BackingTrack.m4a; sourceTree = "<group>"; };
+		2B86436816D25B46008FEB55 /* DTOptions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTOptions.h; sourceTree = "<group>"; };
+		2B86436916D25B46008FEB55 /* DTOptions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTOptions.m; sourceTree = "<group>"; };
 		2B980D2B16CA93500028BB93 /* DTHospitalF1.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = DTHospitalF1.tmx; sourceTree = "<group>"; };
 		2B980D2F16CA944A0028BB93 /* DTGameLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTGameLayer.h; sourceTree = "<group>"; };
 		2B980D3016CA944A0028BB93 /* DTGameLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTGameLayer.m; sourceTree = "<group>"; };
@@ -441,6 +453,8 @@
 		2BE0774016B767540073F28F /* DTLevelSelectScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTLevelSelectScene.m; sourceTree = "<group>"; };
 		2BE0774216B768840073F28F /* DTGameScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTGameScene.h; sourceTree = "<group>"; };
 		2BE0774316B768840073F28F /* DTGameScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTGameScene.m; sourceTree = "<group>"; };
+		2BE40E6116D19A96003C5065 /* tile_markers-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tile_markers-hd.png"; sourceTree = "<group>"; };
+		2BE40E6216D19A96003C5065 /* tmw_desert_spacing-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tmw_desert_spacing-hd.png"; sourceTree = "<group>"; };
 		2BF7A8C516C8631500D3063F /* DTMenuLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTMenuLayer.h; sourceTree = "<group>"; };
 		2BF7A8C616C8631500D3063F /* DTMenuLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTMenuLayer.m; sourceTree = "<group>"; };
 		2BF7A8C816C864D800D3063F /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
@@ -470,6 +484,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2B86436516D257A0008FEB55 /* sounds */ = {
+			isa = PBXGroup;
+			children = (
+				2B86436616D25B00008FEB55 /* BackingTrack.m4a */,
+				2B86436316D25797008FEB55 /* Pew.m4a */,
+			);
+			name = sounds;
+			sourceTree = "<group>";
+		};
 		2B980D2E16CA94040028BB93 /* game scene */ = {
 			isa = PBXGroup;
 			children = (
@@ -477,6 +500,8 @@
 				2B980D3016CA944A0028BB93 /* DTGameLayer.m */,
 				2B980D3B16CAAE3A0028BB93 /* DTControlsLayer.h */,
 				2B980D3C16CAAE3A0028BB93 /* DTControlsLayer.m */,
+				2B86435F16D23A02008FEB55 /* DTPausedLayer.h */,
+				2B86436016D23A02008FEB55 /* DTPausedLayer.m */,
 			);
 			name = "game scene";
 			sourceTree = "<group>";
@@ -484,6 +509,8 @@
 		2B980D3216CAA2370028BB93 /* sprites */ = {
 			isa = PBXGroup;
 			children = (
+				2BE40E6116D19A96003C5065 /* tile_markers-hd.png */,
+				2BE40E6216D19A96003C5065 /* tmw_desert_spacing-hd.png */,
 				2B980D3316CAA2540028BB93 /* tile_markers.png */,
 				2B980D3416CAA2540028BB93 /* tmw_desert_spacing.png */,
 			);
@@ -555,6 +582,7 @@
 		2BE075A616B74A6D0073F28F /* Dead Town */ = {
 			isa = PBXGroup;
 			children = (
+				2B86436516D257A0008FEB55 /* sounds */,
 				2B980D3E16CAB1180028BB93 /* sneakyness */,
 				2B980D3716CAA5D60028BB93 /* characters */,
 				2BE0773616B7667D0073F28F /* base classes */,
@@ -941,6 +969,8 @@
 				2BE0772516B74A720073F28F /* IntroLayer.m */,
 				2BF7A8D116C9BB7900D3063F /* GooeyStatics.h */,
 				2BF7A8D216C9BB7900D3063F /* GooeyStatics.m */,
+				2B86436816D25B46008FEB55 /* DTOptions.h */,
+				2B86436916D25B46008FEB55 /* DTOptions.m */,
 			);
 			name = "base classes";
 			sourceTree = "<group>";
@@ -1045,6 +1075,10 @@
 				2B980D2C16CA93500028BB93 /* DTHospitalF1.tmx in Resources */,
 				2B980D3516CAA2540028BB93 /* tile_markers.png in Resources */,
 				2B980D3616CAA2540028BB93 /* tmw_desert_spacing.png in Resources */,
+				2BE40E6316D19A96003C5065 /* tile_markers-hd.png in Resources */,
+				2BE40E6416D19A96003C5065 /* tmw_desert_spacing-hd.png in Resources */,
+				2B86436416D25798008FEB55 /* Pew.m4a in Resources */,
+				2B86436716D25B00008FEB55 /* BackingTrack.m4a in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1173,6 +1207,8 @@
 				2B980D4A16CB0FC30028BB93 /* SneakyButtonSkinnedBase.m in Sources */,
 				2B980D4D16CB10CA0028BB93 /* ColoredCircleSprite.m in Sources */,
 				2B51EC4D16CFFB7C00B037F9 /* DTBullet.m in Sources */,
+				2B86436116D23A02008FEB55 /* DTPausedLayer.m in Sources */,
+				2B86436A16D25B46008FEB55 /* DTOptions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

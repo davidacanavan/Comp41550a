@@ -9,6 +9,7 @@
 #import "DTPlayer.h"
 #import "ColoredCircleSprite.h"
 #import "DTBullet.h"
+#import "SimpleAudioEngine.h"
 
 @implementation DTPlayer
 
@@ -29,6 +30,7 @@
         _sprite.position = point;
         _gameLayer = gameLayer;
         [self addChild:_sprite];
+        _options = [DTOptions sharedOptions];
     }
     
     return self;
@@ -49,6 +51,9 @@
 {
     DTBullet *bullet = [DTBullet bulletWithPlayerPosition:_sprite.position andAngle:_sprite.rotation withGameLayer:_gameLayer];
     [_gameLayer addChild:bullet];
+    
+    if (_options.playSoundEffects)
+        [[SimpleAudioEngine sharedEngine] playEffect:@"Pew.m4a"];
 }
 
 -(void)turnToFacePoint:(CGPoint)point;

@@ -14,6 +14,8 @@
 #import "SneakyJoystickSkinnedBase.h"
 #import "DTGameLayer.h"
 
+@class DTGameLayer;
+
 @interface DTControlsLayer : CCLayer <CCTargetedTouchDelegate>
 {
     @private
@@ -27,6 +29,9 @@
     CGSize _screen;
 }
 
+@property(nonatomic) BOOL isPausing;
+
 +(id)controlsLayerWithGameLayer:(DTGameLayer *)gameLayer;
+-(void)unpause;
 
 @end

@@ -10,7 +10,7 @@
     DTGameLayer *_gameLayer;
 }
 
-@property(readonly) BOOL isExpired;
+@property(nonatomic, readonly) BOOL isExpired;
 
 +(id)bulletWithPlayerPosition:(CGPoint)playerPosition andAngle:(float)angleOfFire withGameLayer:(DTGameLayer *)gameLayer;
 -(void)moveToPoint:(CGPoint)point;
