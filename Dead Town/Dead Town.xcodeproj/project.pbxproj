@@ -12,6 +12,8 @@
 		2B86436416D25798008FEB55 /* Pew.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 2B86436316D25797008FEB55 /* Pew.m4a */; };
 		2B86436716D25B00008FEB55 /* BackingTrack.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 2B86436616D25B00008FEB55 /* BackingTrack.m4a */; };
 		2B86436A16D25B46008FEB55 /* DTOptions.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B86436916D25B46008FEB55 /* DTOptions.m */; };
+		2B86919216D3B57D00497D63 /* DTCharacter.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B86918F16D3B57D00497D63 /* DTCharacter.m */; };
+		2B86919316D3B57D00497D63 /* DTStraightLineZombie.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B86919116D3B57D00497D63 /* DTStraightLineZombie.m */; };
 		2B980D2C16CA93500028BB93 /* DTHospitalF1.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 2B980D2B16CA93500028BB93 /* DTHospitalF1.tmx */; };
 		2B980D3116CA944A0028BB93 /* DTGameLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B980D3016CA944A0028BB93 /* DTGameLayer.m */; };
 		2B980D3516CAA2540028BB93 /* tile_markers.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B980D3316CAA2540028BB93 /* tile_markers.png */; };
@@ -23,6 +25,9 @@
 		2B980D4716CB0F7B0028BB93 /* SneakyJoystickSkinnedBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B980D4616CB0F7B0028BB93 /* SneakyJoystickSkinnedBase.m */; };
 		2B980D4A16CB0FC30028BB93 /* SneakyButtonSkinnedBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B980D4916CB0FC30028BB93 /* SneakyButtonSkinnedBase.m */; };
 		2B980D4D16CB10CA0028BB93 /* ColoredCircleSprite.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B980D4C16CB10CA0028BB93 /* ColoredCircleSprite.m */; };
+		2BB71ACF16D2DDEB001C636C /* player sprite-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 2BB71ACE16D2DDEB001C636C /* player sprite-hd.png */; };
+		2BB71AD116D2E7D5001C636C /* Tile_Test01-26.png in Resources */ = {isa = PBXBuildFile; fileRef = 2BB71AD016D2E7D5001C636C /* Tile_Test01-26.png */; };
+		2BB71AD516D2EA5A001C636C /* DTHospitalF1-hd.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 2BB71AD416D2EA5A001C636C /* DTHospitalF1-hd.tmx */; };
 		2BE0759516B74A6D0073F28F /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BE0759416B74A6D0073F28F /* QuartzCore.framework */; };
 		2BE0759716B74A6D0073F28F /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BE0759616B74A6D0073F28F /* OpenGLES.framework */; };
 		2BE0759916B74A6D0073F28F /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BE0759816B74A6D0073F28F /* OpenAL.framework */; };
@@ -168,6 +173,10 @@
 		2B86436616D25B00008FEB55 /* BackingTrack.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = BackingTrack.m4a; path = sounds/BackingTrack.m4a; sourceTree = "<group>"; };
 		2B86436816D25B46008FEB55 /* DTOptions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTOptions.h; sourceTree = "<group>"; };
 		2B86436916D25B46008FEB55 /* DTOptions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTOptions.m; sourceTree = "<group>"; };
+		2B86918E16D3B57D00497D63 /* DTCharacter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTCharacter.h; sourceTree = "<group>"; };
+		2B86918F16D3B57D00497D63 /* DTCharacter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTCharacter.m; sourceTree = "<group>"; };
+		2B86919016D3B57D00497D63 /* DTStraightLineZombie.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTStraightLineZombie.h; sourceTree = "<group>"; };
+		2B86919116D3B57D00497D63 /* DTStraightLineZombie.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTStraightLineZombie.m; sourceTree = "<group>"; };
 		2B980D2B16CA93500028BB93 /* DTHospitalF1.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = DTHospitalF1.tmx; sourceTree = "<group>"; };
 		2B980D2F16CA944A0028BB93 /* DTGameLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTGameLayer.h; sourceTree = "<group>"; };
 		2B980D3016CA944A0028BB93 /* DTGameLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTGameLayer.m; sourceTree = "<group>"; };
@@ -187,6 +196,9 @@
 		2B980D4916CB0FC30028BB93 /* SneakyButtonSkinnedBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SneakyButtonSkinnedBase.m; sourceTree = "<group>"; };
 		2B980D4B16CB10C90028BB93 /* ColoredCircleSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColoredCircleSprite.h; sourceTree = "<group>"; };
 		2B980D4C16CB10CA0028BB93 /* ColoredCircleSprite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ColoredCircleSprite.m; sourceTree = "<group>"; };
+		2BB71ACE16D2DDEB001C636C /* player sprite-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "player sprite-hd.png"; path = "Sprites/player sprite-hd.png"; sourceTree = "<group>"; };
+		2BB71AD016D2E7D5001C636C /* Tile_Test01-26.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Tile_Test01-26.png"; path = "Sprites/Tile_Test01-26.png"; sourceTree = "<group>"; };
+		2BB71AD416D2EA5A001C636C /* DTHospitalF1-hd.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "DTHospitalF1-hd.tmx"; sourceTree = "<group>"; };
 		2BE0759016B74A6D0073F28F /* Dead Town.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Dead Town.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2BE0759416B74A6D0073F28F /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		2BE0759616B74A6D0073F28F /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -500,8 +512,6 @@
 				2B980D3016CA944A0028BB93 /* DTGameLayer.m */,
 				2B980D3B16CAAE3A0028BB93 /* DTControlsLayer.h */,
 				2B980D3C16CAAE3A0028BB93 /* DTControlsLayer.m */,
-				2B86435F16D23A02008FEB55 /* DTPausedLayer.h */,
-				2B86436016D23A02008FEB55 /* DTPausedLayer.m */,
 			);
 			name = "game scene";
 			sourceTree = "<group>";
@@ -509,6 +519,8 @@
 		2B980D3216CAA2370028BB93 /* sprites */ = {
 			isa = PBXGroup;
 			children = (
+				2BB71AD016D2E7D5001C636C /* Tile_Test01-26.png */,
+				2BB71ACE16D2DDEB001C636C /* player sprite-hd.png */,
 				2BE40E6116D19A96003C5065 /* tile_markers-hd.png */,
 				2BE40E6216D19A96003C5065 /* tmw_desert_spacing-hd.png */,
 				2B980D3316CAA2540028BB93 /* tile_markers.png */,
@@ -520,6 +532,10 @@
 		2B980D3716CAA5D60028BB93 /* characters */ = {
 			isa = PBXGroup;
 			children = (
+				2B86918E16D3B57D00497D63 /* DTCharacter.h */,
+				2B86918F16D3B57D00497D63 /* DTCharacter.m */,
+				2B86919016D3B57D00497D63 /* DTStraightLineZombie.h */,
+				2B86919116D3B57D00497D63 /* DTStraightLineZombie.m */,
 				2B980D3816CAA63F0028BB93 /* DTPlayer.h */,
 				2B980D3916CAA63F0028BB93 /* DTPlayer.m */,
 				2B51EC4B16CFFB7C00B037F9 /* DTBullet.h */,
@@ -543,6 +559,15 @@
 				2B980D4C16CB10CA0028BB93 /* ColoredCircleSprite.m */,
 			);
 			name = sneakyness;
+			sourceTree = "<group>";
+		};
+		2BB71ACB16D29568001C636C /* pausing */ = {
+			isa = PBXGroup;
+			children = (
+				2B86435F16D23A02008FEB55 /* DTPausedLayer.h */,
+				2B86436016D23A02008FEB55 /* DTPausedLayer.m */,
+			);
+			name = pausing;
 			sourceTree = "<group>";
 		};
 		2BE0758516B74A6D0073F28F = {
@@ -978,6 +1003,7 @@
 		2BE0773716B766880073F28F /* layers */ = {
 			isa = PBXGroup;
 			children = (
+				2BB71ACB16D29568001C636C /* pausing */,
 				2B980D2E16CA94040028BB93 /* game scene */,
 				2BF7A8C516C8631500D3063F /* DTMenuLayer.h */,
 				2BF7A8C616C8631500D3063F /* DTMenuLayer.m */,
@@ -1003,6 +1029,7 @@
 		2BF7A8BF16C849EC00D3063F /* Maps */ = {
 			isa = PBXGroup;
 			children = (
+				2BB71AD416D2EA5A001C636C /* DTHospitalF1-hd.tmx */,
 				2B980D2B16CA93500028BB93 /* DTHospitalF1.tmx */,
 			);
 			name = Maps;
@@ -1079,6 +1106,9 @@
 				2BE40E6416D19A96003C5065 /* tmw_desert_spacing-hd.png in Resources */,
 				2B86436416D25798008FEB55 /* Pew.m4a in Resources */,
 				2B86436716D25B00008FEB55 /* BackingTrack.m4a in Resources */,
+				2BB71ACF16D2DDEB001C636C /* player sprite-hd.png in Resources */,
+				2BB71AD116D2E7D5001C636C /* Tile_Test01-26.png in Resources */,
+				2BB71AD516D2EA5A001C636C /* DTHospitalF1-hd.tmx in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1209,6 +1239,8 @@
 				2B51EC4D16CFFB7C00B037F9 /* DTBullet.m in Sources */,
 				2B86436116D23A02008FEB55 /* DTPausedLayer.m in Sources */,
 				2B86436A16D25B46008FEB55 /* DTOptions.m in Sources */,
+				2B86919216D3B57D00497D63 /* DTCharacter.m in Sources */,
+				2B86919316D3B57D00497D63 /* DTStraightLineZombie.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
