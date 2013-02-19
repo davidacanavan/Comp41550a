@@ -35,7 +35,7 @@
         [self addChild:_player];
         
         // TEST CODE!!!!
-        DTStraightLineZombie *zombie = [DTStraightLineZombie zombieWithPlayer:_player andRunningDistance:250 withGameLayer:self andPosition:ccp(150, 400)];
+        DTStraightLineZombie *zombie = [DTStraightLineZombie zombieWithPlayer:_player runningDistance:250 gameLayer:self position:ccp(150, 400) life:100 maxAttacksPerSecond:5];
         [self addChild:zombie];
         
         // Get some other variables we'll need

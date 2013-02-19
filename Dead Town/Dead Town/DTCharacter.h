@@ -19,9 +19,13 @@
     CCNode *_sprite; // The sprite itself
     CGPoint _previousPosition; // The position the sprite was in before this call to the game loop (for walls)
     float _bulletAngle; // The angle a bullet should fire at to be right on target
+    float _maxAttackRate;
+    float _currentFireGap;
 }
 
--(id)initWithPosition:(CGPoint)position gameLayer:(DTGameLayer *)gameLayer andSprite:(CCNode *)sprite;
+@property(nonatomic) float life;
+
+-(id)initWithPosition:(CGPoint)position gameLayer:(DTGameLayer *)gameLayer sprite:(CCNode *)sprite life:(float)life maxAttacksPerSecond:(int)maxAttacksPerSecond;
 -(void)moveToPosition:(CGPoint)position;
 -(void)turnToFacePosition:(CGPoint)position;
 -(CGPoint)getPosition;

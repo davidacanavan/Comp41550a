@@ -19,6 +19,6 @@
     float _runningDistance;
 }
 
-+(id)zombieWithPlayer:(DTPlayer *)player andRunningDistance:(float)runningDistance withGameLayer:(DTGameLayer *)gameLayer andPosition:(CGPoint)position;
++(id)zombieWithPlayer:(DTPlayer *)player runningDistance:(float)runningDistance gameLayer:(DTGameLayer *)gameLayer position:(CGPoint)position life:(float)life maxAttacksPerSecond:(int)maxAttacksPerSecond;
 
 @end

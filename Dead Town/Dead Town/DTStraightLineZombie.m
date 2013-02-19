@@ -10,16 +10,16 @@
 
 @implementation DTStraightLineZombie
 
-+(id)zombieWithPlayer:(DTPlayer *)player andRunningDistance:(float)runningDistance withGameLayer:(DTGameLayer *)gameLayer andPosition:(CGPoint)position
++(id)zombieWithPlayer:(DTPlayer *)player runningDistance:(float)runningDistance gameLayer:(DTGameLayer *)gameLayer position:(CGPoint)position life:(float)life maxAttacksPerSecond:(int)maxAttacksPerSecond
 {
-    return [[self alloc] initWithPlayer:player andRunningDistance:runningDistance withGameLayer:gameLayer andPosition:position];
+    return [[self alloc] initWithPlayer:player runningDistance:runningDistance gameLayer:gameLayer position:position life:life maxAttacksPerSecond:(int)maxAttacksPerSecond];
 }
 
--(id)initWithPlayer: (DTPlayer *)player andRunningDistance:(float)runningDistance withGameLayer:(DTGameLayer *)gameLayer andPosition:(CGPoint)position
+-(id)initWithPlayer: (DTPlayer *)player runningDistance:(float)runningDistance gameLayer:(DTGameLayer *)gameLayer position:(CGPoint)position life:(float)life maxAttacksPerSecond:(int)maxAttacksPerSecond
 {
     ColoredCircleSprite *sprite = [ColoredCircleSprite circleWithColor:ccc4(0, 0, 0, 200) radius:10];
     
-    if (self = [super initWithPosition:position gameLayer:gameLayer andSprite:sprite])
+    if (self = [super initWithPosition:position gameLayer:gameLayer sprite:sprite life:life maxAttacksPerSecond:maxAttacksPerSecond])
     {
         _player = player;
         _runningDistance = runningDistance;
@@ -38,7 +38,7 @@
     
     if (distance < _runningDistance) // Then run after the player!!!
     {
-        if (ccpFuzzyEqual(player, zombie, 10))
+        if (ccpFuzzyEqual(player, zombie, 15))
             return;
         else if ([_gameLayer isWallAtPosition:zombie])
         {

@@ -11,7 +11,9 @@
 
 @implementation DTCharacter
 
--(id)initWithPosition:(CGPoint)position gameLayer:(DTGameLayer *)gameLayer andSprite:(CCNode *)sprite
+@synthesize life = _life;
+
+-(id)initWithPosition:(CGPoint)position gameLayer:(DTGameLayer *)gameLayer sprite:(CCNode *)sprite life:(float)life maxAttacksPerSecond:(int)maxAttacksPerSecond
 {
     if (self = [super init])
     {
@@ -22,7 +24,13 @@
         _gameLayer = gameLayer;
         _sprite = sprite;
         _sprite.position = position;
+        _life = life;
+        _maxAttackRate = 1 / maxAttacksPerSecond;
+        _currentFireGap = 0;
+        
+        // Add the sprite to the layer - I leave the actual end
         [self addChild:_sprite];
+        
     }
     
     return self;
@@ -59,4 +67,20 @@
     return _sprite.position;
 }
 
+// Ensure the player's life never goes below zero
+-(void)setLife:(float)life
+{
+    _life = max(life, 0);
+}
+
 @end
+
+
+
+
+
+
+
+
+
+
