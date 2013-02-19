@@ -44,7 +44,7 @@
     _sprite.position = point;
 }
 
--(CGPoint)getPlayerPosition
+-(CGPoint)getPosition
 {
     return _sprite.position;
 }

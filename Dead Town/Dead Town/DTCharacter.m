@@ -53,4 +53,9 @@
     _bulletAngle = bulletAngle;
 }
 
+-(CGPoint)getPosition
+{
+    return _sprite.position;
+}
+
 @end

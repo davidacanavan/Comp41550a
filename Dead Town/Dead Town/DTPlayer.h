@@ -29,5 +29,6 @@
 -(void)movePlayerToPoint:(CGPoint)point;
 -(void)turnToFacePoint:(CGPoint)point;
 -(void)fire;
+-(CGPoint)getPosition;
 
 @end

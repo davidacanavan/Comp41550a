@@ -31,7 +31,30 @@
 
 -(void)tick:(float)delta
 {
+    int velocity = 50;
+    CGPoint player = [_player getPosition];
+    CGPoint zombie = _sprite.position;
+    float distance = ccpDistance(player, zombie);
     
+    if (distance < _runningDistance) // Then run after the player!!!
+    {
+        float slope = ((float) (player.y - zombie.y)) / (player.x - zombie.x);
+        float c = player.y - slope * player.x; // The y-intercept
+        float x = zombie.x + velocity * delta * (player.y < zombie.y ? -1 : 1);
+        float y = slope * x + c;
+        _sprite.position = ccp(x, y);
+    }
 }
 
 @end
+
+
+
+
+
+
+
+
+
+
+

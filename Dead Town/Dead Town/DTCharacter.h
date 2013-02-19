@@ -22,5 +22,6 @@
 -(id)initWithPosition:(CGPoint)position gameLayer:(DTGameLayer *)gameLayer andSprite:(CCNode *)sprite;
 -(void)moveToPosition:(CGPoint)position;
 -(void)turnToFacePosition:(CGPoint)position;
+-(CGPoint)getPosition;
 
 @end
