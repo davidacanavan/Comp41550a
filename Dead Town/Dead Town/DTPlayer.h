@@ -11,6 +11,8 @@
 #import "ColoredCircleSprite.h"
 #import "DTGameLayer.h"
 #import "DTOptions.h"
+#import "DTBullet.h"
+#import "SimpleAudioEngine.h"
 
 @class DTGameLayer;
 

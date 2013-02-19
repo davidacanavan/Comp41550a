@@ -7,6 +7,7 @@
 //
 
 #import "DTCharacter.h"
+#import "DTGameLayer.h"
 
 @implementation DTCharacter
 

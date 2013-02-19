@@ -3,6 +3,8 @@
 #import "ColoredCircleSprite.h"
 #import "DTGameLayer.h"
 
+@class DTGameLayer;
+
 @interface DTBullet : CCNode
 {
     @private

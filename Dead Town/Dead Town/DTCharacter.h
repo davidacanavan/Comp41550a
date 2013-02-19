@@ -7,7 +7,9 @@
 //
 
 #import "cocos2d.h"
-#import "DTGameLayer.h"
+
+@class DTGameLayer;
+@class DTOptions;
 
 @interface DTCharacter : CCNode
 {

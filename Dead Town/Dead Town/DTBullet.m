@@ -48,7 +48,7 @@
     CGPoint circlePosition = ccpMult(ccpForAngle(angle), velocity * delta);
     _sprite.position = ccpAdd(_sprite.position, circlePosition);
     
-    if ([_gameLayer isWallAtTileCoordinate:[_gameLayer tileCoordinateForPoint:_sprite.position]])
+    if ([_gameLayer isWallAtTileCoordinate:[_gameLayer tileCoordinateForPosition:_sprite.position]])
     {
         _isExpired = YES;
         [_gameLayer removeChild:self cleanup:NO];

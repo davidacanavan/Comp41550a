@@ -12,6 +12,7 @@
 #import "SneakyJoystick.h"
 #import "DTPausedLayer.h"
 #import "DTOptions.h"
+#import "DTStraightLineZombie.h"
 
 #define MIN_PLAYER_FIRE_GAP .1; // A fifth of a second
 
@@ -19,6 +20,7 @@
 @class DTBullet;
 @class DTControlsLayer;
 @class DTPausedLayer;
+@class DTStraightLineZombie;
 
 @interface DTGameLayer : CCLayer
 {
@@ -44,7 +46,8 @@
 -(void)centerViewportOnPosition:(CGPoint)position;
 -(void)updatePlayerPositionForJoystick:(SneakyJoystick *)joystick andDelta:(float)delta;
 -(BOOL)isWallAtTileCoordinate:(CGPoint)tileCoordinate;
--(CGPoint)tileCoordinateForPoint:(CGPoint)point;
+-(BOOL)isWallAtPosition:(CGPoint)position;
+-(CGPoint)tileCoordinateForPosition:(CGPoint)point;
 -(void)unpause;
 -(void)unpauseAll;
 

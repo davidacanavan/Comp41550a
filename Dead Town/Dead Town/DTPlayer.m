@@ -7,9 +7,6 @@
 //
 
 #import "DTPlayer.h"
-#import "ColoredCircleSprite.h"
-#import "DTBullet.h"
-#import "SimpleAudioEngine.h"
 
 @implementation DTPlayer
 

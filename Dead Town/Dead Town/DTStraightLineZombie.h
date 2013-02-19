@@ -6,9 +6,10 @@
 //
 //
 
-#import "cocos2d.h"
 #import "DTCharacter.h"
-#import "DTPlayer.h"
+#import "DTGameLayer.h"
+
+@class DTPlayer;
 
 // A zombie that runs after you in a straight line when the player comes a certain distance from him
 @interface DTStraightLineZombie : DTCharacter

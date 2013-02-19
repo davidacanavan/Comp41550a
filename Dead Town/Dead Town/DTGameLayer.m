@@ -34,6 +34,10 @@
         _player = [DTPlayer playerWithPlayerAtPoint:ccp(100, 100) withGameLayer:self];
         [self addChild:_player];
         
+        // TEST CODE!!!!
+        DTStraightLineZombie *zombie = [DTStraightLineZombie zombieWithPlayer:_player andRunningDistance:250 withGameLayer:self andPosition:ccp(150, 400)];
+        [self addChild:zombie];
+        
         // Get some other variables we'll need
         _screen = [CCDirector sharedDirector].winSize;
         
@@ -55,7 +59,7 @@
 -(void)updatePlayerPositionForJoystick:(SneakyJoystick *)joystick andDelta:(float)delta
 {
     CGPoint oldPosition = _player.sprite.position;
-    CGPoint tileCoordinate = [self tileCoordinateForPoint:oldPosition];
+    CGPoint tileCoordinate = [self tileCoordinateForPosition:oldPosition];
     
     if ([self isWallAtTileCoordinate:tileCoordinate])
     {
@@ -84,13 +88,18 @@
 }
 
 // Converts the layer point to a tile coordinate (they go from top left)
--(CGPoint)tileCoordinateForPoint:(CGPoint)point
+-(CGPoint)tileCoordinateForPosition:(CGPoint)point
 {
     // So if the x or y are beyond the screen bounds then fix them to -1 as an off limit coordinate, otherwise we just adjust to normal
     int x = (point.x < 0) ? -1 : point.x / _tileDimension;
     int mapDimensionInPoints = _tileMapHeight * _tileDimension;
     int y = (point.y > mapDimensionInPoints) ? -1 : (mapDimensionInPoints - point.y) / _tileDimension;
     return ccp(x, y);
+}
+
+-(BOOL)isWallAtPosition:(CGPoint)position
+{
+    return [self isWallAtTileCoordinate:[self tileCoordinateForPosition:position]];
 }
 
 -(BOOL)isWallAtTileCoordinate:(CGPoint)tileCoordinate
