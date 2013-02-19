@@ -24,6 +24,7 @@
 }
 
 @property(nonatomic) float life;
+@property(nonatomic) BOOL isPausing;
 
 -(id)initWithPosition:(CGPoint)position gameLayer:(DTGameLayer *)gameLayer sprite:(CCNode *)sprite life:(float)life maxAttacksPerSecond:(int)maxAttacksPerSecond;
 -(void)moveToPosition:(CGPoint)position;

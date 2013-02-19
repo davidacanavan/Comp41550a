@@ -12,6 +12,7 @@
 @implementation DTCharacter
 
 @synthesize life = _life;
+@synthesize isPausing = _isPausing;
 
 -(id)initWithPosition:(CGPoint)position gameLayer:(DTGameLayer *)gameLayer sprite:(CCNode *)sprite life:(float)life maxAttacksPerSecond:(int)maxAttacksPerSecond
 {

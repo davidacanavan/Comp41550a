@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		2B51EC4D16CFFB7C00B037F9 /* DTBullet.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B51EC4C16CFFB7C00B037F9 /* DTBullet.m */; };
+		2B7BEC0916D3FE0600BB01B7 /* man_90%-10.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B7BEC0716D3FE0600BB01B7 /* man_90%-10.png */; };
+		2B7BEC0A16D3FE0600BB01B7 /* zombie_90%-11.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B7BEC0816D3FE0600BB01B7 /* zombie_90%-11.png */; };
 		2B86436116D23A02008FEB55 /* DTPausedLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B86436016D23A02008FEB55 /* DTPausedLayer.m */; };
 		2B86436416D25798008FEB55 /* Pew.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 2B86436316D25797008FEB55 /* Pew.m4a */; };
 		2B86436716D25B00008FEB55 /* BackingTrack.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 2B86436616D25B00008FEB55 /* BackingTrack.m4a */; };
@@ -167,6 +169,8 @@
 /* Begin PBXFileReference section */
 		2B51EC4B16CFFB7C00B037F9 /* DTBullet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTBullet.h; sourceTree = "<group>"; };
 		2B51EC4C16CFFB7C00B037F9 /* DTBullet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTBullet.m; sourceTree = "<group>"; };
+		2B7BEC0716D3FE0600BB01B7 /* man_90%-10.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "man_90%-10.png"; path = "Sprites/man_90%-10.png"; sourceTree = "<group>"; };
+		2B7BEC0816D3FE0600BB01B7 /* zombie_90%-11.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "zombie_90%-11.png"; path = "Sprites/zombie_90%-11.png"; sourceTree = "<group>"; };
 		2B86435F16D23A02008FEB55 /* DTPausedLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTPausedLayer.h; sourceTree = "<group>"; };
 		2B86436016D23A02008FEB55 /* DTPausedLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTPausedLayer.m; sourceTree = "<group>"; };
 		2B86436316D25797008FEB55 /* Pew.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = Pew.m4a; path = sounds/Pew.m4a; sourceTree = "<group>"; };
@@ -519,6 +523,8 @@
 		2B980D3216CAA2370028BB93 /* sprites */ = {
 			isa = PBXGroup;
 			children = (
+				2B7BEC0716D3FE0600BB01B7 /* man_90%-10.png */,
+				2B7BEC0816D3FE0600BB01B7 /* zombie_90%-11.png */,
 				2BB71AD016D2E7D5001C636C /* Tile_Test01-26.png */,
 				2BB71ACE16D2DDEB001C636C /* player sprite-hd.png */,
 				2BE40E6116D19A96003C5065 /* tile_markers-hd.png */,
@@ -1109,6 +1115,8 @@
 				2BB71ACF16D2DDEB001C636C /* player sprite-hd.png in Resources */,
 				2BB71AD116D2E7D5001C636C /* Tile_Test01-26.png in Resources */,
 				2BB71AD516D2EA5A001C636C /* DTHospitalF1-hd.tmx in Resources */,
+				2B7BEC0916D3FE0600BB01B7 /* man_90%-10.png in Resources */,
+				2B7BEC0A16D3FE0600BB01B7 /* zombie_90%-11.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

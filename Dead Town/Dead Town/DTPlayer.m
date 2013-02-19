@@ -25,7 +25,7 @@
     if ((self = [super init]))
     {
         //_sprite = [[ColoredCircleSprite alloc] initWithColor:ccc4(100, 40, 56, 255) radius:13];
-        _sprite = [CCSprite spriteWithFile:@"player sprite.png"];
+        _sprite = [CCSprite spriteWithFile:@"man_90%-10.png"];
         _sprite.position = point;
         _gameLayer = gameLayer;
         [self addChild:_sprite];
