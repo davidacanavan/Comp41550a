@@ -27,7 +27,7 @@
         _tileDimension = _tileMap.tileSize.width / CC_CONTENT_SCALE_FACTOR(); // Since they're square this is ok - measured in pixels and scaled for retina!
         _floor = [_tileMap layerNamed:@"Floor"];
         _walls = [_tileMap layerNamed:@"Walls"];
-        _walls.visible = NO; // Make sure no-one can see the transparent tiles!!!
+        _walls.visible = YES; // Make sure no-one can see the transparent tiles!!!
         [self addChild:_tileMap];
         
         // Create the players TODO: second player!!!

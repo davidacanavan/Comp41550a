@@ -21,8 +21,9 @@
     DTOptions *_options;
 }
 
-@property(nonatomic, strong, readonly) ColoredCircleSprite *sprite;
+@property(nonatomic, strong, readonly) CCSprite *sprite;
 @property(nonatomic, readonly) CGPoint previousPosition;
+@property(nonatomic, readonly) float bulletAngle;
 
 +(id)playerWithPlayerAtPoint:(CGPoint)point withGameLayer:(DTGameLayer *)gameLayer;
 -(void)movePlayerToPoint:(CGPoint)point;

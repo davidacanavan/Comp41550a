@@ -15,6 +15,7 @@
 
 @synthesize sprite = _sprite;
 @synthesize previousPosition = _previousPosition;
+@synthesize bulletAngle = _bulletAngle;
 
 // Class method to allocate the class and call the constructor
 +(id)playerWithPlayerAtPoint:(CGPoint)point withGameLayer:(DTGameLayer *)gameLayer
@@ -26,7 +27,8 @@
 {
     if ((self = [super init]))
     {
-        _sprite = [[ColoredCircleSprite alloc] initWithColor:ccc4(100, 40, 56, 255) radius:13];
+        //_sprite = [[ColoredCircleSprite alloc] initWithColor:ccc4(100, 40, 56, 255) radius:13];
+        _sprite = [CCSprite spriteWithFile:@"player sprite.png"];
         _sprite.position = point;
         _gameLayer = gameLayer;
         [self addChild:_sprite];
@@ -49,7 +51,7 @@
 
 -(void)fire
 {
-    DTBullet *bullet = [DTBullet bulletWithPlayerPosition:_sprite.position andAngle:_sprite.rotation withGameLayer:_gameLayer];
+    DTBullet *bullet = [DTBullet bulletWithPlayerPosition:_sprite.position andAngle:_bulletAngle withGameLayer:_gameLayer];
     [_gameLayer addChild:bullet];
     
     if (_options.playSoundEffects)
@@ -63,12 +65,17 @@
     float xDifference = (float) (point.x - spritePosition.x);
     float tanToHorizontalAxis = (point.y - spritePosition.y) / ((float) xDifference); // (y2 - y1) / (x2 - x1)
     // Get the inverse tan of the ratio. Convert back to degrees. Add 180 to ensure the direction is correct!
-    float angleValue = CC_RADIANS_TO_DEGREES(atanf(tanToHorizontalAxis));
+    float bulletAngle = CC_RADIANS_TO_DEGREES(atanf(tanToHorizontalAxis));
+    float angleValue = -bulletAngle;
     
     if (xDifference < 0)
+    {
+        bulletAngle += 180;
         angleValue += 180;
+    }
     
     _sprite.rotation = angleValue;
+    _bulletAngle = bulletAngle;
 }
 
 @end

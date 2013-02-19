@@ -64,6 +64,7 @@
 {
     [self unschedule:@selector(tick:)];
     [_director.touchDispatcher removeDelegate:self];
+    _joystick.visible = NO;
 }
 
 -(void)unpause

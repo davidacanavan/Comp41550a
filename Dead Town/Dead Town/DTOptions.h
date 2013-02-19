@@ -6,12 +6,14 @@
 //
 //
 
+#import <Foundation/Foundation.h>
 #import "CCNode.h"
 
 @interface DTOptions : NSObject
 
 @property(nonatomic) BOOL playSoundEffects;
 @property(nonatomic) BOOL playBackgroundMusic;
+@property(nonatomic) BOOL useTiltControls;
 
 +(id)sharedOptions;
 
