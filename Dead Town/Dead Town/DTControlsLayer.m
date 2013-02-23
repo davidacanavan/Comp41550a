@@ -13,12 +13,12 @@
 
 @synthesize isPausing = _isPausing;
 
-+(id)controlsLayerWithGameLayer:(DTGameLayer *)gameLayer
++(id)controlsLayerWithGameLayer:(DTGameLayer *)gameLayer useJoystick:(BOOL)useJoystick
 {
-    return [[self alloc] initWithGameLayer:gameLayer];
+    return [[self alloc] initWithGameLayer:gameLayer useJoystick:useJoystick];
 }
 
--(id)initWithGameLayer:(DTGameLayer *)gameLayer
+-(id)initWithGameLayer:(DTGameLayer *)gameLayer useJoystick:(BOOL)useJoystick
 {
     if ((self = [super init]))
     {
@@ -26,9 +26,13 @@
         _gameLayer = gameLayer;
         _director = [CCDirector sharedDirector];
         _screen = _director.winSize;
+        _qualifyingTimeForHold = 5.0 / 60;
+        _currentHoldTime = 0;
         
         // Create the buttons and what-nots
-        [self setUpSneakyJoystick];
+        if (useJoystick)
+            [self setUpSneakyJoystick];
+        
         [self setUpSneakyFireButton];
         [self setUpSneakyPauseButton];
         
@@ -50,6 +54,16 @@
     {
         _gameLayer.isFiring = YES;
         _fireButton.active = NO; // Fix to stop double-fire
+        _isPossibleHold = YES; // So we can check this next time the game loop runs around
+    }
+    else if (_isPossibleHold)
+    {
+        _currentHoldTime = min(_currentHoldTime + delta, _qualifyingTimeForHold);
+        
+        // Check if we've held the button long enough
+        if (_currentHoldTime >= _qualifyingTimeForHold)
+            //_gameLayer.isHoldFiring = YES;
+            [_gameLayer setIsHoldFiring:YES andIsJoystickStillMoving:_joystickSkin.visible];
     }
     
     // Check for a pause
@@ -64,7 +78,7 @@
 {
     [self unschedule:@selector(tick:)];
     [_director.touchDispatcher removeDelegate:self];
-    _joystick.visible = NO;
+    _joystickSkin.visible = NO;
 }
 
 -(void)unpause
@@ -97,6 +111,8 @@
     int padding = 15, buttonRadius = 24;
     SneakyButtonSkinnedBase *fireButtonSkin = [[SneakyButtonSkinnedBase alloc] init];
     fireButtonSkin.defaultSprite = [ColoredCircleSprite circleWithColor: ccc4(255, 255, 0, 255)radius:buttonRadius];
+    fireButtonSkin.activatedSprite = [ColoredCircleSprite circleWithColor: ccc4(255, 255, 0, 255)radius:buttonRadius];
+    fireButtonSkin.pressSprite = [ColoredCircleSprite circleWithColor: ccc4(255, 255, 0, 255)radius:buttonRadius];
     CGSize fireButtonSize = fireButtonSkin.contentSize;
     fireButtonSkin.position = ccp(_screen.width - padding - fireButtonSize.width / 2, padding + fireButtonSize.height / 2);
     _fireButton = [[SneakyButton alloc] initWithRect:CGRectMake(0, 0, buttonRadius * 2, buttonRadius * 2)];
@@ -124,7 +140,9 @@
     {
         _joystickSkin.position = touchPoint;
         _joystickSkin.visible = YES;
+        [_gameLayer updatePlayerPositionForJoystickStart];
     }
+    
     return YES;
 }
 
@@ -133,7 +151,16 @@
     CGPoint touchPoint = [_director convertToGL:[touch locationInView:[_director view]]];
     
     if (touchPoint.x < _screen.width / 2) // Stops the joystick from disappearing when you take a shot
+    {
         _joystickSkin.visible = NO;
+        [_gameLayer updatePlayerPositionForJoystickStop]; // Tell the game layer that the joystick has stopped moving
+    }
+    else
+        //_gameLayer.isHoldFiring = NO;
+        [_gameLayer setIsHoldFiring:NO andIsJoystickStillMoving:_joystickSkin.visible];
+    
+    _isPossibleHold = NO;
+    _currentHoldTime = 0;
 }
 
 -(void)ccTouchCancelled:(UITouch *)touch withEvent:(UIEvent *)event{}

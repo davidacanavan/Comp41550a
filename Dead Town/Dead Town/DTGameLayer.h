@@ -39,16 +39,20 @@
     DTPausedLayer *_pausedLayer;
 }
 
-@property(nonatomic) BOOL isFiring;
-@property(nonatomic) BOOL isPausing;
+@property(nonatomic) BOOL isFiring; // Set to true if the user is firing
+@property(nonatomic) BOOL isHoldFiring; // Set to true if the user is firing and holding the button
+@property(nonatomic) BOOL isPausing; // Set to true to pause the game layer and all children
 @property(nonatomic, strong) DTControlsLayer *controlsLayer;
 
 -(void)centerViewportOnPosition:(CGPoint)position;
 -(void)updatePlayerPositionForJoystick:(SneakyJoystick *)joystick andDelta:(float)delta;
+-(void)updatePlayerPositionForJoystickStart;
+-(void)updatePlayerPositionForJoystickStop;
 -(BOOL)isWallAtTileCoordinate:(CGPoint)tileCoordinate;
 -(BOOL)isWallAtPosition:(CGPoint)position;
 -(CGPoint)tileCoordinateForPosition:(CGPoint)point;
 -(void)unpause;
 -(void)unpauseAll;
+-(void)setIsHoldFiring:(BOOL)isHoldFiring andIsJoystickStillMoving:(BOOL)isJoystickStillMoving;
 
 @end

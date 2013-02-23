@@ -7,8 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <GameKit/GameKit.h>
 #import "cocos2d.h"
 
 @interface DTMenuLayer : CCLayer
+{
+}
 
 @end

@@ -21,6 +21,9 @@
     @private
     DTGameLayer *_gameLayer;
     DTOptions *_options;
+    CCRepeatForever *_movingAction;
+    CCAnimation *_movingAnimation;
+    BOOL _isMovingActionRunning;
 }
 
 @property(nonatomic, strong, readonly) CCSprite *sprite;
@@ -32,5 +35,8 @@
 -(void)turnToFacePoint:(CGPoint)point;
 -(void)fire;
 -(CGPoint)getPosition;
+-(void)notifyMovementStart;
+-(void)notifyMovementStop;
+-(void)notifyMovementSpeed:(float)speed;
 
 @end

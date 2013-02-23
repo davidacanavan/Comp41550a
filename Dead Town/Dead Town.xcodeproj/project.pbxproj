@@ -7,8 +7,20 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2B36587716D693D800720844 /* DTLifeNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B36587616D693D800720844 /* DTLifeNode.m */; };
+		2B36587B16D697C700720844 /* DTPlayerStatusLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B36587A16D697C700720844 /* DTPlayerStatusLayer.m */; };
+		2B36587D16D8295C00720844 /* WalkingMan-hd.tps in Resources */ = {isa = PBXBuildFile; fileRef = 2B36587C16D8295C00720844 /* WalkingMan-hd.tps */; };
+		2B36587F16D829BD00720844 /* Sprite1.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B36587E16D829BD00720844 /* Sprite1.png */; };
+		2B36588616D829DC00720844 /* Sprite2.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B36588016D829DC00720844 /* Sprite2.png */; };
+		2B36588716D829DC00720844 /* Sprite3.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B36588116D829DC00720844 /* Sprite3.png */; };
+		2B36588816D829DC00720844 /* Sprite4.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B36588216D829DC00720844 /* Sprite4.png */; };
+		2B36588916D829DC00720844 /* Sprite5.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B36588316D829DC00720844 /* Sprite5.png */; };
+		2B36588A16D829DC00720844 /* Sprite6.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B36588416D829DC00720844 /* Sprite6.png */; };
+		2B36588B16D829DC00720844 /* Sprite7.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B36588516D829DC00720844 /* Sprite7.png */; };
+		2B36588E16D82ABB00720844 /* WalkingMan-hd.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2B36588C16D82ABB00720844 /* WalkingMan-hd.plist */; };
+		2B36588F16D82ABB00720844 /* WalkingMan-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B36588D16D82ABB00720844 /* WalkingMan-hd.png */; };
 		2B51EC4D16CFFB7C00B037F9 /* DTBullet.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B51EC4C16CFFB7C00B037F9 /* DTBullet.m */; };
-		2B7BEC0916D3FE0600BB01B7 /* man_90%-10.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B7BEC0716D3FE0600BB01B7 /* man_90%-10.png */; };
+		2B7BEC0916D3FE0600BB01B7 /* Sprite0.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B7BEC0716D3FE0600BB01B7 /* Sprite0.png */; };
 		2B7BEC0A16D3FE0600BB01B7 /* zombie_90%-11.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B7BEC0816D3FE0600BB01B7 /* zombie_90%-11.png */; };
 		2B86436116D23A02008FEB55 /* DTPausedLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B86436016D23A02008FEB55 /* DTPausedLayer.m */; };
 		2B86436416D25798008FEB55 /* Pew.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 2B86436316D25797008FEB55 /* Pew.m4a */; };
@@ -167,9 +179,23 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2B36587516D693D700720844 /* DTLifeNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTLifeNode.h; sourceTree = "<group>"; };
+		2B36587616D693D800720844 /* DTLifeNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTLifeNode.m; sourceTree = "<group>"; };
+		2B36587916D697C700720844 /* DTPlayerStatusLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTPlayerStatusLayer.h; sourceTree = "<group>"; };
+		2B36587A16D697C700720844 /* DTPlayerStatusLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTPlayerStatusLayer.m; sourceTree = "<group>"; };
+		2B36587C16D8295C00720844 /* WalkingMan-hd.tps */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = "WalkingMan-hd.tps"; path = "Sprites/WalkingMan-hd.tps"; sourceTree = "<group>"; };
+		2B36587E16D829BD00720844 /* Sprite1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Sprite1.png; path = Sprites/Sprite1.png; sourceTree = "<group>"; };
+		2B36588016D829DC00720844 /* Sprite2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Sprite2.png; path = Sprites/Sprite2.png; sourceTree = "<group>"; };
+		2B36588116D829DC00720844 /* Sprite3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Sprite3.png; path = Sprites/Sprite3.png; sourceTree = "<group>"; };
+		2B36588216D829DC00720844 /* Sprite4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Sprite4.png; path = Sprites/Sprite4.png; sourceTree = "<group>"; };
+		2B36588316D829DC00720844 /* Sprite5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Sprite5.png; path = Sprites/Sprite5.png; sourceTree = "<group>"; };
+		2B36588416D829DC00720844 /* Sprite6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Sprite6.png; path = Sprites/Sprite6.png; sourceTree = "<group>"; };
+		2B36588516D829DC00720844 /* Sprite7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Sprite7.png; path = Sprites/Sprite7.png; sourceTree = "<group>"; };
+		2B36588C16D82ABB00720844 /* WalkingMan-hd.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "WalkingMan-hd.plist"; path = "Sprites/WalkingMan-hd.plist"; sourceTree = "<group>"; };
+		2B36588D16D82ABB00720844 /* WalkingMan-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "WalkingMan-hd.png"; path = "Sprites/WalkingMan-hd.png"; sourceTree = "<group>"; };
 		2B51EC4B16CFFB7C00B037F9 /* DTBullet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTBullet.h; sourceTree = "<group>"; };
 		2B51EC4C16CFFB7C00B037F9 /* DTBullet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTBullet.m; sourceTree = "<group>"; };
-		2B7BEC0716D3FE0600BB01B7 /* man_90%-10.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "man_90%-10.png"; path = "Sprites/man_90%-10.png"; sourceTree = "<group>"; };
+		2B7BEC0716D3FE0600BB01B7 /* Sprite0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Sprite0.png; path = Sprites/Sprite0.png; sourceTree = "<group>"; };
 		2B7BEC0816D3FE0600BB01B7 /* zombie_90%-11.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "zombie_90%-11.png"; path = "Sprites/zombie_90%-11.png"; sourceTree = "<group>"; };
 		2B86435F16D23A02008FEB55 /* DTPausedLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTPausedLayer.h; sourceTree = "<group>"; };
 		2B86436016D23A02008FEB55 /* DTPausedLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTPausedLayer.m; sourceTree = "<group>"; };
@@ -516,6 +542,10 @@
 				2B980D3016CA944A0028BB93 /* DTGameLayer.m */,
 				2B980D3B16CAAE3A0028BB93 /* DTControlsLayer.h */,
 				2B980D3C16CAAE3A0028BB93 /* DTControlsLayer.m */,
+				2B36587516D693D700720844 /* DTLifeNode.h */,
+				2B36587616D693D800720844 /* DTLifeNode.m */,
+				2B36587916D697C700720844 /* DTPlayerStatusLayer.h */,
+				2B36587A16D697C700720844 /* DTPlayerStatusLayer.m */,
 			);
 			name = "game scene";
 			sourceTree = "<group>";
@@ -523,7 +553,17 @@
 		2B980D3216CAA2370028BB93 /* sprites */ = {
 			isa = PBXGroup;
 			children = (
-				2B7BEC0716D3FE0600BB01B7 /* man_90%-10.png */,
+				2B36588C16D82ABB00720844 /* WalkingMan-hd.plist */,
+				2B36588D16D82ABB00720844 /* WalkingMan-hd.png */,
+				2B7BEC0716D3FE0600BB01B7 /* Sprite0.png */,
+				2B36587E16D829BD00720844 /* Sprite1.png */,
+				2B36588016D829DC00720844 /* Sprite2.png */,
+				2B36588116D829DC00720844 /* Sprite3.png */,
+				2B36588216D829DC00720844 /* Sprite4.png */,
+				2B36588316D829DC00720844 /* Sprite5.png */,
+				2B36588416D829DC00720844 /* Sprite6.png */,
+				2B36588516D829DC00720844 /* Sprite7.png */,
+				2B36587C16D8295C00720844 /* WalkingMan-hd.tps */,
 				2B7BEC0816D3FE0600BB01B7 /* zombie_90%-11.png */,
 				2BB71AD016D2E7D5001C636C /* Tile_Test01-26.png */,
 				2BB71ACE16D2DDEB001C636C /* player sprite-hd.png */,
@@ -1115,8 +1155,18 @@
 				2BB71ACF16D2DDEB001C636C /* player sprite-hd.png in Resources */,
 				2BB71AD116D2E7D5001C636C /* Tile_Test01-26.png in Resources */,
 				2BB71AD516D2EA5A001C636C /* DTHospitalF1-hd.tmx in Resources */,
-				2B7BEC0916D3FE0600BB01B7 /* man_90%-10.png in Resources */,
+				2B7BEC0916D3FE0600BB01B7 /* Sprite0.png in Resources */,
 				2B7BEC0A16D3FE0600BB01B7 /* zombie_90%-11.png in Resources */,
+				2B36587D16D8295C00720844 /* WalkingMan-hd.tps in Resources */,
+				2B36587F16D829BD00720844 /* Sprite1.png in Resources */,
+				2B36588616D829DC00720844 /* Sprite2.png in Resources */,
+				2B36588716D829DC00720844 /* Sprite3.png in Resources */,
+				2B36588816D829DC00720844 /* Sprite4.png in Resources */,
+				2B36588916D829DC00720844 /* Sprite5.png in Resources */,
+				2B36588A16D829DC00720844 /* Sprite6.png in Resources */,
+				2B36588B16D829DC00720844 /* Sprite7.png in Resources */,
+				2B36588E16D82ABB00720844 /* WalkingMan-hd.plist in Resources */,
+				2B36588F16D82ABB00720844 /* WalkingMan-hd.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1249,6 +1299,8 @@
 				2B86436A16D25B46008FEB55 /* DTOptions.m in Sources */,
 				2B86919216D3B57D00497D63 /* DTCharacter.m in Sources */,
 				2B86919316D3B57D00497D63 /* DTStraightLineZombie.m in Sources */,
+				2B36587716D693D800720844 /* DTLifeNode.m in Sources */,
+				2B36587B16D697C700720844 /* DTPlayerStatusLayer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

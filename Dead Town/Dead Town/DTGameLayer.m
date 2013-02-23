@@ -15,6 +15,7 @@
 @synthesize isFiring = _isFiring;
 @synthesize isPausing = _isPausing;
 @synthesize controlsLayer = _controlsLayer;
+@synthesize isHoldFiring = _isHoldFiring;
 
 -(id)init
 {
@@ -60,6 +61,15 @@
 {
     CGPoint oldPosition = _player.sprite.position;
     CGPoint tileCoordinate = [self tileCoordinateForPosition:oldPosition];
+    CGPoint velocity = ccpMult(joystick.velocity, 140);
+    CGPoint newPosition = ccp(oldPosition.x + velocity.x * delta,
+                              oldPosition.y + velocity.y * delta);
+    
+    if (_isHoldFiring) // In this case we don't move the player at all, but we still change which way he's facing
+    {
+        [_player turnToFacePoint:newPosition]; // Tell him where to look
+        return;
+    }
     
     if ([self isWallAtTileCoordinate:tileCoordinate])
     {
@@ -67,12 +77,22 @@
         return;
     }
     
-    CGPoint velocity = ccpMult(joystick.velocity, 140);
-    CGPoint newPosition = ccp(oldPosition.x + velocity.x * delta,
-                              oldPosition.y + velocity.y * delta);
     [_player turnToFacePoint:newPosition]; // Tell him where to look
     [_player movePlayerToPoint:newPosition]; // Update the player position
     [self centerViewportOnPosition:newPosition];
+}
+
+-(void)updatePlayerPositionForJoystickStart // TODO: rename these guys and put them into some sort of protocal declaration
+{
+    // So he's only moving as long as he's not hold firing! This has to be put in in case the user is hold-firing before he starts to run
+    if (!_isHoldFiring)
+        [_player notifyMovementStart];
+}
+
+-(void)updatePlayerPositionForJoystickStop
+{
+    if (!_isHoldFiring)
+        [_player notifyMovementStop];
 }
 
 -(void)centerViewportOnPosition:(CGPoint) position
@@ -170,7 +190,7 @@
     _currentPlayerFireGap = MIN(minPlayerFireGap, _currentPlayerFireGap + delta);
     
     // So when it hits the minimum gap and the user wants to fire I allow it
-    if (_isFiring && _currentPlayerFireGap == minPlayerFireGap)
+    if ((_isFiring || _isHoldFiring) && _currentPlayerFireGap == minPlayerFireGap)
     {
         [_player fire]; // So let him fire
         _isFiring = NO; // He's not firing anymore!
@@ -178,6 +198,19 @@
     }
 }
 
+-(void)setIsHoldFiring:(BOOL)isHoldFiring andIsJoystickStillMoving:(BOOL)isJoystickStillMoving
+{
+    // So if the user is running we just tell him not to run anymore if a hold fire occurs
+    if (isHoldFiring)
+        [_player notifyMovementStop];
+    else // So if the player
+    {
+        if (isJoystickStillMoving) // Then the user is holding down the stick and wants to run right after the hold
+            [_player notifyMovementStart];
+    }
+    
+    _isHoldFiring = isHoldFiring; // Then do the default behaviour of the setter
+}
 
 @end
 
