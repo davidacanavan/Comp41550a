@@ -39,6 +39,7 @@
         
         CCMenuItemImage *onePlayerMenuItem = [GooeyStatics menuItemWithImageName:@"dt_intro_one_player.png" target:self selector:@selector(onePlayerModeSelected)];
         CCMenuItemImage *twoPlayerMenuItem = [GooeyStatics menuItemWithImageName:@"dt_intro_two_player.png" target:self selector:@selector(twoPlayerModeSelected)];
+        int i;
         //onePlayerMenuItem.position = ccp(screen.width * .3, screen.height * .35);
         //twoPlayerMenuItem.position = ccp(screen.width * .7, screen.height * .35);
         CCMenu *menu = [CCMenu menuWithItems:onePlayerMenuItem, twoPlayerMenuItem, nil];
