@@ -18,4 +18,9 @@
     return item;
 }
 
++(CCMenuItemImage *)menuItemWithImageName:(NSString *)imageName target:(id)target selector:(SEL)selector
+{
+    return [CCMenuItemImage itemWithNormalImage:imageName selectedImage:imageName target:target selector:selector];
+}
+
 @end

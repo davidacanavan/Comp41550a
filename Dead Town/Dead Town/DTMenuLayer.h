@@ -12,6 +12,8 @@
 
 @interface DTMenuLayer : CCLayer
 {
+    CCSprite *_headingSprite;
+    CCAnimate *_headingAnimation;
 }
 
 @end

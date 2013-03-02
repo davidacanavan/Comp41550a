@@ -11,9 +11,12 @@
  <tileset firstgid="4" name="Desert Tiles" tilewidth="64" tileheight="64" spacing="2" margin="2">
   <image source="tmw_desert_spacing-hd.png" width="530" height="398"/>
  </tileset>
+ <tileset firstgid="52" name="Hospital Tiles" tilewidth="64" tileheight="64">
+  <image source="hospital_tileset.png" width="256" height="128"/>
+ </tileset>
  <layer name="Floor" width="32" height="32">
   <data encoding="base64" compression="zlib">
-   eJztlTEOgCAMRTugk3FSZBO9/yGFlYCWQhs1Hd5CCK+W8j0A4FCUAiYwMDAi/VNgC6wdcYG5wo/di6XmzNJeU9FDDn9c34n33ctfMxeWwU+dC/X/04/NSs/kX0Au/97Yf2k/Nv/SnObMP5dZt0x+6r2on+Y/P/D9MYPSeZP0t5xZ2pt7517If5fpuT5j/kEttbfU+1S7Is8F0FxvKg==
+   eJzt1TEOgCAMBVAOBWLx/vdSEibTaD9pKSEMf2HwaW1LCSEU5xxO2f6/H59cBklCPxu8Q2rPlfpZue5ZwY/tO7z8enaCNdf2kb4gA7+3L7a/pi/tRzLypfOosf9mrP9oH6m3hc/1W2LOycjv/S/bX9evM/Hut5G+JKjPzTkN8r92DFdnyR2E3D9opDuRjHwks/ieuQFAftza
   </data>
  </layer>
  <layer name="Walls" width="32" height="32">

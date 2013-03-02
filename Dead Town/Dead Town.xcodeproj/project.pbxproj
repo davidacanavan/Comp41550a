@@ -44,6 +44,14 @@
 		2BB71ACF16D2DDEB001C636C /* player sprite-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 2BB71ACE16D2DDEB001C636C /* player sprite-hd.png */; };
 		2BB71AD116D2E7D5001C636C /* Tile_Test01-26.png in Resources */ = {isa = PBXBuildFile; fileRef = 2BB71AD016D2E7D5001C636C /* Tile_Test01-26.png */; };
 		2BB71AD516D2EA5A001C636C /* DTHospitalF1-hd.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 2BB71AD416D2EA5A001C636C /* DTHospitalF1-hd.tmx */; };
+		2BDD70AE16E0DBAB00A31DD5 /* hospital_tileset.png in Resources */ = {isa = PBXBuildFile; fileRef = 2BDD70AD16E0DBAB00A31DD5 /* hospital_tileset.png */; };
+		2BDD70B116E0E05300A31DD5 /* DTIntroAnimation.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2BDD70AF16E0E05300A31DD5 /* DTIntroAnimation.plist */; };
+		2BDD70B216E0E05300A31DD5 /* DTIntroAnimation.png in Resources */ = {isa = PBXBuildFile; fileRef = 2BDD70B016E0E05300A31DD5 /* DTIntroAnimation.png */; };
+		2BDD70B416E0E58D00A31DD5 /* dt_intro_background.png in Resources */ = {isa = PBXBuildFile; fileRef = 2BDD70B316E0E58D00A31DD5 /* dt_intro_background.png */; };
+		2BDD70B616E0E7F800A31DD5 /* dt_intro_background-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 2BDD70B516E0E7F800A31DD5 /* dt_intro_background-hd.png */; };
+		2BDD70B816E0EAEE00A31DD5 /* dt_intro_title_0-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 2BDD70B716E0EAEE00A31DD5 /* dt_intro_title_0-hd.png */; };
+		2BDD70BB16E0ED1A00A31DD5 /* dt_intro_one_player-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 2BDD70B916E0ED1A00A31DD5 /* dt_intro_one_player-hd.png */; };
+		2BDD70BC16E0ED1A00A31DD5 /* dt_intro_two_player-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 2BDD70BA16E0ED1A00A31DD5 /* dt_intro_two_player-hd.png */; };
 		2BE0759516B74A6D0073F28F /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BE0759416B74A6D0073F28F /* QuartzCore.framework */; };
 		2BE0759716B74A6D0073F28F /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BE0759616B74A6D0073F28F /* OpenGLES.framework */; };
 		2BE0759916B74A6D0073F28F /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BE0759816B74A6D0073F28F /* OpenAL.framework */; };
@@ -232,6 +240,14 @@
 		2BB71ACE16D2DDEB001C636C /* player sprite-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "player sprite-hd.png"; path = "Sprites/player sprite-hd.png"; sourceTree = "<group>"; };
 		2BB71AD016D2E7D5001C636C /* Tile_Test01-26.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Tile_Test01-26.png"; path = "Sprites/Tile_Test01-26.png"; sourceTree = "<group>"; };
 		2BB71AD416D2EA5A001C636C /* DTHospitalF1-hd.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "DTHospitalF1-hd.tmx"; sourceTree = "<group>"; };
+		2BDD70AD16E0DBAB00A31DD5 /* hospital_tileset.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hospital_tileset.png; sourceTree = "<group>"; };
+		2BDD70AF16E0E05300A31DD5 /* DTIntroAnimation.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = DTIntroAnimation.plist; path = Sprites/DTIntroAnimation.plist; sourceTree = "<group>"; };
+		2BDD70B016E0E05300A31DD5 /* DTIntroAnimation.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = DTIntroAnimation.png; path = Sprites/DTIntroAnimation.png; sourceTree = "<group>"; };
+		2BDD70B316E0E58D00A31DD5 /* dt_intro_background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = dt_intro_background.png; path = Sprites/dt_intro_background.png; sourceTree = "<group>"; };
+		2BDD70B516E0E7F800A31DD5 /* dt_intro_background-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "dt_intro_background-hd.png"; path = "Sprites/dt_intro_background-hd.png"; sourceTree = "<group>"; };
+		2BDD70B716E0EAEE00A31DD5 /* dt_intro_title_0-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "dt_intro_title_0-hd.png"; path = "Sprites/dt_intro_title_0-hd.png"; sourceTree = "<group>"; };
+		2BDD70B916E0ED1A00A31DD5 /* dt_intro_one_player-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "dt_intro_one_player-hd.png"; path = "Sprites/dt_intro_one_player-hd.png"; sourceTree = "<group>"; };
+		2BDD70BA16E0ED1A00A31DD5 /* dt_intro_two_player-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "dt_intro_two_player-hd.png"; path = "Sprites/dt_intro_two_player-hd.png"; sourceTree = "<group>"; };
 		2BE0759016B74A6D0073F28F /* Dead Town.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Dead Town.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2BE0759416B74A6D0073F28F /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		2BE0759616B74A6D0073F28F /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -555,6 +571,14 @@
 		2B980D3216CAA2370028BB93 /* sprites */ = {
 			isa = PBXGroup;
 			children = (
+				2BDD70B916E0ED1A00A31DD5 /* dt_intro_one_player-hd.png */,
+				2BDD70BA16E0ED1A00A31DD5 /* dt_intro_two_player-hd.png */,
+				2BDD70B716E0EAEE00A31DD5 /* dt_intro_title_0-hd.png */,
+				2BDD70B516E0E7F800A31DD5 /* dt_intro_background-hd.png */,
+				2BDD70B316E0E58D00A31DD5 /* dt_intro_background.png */,
+				2BDD70AF16E0E05300A31DD5 /* DTIntroAnimation.plist */,
+				2BDD70B016E0E05300A31DD5 /* DTIntroAnimation.png */,
+				2BDD70AD16E0DBAB00A31DD5 /* hospital_tileset.png */,
 				2B36588C16D82ABB00720844 /* WalkingMan-hd.plist */,
 				2B36588D16D82ABB00720844 /* WalkingMan-hd.png */,
 				2B7BEC0716D3FE0600BB01B7 /* Sprite0.png */,
@@ -1171,6 +1195,14 @@
 				2B36588F16D82ABB00720844 /* WalkingMan-hd.png in Resources */,
 				2B3025CA16D93FBD00A3C0F1 /* Default.png in Resources */,
 				2B3025CF16D941ED00A3C0F1 /* TUA_Screen-02.png in Resources */,
+				2BDD70AE16E0DBAB00A31DD5 /* hospital_tileset.png in Resources */,
+				2BDD70B116E0E05300A31DD5 /* DTIntroAnimation.plist in Resources */,
+				2BDD70B216E0E05300A31DD5 /* DTIntroAnimation.png in Resources */,
+				2BDD70B416E0E58D00A31DD5 /* dt_intro_background.png in Resources */,
+				2BDD70B616E0E7F800A31DD5 /* dt_intro_background-hd.png in Resources */,
+				2BDD70B816E0EAEE00A31DD5 /* dt_intro_title_0-hd.png in Resources */,
+				2BDD70BB16E0ED1A00A31DD5 /* dt_intro_one_player-hd.png in Resources */,
+				2BDD70BC16E0ED1A00A31DD5 /* dt_intro_two_player-hd.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
