@@ -13,6 +13,7 @@
 #import "SneakyButtonSkinnedBase.h"
 #import "SneakyJoystickSkinnedBase.h"
 #import "DTGameLayer.h"
+#import "DTControlsListener.h"
 
 @class DTGameLayer;
 
@@ -20,12 +21,13 @@
 {
     @private
     // The map layer - this makes it easy to update the player position
-    DTGameLayer *_gameLayer; // TODO: should i pass this stuff through the scene instead?
+    DTGameLayer *_gameLayer; 
     SneakyJoystickSkinnedBase *_joystickSkin;
     SneakyJoystick *_joystick;
     SneakyButton *_fireButton;
     SneakyButton *_pauseButton;
     CCDirector *_director;
+    id <DTControlsListener> _controlsListener;
     CGSize _screen;
     float _qualifyingTimeForHold;
     float _currentHoldTime;
@@ -35,7 +37,19 @@
 
 @property(nonatomic) BOOL isPausing;
 
-+(id)controlsLayerWithGameLayer:(DTGameLayer *)gameLayer useJoystick:(BOOL)useJoystick;
++(id)controlsLayerWithGameLayer:(DTGameLayer *)gameLayer useJoystick:(BOOL)useJoystick controlsListener:(id <DTControlsListener>)controlsListener;
 -(void)unpause;
 
 @end
+
+
+
+
+
+
+
+
+
+
+
+

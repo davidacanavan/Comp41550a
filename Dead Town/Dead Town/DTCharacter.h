@@ -23,6 +23,7 @@
     float _currentFireGap;
 }
 
+// The amount of life the character has left, it's between 0 and 100.
 @property(nonatomic) float life;
 @property(nonatomic) BOOL isPausing;
 

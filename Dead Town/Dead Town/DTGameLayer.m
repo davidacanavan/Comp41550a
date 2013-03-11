@@ -43,7 +43,7 @@
         _screen = [CCDirector sharedDirector].winSize;
         
         // Center the map over the player TODO: Add a spawn point for the players on the map
-        [self centerViewportOnPosition:_player.position];
+        [self centerViewportOnPosition:_player.sprite.position];
         
         _isGameOver = NO;
         _isFiring = NO;
@@ -56,12 +56,14 @@
     return self;
 }
 
+;
+;
+
 // Called by the controls layer when the joystick is moved
--(void)updatePlayerPositionForJoystick:(SneakyJoystick *)joystick andDelta:(float)delta
+-(void)joystickUpdated:(CGPoint)jvelocity delta:(float)delta
 {
     CGPoint oldPosition = _player.sprite.position;
-    CGPoint tileCoordinate = [self tileCoordinateForPosition:oldPosition];
-    CGPoint velocity = ccpMult(joystick.velocity, 140);
+    CGPoint velocity = ccpMult(jvelocity, 140);
     CGPoint newPosition = ccp(oldPosition.x + velocity.x * delta,
                               oldPosition.y + velocity.y * delta);
     
@@ -71,25 +73,24 @@
         return;
     }
     
-    if ([self isWallAtTileCoordinate:tileCoordinate])
+    [_player turnToFacePoint:newPosition]; // Tell him where to look
+    
+    if (![self isWallAtPosition:newPosition])
     {
-        [_player movePlayerToPoint: [_player previousPosition]]; // TODO: this stops the player getting stuck but it warbles a bit!
-        return;
+        [_player movePlayerToPoint:newPosition]; // Update the player position
+        [self centerViewportOnPosition:newPosition];
     }
     
-    [_player turnToFacePoint:newPosition]; // Tell him where to look
-    [_player movePlayerToPoint:newPosition]; // Update the player position
-    [self centerViewportOnPosition:newPosition];
 }
 
--(void)updatePlayerPositionForJoystickStart // TODO: rename these guys and put them into some sort of protocal declaration
+-(void)joystickMoveStarted
 {
     // So he's only moving as long as he's not hold firing! This has to be put in in case the user is hold-firing before he starts to run
     if (!_isHoldFiring)
         [_player notifyMovementStart];
 }
 
--(void)updatePlayerPositionForJoystickStop
+-(void)joystickMoveEnded
 {
     if (!_isHoldFiring)
         [_player notifyMovementStop];
@@ -97,14 +98,8 @@
 
 -(void)centerViewportOnPosition:(CGPoint) position
 {
-    int x = MAX(position.x, _screen.width / 2);
-    int y = MAX(position.y, _screen.height / 2);
-    x = MIN(x, (_tileMap.mapSize.width * _tileMap.tileSize.width) - _screen.width / 2);
-    y = MIN(y, (_tileMap.mapSize.height * _tileMap.tileSize.height) - _screen.height/2);
-    CGPoint actualPosition = ccp(x, y);
     CGPoint centerOfView = ccp(_screen.width / 2, _screen.height / 2);
-    CGPoint viewPoint = ccpSub(centerOfView, actualPosition);
-    self.position = viewPoint;
+    self.position = ccpSub(centerOfView, position);
 }
 
 // Converts the layer point to a tile coordinate (they go from top left)

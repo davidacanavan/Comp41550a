@@ -206,6 +206,7 @@
 		2B36588D16D82ABB00720844 /* WalkingMan-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "WalkingMan-hd.png"; path = "Sprites/WalkingMan-hd.png"; sourceTree = "<group>"; };
 		2B51EC4B16CFFB7C00B037F9 /* DTBullet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTBullet.h; sourceTree = "<group>"; };
 		2B51EC4C16CFFB7C00B037F9 /* DTBullet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTBullet.m; sourceTree = "<group>"; };
+		2B5668CF16EE1BE6004FEA6C /* DTControlsListener.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTControlsListener.h; sourceTree = "<group>"; };
 		2B7BEC0716D3FE0600BB01B7 /* Sprite0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Sprite0.png; path = Sprites/Sprite0.png; sourceTree = "<group>"; };
 		2B7BEC0816D3FE0600BB01B7 /* zombie_90%-11.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "zombie_90%-11.png"; path = "Sprites/zombie_90%-11.png"; sourceTree = "<group>"; };
 		2B86435F16D23A02008FEB55 /* DTPausedLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTPausedLayer.h; sourceTree = "<group>"; };
@@ -544,6 +545,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2B5668CC16EE1750004FEA6C /* controls */ = {
+			isa = PBXGroup;
+			children = (
+				2B980D3B16CAAE3A0028BB93 /* DTControlsLayer.h */,
+				2B980D3C16CAAE3A0028BB93 /* DTControlsLayer.m */,
+				2B5668CF16EE1BE6004FEA6C /* DTControlsListener.h */,
+			);
+			name = controls;
+			sourceTree = "<group>";
+		};
 		2B86436516D257A0008FEB55 /* sounds */ = {
 			isa = PBXGroup;
 			children = (
@@ -558,8 +569,6 @@
 			children = (
 				2B980D2F16CA944A0028BB93 /* DTGameLayer.h */,
 				2B980D3016CA944A0028BB93 /* DTGameLayer.m */,
-				2B980D3B16CAAE3A0028BB93 /* DTControlsLayer.h */,
-				2B980D3C16CAAE3A0028BB93 /* DTControlsLayer.m */,
 				2B36587516D693D700720844 /* DTLifeNode.h */,
 				2B36587616D693D800720844 /* DTLifeNode.m */,
 				2B36587916D697C700720844 /* DTPlayerStatusLayer.h */,
@@ -1076,6 +1085,7 @@
 		2BE0773716B766880073F28F /* layers */ = {
 			isa = PBXGroup;
 			children = (
+				2B5668CC16EE1750004FEA6C /* controls */,
 				2BB71ACB16D29568001C636C /* pausing */,
 				2B980D2E16CA94040028BB93 /* game scene */,
 				2BF7A8C516C8631500D3063F /* DTMenuLayer.h */,

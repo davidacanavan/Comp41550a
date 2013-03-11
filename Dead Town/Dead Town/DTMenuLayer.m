@@ -17,13 +17,6 @@
     if ((self = [super init]))
     {
         CGSize screen = [[CCDirector sharedDirector] winSize];
-        NSString *fontName = @"Marker Felt";
-        
-        // The title label - replace this later with a proper image
-        //CCLabelTTF *titleLabel = [CCLabelTTF labelWithString:@"DEAD TOWN" fontName:fontName fontSize:60];
-        //[titleLabel setColor:ccRED];
-        //[titleLabel setPosition:ccp(screen.width / 2, screen.height / 2 + 30)];
-        //[self addChild: titleLabel];
         
         CCSprite *backgroundSprite = [CCSprite spriteWithFile:@"dt_intro_background.png"];
         backgroundSprite.position = ccp(screen.width / 2, screen.height / 2);
@@ -39,9 +32,7 @@
         
         CCMenuItemImage *onePlayerMenuItem = [GooeyStatics menuItemWithImageName:@"dt_intro_one_player.png" target:self selector:@selector(onePlayerModeSelected)];
         CCMenuItemImage *twoPlayerMenuItem = [GooeyStatics menuItemWithImageName:@"dt_intro_two_player.png" target:self selector:@selector(twoPlayerModeSelected)];
-        int i;
-        //onePlayerMenuItem.position = ccp(screen.width * .3, screen.height * .35);
-        //twoPlayerMenuItem.position = ccp(screen.width * .7, screen.height * .35);
+        
         CCMenu *menu = [CCMenu menuWithItems:onePlayerMenuItem, twoPlayerMenuItem, nil];
         [menu alignItemsHorizontallyWithPadding:40];
         menu.position = ccp(screen.width / 2, screen.height * .35);

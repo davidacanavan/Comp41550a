@@ -11,21 +11,29 @@
 @implementation DTBullet
 
 @synthesize isExpired = _isExpired;
+@synthesize damage = _damage;
+@synthesize maxDistance = _maxDistance;
+@synthesize initialPosition = _initialPosition;
+@synthesize isPlayers = _isPlayers;
 
-+(id)bulletWithPlayerPosition:(CGPoint)playerPosition andAngle:(float)angleOfFire withGameLayer:(DTGameLayer *)gameLayer
++(id)bulletWithPosition:(CGPoint)initialPosition andAngle:(float)angleOfFire damage:(float)damage maxDistance:(float)maxDistance isPlayers:(BOOL)isPlayers withGameLayer:(DTGameLayer *)gameLayer
 {
-    return [[self alloc] initWithPlayerPosition:playerPosition andAngle:angleOfFire withGameLayer:gameLayer];
+    return [[self alloc] initWithPosition:initialPosition andAngle:angleOfFire damage:damage maxDistance:maxDistance isPlayers:isPlayers withGameLayer:gameLayer];
 }
 
--(id)initWithPlayerPosition:(CGPoint)playerPosition andAngle:(float)angleOfFire withGameLayer:(DTGameLayer*)gameLayer
+-(id)initWithPosition:(CGPoint)initialPosition andAngle:(float)angleOfFire damage:(float)damage maxDistance:(float)maxDistance isPlayers:(BOOL)isPlayers withGameLayer:(DTGameLayer*)gameLayer
 {
     if (self = [super init])
     {
         _gameLayer = gameLayer;
         _isExpired = NO; // Make sure the bullet actually exists for a little bit!
-        _sprite = [ColoredCircleSprite circleWithColor:ccc4(0, 0, 100, 255) radius:2];
-        _sprite.position = playerPosition;
-        _sprite.rotation = angleOfFire;
+        _sprite = [ColoredCircleSprite circleWithColor:ccc4(0, 0, 100, 255) radius:2]; // TODO: Allow various sprites for this
+        _sprite.position = initialPosition;
+        _initialPosition = initialPosition;
+        _sprite.rotation = angleOfFire; // Make sure the bullet travels in the correct direction
+        _damage = damage;
+        _maxDistance = maxDistance;
+        _isPlayers = isPlayers;
         [self addChild:_sprite];
         [self schedule:@selector(tick:)];
     }
@@ -46,9 +54,13 @@
     int velocity = 400;
     float angle = CC_DEGREES_TO_RADIANS(_sprite.rotation);
     CGPoint circlePosition = ccpMult(ccpForAngle(angle), velocity * delta);
-    _sprite.position = ccpAdd(_sprite.position, circlePosition);
+    CGPoint newPosition = ccpAdd(_sprite.position, circlePosition);
+    _sprite.position = newPosition;
+    // So if we're at -1 then the caller doesn't care about distance - only walls
+    BOOL isPastMaxDistance = _maxDistance == -1 ? NO : ccpDistance(newPosition, _initialPosition) > _maxDistance;
     
-    if ([_gameLayer isWallAtTileCoordinate:[_gameLayer tileCoordinateForPosition:_sprite.position]])
+    // So if we've hit a wall we stop the bullet or if we've gone further than we allow.
+    if ([_gameLayer isWallAtPosition:(newPosition)] || isPastMaxDistance)
     {
         _isExpired = YES;
         [_gameLayer removeChild:self cleanup:NO];

@@ -13,12 +13,12 @@
 
 @synthesize isPausing = _isPausing;
 
-+(id)controlsLayerWithGameLayer:(DTGameLayer *)gameLayer useJoystick:(BOOL)useJoystick
++(id)controlsLayerWithGameLayer:(DTGameLayer *)gameLayer useJoystick:(BOOL)useJoystick controlsListener:(id <DTControlsListener>)controlsListener
 {
-    return [[self alloc] initWithGameLayer:gameLayer useJoystick:useJoystick];
+    return [[self alloc] initWithGameLayer:gameLayer useJoystick:useJoystick controlsListener:controlsListener];
 }
 
--(id)initWithGameLayer:(DTGameLayer *)gameLayer useJoystick:(BOOL)useJoystick
+-(id)initWithGameLayer:(DTGameLayer *)gameLayer useJoystick:(BOOL)useJoystick controlsListener:(id <DTControlsListener>)controlsListener
 {
     if ((self = [super init]))
     {
@@ -28,6 +28,7 @@
         _screen = _director.winSize;
         _qualifyingTimeForHold = 5.0 / 60;
         _currentHoldTime = 0;
+        _controlsListener = controlsListener;
         
         // Create the buttons and what-nots
         if (useJoystick)
@@ -47,7 +48,7 @@
 {
     // So we're moving the character a little bit - so tell the game layer to move him!
     if (!CGPointEqualToPoint(_joystick.stickPosition, CGPointZero)) 
-        [_gameLayer updatePlayerPositionForJoystick:_joystick andDelta:delta];
+        [_controlsListener joystickUpdated:_joystick.velocity delta:delta];
     
     // Check to see if we're firing a bullet - then fire!
     if (_fireButton.active)
@@ -62,7 +63,6 @@
         
         // Check if we've held the button long enough
         if (_currentHoldTime >= _qualifyingTimeForHold)
-            //_gameLayer.isHoldFiring = YES;
             [_gameLayer setIsHoldFiring:YES andIsJoystickStillMoving:_joystickSkin.visible];
     }
     
@@ -140,7 +140,7 @@
     {
         _joystickSkin.position = touchPoint;
         _joystickSkin.visible = YES;
-        [_gameLayer updatePlayerPositionForJoystickStart];
+        [_controlsListener joystickMoveStarted];
     }
     
     return YES;
@@ -153,10 +153,9 @@
     if (touchPoint.x < _screen.width / 2) // Stops the joystick from disappearing when you take a shot
     {
         _joystickSkin.visible = NO;
-        [_gameLayer updatePlayerPositionForJoystickStop]; // Tell the game layer that the joystick has stopped moving
+        [_controlsListener joystickMoveEnded]; // Tell the game layer that the joystick has stopped moving
     }
     else
-        //_gameLayer.isHoldFiring = NO;
         [_gameLayer setIsHoldFiring:NO andIsJoystickStillMoving:_joystickSkin.visible];
     
     _isPossibleHold = NO;

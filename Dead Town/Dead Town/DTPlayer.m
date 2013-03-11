@@ -89,7 +89,7 @@
 
 -(void)fire
 {
-    DTBullet *bullet = [DTBullet bulletWithPlayerPosition:_sprite.position andAngle:_bulletAngle withGameLayer:_gameLayer];
+    DTBullet *bullet = [DTBullet bulletWithPosition:_sprite.position andAngle:_bulletAngle damage:10 maxDistance:-1 isPlayers:YES withGameLayer:_gameLayer];
     [_gameLayer addChild:bullet];
     
     if (_options.playSoundEffects)
