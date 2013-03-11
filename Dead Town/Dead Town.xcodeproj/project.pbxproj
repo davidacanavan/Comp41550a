@@ -22,6 +22,7 @@
 		2B36588E16D82ABB00720844 /* WalkingMan-hd.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2B36588C16D82ABB00720844 /* WalkingMan-hd.plist */; };
 		2B36588F16D82ABB00720844 /* WalkingMan-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B36588D16D82ABB00720844 /* WalkingMan-hd.png */; };
 		2B51EC4D16CFFB7C00B037F9 /* DTBullet.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B51EC4C16CFFB7C00B037F9 /* DTBullet.m */; };
+		2B5668D316EE2914004FEA6C /* DTWeapon.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B5668D216EE2914004FEA6C /* DTWeapon.m */; };
 		2B7BEC0916D3FE0600BB01B7 /* Sprite0.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B7BEC0716D3FE0600BB01B7 /* Sprite0.png */; };
 		2B7BEC0A16D3FE0600BB01B7 /* zombie_90%-11.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B7BEC0816D3FE0600BB01B7 /* zombie_90%-11.png */; };
 		2B86436116D23A02008FEB55 /* DTPausedLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B86436016D23A02008FEB55 /* DTPausedLayer.m */; };
@@ -207,6 +208,8 @@
 		2B51EC4B16CFFB7C00B037F9 /* DTBullet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTBullet.h; sourceTree = "<group>"; };
 		2B51EC4C16CFFB7C00B037F9 /* DTBullet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTBullet.m; sourceTree = "<group>"; };
 		2B5668CF16EE1BE6004FEA6C /* DTControlsListener.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTControlsListener.h; sourceTree = "<group>"; };
+		2B5668D116EE2914004FEA6C /* DTWeapon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTWeapon.h; sourceTree = "<group>"; };
+		2B5668D216EE2914004FEA6C /* DTWeapon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTWeapon.m; sourceTree = "<group>"; };
 		2B7BEC0716D3FE0600BB01B7 /* Sprite0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Sprite0.png; path = Sprites/Sprite0.png; sourceTree = "<group>"; };
 		2B7BEC0816D3FE0600BB01B7 /* zombie_90%-11.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "zombie_90%-11.png"; path = "Sprites/zombie_90%-11.png"; sourceTree = "<group>"; };
 		2B86435F16D23A02008FEB55 /* DTPausedLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTPausedLayer.h; sourceTree = "<group>"; };
@@ -555,6 +558,15 @@
 			name = controls;
 			sourceTree = "<group>";
 		};
+		2B5668D016EE28FD004FEA6C /* weapons */ = {
+			isa = PBXGroup;
+			children = (
+				2B5668D116EE2914004FEA6C /* DTWeapon.h */,
+				2B5668D216EE2914004FEA6C /* DTWeapon.m */,
+			);
+			name = weapons;
+			sourceTree = "<group>";
+		};
 		2B86436516D257A0008FEB55 /* sounds */ = {
 			isa = PBXGroup;
 			children = (
@@ -613,6 +625,7 @@
 		2B980D3716CAA5D60028BB93 /* characters */ = {
 			isa = PBXGroup;
 			children = (
+				2B5668D016EE28FD004FEA6C /* weapons */,
 				2B86918E16D3B57D00497D63 /* DTCharacter.h */,
 				2B86918F16D3B57D00497D63 /* DTCharacter.m */,
 				2B86919016D3B57D00497D63 /* DTStraightLineZombie.h */,
@@ -1347,6 +1360,7 @@
 				2B86919316D3B57D00497D63 /* DTStraightLineZombie.m in Sources */,
 				2B36587716D693D800720844 /* DTLifeNode.m in Sources */,
 				2B36587B16D697C700720844 /* DTPlayerStatusLayer.m in Sources */,
+				2B5668D316EE2914004FEA6C /* DTWeapon.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
