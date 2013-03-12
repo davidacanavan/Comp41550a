@@ -7,14 +7,14 @@
 //
 
 #import "DTCharacter.h"
-#import "DTGameLayer.h"
+#import "DTOptions.h"
+#import "DTWeapon.h"
 
 @implementation DTCharacter
 
-@synthesize life = _life;
-@synthesize isPausing = _isPausing;
+@synthesize position = _position;
 
--(id)initWithPosition:(CGPoint)position gameLayer:(DTGameLayer *)gameLayer sprite:(CCNode *)sprite life:(float)life maxAttacksPerSecond:(int)maxAttacksPerSecond
+-(id)initWithPosition:(CGPoint)position gameLayer:(DTGameLayer *)gameLayer life:(float)life
 {
     if (self = [super init])
     {
@@ -23,15 +23,12 @@
         
         // Save the instance variables and set the sprite's position
         _gameLayer = gameLayer;
-        _sprite = sprite;
+        _sprite = [self loadSpriteAndAnimations]; // This method is overriden by subclasses to allow more functionality
         _sprite.position = position;
         _life = life;
-        _maxAttackRate = 1 / maxAttacksPerSecond;
-        _currentFireGap = 0;
         
-        // Add the sprite to the layer - I leave the actual end
+        // Add the sprite to the layer
         [self addChild:_sprite];
-        
     }
     
     return self;
@@ -39,7 +36,6 @@
 
 -(void)moveToPosition:(CGPoint)position
 {
-    _previousPosition = _sprite.position;
     _sprite.position = position;
 }
 
@@ -68,11 +64,28 @@
     return _sprite.position;
 }
 
-// Ensure the player's life never goes below zero
+-(void)setPosition:(CGPoint)position
+{
+    _sprite.position = position;
+}
+
+// Override of the setter to ensure the player's life never goes below 0 or beyond 100.
 -(void)setLife:(float)life
 {
-    _life = max(life, 0);
+    _life = min(max(life, 0), 100);
 }
+
+-(void)notifyMovementStart {}
+-(void)notifyMovementEnd {}
+-(void)notifyMovementSpeed:(float)speed {}
+-(CCNode *)loadSpriteAndAnimations {return nil;}
+
+// By default we just ask the weapon to fire for us.
+-(void)fire
+{
+    [_weapon fireAtAngle:_bulletAngle];
+}
+
 
 @end
 

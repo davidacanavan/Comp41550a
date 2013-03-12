@@ -7,7 +7,6 @@
 //
 
 #import "DTCharacter.h"
-#import "DTGameLayer.h"
 
 @class DTPlayer;
 
@@ -19,6 +18,6 @@
     float _runningDistance;
 }
 
-+(id)zombieWithPlayer:(DTPlayer *)player runningDistance:(float)runningDistance gameLayer:(DTGameLayer *)gameLayer position:(CGPoint)position life:(float)life maxAttacksPerSecond:(int)maxAttacksPerSecond;
++(id)zombieWithPlayer:(DTPlayer *)player runningDistance:(float)runningDistance gameLayer:(DTGameLayer *)gameLayer position:(CGPoint)position life:(float)life;
 
 @end

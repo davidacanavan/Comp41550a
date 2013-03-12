@@ -7,20 +7,19 @@
 //
 
 #import "DTStraightLineZombie.h"
+#import "DTPlayer.h"
+#import "DTGameLayer.h"
 
 @implementation DTStraightLineZombie
 
-+(id)zombieWithPlayer:(DTPlayer *)player runningDistance:(float)runningDistance gameLayer:(DTGameLayer *)gameLayer position:(CGPoint)position life:(float)life maxAttacksPerSecond:(int)maxAttacksPerSecond
++(id)zombieWithPlayer:(DTPlayer *)player runningDistance:(float)runningDistance gameLayer:(DTGameLayer *)gameLayer position:(CGPoint)position life:(float)life
 {
-    return [[self alloc] initWithPlayer:player runningDistance:runningDistance gameLayer:gameLayer position:position life:life maxAttacksPerSecond:(int)maxAttacksPerSecond];
+    return [[self alloc] initWithPlayer:player runningDistance:runningDistance gameLayer:gameLayer position:position life:life];
 }
 
--(id)initWithPlayer: (DTPlayer *)player runningDistance:(float)runningDistance gameLayer:(DTGameLayer *)gameLayer position:(CGPoint)position life:(float)life maxAttacksPerSecond:(int)maxAttacksPerSecond
+-(id)initWithPlayer: (DTPlayer *)player runningDistance:(float)runningDistance gameLayer:(DTGameLayer *)gameLayer position:(CGPoint)position life:(float)life
 {
-    CCSprite *sprite = [CCSprite spriteWithFile:@"zombie_90%-11.png"];
-    //ColoredCircleSprite *sprite = [ColoredCircleSprite circleWithColor:ccc4(0, 0, 0, 200) radius:10];
-    
-    if (self = [super initWithPosition:position gameLayer:gameLayer sprite:sprite life:life maxAttacksPerSecond:maxAttacksPerSecond])
+    if (self = [super initWithPosition:position gameLayer:gameLayer life:life])
     {
         _player = player;
         _runningDistance = runningDistance;
@@ -28,6 +27,11 @@
     }
     
     return self;
+}
+
+-(CCSprite *)loadSpriteAndAnimations
+{
+    return [CCSprite spriteWithFile:@"zombie_90%-11.png"];
 }
 
 -(void)tick:(float)delta
@@ -43,7 +47,6 @@
             return;
         else if ([_gameLayer isWallAtPosition:zombie])
         {
-            [self moveToPosition:_previousPosition];
             return; // So if the zombie is in a wall he doesn't have a line of sight anymore or else he's eating you already
         }
         

@@ -32,18 +32,18 @@
         [self addChild:_tileMap];
         
         // Create the players TODO: second player!!!
-        _player = [DTPlayer playerWithPlayerAtPoint:ccp(100, 100) withGameLayer:self];
+        _player = [DTPlayer playerAtPosition:ccp(100, 100) gameLayer:self life:100];
         [self addChild:_player];
         
         // TEST CODE!!!!
-        DTStraightLineZombie *zombie = [DTStraightLineZombie zombieWithPlayer:_player runningDistance:250 gameLayer:self position:ccp(150, 400) life:100 maxAttacksPerSecond:5];
+        DTStraightLineZombie *zombie = [DTStraightLineZombie zombieWithPlayer:_player runningDistance:250 gameLayer:self position:ccp(150, 400) life:100];
         [self addChild:zombie];
         
         // Get some other variables we'll need
         _screen = [CCDirector sharedDirector].winSize;
         
         // Center the map over the player TODO: Add a spawn point for the players on the map
-        [self centerViewportOnPosition:_player.sprite.position];
+        [self centerViewportOnPosition:[_player getPosition]];
         
         _isGameOver = NO;
         _isFiring = NO;
@@ -56,28 +56,25 @@
     return self;
 }
 
-;
-;
-
 // Called by the controls layer when the joystick is moved
 -(void)joystickUpdated:(CGPoint)jvelocity delta:(float)delta
 {
-    CGPoint oldPosition = _player.sprite.position;
+    CGPoint oldPosition = [_player getPosition];
     CGPoint velocity = ccpMult(jvelocity, 140);
     CGPoint newPosition = ccp(oldPosition.x + velocity.x * delta,
                               oldPosition.y + velocity.y * delta);
     
     if (_isHoldFiring) // In this case we don't move the player at all, but we still change which way he's facing
     {
-        [_player turnToFacePoint:newPosition]; // Tell him where to look
+        [_player turnToFacePosition:newPosition]; // Tell him where to look
         return;
     }
     
-    [_player turnToFacePoint:newPosition]; // Tell him where to look
+    [_player turnToFacePosition:newPosition]; // Tell him where to look
     
     if (![self isWallAtPosition:newPosition])
     {
-        [_player movePlayerToPoint:newPosition]; // Update the player position
+        [_player moveToPosition:newPosition]; // Update the player position
         [self centerViewportOnPosition:newPosition];
     }
     
@@ -93,7 +90,7 @@
 -(void)joystickMoveEnded
 {
     if (!_isHoldFiring)
-        [_player notifyMovementStop];
+        [_player notifyMovementEnd];
 }
 
 -(void)centerViewportOnPosition:(CGPoint) position
@@ -197,7 +194,7 @@
 {
     // So if the user is running we just tell him not to run anymore if a hold fire occurs
     if (isHoldFiring)
-        [_player notifyMovementStop];
+        [_player notifyMovementEnd];
     else // So if the player
     {
         if (isJoystickStillMoving) // Then the user is holding down the stick and wants to run right after the hold
