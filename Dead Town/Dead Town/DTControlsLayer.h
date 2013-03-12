@@ -8,14 +8,13 @@
 
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
-#import "SneakyJoystick.h"
-#import "SneakyButton.h"
-#import "SneakyButtonSkinnedBase.h"
-#import "SneakyJoystickSkinnedBase.h"
-#import "DTGameLayer.h"
-#import "DTControlsListener.h"
+#import "DTJoystickDelegate.h"
 
 @class DTGameLayer;
+@class SneakyJoystick;
+@class SneakyJoystickSkinnedBase;
+@class SneakyButton;
+@class SneakyButtonSkinnedBase;
 
 @interface DTControlsLayer : CCLayer <CCTargetedTouchDelegate>
 {
@@ -27,7 +26,7 @@
     SneakyButton *_fireButton;
     SneakyButton *_pauseButton;
     CCDirector *_director;
-    id <DTControlsListener> _controlsListener;
+    id <DTJoystickDelegate> _joystickDelegate;
     CGSize _screen;
     float _qualifyingTimeForHold;
     float _currentHoldTime;
@@ -37,7 +36,7 @@
 
 @property(nonatomic) BOOL isPausing;
 
-+(id)controlsLayerWithGameLayer:(DTGameLayer *)gameLayer useJoystick:(BOOL)useJoystick controlsListener:(id <DTControlsListener>)controlsListener;
++(id)controlsLayerWithGameLayer:(DTGameLayer *)gameLayer useJoystick:(BOOL)useJoystick joystickDelegate:(id <DTJoystickDelegate>)joystickDelegate;
 -(void)unpause;
 
 @end

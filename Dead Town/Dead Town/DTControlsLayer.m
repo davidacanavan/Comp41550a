@@ -6,19 +6,23 @@
 //
 //
 
-#import "DTControlsLayer.h"
 #import "ColoredCircleSprite.h"
+#import "DTGameLayer.h"
+#import "SneakyJoystick.h"
+#import "SneakyButton.h"
+#import "SneakyButtonSkinnedBase.h"
+#import "SneakyJoystickSkinnedBase.h"
 
 @implementation DTControlsLayer
 
 @synthesize isPausing = _isPausing;
 
-+(id)controlsLayerWithGameLayer:(DTGameLayer *)gameLayer useJoystick:(BOOL)useJoystick controlsListener:(id <DTControlsListener>)controlsListener
++(id)controlsLayerWithGameLayer:(DTGameLayer *)gameLayer useJoystick:(BOOL)useJoystick joystickDelegate:(id <DTJoystickDelegate>)joystickDelegate
 {
-    return [[self alloc] initWithGameLayer:gameLayer useJoystick:useJoystick controlsListener:controlsListener];
+    return [[self alloc] initWithGameLayer:gameLayer useJoystick:useJoystick joystickDelegate:joystickDelegate];
 }
 
--(id)initWithGameLayer:(DTGameLayer *)gameLayer useJoystick:(BOOL)useJoystick controlsListener:(id <DTControlsListener>)controlsListener
+-(id)initWithGameLayer:(DTGameLayer *)gameLayer useJoystick:(BOOL)useJoystick joystickDelegate:(id <DTJoystickDelegate>)joystickDelegate
 {
     if ((self = [super init]))
     {
@@ -28,7 +32,7 @@
         _screen = _director.winSize;
         _qualifyingTimeForHold = 5.0 / 60;
         _currentHoldTime = 0;
-        _controlsListener = controlsListener;
+        _joystickDelegate = joystickDelegate;
         
         // Create the buttons and what-nots
         if (useJoystick)
@@ -48,7 +52,7 @@
 {
     // So we're moving the character a little bit - so tell the game layer to move him!
     if (!CGPointEqualToPoint(_joystick.stickPosition, CGPointZero)) 
-        [_controlsListener joystickUpdated:_joystick.velocity delta:delta];
+        [_joystickDelegate joystickUpdated:_joystick.velocity delta:delta];
     
     // Check to see if we're firing a bullet - then fire!
     if (_fireButton.active)
@@ -140,7 +144,7 @@
     {
         _joystickSkin.position = touchPoint;
         _joystickSkin.visible = YES;
-        [_controlsListener joystickMoveStarted];
+        [_joystickDelegate joystickMoveStarted];
     }
     
     return YES;
@@ -153,7 +157,7 @@
     if (touchPoint.x < _screen.width / 2) // Stops the joystick from disappearing when you take a shot
     {
         _joystickSkin.visible = NO;
-        [_controlsListener joystickMoveEnded]; // Tell the game layer that the joystick has stopped moving
+        [_joystickDelegate joystickMoveEnded]; // Tell the game layer that the joystick has stopped moving
     }
     else
         [_gameLayer setIsHoldFiring:NO andIsJoystickStillMoving:_joystickSkin.visible];

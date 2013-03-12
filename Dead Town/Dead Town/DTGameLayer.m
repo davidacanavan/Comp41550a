@@ -163,7 +163,7 @@
     [_controlsLayer unpause];
 }
 
--(void)tick:(float)delta
+-(void)gameLoopUpdate:(float)delta
 {
     if (_isGameOver) // So check for the game over condition and end if it's all done
     {

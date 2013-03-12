@@ -10,20 +10,17 @@
 
 @interface DTWeapon : NSObject
 {
-    @private
-    // The time since the last accepted call to fire (calls can be rejeted to prevent bullet rain).
-    int _currentFireGap;
-    // The angle of trajectory the bullet will follow.
-    float _angleOfFire;
-    // Whether this weapon belongs to the player or an enemy.
-    BOOL _isPlayers;
+    @protected
+    float _timeSinceLastFire; // The time since the last accepted call to fire (calls can be rejeted to prevent bullet rain).
+    float _minimumTimeBetweenFires;
 }
 
-// The maximum number of times the weapon can be fired per second.
-@property(nonatomic, readonly) float fireRate;
+// Whether this weapon belongs to the player or an enemy.
+@property(nonatomic, readonly) BOOL belongsToPlayer;
 
 // Factory initializer for a weapon.
-+(id)weaponWithFireRate:(float)fireRate;
++(id)weaponWithFireRatePerSecond:(float)fireRatePerSecond belongsToPlayer:(BOOL)belongsToPlayer;
 -(void)fireAtAngle:(float)angleOfFire;
+-(void)updateTimeSinceLastFire:(float)delta;
 
 @end

@@ -21,6 +21,7 @@
 		2B36588B16D829DC00720844 /* Sprite7.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B36588516D829DC00720844 /* Sprite7.png */; };
 		2B36588E16D82ABB00720844 /* WalkingMan-hd.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2B36588C16D82ABB00720844 /* WalkingMan-hd.plist */; };
 		2B36588F16D82ABB00720844 /* WalkingMan-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B36588D16D82ABB00720844 /* WalkingMan-hd.png */; };
+		2B43E30D16EF8D64002F4401 /* DTSneakyButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B43E30C16EF8D64002F4401 /* DTSneakyButton.m */; };
 		2B51EC4D16CFFB7C00B037F9 /* DTBullet.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B51EC4C16CFFB7C00B037F9 /* DTBullet.m */; };
 		2B5668D316EE2914004FEA6C /* DTWeapon.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B5668D216EE2914004FEA6C /* DTWeapon.m */; };
 		2B7BEC0916D3FE0600BB01B7 /* Sprite0.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B7BEC0716D3FE0600BB01B7 /* Sprite0.png */; };
@@ -205,9 +206,12 @@
 		2B36588516D829DC00720844 /* Sprite7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Sprite7.png; path = Sprites/Sprite7.png; sourceTree = "<group>"; };
 		2B36588C16D82ABB00720844 /* WalkingMan-hd.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "WalkingMan-hd.plist"; path = "Sprites/WalkingMan-hd.plist"; sourceTree = "<group>"; };
 		2B36588D16D82ABB00720844 /* WalkingMan-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "WalkingMan-hd.png"; path = "Sprites/WalkingMan-hd.png"; sourceTree = "<group>"; };
+		2B43E30A16EF8B95002F4401 /* DTSneakyButtonDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTSneakyButtonDelegate.h; sourceTree = "<group>"; };
+		2B43E30B16EF8D64002F4401 /* DTSneakyButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTSneakyButton.h; sourceTree = "<group>"; };
+		2B43E30C16EF8D64002F4401 /* DTSneakyButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTSneakyButton.m; sourceTree = "<group>"; };
 		2B51EC4B16CFFB7C00B037F9 /* DTBullet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTBullet.h; sourceTree = "<group>"; };
 		2B51EC4C16CFFB7C00B037F9 /* DTBullet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTBullet.m; sourceTree = "<group>"; };
-		2B5668CF16EE1BE6004FEA6C /* DTControlsListener.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTControlsListener.h; sourceTree = "<group>"; };
+		2B5668CF16EE1BE6004FEA6C /* DTJoystickDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTJoystickDelegate.h; sourceTree = "<group>"; };
 		2B5668D116EE2914004FEA6C /* DTWeapon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTWeapon.h; sourceTree = "<group>"; };
 		2B5668D216EE2914004FEA6C /* DTWeapon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTWeapon.m; sourceTree = "<group>"; };
 		2B7BEC0716D3FE0600BB01B7 /* Sprite0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Sprite0.png; path = Sprites/Sprite0.png; sourceTree = "<group>"; };
@@ -548,12 +552,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2B43E30916EF8B55002F4401 /* dt extension */ = {
+			isa = PBXGroup;
+			children = (
+				2B43E30A16EF8B95002F4401 /* DTSneakyButtonDelegate.h */,
+				2B43E30B16EF8D64002F4401 /* DTSneakyButton.h */,
+				2B43E30C16EF8D64002F4401 /* DTSneakyButton.m */,
+			);
+			name = "dt extension";
+			sourceTree = "<group>";
+		};
 		2B5668CC16EE1750004FEA6C /* controls */ = {
 			isa = PBXGroup;
 			children = (
 				2B980D3B16CAAE3A0028BB93 /* DTControlsLayer.h */,
 				2B980D3C16CAAE3A0028BB93 /* DTControlsLayer.m */,
-				2B5668CF16EE1BE6004FEA6C /* DTControlsListener.h */,
+				2B5668CF16EE1BE6004FEA6C /* DTJoystickDelegate.h */,
 			);
 			name = controls;
 			sourceTree = "<group>";
@@ -641,6 +655,7 @@
 		2B980D3E16CAB1180028BB93 /* sneakyness */ = {
 			isa = PBXGroup;
 			children = (
+				2B43E30916EF8B55002F4401 /* dt extension */,
 				2B980D3F16CAB1390028BB93 /* SneakyJoystick.h */,
 				2B980D4016CAB1390028BB93 /* SneakyJoystick.m */,
 				2B980D4216CAB2180028BB93 /* SneakyButton.h */,
@@ -1361,6 +1376,7 @@
 				2B36587716D693D800720844 /* DTLifeNode.m in Sources */,
 				2B36587B16D697C700720844 /* DTPlayerStatusLayer.m in Sources */,
 				2B5668D316EE2914004FEA6C /* DTWeapon.m in Sources */,
+				2B43E30D16EF8D64002F4401 /* DTSneakyButton.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

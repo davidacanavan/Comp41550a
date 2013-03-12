@@ -45,10 +45,6 @@
     {
         if (ccpFuzzyEqual(player, zombie, 15))
             return;
-        else if ([_gameLayer isWallAtPosition:zombie])
-        {
-            return; // So if the zombie is in a wall he doesn't have a line of sight anymore or else he's eating you already
-        }
         
         float movingDistance = velocity * delta;
         float slope = ((float) (player.y - zombie.y)) / (player.x - zombie.x);
@@ -57,6 +53,11 @@
         float x = zombie.x + movingDistance * xComponentFactor * (player.x < zombie.x ? -1 : 1);
         float y = slope * x + c;
         CGPoint newPosition = ccp(x, y);
+        
+        // So if the zombie is in a wall he doesn't have a line of sight anymore or else he's eating you already
+        if ([_gameLayer isWallAtPosition:newPosition])
+            return;
+        
         [self moveToPosition:newPosition];
         [self turnToFacePosition:player];
     }

@@ -13,7 +13,7 @@
 #import "DTPausedLayer.h"
 #import "DTOptions.h"
 #import "DTStraightLineZombie.h"
-#import "DTControlsListener.h"
+#import "DTJoystickDelegate.h"
 
 #define MIN_PLAYER_FIRE_GAP .1; // A fifth of a second
 
@@ -23,7 +23,7 @@
 @class DTPausedLayer;
 @class DTStraightLineZombie;
 
-@interface DTGameLayer : CCLayer <DTControlsListener>
+@interface DTGameLayer : CCLayer <DTJoystickDelegate>
 {
     @private
     CCTMXTiledMap *_tileMap;

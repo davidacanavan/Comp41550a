@@ -10,17 +10,18 @@
 
 @implementation DTWeapon
 
-+(id)weaponWithFireRate:(float)fireRate
++(id)weaponWithFireRatePerSecond:(float)fireRatePerSecond belongsToPlayer:(BOOL)belongsToPlayer
 {
-    return [[self alloc] initWithFireRate:fireRate];
+    return [[self alloc] initWithFireRatePerSecond:fireRatePerSecond belongsToPlayer:(BOOL)belongsToPlayer];
 }
 
--(id)initWithFireRate:(float)fireRate
+-(id)initWithFireRatePerSecond:(float)fireRatePerSecond belongsToPlayer:(BOOL)belongsToPlayer
 {
     if (self = [super init])
     {
-        _fireRate = fireRate;
-        _currentFireGap = 0;
+        _minimumTimeBetweenFires = 1.0f / fireRatePerSecond; // Convert to absolute time
+        _timeSinceLastFire = 0; // Assume they haven't fired yet
+        _belongsToPlayer = belongsToPlayer;
     }
     
     return self;
@@ -28,4 +29,17 @@
 
 -(void)fireAtAngle:(float)angleOfFire {}
 
+-(void)updateTimeSinceLastFire:(float)delta
+{
+    
+}
+
 @end
+
+
+
+
+
+
+
+
