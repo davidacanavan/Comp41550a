@@ -33,7 +33,7 @@
 {
     if (self.active)
     {
-        [_delegate buttonPressed];
+        [_delegate buttonPressed:self];
         self.active = NO; // Stop double-fire problem with the button
         _isPossibleHold = YES; // So we can check this next time the game loop runs around
     }
@@ -42,15 +42,24 @@
         _currentHoldTime += delta;
 
         if (_currentHoldTime >= _qualifyingTimeForHold) // Check if we've held the button long enough
-            [_delegate buttonHoldStarted];
+        {
+            if (!_hasHoldStarted)
+            {
+                [_delegate buttonHoldStarted:self];
+                _hasHoldStarted = YES;
+            }
+            else
+                [_delegate buttonHoldContinued:self];
+        }
     }
     else // So we're not active at all
     {
         if (_currentHoldTime >= _qualifyingTimeForHold) // Then we were holding but have let go
-            [_delegate buttonHoldEnded];
+            [_delegate buttonHoldEnded:self];
         
         _currentHoldTime = 0; // Reset the hold checks
         _isPossibleHold = NO;
+        _hasHoldStarted = NO;
     }
 }
 

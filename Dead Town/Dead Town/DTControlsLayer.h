@@ -16,6 +16,8 @@
 @class SneakyButton;
 @class SneakyButtonSkinnedBase;
 
+typedef enum {LeftHanded, RightHanded} DTControlsLayerLayout;
+
 @interface DTControlsLayer : CCLayer <CCTargetedTouchDelegate>
 {
     @private

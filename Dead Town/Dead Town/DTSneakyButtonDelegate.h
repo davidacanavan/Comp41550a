@@ -7,13 +7,15 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "DTSneakyButton.h"
 
-@class SneakyButton;
+@class DTSneakyButton;
 
 @protocol DTSneakyButtonDelegate <NSObject>
 
--(void)buttonHoldStarted;
--(void)buttonHoldEnded;
--(void)buttonPressed;
+-(void)buttonHoldStarted:(DTSneakyButton *)button;
+-(void)buttonHoldContinued:(DTSneakyButton *)button;
+-(void)buttonHoldEnded:(DTSneakyButton *)button;
+-(void)buttonPressed:(DTSneakyButton *)button;
 
 @end
