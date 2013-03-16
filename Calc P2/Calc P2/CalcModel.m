@@ -7,6 +7,7 @@
 //
 
 #import "CalcModel.h"
+#import "CalcModelSimulator.h"
 
 @implementation CalcModel
 
@@ -16,64 +17,82 @@ const double RADIAN_TO_DEGREE_CONVERSION_FACTOR = M_PI / 180;
 @synthesize waitingOperand = _waitingOperand;
 @synthesize waitingOperation = _waitingOperation;
 @synthesize memoryStore = _memoryStore;
-@synthesize didOperationResultInError = _didOperationResultInError;
-@synthesize operationErrorMessage = _operationErrorMessage;
 @synthesize isCalcInDegreeMode = _isCalcInDegreeMode;
-@synthesize listener = _listener;
+@synthesize delegate = _delegate;
 @synthesize waitingOperationStatus = _waitingOperationStatus;
+@synthesize expression = _expression;
+
+-(id)init
+{
+    if (self = [super init])
+    {
+        _expression = [NSMutableArray arrayWithCapacity:10];
+    }
+    
+    return self;
+}
 
 -(double)performOperation:(NSString *)operation withScreenValueOf:(double)screenValue
 {
-    _didOperationResultInError = NO; // initially assume we haven't had a calcultion error
     _waitingOperationStatus = @"";
+    BOOL addOperationToExpressionList = YES;
     
     if ([operation isEqualToString:@"sqrt"])
     {
-        if (self.operand < 0) // Stop the error from happening
-            [self registerOperationError:@"The square root function does not accept negative numbers."];
+        if (_operand < 0) // Stop the error from happening
+            [_delegate onErrorReceived:@"The square root function does not accept negative numbers."];
         else
-            self.operand = sqrt(self.operand);
+            _operand = sqrt(self.operand);
     }
     else if ([operation isEqualToString:@"+/-"])
     {
-        if (self.operand != 0) // If it's 0 then +/- really does nothing
-            self.operand = -self.operand;
+        if (_operand != 0) // If it's 0 then +/- really does nothing
+            _operand = -_operand;
     }
     else if ([operation isEqualToString:@"1/x"])
     {
-        if (self.operand == 0) // Stop the divide by 0 error
-            [self registerOperationError:@"The inverse function does not accept '0' as an argument."];
+        if (_operand == 0) // Stop the divide by 0 error
+            [_delegate onErrorReceived:@"The inverse function does not accept '0' as an argument."];
         else
-            self.operand = 1 / self.operand;
+            _operand = 1 / _operand;
     }
     else if ([operation isEqualToString:@"sin"])
-        self.operand = sin(self.operand * (!_isCalcInDegreeMode ? 1 : RADIAN_TO_DEGREE_CONVERSION_FACTOR));
+    {
+        _operand = sin(_operand * (!_isCalcInDegreeMode ? 1 : RADIAN_TO_DEGREE_CONVERSION_FACTOR));
+    }
     else if ([operation isEqualToString:@"cos"])
-        self.operand = cos(self.operand * (!_isCalcInDegreeMode ? 1 : RADIAN_TO_DEGREE_CONVERSION_FACTOR));
+    {
+        _operand = cos(_operand * (!_isCalcInDegreeMode ? 1 : RADIAN_TO_DEGREE_CONVERSION_FACTOR));
+    }
     else if ([operation isEqualToString:@"C"])
     {
-        [self performClear]; // Clear out the memory and tell the listener
-        [_listener onClearOperation];
+        [self performClear]; // Clear out the memory and tell the delegate
+        addOperationToExpressionList = NO; // No need to record a clear
+        [_delegate onClearOperation];
     }
     else if ([operation isEqualToString:@"Rec"])
     {
-        _operand = _memoryStore;
-        [_listener onMemoryRecallOperation]; // Tell the listener this just went down
+        self.operand = _memoryStore; // Make sure this is saved in the expression list
+        addOperationToExpressionList = NO; // Since it's done in the above step
+        [_delegate onMemoryRecallOperation]; // Tell the delegate this just went down
     }
     else if ([operation isEqualToString:@"Store"])
     {
         _memoryStore = screenValue; // Overwrite the mem value with what's on screen.
-        [_listener onStoreOperation];
+        addOperationToExpressionList = NO;
+        [_delegate onStoreOperation];
     }
     else if ([operation isEqualToString:@"M+"])
     {
         _memoryStore += screenValue;
-        [_listener onMemoryPlusOperation];
+        addOperationToExpressionList = NO;
+        [_delegate onMemoryPlusOperation];
     }
     else if ([operation isEqualToString:@"D/R"])
     {
         _isCalcInDegreeMode = !_isCalcInDegreeMode; // Toggle the boolean
-        [_listener onDegreeRadianOperation];
+        addOperationToExpressionList = NO;
+        [_delegate onDegreeRadianOperation];
     }
     else // This is if we get a binary operator or equals
     {
@@ -82,21 +101,36 @@ const double RADIAN_TO_DEGREE_CONVERSION_FACTOR = M_PI / 180;
         self.waitingOperand = self.operand;
     }
     
+    if (addOperationToExpressionList)
+        [_expression addObject:operation];
+    
     return self.operand;
 }
 
 -(void)performWaitingOperation
 {
+    // Don't use the overridden setter here since we don't need to record the operation
     if ([@"+" isEqualToString:self.waitingOperation])
-        self.operand = self.waitingOperand + self.operand;
+        _operand = self.waitingOperand + self.operand;
     else if ([@"-" isEqualToString:self.waitingOperation])
-        self.operand = self.waitingOperand - self.operand;
+        _operand = self.waitingOperand - self.operand;
     else if ([@"*" isEqualToString:self.waitingOperation])
-        self.operand = self.waitingOperand * self.operand;
+        _operand = self.waitingOperand * self.operand;
     else if ([@"/" isEqualToString:self.waitingOperation])
-        if (self.operand) self.operand = self.waitingOperand / self.operand;
+    {
+        if (_operand == 0)
+            [_delegate onErrorReceived:@"The division operator does not accept '0' as the divisor."];
+        else  _operand = self.waitingOperand / self.operand;
+    }
     
     _waitingOperationStatus = [NSString stringWithFormat:@"%g %@ %g", _waitingOperand, _waitingOperation, _operand];
+}
+
+// Override to add the value to our expression list
+-(void)setOperand:(double)operand
+{
+    [_expression addObject:[NSNumber numberWithDouble:operand]];
+     _operand = operand; // default behaviour
 }
 
 -(void)performClear
@@ -105,13 +139,114 @@ const double RADIAN_TO_DEGREE_CONVERSION_FACTOR = M_PI / 180;
     _waitingOperand = 0;
     _waitingOperation = @"";
     _memoryStore = 0;
+    _expression = [NSMutableArray arrayWithCapacity:10]; // Reallocate the expression array
 }
 
--(void)registerOperationError:(NSString *)message
+// Part 2 new methods
+
+-(void)setVariableAsOperand:(NSString *) variableName
 {
-    _operationErrorMessage = message;
-    _didOperationResultInError = YES;
+    [_expression addObject:variableName];
 }
 
++(NSSet *)variablesInExpression:(id)anExpression
+{
+    if (![anExpression isKindOfClass:[NSMutableArray class]])
+        return nil;
+    
+    NSMutableArray *expressionArray = (NSMutableArray *) anExpression;
+    NSMutableSet *variablesInExpression = [NSMutableSet setWithObjects:nil];
+    
+    for (int i = 0; i < [variablesInExpression count]; i++)
+    {
+        id expressionSegment = [expressionArray objectAtIndex:i];
+        
+        // If it's a number we don't care, we're only looking for the variables
+        if ([expressionSegment isKindOfClass:[NSString class]])
+        {
+            NSString *string = (NSString *) expressionSegment;
+            
+            if ([string isEqualToString: @"x"])
+                [variablesInExpression addObject:@"x"];
+            else if ([string isEqualToString: @"a"])
+                [variablesInExpression addObject:@"a"];
+            else if ([string isEqualToString: @"b"])
+                [variablesInExpression addObject:@"b"];
+            else if ([string isEqualToString: @"c"])
+                [variablesInExpression addObject:@"c"];
+        }
+    }
+    
+    return [variablesInExpression count] == 0 ? nil : variablesInExpression;
+}
+
++(double)evaluateExpression:(id)anExpression usingVariableValues:(NSDictionary *)variables withDelegate:(id <CalcModelDelegate>) delegate
+{
+    if (![anExpression isKindOfClass:[NSMutableArray class]])
+        return NAN;
+    
+    NSMutableArray *expressionArray = (NSMutableArray *) anExpression;
+    
+    if ([expressionArray count] == 0)
+        return 0; // To avoid a crash
+    
+    // I essentially chose to externalise the algorithm into a separate class that behaves in the same precise way as the calculator. This made sense since the interface for dealing with expressions is at the class level.
+    CalcModelSimulator *simulator = [CalcModelSimulator simulatorWithDelegate:delegate];
+    
+    for (int i = 0; i < [expressionArray count]; i++)
+    {
+        id element = [expressionArray objectAtIndex:i];
+        
+        if ([element isKindOfClass:[NSString class]])
+            [simulator performOperation:element];
+        else if ([element isKindOfClass:[NSNumber class]])
+            simulator.operand = [element doubleValue];
+    }
+    
+    return simulator.operand;
+}
+
++(NSString *)descriptionOfExpression:(id) anExpression
+{
+    if (![anExpression isKindOfClass:[NSMutableArray class]])
+        return @"'anExpression' is not a valid CalcModel expression.";
+    
+    NSMutableString *description = [NSMutableString stringWithCapacity:20];
+    
+    for (int i = 0; i < [anExpression count]; i++)
+    {
+        id item = [anExpression objectAtIndex:i];
+        
+        if ([item isKindOfClass:[NSString class]])
+        {
+            [description appendString:item];
+            [description appendString:@" "];
+        }
+        else if ([item isKindOfClass:[NSNumber class]])
+            [description appendString:[NSString stringWithFormat:@"%g ", [item doubleValue]]];
+    }
+    
+    return description;
+}
+
++ (id)propertyListForExpression:(id)anExpression
+{
+    NSError *error = nil;
+    NSData *plistData = [NSPropertyListSerialization dataWithPropertyList:anExpression format:NSPropertyListXMLFormat_v1_0 options:NSPropertyListImmutable error:&error];
+    
+    return error == nil ? nil : plistData;
+}
+
++ (id)expressionForPropertyList:(id)propertyList
+{
+    
+}
 
 @end
+
+
+
+
+
+
+

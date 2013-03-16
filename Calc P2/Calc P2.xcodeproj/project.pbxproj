@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2B6976D616F4FD1F0072B652 /* CalcModelSimulator.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B6976D516F4FD1F0072B652 /* CalcModelSimulator.m */; };
 		2BF7A89416C82EA400D3063F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BF7A89316C82EA400D3063F /* UIKit.framework */; };
 		2BF7A89616C82EA400D3063F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BF7A89516C82EA400D3063F /* Foundation.framework */; };
 		2BF7A89816C82EA400D3063F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BF7A89716C82EA400D3063F /* CoreGraphics.framework */; };
@@ -22,6 +23,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2B6976D416F4FD1F0072B652 /* CalcModelSimulator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalcModelSimulator.h; sourceTree = "<group>"; };
+		2B6976D516F4FD1F0072B652 /* CalcModelSimulator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalcModelSimulator.m; sourceTree = "<group>"; };
 		2BF7A88F16C82EA400D3063F /* Calc P2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Calc P2.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2BF7A89316C82EA400D3063F /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		2BF7A89516C82EA400D3063F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -40,7 +43,7 @@
 		2BF7A8AF16C82EA400D3063F /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		2BF7A8B616C82EEE00D3063F /* CalcModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalcModel.h; sourceTree = "<group>"; };
 		2BF7A8B716C82EEE00D3063F /* CalcModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalcModel.m; sourceTree = "<group>"; };
-		2BF7A8BA16C82FE100D3063F /* CalcModelListener.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalcModelListener.h; sourceTree = "<group>"; };
+		2BF7A8BA16C82FE100D3063F /* CalcModelDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalcModelDelegate.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,6 +60,25 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2B6976D816F502A10072B652 /* Calc Model Simulator */ = {
+			isa = PBXGroup;
+			children = (
+				2B6976D416F4FD1F0072B652 /* CalcModelSimulator.h */,
+				2B6976D516F4FD1F0072B652 /* CalcModelSimulator.m */,
+			);
+			name = "Calc Model Simulator";
+			sourceTree = "<group>";
+		};
+		2B6976DA16F505220072B652 /* Calc Model */ = {
+			isa = PBXGroup;
+			children = (
+				2BF7A8B616C82EEE00D3063F /* CalcModel.h */,
+				2BF7A8B716C82EEE00D3063F /* CalcModel.m */,
+				2BF7A8BA16C82FE100D3063F /* CalcModelDelegate.h */,
+			);
+			name = "Calc Model";
+			sourceTree = "<group>";
+		};
 		2BF7A88416C82EA400D3063F = {
 			isa = PBXGroup;
 			children = (
@@ -87,15 +109,14 @@
 		2BF7A89916C82EA400D3063F /* Calc P2 */ = {
 			isa = PBXGroup;
 			children = (
+				2B6976DA16F505220072B652 /* Calc Model */,
+				2B6976D816F502A10072B652 /* Calc Model Simulator */,
 				2BF7A8A216C82EA400D3063F /* AppDelegate.h */,
 				2BF7A8A316C82EA400D3063F /* AppDelegate.m */,
 				2BF7A8AB16C82EA400D3063F /* MainStoryboard.storyboard */,
 				2BF7A8AE16C82EA400D3063F /* ViewController.h */,
 				2BF7A8AF16C82EA400D3063F /* ViewController.m */,
 				2BF7A89A16C82EA400D3063F /* Supporting Files */,
-				2BF7A8B616C82EEE00D3063F /* CalcModel.h */,
-				2BF7A8B716C82EEE00D3063F /* CalcModel.m */,
-				2BF7A8BA16C82FE100D3063F /* CalcModelListener.h */,
 			);
 			path = "Calc P2";
 			sourceTree = "<group>";
@@ -184,6 +205,7 @@
 				2BF7A8A416C82EA400D3063F /* AppDelegate.m in Sources */,
 				2BF7A8B016C82EA400D3063F /* ViewController.m in Sources */,
 				2BF7A8B816C82EEE00D3063F /* CalcModel.m in Sources */,
+				2B6976D616F4FD1F0072B652 /* CalcModelSimulator.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -265,6 +287,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Calc P2/Calc P2-Prefix.pch";
 				INFOPLIST_FILE = "Calc P2/Calc P2-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -276,6 +299,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Calc P2/Calc P2-Prefix.pch";
 				INFOPLIST_FILE = "Calc P2/Calc P2-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -300,6 +324,7 @@
 				2BF7A8B516C82EA400D3063F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "CalcModelListener.h"
+#import "CalcModelDelegate.h"
 
 @interface CalcModel : NSObject
 
@@ -15,10 +15,8 @@
 @property (nonatomic) double waitingOperand;
 @property (nonatomic) double memoryStore;
 @property (nonatomic, strong) NSString *waitingOperation;
-@property (nonatomic, readonly) BOOL didOperationResultInError;
-@property (nonatomic, strong, readonly) NSString *operationErrorMessage;
 @property (nonatomic) BOOL isCalcInDegreeMode;
-@property (nonatomic, weak) id <CalcModelListener> listener;
+@property (nonatomic, weak) id <CalcModelDelegate> delegate;
 @property (nonatomic, readonly) NSString *waitingOperationStatus;
 @property (readonly, strong) id expression; // New property in P2
 
@@ -26,12 +24,14 @@
 - (double)performOperation:(NSString *)operation withScreenValueOf:(double)screenValue;
 
 // P2 methods
-- (void)setVariableAsOperand:(NSString *) variableName;
-+ (double)evaluateExpression:(id) anExpression usingVariableValues:(NSDictionary *) variables;
+- (id)init;
+- (void)setVariableAsOperand:(NSString *)variableName;
+// I added a delegate option at the back of this so we can still receive error messages
++ (double)evaluateExpression:(id)anExpression usingVariableValues:(NSDictionary *)variables withDelegate:(id <CalcModelDelegate>)delegate;
 + (NSSet *)variablesInExpression:(id) anExpression;
-- (NSString *)descriptionOfExpression:(id) anExpression;
-+ (id)propertyListForExpression:(id) anExpression;
-- (id)expressionForPropertyList:(id) propertyList;
++ (NSString *)descriptionOfExpression:(id)anExpression;
++ (id)propertyListForExpression:(id)anExpression;
++ (id)expressionForPropertyList:(id)propertyList;
 
 
 @end
