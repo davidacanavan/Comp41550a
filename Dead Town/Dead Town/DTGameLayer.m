@@ -50,6 +50,8 @@
         _currentPlayerFireGap = MIN_PLAYER_FIRE_GAP; // Set the player to have not been firing at all
         _options = [DTOptions sharedOptions];
         
+        _holdNumber = 0;
+        
         [self unpause];
     }
     
@@ -57,10 +59,10 @@
 }
 
 // Called by the controls layer when the joystick is moved
--(void)joystickUpdated:(CGPoint)jvelocity delta:(float)delta
+-(void)joystickUpdated:(CGPoint)joystickVelocity delta:(float)delta
 {
     CGPoint oldPosition = [_player getPosition];
-    CGPoint velocity = ccpMult(jvelocity, 140);
+    CGPoint velocity = ccpMult(joystickVelocity, 140);
     CGPoint newPosition = ccp(oldPosition.x + velocity.x * delta,
                               oldPosition.y + velocity.y * delta);
     
@@ -82,6 +84,7 @@
 
 -(void)joystickMoveStarted
 {
+    _joystickActive = YES;
     // So he's only moving as long as he's not hold firing! This has to be put in in case the user is hold-firing before he starts to run
     if (!_isHoldFiring)
         [_player notifyMovementStart];
@@ -89,6 +92,7 @@
 
 -(void)joystickMoveEnded
 {
+    _joystickActive = NO;
     if (!_isHoldFiring)
         [_player notifyMovementEnd];
 }
@@ -139,7 +143,7 @@
 -(void)pause
 {
     _isPausing = NO;
-    [self unschedule:@selector(tick:)];
+    [self unschedule:@selector(gameLoopUpdate:)];
     _pausedLayer = [DTPausedLayer pausedLayerWithGameLayer:self andControlsLayer:_controlsLayer];
     [[self parent] addChild:_pausedLayer z:1];
     
@@ -150,7 +154,7 @@
 -(void)unpause
 {
     // Schedule the tick so we can check for pausing and gameover
-    [self schedule:@selector(tick:)];
+    [self schedule:@selector(gameLoopUpdate:)];
     
     if (_options.playBackgroundMusic)
         [[SimpleAudioEngine sharedEngine] playBackgroundMusic:@"BackingTrack.m4a" loop:YES];
@@ -190,19 +194,31 @@
     }
 }
 
--(void)setIsHoldFiring:(BOOL)isHoldFiring andIsJoystickStillMoving:(BOOL)isJoystickStillMoving
+#pragma mark-
+#pragma mark Button delegate implementation
+-(void)buttonPressed:(DTSneakyButton *)button
 {
-    // So if the user is running we just tell him not to run anymore if a hold fire occurs
-    if (isHoldFiring)
-        [_player notifyMovementEnd];
-    else // So if the player
-    {
-        if (isJoystickStillMoving) // Then the user is holding down the stick and wants to run right after the hold
-            [_player notifyMovementStart];
-    }
-    
-    _isHoldFiring = isHoldFiring; // Then do the default behaviour of the setter
+    _isFiring = YES;
 }
+
+-(void)buttonHoldStarted:(DTSneakyButton *)button
+{
+    _isHoldFiring = YES;
+}
+
+-(void)buttonHoldContinued:(DTSneakyButton *)button
+{
+    [_player notifyMovementEnd]; // So if the user is running we just tell him not to run anymore if a hold fire occurs
+}
+
+-(void)buttonHoldEnded:(DTSneakyButton *)button
+{
+    if (_joystickActive)
+        [_player notifyMovementStart];
+    
+    _isHoldFiring = NO;
+}
+#pragma mark-
 
 @end
 

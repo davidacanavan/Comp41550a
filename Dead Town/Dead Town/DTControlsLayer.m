@@ -12,17 +12,19 @@
 #import "SneakyButton.h"
 #import "SneakyButtonSkinnedBase.h"
 #import "SneakyJoystickSkinnedBase.h"
+#import "DTSneakyButton.h"
 
 @implementation DTControlsLayer
 
 @synthesize isPausing = _isPausing;
+@synthesize dominantHand = _dominantHand;
 
-+(id)controlsLayerWithGameLayer:(DTGameLayer *)gameLayer useJoystick:(BOOL)useJoystick joystickDelegate:(id <DTJoystickDelegate>)joystickDelegate
++(id)controlsLayerWithGameLayer:(DTGameLayer *)gameLayer useJoystick:(BOOL)useJoystick joystickDelegate:(id <DTJoystickDelegate>)joystickDelegate dominantHand:(DominantHand)dominantHand
 {
-    return [[self alloc] initWithGameLayer:gameLayer useJoystick:useJoystick joystickDelegate:joystickDelegate];
+    return [[self alloc] initWithGameLayer:gameLayer useJoystick:useJoystick joystickDelegate:joystickDelegate dominantHand:(DominantHand)dominantHand];
 }
 
--(id)initWithGameLayer:(DTGameLayer *)gameLayer useJoystick:(BOOL)useJoystick joystickDelegate:(id <DTJoystickDelegate>)joystickDelegate
+-(id)initWithGameLayer:(DTGameLayer *)gameLayer useJoystick:(BOOL)useJoystick joystickDelegate:(id <DTJoystickDelegate>)joystickDelegate dominantHand:(DominantHand)dominantHand
 {
     if ((self = [super init]))
     {
@@ -30,9 +32,8 @@
         _gameLayer = gameLayer;
         _director = [CCDirector sharedDirector];
         _screen = _director.winSize;
-        _qualifyingTimeForHold = 5.0 / 60;
-        _currentHoldTime = 0;
         _joystickDelegate = joystickDelegate;
+        _dominantHand = dominantHand;
         
         // Create the buttons and what-nots
         if (useJoystick)
@@ -53,22 +54,6 @@
     // So we're moving the character a little bit - so tell the game layer to move him!
     if (!CGPointEqualToPoint(_joystick.stickPosition, CGPointZero)) 
         [_joystickDelegate joystickUpdated:_joystick.velocity delta:delta];
-    
-    // Check to see if we're firing a bullet - then fire!
-    if (_fireButton.active)
-    {
-        _gameLayer.isFiring = YES;
-        _fireButton.active = NO; // Fix to stop double-fire
-        _isPossibleHold = YES; // So we can check this next time the game loop runs around
-    }
-    else if (_isPossibleHold)
-    {
-        _currentHoldTime = min(_currentHoldTime + delta, _qualifyingTimeForHold);
-        
-        // Check if we've held the button long enough
-        if (_currentHoldTime >= _qualifyingTimeForHold)
-            [_gameLayer setIsHoldFiring:YES andIsJoystickStillMoving:_joystickSkin.visible];
-    }
     
     // Check for a pause
     if (_pauseButton.active)
@@ -119,7 +104,8 @@
     fireButtonSkin.pressSprite = [ColoredCircleSprite circleWithColor: ccc4(255, 255, 0, 255)radius:buttonRadius];
     CGSize fireButtonSize = fireButtonSkin.contentSize;
     fireButtonSkin.position = ccp(_screen.width - padding - fireButtonSize.width / 2, padding + fireButtonSize.height / 2);
-    _fireButton = [[SneakyButton alloc] initWithRect:CGRectMake(0, 0, buttonRadius * 2, buttonRadius * 2)];
+    //_fireButton = [[SneakyButton alloc] initWithRect:CGRectMake(0, 0, buttonRadius * 2, buttonRadius * 2)];
+    _fireButton = [DTSneakyButton buttonWithRect:CGRectMake(0, 0, buttonRadius * 2, buttonRadius * 2) isHoldable:YES delegate:_gameLayer tag:@"fire"];
     fireButtonSkin.button = _fireButton;
     [self addChild:fireButtonSkin];
 }
@@ -159,11 +145,6 @@
         _joystickSkin.visible = NO;
         [_joystickDelegate joystickMoveEnded]; // Tell the game layer that the joystick has stopped moving
     }
-    else
-        [_gameLayer setIsHoldFiring:NO andIsJoystickStillMoving:_joystickSkin.visible];
-    
-    _isPossibleHold = NO;
-    _currentHoldTime = 0;
 }
 
 -(void)ccTouchCancelled:(UITouch *)touch withEvent:(UIEvent *)event{}

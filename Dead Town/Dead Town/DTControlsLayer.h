@@ -16,7 +16,7 @@
 @class SneakyButton;
 @class SneakyButtonSkinnedBase;
 
-typedef enum {LeftHanded, RightHanded} DTControlsLayerLayout;
+typedef enum {LeftHanded, RightHanded} DominantHand;
 
 @interface DTControlsLayer : CCLayer <CCTargetedTouchDelegate>
 {
@@ -30,15 +30,12 @@ typedef enum {LeftHanded, RightHanded} DTControlsLayerLayout;
     CCDirector *_director;
     id <DTJoystickDelegate> _joystickDelegate;
     CGSize _screen;
-    float _qualifyingTimeForHold;
-    float _currentHoldTime;
-    BOOL _isPossibleHold;
-    BOOL _isJoystickActive;
 }
 
 @property(nonatomic) BOOL isPausing;
+@property(nonatomic) DominantHand dominantHand;
 
-+(id)controlsLayerWithGameLayer:(DTGameLayer *)gameLayer useJoystick:(BOOL)useJoystick joystickDelegate:(id <DTJoystickDelegate>)joystickDelegate;
++(id)controlsLayerWithGameLayer:(DTGameLayer *)gameLayer useJoystick:(BOOL)useJoystick joystickDelegate:(id <DTJoystickDelegate>)joystickDelegate dominantHand:(DominantHand)dominantHand;
 -(void)unpause;
 
 @end

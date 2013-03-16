@@ -10,12 +10,14 @@
 
 @implementation DTSneakyButton
 
-+buttonWithRect:(CGRect)rect isHoldable:(BOOL)isHoldable delegate:(id <DTSneakyButtonDelegate>)delegate
+@synthesize tag = _tag;
+
++buttonWithRect:(CGRect)rect isHoldable:(BOOL)isHoldable delegate:(id <DTSneakyButtonDelegate>)delegate tag:(NSString *) tag
 {
-    return [[self alloc] initWithRect:rect isHoldable:isHoldable delegate:delegate];
+    return [[self alloc] initWithRect:rect isHoldable:isHoldable delegate:delegate tag:tag];
 }
 
--(id)initWithRect:(CGRect)rect isHoldable:(BOOL)holdable delegate:(id <DTSneakyButtonDelegate>)delegate
+-(id)initWithRect:(CGRect)rect isHoldable:(BOOL)holdable delegate:(id <DTSneakyButtonDelegate>)delegate tag:(NSString *) tag
 {
     if (self = [super initWithRect:rect])
     {
@@ -23,6 +25,7 @@
         _delegate = delegate;
         _qualifyingTimeForHold = 5.0 / 60;
         _currentHoldTime = 0;
+        _tag = tag;
         [self schedule:@selector(gameLoopUpdate:)]; // Check for presses and so forth
     }
     
@@ -35,9 +38,11 @@
     {
         [_delegate buttonPressed:self];
         self.active = NO; // Stop double-fire problem with the button
-        _isPossibleHold = YES; // So we can check this next time the game loop runs around
+        
+        if (self.isHoldable)
+            _isPossibleHold = YES; // So we can check this next time the game loop runs around
     }
-    else if (self.active && _isPossibleHold) // So we may be holding the button
+    else if (_isPossibleHold && self.isHoldable) // So we may be holding the button
     {
         _currentHoldTime += delta;
 
@@ -52,12 +57,18 @@
                 [_delegate buttonHoldContinued:self];
         }
     }
-    else // So we're not active at all
+}
+
+-(void)ccTouchEnded:(UITouch *)touch withEvent:(UIEvent *)event
+{
+    [super ccTouchEnded:touch withEvent:event];
+    
+    if (isHoldable)
     {
         if (_currentHoldTime >= _qualifyingTimeForHold) // Then we were holding but have let go
             [_delegate buttonHoldEnded:self];
-        
-        _currentHoldTime = 0; // Reset the hold checks
+    
+        _currentHoldTime = 0; // Reset the hold checks anyway
         _isPossibleHold = NO;
         _hasHoldStarted = NO;
     }

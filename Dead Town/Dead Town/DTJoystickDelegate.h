@@ -17,7 +17,7 @@
 // Called when the joystick has stopped moving.
 -(void)joystickMoveEnded;
 // called when the joystick velocity has changed given the time lapse between calls.
--(void)joystickUpdated:(CGPoint)velocity delta:(float)delta;
+-(void)joystickUpdated:(CGPoint)joystickVelocity delta:(float)delta;
 
 @end
 

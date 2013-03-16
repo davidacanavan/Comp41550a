@@ -7,7 +7,6 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "DTSneakyButton.h"
 
 @class DTSneakyButton;
 

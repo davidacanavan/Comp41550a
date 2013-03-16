@@ -14,6 +14,7 @@
 #import "DTOptions.h"
 #import "DTStraightLineZombie.h"
 #import "DTJoystickDelegate.h"
+#import "DTSneakyButtonDelegate.h"
 
 #define MIN_PLAYER_FIRE_GAP .1; // A fifth of a second
 
@@ -23,7 +24,7 @@
 @class DTPausedLayer;
 @class DTStraightLineZombie;
 
-@interface DTGameLayer : CCLayer <DTJoystickDelegate>
+@interface DTGameLayer : CCLayer <DTJoystickDelegate, DTSneakyButtonDelegate>
 {
     @private
     CCTMXTiledMap *_tileMap;
@@ -38,6 +39,8 @@
     float _currentPlayerFireGap;
     DTOptions *_options;
     DTPausedLayer *_pausedLayer;
+    int _holdNumber;
+    BOOL _joystickActive;
 }
 
 @property(nonatomic) BOOL isFiring; // Set to true if the user is firing
@@ -46,14 +49,10 @@
 @property(nonatomic, strong) DTControlsLayer *controlsLayer;
 
 -(void)centerViewportOnPosition:(CGPoint)position;
-//-(void)updatePlayerPositionForJoystick:(SneakyJoystick *)joystick andDelta:(float)delta;
-//-(void)updatePlayerPositionForJoystickStart;
-//-(void)updatePlayerPositionForJoystickStop;
 -(BOOL)isWallAtTileCoordinate:(CGPoint)tileCoordinate;
 -(BOOL)isWallAtPosition:(CGPoint)position;
 -(CGPoint)tileCoordinateForPosition:(CGPoint)point;
 -(void)unpause;
 -(void)unpauseAll;
--(void)setIsHoldFiring:(BOOL)isHoldFiring andIsJoystickStillMoving:(BOOL)isJoystickStillMoving;
 
 @end
