@@ -8,9 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "CalcModel.h"
-#import "CalcModelListener.h"
+#import "CalcModelDelegate.h"
 
-@interface ViewController : UIViewController <CalcModelListener>
+@interface ViewController : UIViewController <CalcModelDelegate>
 
 @property (nonatomic, strong) IBOutlet CalcModel *calcModel;
 @property (nonatomic, weak) IBOutlet UILabel *calcDisplay;

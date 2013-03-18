@@ -22,7 +22,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		2B134D2416BF13140099E5F7 /* CalcModelListener.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalcModelListener.h; sourceTree = "<group>"; };
+		2B134D2416BF13140099E5F7 /* CalcModelDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalcModelDelegate.h; sourceTree = "<group>"; };
 		2B1831E116BB020000B20DBC /* Calc P1.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Calc P1.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2B1831E516BB020000B20DBC /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		2B1831E716BB020000B20DBC /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -95,7 +95,7 @@
 				2B1831EC16BB020000B20DBC /* Supporting Files */,
 				2B18320816BB023300B20DBC /* CalcModel.h */,
 				2B18320916BB023300B20DBC /* CalcModel.m */,
-				2B134D2416BF13140099E5F7 /* CalcModelListener.h */,
+				2B134D2416BF13140099E5F7 /* CalcModelDelegate.h */,
 			);
 			path = "Calc P1";
 			sourceTree = "<group>";

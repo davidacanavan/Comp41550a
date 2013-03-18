@@ -8,12 +8,13 @@
 
 #import <Foundation/Foundation.h>
 
-@protocol CalcModelListener
+@protocol CalcModelDelegate
 
 -(void)onClearOperation;
 -(void)onStoreOperation;
 -(void)onMemoryRecallOperation;
 -(void)onMemoryPlusOperation;
 -(void)onDegreeRadianOperation;
+-(void)onErrorReceived:(NSString *)errorMessage;
 
 @end

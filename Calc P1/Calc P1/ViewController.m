@@ -64,10 +64,6 @@
     double result = [self.calcModel performOperation:operation withScreenValueOf:screenValue];
     self.calcDisplay.text = [NSString stringWithFormat:@"%g", result];
     
-    // Since if there is an error, the calculation will just return the operand we currently have. This way we can check for the error here.
-    if (_calcModel.didOperationResultInError)
-        [self showAlertDialogWithMessage:_calcModel.operationErrorMessage];
-    
     _binaryCalculationProgressDisplay.text = _calcModel.waitingOperationStatus;
 }
 
@@ -111,17 +107,16 @@
     _degreeRadiansDisplay.text = _calcModel.isCalcInDegreeMode ? @"Deg" : @"Rad";
 }
 
-// Shows the alert dialog with custom message
--(void)showAlertDialogWithMessage:(NSString *)message
+-(void)onErrorReceived:(NSString *)errorMessage
 {
-    UIAlertView *alertDialog = [[UIAlertView alloc] initWithTitle:@"Calculation Error" message:message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    UIAlertView *alertDialog = [[UIAlertView alloc] initWithTitle:@"Calculation Error" message:errorMessage delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
     [alertDialog show];
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    _calcModel.listener = self;
+    _calcModel.delegate = self;
 	// Do any additional setup after loading the view, typically from a nib.
 }
 

@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "CalcModelListener.h"
+#import "CalcModelDelegate.h"
 
 @interface CalcModel : NSObject
 
@@ -18,7 +18,7 @@
 @property (nonatomic, readonly) BOOL didOperationResultInError;
 @property (nonatomic, strong, readonly) NSString *operationErrorMessage;
 @property (nonatomic) BOOL isCalcInDegreeMode;
-@property (nonatomic, weak) id <CalcModelListener> listener;
+@property (nonatomic, weak) id <CalcModelDelegate> delegate;
 @property (nonatomic, readonly) NSString *waitingOperationStatus;
 
 -(double)performOperation:(NSString *)operation withScreenValueOf:(double)screenValue;
