@@ -529,6 +529,7 @@
                         <outlet property="calcDisplay" destination="DGM-j6-zND" id="eSx-u7-Ef7"/>
                         <outlet property="calcModel" destination="91L-c6-LY0" id="SLa-qE-Ztv"/>
                         <outlet property="degreeRadiansDisplay" destination="0Bq-hb-GjL" id="981-2K-w2B"/>
+                        <outlet property="equalsButton" destination="klX-hp-aSY" id="UUe-d0-aY6"/>
                         <outlet property="memoryDisplay" destination="Ueq-2e-dn4" id="8Gt-6h-mNm"/>
                     </connections>
                 </viewController>
@@ -537,26 +538,6 @@
             </objects>
         </scene>
     </scenes>
-    <classes>
-        <class className="CalcModel" superclassName="NSObject">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/CalcModel.h"/>
-        </class>
-        <class className="ViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="backPressed:" candidateClass="UIButton"/>
-                <relationship kind="action" name="digitPressed:" candidateClass="UIButton"/>
-                <relationship kind="action" name="operationPressed:" candidateClass="UIButton"/>
-                <relationship kind="action" name="setVariableAsOperand:" candidateClass="UIButton"/>
-                <relationship kind="action" name="solveEquation:" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="binaryCalculationProgressDisplay" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="calcDisplay" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="calcModel" candidateClass="CalcModel"/>
-                <relationship kind="outlet" name="degreeRadiansDisplay" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="memoryDisplay" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

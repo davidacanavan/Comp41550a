@@ -147,6 +147,7 @@ const double RADIAN_TO_DEGREE_CONVERSION_FACTOR = M_PI / 180;
 -(void)setVariableAsOperand:(NSString *) variableName
 {
     [_expression addObject:variableName];
+    _operand = 0; // We pretend that the variable has a value of 0 when we're typing it in.
 }
 
 +(NSSet *)variablesInExpression:(id)anExpression
@@ -157,7 +158,7 @@ const double RADIAN_TO_DEGREE_CONVERSION_FACTOR = M_PI / 180;
     NSMutableArray *expressionArray = (NSMutableArray *) anExpression;
     NSMutableSet *variablesInExpression = [NSMutableSet setWithObjects:nil];
     
-    for (int i = 0; i < [variablesInExpression count]; i++)
+    for (int i = 0; i < [expressionArray count]; i++)
     {
         id expressionSegment = [expressionArray objectAtIndex:i];
         
@@ -197,7 +198,12 @@ const double RADIAN_TO_DEGREE_CONVERSION_FACTOR = M_PI / 180;
     {
         id element = [expressionArray objectAtIndex:i];
         
-        if ([element isKindOfClass:[NSString class]])
+        if ([CalcModel isValidVariable:element])
+        {
+            double operand = [[variables objectForKey:element] doubleValue];
+            simulator.operand = operand;
+        }
+        else if ([element isKindOfClass:[NSString class]])
             [simulator performOperation:element];
         else if ([element isKindOfClass:[NSNumber class]])
             simulator.operand = [element doubleValue];
@@ -206,7 +212,15 @@ const double RADIAN_TO_DEGREE_CONVERSION_FACTOR = M_PI / 180;
     return simulator.operand;
 }
 
-+(NSString *)descriptionOfExpression:(id) anExpression
++(BOOL)isValidVariable:(id)variable
+{
+    if (![variable isKindOfClass:[NSString class]])
+        return NO;
+    return [variable isEqualToString:@"a"] || [variable isEqualToString:@"b"] ||
+        [variable isEqualToString:@"c"] || [variable isEqualToString:@"x"];
+}
+
++(NSString *)descriptionOfExpression:(id)anExpression
 {
     if (![anExpression isKindOfClass:[NSMutableArray class]])
         return @"'anExpression' is not a valid CalcModel expression.";
@@ -229,17 +243,20 @@ const double RADIAN_TO_DEGREE_CONVERSION_FACTOR = M_PI / 180;
     return description;
 }
 
-+ (id)propertyListForExpression:(id)anExpression
++(id)propertyListForExpression:(id)anExpression
 {
     NSError *error = nil;
     NSData *plistData = [NSPropertyListSerialization dataWithPropertyList:anExpression format:NSPropertyListXMLFormat_v1_0 options:NSPropertyListImmutable error:&error];
     
-    return error == nil ? nil : plistData;
+    return error != nil ? nil : plistData;
 }
 
-+ (id)expressionForPropertyList:(id)propertyList
++(id)expressionForPropertyList:(id)propertyList
 {
-    
+    NSError *error = nil;
+    NSPropertyListFormat format; // Not that i need this though
+    id array = [NSPropertyListSerialization propertyListWithData:propertyList options:0 format: &format error:&error];
+    return error != nil ? nil : array;
 }
 
 @end

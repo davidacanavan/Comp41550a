@@ -17,6 +17,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *degreeRadiansDisplay;
 @property (weak, nonatomic) IBOutlet UILabel *binaryCalculationProgressDisplay;
 @property (weak, nonatomic) IBOutlet UILabel *memoryDisplay;
+@property (weak, nonatomic) IBOutlet UIButton *equalsButton;
 @property (nonatomic) BOOL isInTheMiddleOfTypingSomething;
 @property (nonatomic) BOOL isDotUsedInCurrentNumber;
 

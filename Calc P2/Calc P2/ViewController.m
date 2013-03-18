@@ -16,6 +16,7 @@
 @synthesize isDotUsedInCurrentNumber = _isDotUsedInCurrentNumber;
 @synthesize degreeRadiansDisplay = _degreeRadiansDisplay;
 @synthesize binaryCalculationProgressDisplay = _binaryCalculationProgressDisplay;
+@synthesize equalsButton = _equalsButton;
 
 - (IBAction)digitPressed:(UIButton *)sender
 {
@@ -75,10 +76,30 @@
 
 -(IBAction)solveEquation:(UIButton *)sender
 {
-    NSLog([CalcModel descriptionOfExpression:_calcModel.expression]);
-    NSDictionary *variableValues = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithDouble:2], @"x", [NSNumber numberWithDouble:3], @"a", [NSNumber numberWithDouble:4], @"b", [NSNumber numberWithDouble:5], @"c", nil];
-    double result = [CalcModel evaluateExpression:_calcModel.expression usingVariableValues:variableValues withDelegate:self];
+    id expression = _calcModel.expression;
+    NSSet *variablesInExpression = [CalcModel variablesInExpression:expression];
+    NSMutableDictionary *variablesWithValues = [NSMutableDictionary dictionaryWithCapacity:4];
+    
+    if (variablesInExpression)
+    {
+        double currentVariableValue = 2;
+        double increaseFactor = 2;
+        
+        for (NSString *variableName in variablesInExpression)
+        {
+            [variablesWithValues setObject:[NSNumber numberWithDouble:currentVariableValue] forKey:variableName];
+            currentVariableValue *= increaseFactor;
+        }
+    }
+    
+    double result = [CalcModel evaluateExpression:_calcModel.expression usingVariableValues:variablesWithValues withDelegate:self];
     self.calcDisplay.text = [NSString stringWithFormat:@"%g", result];
+    
+    // These lines of code check to make sure the property list methods are working correctly
+    id data = [CalcModel propertyListForExpression:expression];
+    id expressionFrompList = [CalcModel expressionForPropertyList:data];
+    double resultCheck = [CalcModel evaluateExpression:expressionFrompList usingVariableValues:variablesWithValues withDelegate:self];
+    NSLog(@"%g", result - resultCheck);
 }
 
 // I kept this action entirely seperate as it's not really an operation that the calc does
