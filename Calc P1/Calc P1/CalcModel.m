@@ -148,7 +148,7 @@ const double RADIAN_TO_DEGREE_CONVERSION_FACTOR = M_PI / 180;
     if (_waitingOperation != nil && !didOperationResultInError)
     {
         if (![_waitingOperation isEqualToString:@"="])
-            _waitingOperationStatus = [NSString stringWithFormat:@"%g %@ %g = %g", _waitingOperand, _waitingOperation, previousOperand, _operand];
+            _waitingOperationStatus = [NSString stringWithFormat:@"%g %@ %g =", _waitingOperand, _waitingOperation, previousOperand];
         _waitingOperation = nil; // Clear out the waiting operation
     }
 }
