@@ -34,72 +34,110 @@ const double RADIAN_TO_DEGREE_CONVERSION_FACTOR = M_PI / 180;
 
 -(double)performOperation:(NSString *)operation withScreenValueOf:(double)screenValue
 {
-    _waitingOperationStatus = @"";
+    double previousOperand = _operand;
+    // Used for the control flow for the calculation status label
+    NSString *waitingOperationFormatString = nil;
+    BOOL shouldAlterStatusLabel = YES;
     BOOL addOperationToExpressionList = YES;
     
     if ([operation isEqualToString:@"sqrt"])
     {
         if (_operand < 0) // Stop the error from happening
+        {
             [_delegate onErrorReceived:@"The square root function does not accept negative numbers."];
+            shouldAlterStatusLabel = NO; // So we won't change the status label at all
+        }
         else
+        {
             _operand = sqrt(self.operand);
+            waitingOperationFormatString = @"sqrt(%g) =";
+        }
     }
     else if ([operation isEqualToString:@"+/-"])
     {
         if (_operand != 0) // If it's 0 then +/- really does nothing
+        {
             _operand = -_operand;
+            waitingOperationFormatString = @"-(%g) =";
+        }
     }
     else if ([operation isEqualToString:@"1/x"])
     {
         if (_operand == 0) // Stop the divide by 0 error
+        {
             [_delegate onErrorReceived:@"The inverse function does not accept '0' as an argument."];
+            shouldAlterStatusLabel = NO;
+        }
         else
+        {
             _operand = 1 / _operand;
+            
+            if (previousOperand < 0) // Then we format a bit differently
+            {
+                waitingOperationFormatString = @"-1/%g =";
+                previousOperand = -previousOperand;
+            }
+            else
+                waitingOperationFormatString = @"1/%g =";
+        }
     }
     else if ([operation isEqualToString:@"sin"])
     {
         _operand = sin(_operand * (!_isCalcInDegreeMode ? 1 : RADIAN_TO_DEGREE_CONVERSION_FACTOR));
+        waitingOperationFormatString = @"sin(%g) =";
     }
     else if ([operation isEqualToString:@"cos"])
     {
         _operand = cos(_operand * (!_isCalcInDegreeMode ? 1 : RADIAN_TO_DEGREE_CONVERSION_FACTOR));
+        waitingOperationFormatString = @"cos(%g) =";
     }
     else if ([operation isEqualToString:@"C"])
     {
         [self performClear]; // Clear out the memory and tell the delegate
         addOperationToExpressionList = NO; // No need to record a clear
         [_delegate onClearOperation];
+        shouldAlterStatusLabel = NO;
     }
     else if ([operation isEqualToString:@"Rec"])
     {
         self.operand = _memoryStore; // Make sure this is saved in the expression list
         addOperationToExpressionList = NO; // Since it's done in the above step
         [_delegate onMemoryRecallOperation]; // Tell the delegate this just went down
+        shouldAlterStatusLabel = NO;
     }
     else if ([operation isEqualToString:@"Store"])
     {
         _memoryStore = screenValue; // Overwrite the mem value with what's on screen.
         addOperationToExpressionList = NO;
         [_delegate onStoreOperation];
+        shouldAlterStatusLabel = NO;
     }
     else if ([operation isEqualToString:@"M+"])
     {
         _memoryStore += screenValue;
         addOperationToExpressionList = NO;
         [_delegate onMemoryPlusOperation];
+        shouldAlterStatusLabel = NO;
     }
     else if ([operation isEqualToString:@"D/R"])
     {
         _isCalcInDegreeMode = !_isCalcInDegreeMode; // Toggle the boolean
         addOperationToExpressionList = NO;
         [_delegate onDegreeRadianOperation];
+        shouldAlterStatusLabel = NO;
     }
     else // This is if we get a binary operator or equals
     {
+        shouldAlterStatusLabel = NO;
         [self performWaitingOperation];
         self.waitingOperation = operation;
         self.waitingOperand = self.operand;
     }
+    
+    
+    // Update the operation status all things going well
+    if (waitingOperationFormatString && shouldAlterStatusLabel)
+        _waitingOperationStatus = [NSString stringWithFormat:waitingOperationFormatString, previousOperand];
     
     if (addOperationToExpressionList)
         [_expression addObject:operation];
@@ -109,6 +147,9 @@ const double RADIAN_TO_DEGREE_CONVERSION_FACTOR = M_PI / 180;
 
 -(void)performWaitingOperation
 {
+    double previousOperand = _operand;
+    BOOL didOperationResultInError = NO;
+    
     // Don't use the overridden setter here since we don't need to record the operation
     if ([@"+" isEqualToString:self.waitingOperation])
         _operand = self.waitingOperand + self.operand;
@@ -119,11 +160,19 @@ const double RADIAN_TO_DEGREE_CONVERSION_FACTOR = M_PI / 180;
     else if ([@"/" isEqualToString:self.waitingOperation])
     {
         if (_operand == 0)
+        {
             [_delegate onErrorReceived:@"The division operator does not accept '0' as the divisor."];
+            didOperationResultInError = YES;
+        }
         else  _operand = self.waitingOperand / self.operand;
     }
     
-    _waitingOperationStatus = [NSString stringWithFormat:@"%g %@ %g", _waitingOperand, _waitingOperation, _operand];
+    if (_waitingOperation != nil && !didOperationResultInError)
+    {
+        if (![_waitingOperation isEqualToString:@"="])
+            _waitingOperationStatus = [NSString stringWithFormat:@"%g %@ %g = %g", _waitingOperand, _waitingOperation, previousOperand, _operand];
+        _waitingOperation = nil; // Clear out the waiting operation
+    }
 }
 
 // Override to add the value to our expression list

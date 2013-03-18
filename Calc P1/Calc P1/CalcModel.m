@@ -84,26 +84,31 @@ const double RADIAN_TO_DEGREE_CONVERSION_FACTOR = M_PI / 180;
     {
         [self performClear]; // Clear out the memory and tell the listener
         [_delegate onClearOperation];
+        shouldAlterStatusLabel = NO;
     }
     else if ([operation isEqualToString:@"Rec"])
     {
         _operand = _memoryStore;
         [_delegate onMemoryRecallOperation]; // Tell the listener this just went down
+        shouldAlterStatusLabel = NO;
     }
     else if ([operation isEqualToString:@"Store"])
     {
         _memoryStore = screenValue; // Overwrite the mem value with what's on screen.
         [_delegate onStoreOperation];
+        shouldAlterStatusLabel = NO;
     }
     else if ([operation isEqualToString:@"M+"])
     {
         _memoryStore += screenValue;
         [_delegate onMemoryPlusOperation];
+        shouldAlterStatusLabel = NO;
     }
     else if ([operation isEqualToString:@"D/R"])
     {
         _isCalcInDegreeMode = !_isCalcInDegreeMode; // Toggle the boolean
         [_delegate onDegreeRadianOperation];
+        shouldAlterStatusLabel = NO;
     }
     else // This is if we get a binary operator or equals
     {
