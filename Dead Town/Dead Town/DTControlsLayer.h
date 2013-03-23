@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
-#import "DTJoystickDelegate.h"
+#import "DTControllerDelegate.h"
 
 @class DTGameLayer;
 @class SneakyJoystick;
@@ -17,8 +17,9 @@
 @class SneakyButtonSkinnedBase;
 
 typedef enum {LeftHanded, RightHanded} DominantHand;
+typedef enum {Joystick, Tilt} ControllerType;
 
-@interface DTControlsLayer : CCLayer <CCTargetedTouchDelegate>
+@interface DTControlsLayer : CCLayer <CCTargetedTouchDelegate, UIAccelerometerDelegate>
 {
     @private
     // The map layer - this makes it easy to update the player position
@@ -28,14 +29,16 @@ typedef enum {LeftHanded, RightHanded} DominantHand;
     SneakyButton *_fireButton;
     SneakyButton *_pauseButton;
     CCDirector *_director;
-    id <DTJoystickDelegate> _joystickDelegate;
+    id <DTControllerDelegate> _controllerDelegate;
     CGSize _screen;
 }
 
 @property(nonatomic) BOOL isPausing;
 @property(nonatomic) DominantHand dominantHand;
+@property(nonatomic) ControllerType controllerType;
 
-+(id)controlsLayerWithGameLayer:(DTGameLayer *)gameLayer useJoystick:(BOOL)useJoystick joystickDelegate:(id <DTJoystickDelegate>)joystickDelegate dominantHand:(DominantHand)dominantHand;
++(id)controlsLayerWithGameLayer:(DTGameLayer *)gameLayer controllerType:(ControllerType)controllerType controllerDelegate:(id <DTControllerDelegate>)controllerDelegate dominantHand:(DominantHand)dominantHand;
+
 -(void)unpause;
 
 @end

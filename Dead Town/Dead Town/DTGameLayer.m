@@ -59,10 +59,10 @@
 }
 
 // Called by the controls layer when the joystick is moved
--(void)joystickUpdated:(CGPoint)joystickVelocity delta:(float)delta
+-(void)controllerUpdated:(CGPoint)cvelocity delta:(float)delta
 {
     CGPoint oldPosition = [_player getPosition];
-    CGPoint velocity = ccpMult(joystickVelocity, 140);
+    CGPoint velocity = ccpMult(cvelocity, 140);
     CGPoint newPosition = ccp(oldPosition.x + velocity.x * delta,
                               oldPosition.y + velocity.y * delta);
     
@@ -82,7 +82,7 @@
     
 }
 
--(void)joystickMoveStarted
+-(void)controllerMoveStarted
 {
     _joystickActive = YES;
     // So he's only moving as long as he's not hold firing! This has to be put in in case the user is hold-firing before he starts to run
@@ -90,7 +90,7 @@
         [_player notifyMovementStart];
 }
 
--(void)joystickMoveEnded
+-(void)controllerMoveEnded
 {
     _joystickActive = NO;
     if (!_isHoldFiring)
@@ -196,22 +196,22 @@
 
 #pragma mark-
 #pragma mark Button delegate implementation
--(void)buttonPressed:(DTSneakyButton *)button
+-(void)buttonPressed:(DTButton *)button
 {
     _isFiring = YES;
 }
 
--(void)buttonHoldStarted:(DTSneakyButton *)button
+-(void)buttonHoldStarted:(DTButton *)button
 {
     _isHoldFiring = YES;
 }
 
--(void)buttonHoldContinued:(DTSneakyButton *)button
+-(void)buttonHoldContinued:(DTButton *)button
 {
     [_player notifyMovementEnd]; // So if the user is running we just tell him not to run anymore if a hold fire occurs
 }
 
--(void)buttonHoldEnded:(DTSneakyButton *)button
+-(void)buttonHoldEnded:(DTButton *)button
 {
     if (_joystickActive)
         [_player notifyMovementStart];

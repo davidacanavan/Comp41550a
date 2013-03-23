@@ -12,19 +12,20 @@
 #import "SneakyButton.h"
 #import "SneakyButtonSkinnedBase.h"
 #import "SneakyJoystickSkinnedBase.h"
-#import "DTSneakyButton.h"
+#import "DTButton.h"
 
 @implementation DTControlsLayer
 
 @synthesize isPausing = _isPausing;
 @synthesize dominantHand = _dominantHand;
+@synthesize controllerType = _controllerType;
 
-+(id)controlsLayerWithGameLayer:(DTGameLayer *)gameLayer useJoystick:(BOOL)useJoystick joystickDelegate:(id <DTJoystickDelegate>)joystickDelegate dominantHand:(DominantHand)dominantHand
++(id)controlsLayerWithGameLayer:(DTGameLayer *)gameLayer controllerType:(ControllerType)controllerType controllerDelegate:(id <DTControllerDelegate>)controllerDelegate dominantHand:(DominantHand)dominantHand
 {
-    return [[self alloc] initWithGameLayer:gameLayer useJoystick:useJoystick joystickDelegate:joystickDelegate dominantHand:(DominantHand)dominantHand];
+    return [[self alloc] initWithGameLayer:gameLayer controllerType:(ControllerType)controllerType controllerDelegate:controllerDelegate dominantHand:(DominantHand)dominantHand];
 }
 
--(id)initWithGameLayer:(DTGameLayer *)gameLayer useJoystick:(BOOL)useJoystick joystickDelegate:(id <DTJoystickDelegate>)joystickDelegate dominantHand:(DominantHand)dominantHand
+-(id)initWithGameLayer:(DTGameLayer *)gameLayer controllerType:(ControllerType)controllerType controllerDelegate:(id <DTControllerDelegate>)controllerDelegate dominantHand:(DominantHand)dominantHand
 {
     if ((self = [super init]))
     {
@@ -32,12 +33,15 @@
         _gameLayer = gameLayer;
         _director = [CCDirector sharedDirector];
         _screen = _director.winSize;
-        _joystickDelegate = joystickDelegate;
+        _controllerDelegate = controllerDelegate;
         _dominantHand = dominantHand;
+        _controllerDelegate = controllerDelegate;
         
         // Create the buttons and what-nots
-        if (useJoystick)
-            [self setUpSneakyJoystick];
+        if (controllerType == Joystick)
+            [self addJoystick];
+        else
+            [self addTiltControls];
         
         [self setUpSneakyFireButton];
         [self setUpSneakyPauseButton];
@@ -52,8 +56,8 @@
 -(void)tick:(float)delta
 {
     // So we're moving the character a little bit - so tell the game layer to move him!
-    if (!CGPointEqualToPoint(_joystick.stickPosition, CGPointZero)) 
-        [_joystickDelegate joystickUpdated:_joystick.velocity delta:delta];
+    if (_joystick && !CGPointEqualToPoint(_joystick.stickPosition, CGPointZero))
+        [_controllerDelegate controllerUpdated:_joystick.velocity delta:delta];
     
     // Check for a pause
     if (_pauseButton.active)
@@ -76,8 +80,27 @@
     [self schedule:@selector(tick:)]; // Schedule the tick to run on the game loop
 }
 
+-(void)setControllerType:(ControllerType)controllerType
+{
+    if (_controllerType == controllerType) // So nothing is changing...
+        return;
+    
+    if (_controllerType == Joystick) // We're moving to the joystick from the tilt
+    {
+        [self removeTiltControls];
+        [self addJoystick];
+    }
+    else // Setting up tilt controls
+    {
+        [self removeJoystick];
+        [self addTiltControls];
+    }
+    
+    _controllerType = controllerType;
+}
+
 // Create the joystick and add it to the layer
--(void)setUpSneakyJoystick
+-(void)addJoystick
 {
     // Some variables to get the sizes of the controls
     int padding = 15, joystickRadius = 36, joystickThumbRadius = joystickRadius / 3;
@@ -94,6 +117,27 @@
     _joystickSkin.visible = NO;
 }
 
+-(void)removeJoystick
+{
+    if (_controllerType != Joystick)
+        return;
+}
+
+-(void)addTiltControls
+{
+    self.isAccelerometerEnabled = YES;
+    UIAccelerometer *accelerometer = [UIAccelerometer sharedAccelerometer];
+    accelerometer.delegate = self;
+}
+
+-(void)removeTiltControls
+{
+    if (_controllerType != Tilt)
+        return;
+    
+    self.isAccelerometerEnabled = NO;
+}
+
 // Create the shoot button and add it to the layer
 -(void)setUpSneakyFireButton
 {
@@ -105,7 +149,7 @@
     CGSize fireButtonSize = fireButtonSkin.contentSize;
     fireButtonSkin.position = ccp(_screen.width - padding - fireButtonSize.width / 2, padding + fireButtonSize.height / 2);
     //_fireButton = [[SneakyButton alloc] initWithRect:CGRectMake(0, 0, buttonRadius * 2, buttonRadius * 2)];
-    _fireButton = [DTSneakyButton buttonWithRect:CGRectMake(0, 0, buttonRadius * 2, buttonRadius * 2) isHoldable:YES delegate:_gameLayer tag:@"fire"];
+    _fireButton = [DTButton buttonWithRect:CGRectMake(0, 0, buttonRadius * 2, buttonRadius * 2) isHoldable:YES delegate:_gameLayer tag:@"fire"];
     fireButtonSkin.button = _fireButton;
     [self addChild:fireButtonSkin];
 }
@@ -122,6 +166,15 @@
     [self addChild:pauseButtonSkin];
 }
 
+#pragma mark-
+#pragma mark Delegate Implementations
+
+-(void)accelerometer:(UIAccelerometer *)accelerometer didAccelerate:(UIAcceleration *)acceleration
+{
+    // So for landscape mode we swap the x and the y's
+    [_controllerDelegate controllerUpdated:ccp(acceleration.y * 7, acceleration.x * 7) delta:(float) acceleration.timestamp];
+}
+
 -(BOOL)ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event
 {
     CGPoint touchPoint = [_director convertToGL:[touch locationInView:[_director view]]];
@@ -130,7 +183,7 @@
     {
         _joystickSkin.position = touchPoint;
         _joystickSkin.visible = YES;
-        [_joystickDelegate joystickMoveStarted];
+        [_controllerDelegate controllerMoveStarted];
     }
     
     return YES;
@@ -143,12 +196,14 @@
     if (touchPoint.x < _screen.width / 2) // Stops the joystick from disappearing when you take a shot
     {
         _joystickSkin.visible = NO;
-        [_joystickDelegate joystickMoveEnded]; // Tell the game layer that the joystick has stopped moving
+        [_controllerDelegate controllerMoveEnded]; // Tell the game layer that the joystick has stopped moving
     }
 }
 
 -(void)ccTouchCancelled:(UITouch *)touch withEvent:(UIEvent *)event{}
 -(void)ccTouchMoved:(UITouch *)touch withEvent:(UIEvent *)event {}
+
+#pragma mark-
 
 @end
 

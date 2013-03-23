@@ -6,18 +6,18 @@
 //
 //
 
-#import "DTSneakyButton.h"
+#import "DTButton.h"
 
-@implementation DTSneakyButton
+@implementation DTButton
 
 @synthesize tag = _tag;
 
-+buttonWithRect:(CGRect)rect isHoldable:(BOOL)isHoldable delegate:(id <DTSneakyButtonDelegate>)delegate tag:(NSString *) tag
++buttonWithRect:(CGRect)rect isHoldable:(BOOL)isHoldable delegate:(id <DTButtonDelegate>)delegate tag:(NSString *) tag
 {
     return [[self alloc] initWithRect:rect isHoldable:isHoldable delegate:delegate tag:tag];
 }
 
--(id)initWithRect:(CGRect)rect isHoldable:(BOOL)holdable delegate:(id <DTSneakyButtonDelegate>)delegate tag:(NSString *) tag
+-(id)initWithRect:(CGRect)rect isHoldable:(BOOL)holdable delegate:(id <DTButtonDelegate>)delegate tag:(NSString *) tag
 {
     if (self = [super initWithRect:rect])
     {

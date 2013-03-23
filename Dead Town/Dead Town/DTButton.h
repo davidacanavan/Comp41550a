@@ -7,7 +7,7 @@
 //
 
 #import "SneakyButton.h"
-#import "DTSneakyButtonDelegate.h"
+#import "DTButtonDelegate.h"
 
 /**
  * I'll just explain the necessity for this class.
@@ -17,10 +17,10 @@
  * of the game loop if there's a button hold whereas the button has no method to check if the active state is a result 
  * of a hold or not, hence the class. Also i've put it into a nice listener/delegate pattern.
  */
-@interface DTSneakyButton : SneakyButton
+@interface DTButton : SneakyButton
 {
     @private
-    id <DTSneakyButtonDelegate> _delegate;
+    id <DTButtonDelegate> _delegate;
     BOOL _isPossibleHold;
     BOOL _hasHoldStarted;
     float _currentHoldTime;
@@ -29,6 +29,6 @@
 
 @property(nonatomic, strong) NSString *tag;
 
-+buttonWithRect:(CGRect)rect isHoldable:(BOOL)isHoldable delegate:(id <DTSneakyButtonDelegate>)delegate tag:(NSString *) tag;
++buttonWithRect:(CGRect)rect isHoldable:(BOOL)isHoldable delegate:(id <DTButtonDelegate>)delegate tag:(NSString *) tag;
 
 @end

@@ -10,14 +10,14 @@
 
 // General callbacks for dealing with the various buttons and joystick/tilt controls.
 // The methods beginning with joystick supply velocity vectors from both tilt controls and the joystick.
-@protocol DTJoystickDelegate <NSObject>
+@protocol DTControllerDelegate <NSObject>
 
 // Called when the joystick has started to move.
--(void)joystickMoveStarted;
+-(void)controllerMoveStarted;
 // Called when the joystick has stopped moving.
--(void)joystickMoveEnded;
+-(void)controllerMoveEnded;
 // called when the joystick velocity has changed given the time lapse between calls.
--(void)joystickUpdated:(CGPoint)joystickVelocity delta:(float)delta;
+-(void)controllerUpdated:(CGPoint)velocity delta:(float)delta;
 
 @end
 
