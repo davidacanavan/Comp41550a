@@ -196,7 +196,9 @@
         if (!_wasTilting) // So we weren't tilting before but we are now!
             [_controllerDelegate controllerMoveStarted];
         
-        [_controllerDelegate controllerUpdated:ccp(x, y) delta:delta];
+        float sx = fmaxf(fminf(x, sensitivity), -sensitivity) / sensitivity;
+        float sy = fmaxf(fminf(y, sensitivity), -sensitivity) / sensitivity;
+        [_controllerDelegate controllerUpdated:ccp(sx, sy) delta:delta];
         _wasTilting = YES;
     }
     else
