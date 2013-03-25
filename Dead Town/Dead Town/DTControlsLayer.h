@@ -31,6 +31,8 @@ typedef enum {Joystick, Tilt} ControllerType;
     CCDirector *_director;
     id <DTControllerDelegate> _controllerDelegate;
     CGSize _screen;
+    float _lastAccelerometerTime;
+    BOOL _wasTilting;
 }
 
 @property(nonatomic) BOOL isPausing;

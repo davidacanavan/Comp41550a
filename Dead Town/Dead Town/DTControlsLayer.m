@@ -70,13 +70,18 @@
 -(void)pause
 {
     [self unschedule:@selector(tick:)];
-    [_director.touchDispatcher removeDelegate:self];
+    
+    if (_joystick)
+        [_director.touchDispatcher removeDelegate:self];
+    
     _joystickSkin.visible = NO;
 }
 
 -(void)unpause
 {
-    [_director.touchDispatcher addTargetedDelegate:self priority:0 swallowsTouches:NO]; // Register touch events
+    if (_joystick)
+        [_director.touchDispatcher addTargetedDelegate:self priority:0 swallowsTouches:NO]; // Register touch events
+    
     [self schedule:@selector(tick:)]; // Schedule the tick to run on the game loop
 }
 
@@ -121,13 +126,20 @@
 {
     if (_controllerType != Joystick)
         return;
+    
+    [self removeChild:_joystick cleanup:NO];
+    _joystick = nil;
 }
 
 -(void)addTiltControls
 {
     self.isAccelerometerEnabled = YES;
     UIAccelerometer *accelerometer = [UIAccelerometer sharedAccelerometer];
+    accelerometer.updateInterval = 1 / 60.0f;
     accelerometer.delegate = self;
+    
+    _wasTilting = NO;
+    _lastAccelerometerTime = 0;
 }
 
 -(void)removeTiltControls
@@ -171,8 +183,31 @@
 
 -(void)accelerometer:(UIAccelerometer *)accelerometer didAccelerate:(UIAcceleration *)acceleration
 {
-    // So for landscape mode we swap the x and the y's
-    [_controllerDelegate controllerUpdated:ccp(acceleration.y * 7, acceleration.x * 7) delta:(float) acceleration.timestamp];
+    // So for landscape mode we swap the x and the y's and minus the x one!
+    float timestamp = (float) acceleration.timestamp;
+    float delta = timestamp - _lastAccelerometerTime;
+    float minimumSensitivity = 0.1;
+    float sensitivity = 0.3;
+    float calibration = 0.5;
+    float x = acceleration.y, y = -acceleration.x;
+    
+    if (!(fabsf(x) < minimumSensitivity && fabsf(y) < minimumSensitivity))
+    {
+        if (!_wasTilting) // So we weren't tilting before but we are now!
+            [_controllerDelegate controllerMoveStarted];
+        
+        [_controllerDelegate controllerUpdated:ccp(x, y) delta:delta];
+        _wasTilting = YES;
+    }
+    else
+    {
+        if (_wasTilting) // So now we've stopped tilting altogether
+            [_controllerDelegate controllerMoveEnded];
+        
+        _wasTilting = NO;
+    }
+    
+    _lastAccelerometerTime = timestamp;
 }
 
 -(BOOL)ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event
