@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2B43C8DA170096420022DDF3 /* AxesDrawer.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B43C8D9170096420022DDF3 /* AxesDrawer.m */; };
+		2B43C8DD170096550022DDF3 /* GraphView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B43C8DC170096550022DDF3 /* GraphView.m */; };
+		2B43C8E0170099A10022DDF3 /* GraphViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B43C8DF170099A00022DDF3 /* GraphViewController.m */; };
+		2B43C8E417009CB90022DDF3 /* ExpressionDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B43C8E317009CB90022DDF3 /* ExpressionDataSource.m */; };
 		2B6976D616F4FD1F0072B652 /* CalcModelSimulator.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B6976D516F4FD1F0072B652 /* CalcModelSimulator.m */; };
 		2BF7A89416C82EA400D3063F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BF7A89316C82EA400D3063F /* UIKit.framework */; };
 		2BF7A89616C82EA400D3063F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BF7A89516C82EA400D3063F /* Foundation.framework */; };
@@ -23,6 +27,15 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2B43C8D8170096420022DDF3 /* AxesDrawer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AxesDrawer.h; sourceTree = "<group>"; };
+		2B43C8D9170096420022DDF3 /* AxesDrawer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AxesDrawer.m; sourceTree = "<group>"; };
+		2B43C8DB170096550022DDF3 /* GraphView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GraphView.h; sourceTree = "<group>"; };
+		2B43C8DC170096550022DDF3 /* GraphView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GraphView.m; sourceTree = "<group>"; };
+		2B43C8DE170099A00022DDF3 /* GraphViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GraphViewController.h; sourceTree = "<group>"; };
+		2B43C8DF170099A00022DDF3 /* GraphViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GraphViewController.m; sourceTree = "<group>"; };
+		2B43C8E117009BBF0022DDF3 /* GraphDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GraphDataSource.h; sourceTree = "<group>"; };
+		2B43C8E217009CB90022DDF3 /* ExpressionDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExpressionDataSource.h; sourceTree = "<group>"; };
+		2B43C8E317009CB90022DDF3 /* ExpressionDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExpressionDataSource.m; sourceTree = "<group>"; };
 		2B6976D416F4FD1F0072B652 /* CalcModelSimulator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalcModelSimulator.h; sourceTree = "<group>"; };
 		2B6976D516F4FD1F0072B652 /* CalcModelSimulator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalcModelSimulator.m; sourceTree = "<group>"; };
 		2BF7A88F16C82EA400D3063F /* Calc P3.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Calc P3.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -60,6 +73,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2B43C8D6170096080022DDF3 /* Graphing */ = {
+			isa = PBXGroup;
+			children = (
+				2B43C8D8170096420022DDF3 /* AxesDrawer.h */,
+				2B43C8D9170096420022DDF3 /* AxesDrawer.m */,
+				2B43C8DB170096550022DDF3 /* GraphView.h */,
+				2B43C8DC170096550022DDF3 /* GraphView.m */,
+				2B43C8DE170099A00022DDF3 /* GraphViewController.h */,
+				2B43C8DF170099A00022DDF3 /* GraphViewController.m */,
+				2B43C8E117009BBF0022DDF3 /* GraphDataSource.h */,
+			);
+			name = Graphing;
+			sourceTree = "<group>";
+		};
 		2B6976D816F502A10072B652 /* Calc Model Simulator */ = {
 			isa = PBXGroup;
 			children = (
@@ -109,6 +136,7 @@
 		2BF7A89916C82EA400D3063F /* Calc P3 */ = {
 			isa = PBXGroup;
 			children = (
+				2B43C8D6170096080022DDF3 /* Graphing */,
 				2B6976DA16F505220072B652 /* Calc Model */,
 				2B6976D816F502A10072B652 /* Calc Model Simulator */,
 				2BF7A8A216C82EA400D3063F /* AppDelegate.h */,
@@ -117,6 +145,8 @@
 				2BF7A8AE16C82EA400D3063F /* ViewController.h */,
 				2BF7A8AF16C82EA400D3063F /* ViewController.m */,
 				2BF7A89A16C82EA400D3063F /* Supporting Files */,
+				2B43C8E217009CB90022DDF3 /* ExpressionDataSource.h */,
+				2B43C8E317009CB90022DDF3 /* ExpressionDataSource.m */,
 			);
 			path = "Calc P3";
 			sourceTree = "<group>";
@@ -206,6 +236,10 @@
 				2BF7A8B016C82EA400D3063F /* ViewController.m in Sources */,
 				2BF7A8B816C82EEE00D3063F /* CalcModel.m in Sources */,
 				2B6976D616F4FD1F0072B652 /* CalcModelSimulator.m in Sources */,
+				2B43C8DA170096420022DDF3 /* AxesDrawer.m in Sources */,
+				2B43C8DD170096550022DDF3 /* GraphView.m in Sources */,
+				2B43C8E0170099A10022DDF3 /* GraphViewController.m in Sources */,
+				2B43C8E417009CB90022DDF3 /* ExpressionDataSource.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

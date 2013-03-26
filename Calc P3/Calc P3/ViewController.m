@@ -7,6 +7,7 @@
 //
 
 #import "ViewController.h"
+#import "GraphViewController.h"
 
 @implementation ViewController
 
@@ -17,6 +18,13 @@
 @synthesize degreeRadiansDisplay = _degreeRadiansDisplay;
 @synthesize binaryCalculationProgressDisplay = _binaryCalculationProgressDisplay;
 @synthesize equalsButton = _equalsButton;
+
+-(void)viewDidLoad
+{
+    [super viewDidLoad];
+    _calcModel.delegate = self;
+    self.navigationItem.title = @"Graph Calc";
+}
 
 - (IBAction)digitPressed:(UIButton *)sender
 {
@@ -94,12 +102,6 @@
     
     double result = [CalcModel evaluateExpression:_calcModel.expression usingVariableValues:variablesWithValues withDelegate:self];
     self.calcDisplay.text = [NSString stringWithFormat:@"%g", result];
-    
-    // These lines of code check to make sure the property list methods are working correctly
-    id data = [CalcModel propertyListForExpression:expression];
-    id expressionFrompList = [CalcModel expressionForPropertyList:data];
-    double resultCheck = [CalcModel evaluateExpression:expressionFrompList usingVariableValues:variablesWithValues withDelegate:self];
-    NSLog(@"%g", result - resultCheck);
 }
 
 // I kept this action entirely seperate as it's not really an operation that the calc does
@@ -148,13 +150,6 @@
     [alertDialog show];
 }
 
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-    _calcModel.delegate = self;
-	// Do any additional setup after loading the view, typically from a nib.
-}
-
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -167,4 +162,10 @@
     [self setMemoryDisplay:nil];
     [super viewDidUnload];
 }
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    [[segue destinationViewController] setExpression:_calcModel.expression];
+}
+
 @end
