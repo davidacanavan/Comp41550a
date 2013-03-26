@@ -16,8 +16,8 @@
 @class SneakyButton;
 @class SneakyButtonSkinnedBase;
 
-typedef enum {LeftHanded, RightHanded} DominantHand;
-typedef enum {Joystick, Tilt} ControllerType;
+typedef enum {DominantHandLeft, DominantHandRight} DominantHand;
+typedef enum {ControllerTypeJoystick, ControllerTypeTilt} ControllerType;
 
 @interface DTControlsLayer : CCLayer <CCTargetedTouchDelegate, UIAccelerometerDelegate>
 {
@@ -33,6 +33,7 @@ typedef enum {Joystick, Tilt} ControllerType;
     CGSize _screen;
     float _lastAccelerometerTime;
     BOOL _wasTilting;
+    CGPoint _tiltControlVelocity;
 }
 
 @property(nonatomic) BOOL isPausing;

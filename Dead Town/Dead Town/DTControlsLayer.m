@@ -38,7 +38,7 @@
         _controllerDelegate = controllerDelegate;
         
         // Create the buttons and what-nots
-        if (controllerType == Joystick)
+        if (controllerType == ControllerTypeJoystick)
             [self addJoystick];
         else
             [self addTiltControls];
@@ -56,8 +56,14 @@
 -(void)tick:(float)delta
 {
     // So we're moving the character a little bit - so tell the game layer to move him!
-    if (_joystick && !CGPointEqualToPoint(_joystick.stickPosition, CGPointZero))
-        [_controllerDelegate controllerUpdated:_joystick.velocity delta:delta];
+    if (_joystick)
+    {
+        if(!CGPointEqualToPoint(_joystick.stickPosition, CGPointZero))
+            [_controllerDelegate controllerUpdated:_joystick.velocity delta:delta];
+    }
+    else // I'm talking tilt controls baby!
+        if (!CGPointEqualToPoint(_tiltControlVelocity, CGPointZero))
+            [_controllerDelegate controllerUpdated:_tiltControlVelocity delta:delta];
     
     // Check for a pause
     if (_pauseButton.active)
@@ -90,7 +96,7 @@
     if (_controllerType == controllerType) // So nothing is changing...
         return;
     
-    if (_controllerType == Joystick) // We're moving to the joystick from the tilt
+    if (_controllerType == ControllerTypeJoystick) // We're moving to the joystick from the tilt
     {
         [self removeTiltControls];
         [self addJoystick];
@@ -124,7 +130,7 @@
 
 -(void)removeJoystick
 {
-    if (_controllerType != Joystick)
+    if (_controllerType != ControllerTypeJoystick)
         return;
     
     [self removeChild:_joystick cleanup:NO];
@@ -144,7 +150,7 @@
 
 -(void)removeTiltControls
 {
-    if (_controllerType != Tilt)
+    if (_controllerType != ControllerTypeTilt)
         return;
     
     self.isAccelerometerEnabled = NO;
@@ -185,10 +191,9 @@
 {
     // So for landscape mode we swap the x and the y's and minus the x one!
     float timestamp = (float) acceleration.timestamp;
-    float delta = timestamp - _lastAccelerometerTime;
     float minimumSensitivity = 0.1;
     float sensitivity = 0.3;
-    float calibration = 0.5;
+    //float calibration = 0.5; TODO: Tilt control calibrations
     float x = acceleration.y, y = -acceleration.x;
     
     if (!(fabsf(x) < minimumSensitivity && fabsf(y) < minimumSensitivity))
@@ -198,13 +203,16 @@
         
         float sx = fmaxf(fminf(x, sensitivity), -sensitivity) / sensitivity;
         float sy = fmaxf(fminf(y, sensitivity), -sensitivity) / sensitivity;
-        [_controllerDelegate controllerUpdated:ccp(sx, sy) delta:delta];
+        _tiltControlVelocity = ccp(sx, sy);
         _wasTilting = YES;
     }
-    else
+    else // The actual tilt detection is done on the game loop to avoid any animation stuttering
     {
         if (_wasTilting) // So now we've stopped tilting altogether
+        {
+            _tiltControlVelocity = CGPointZero;
             [_controllerDelegate controllerMoveEnded];
+        }
         
         _wasTilting = NO;
     }

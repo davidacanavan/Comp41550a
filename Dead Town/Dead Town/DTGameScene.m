@@ -24,7 +24,7 @@
     {
         // So this scene has a few layers to deal with - the controls, info and map layer
         DTGameLayer *gameLayer = [DTGameLayer node];
-        DTControlsLayer *controlsLayer = [DTControlsLayer controlsLayerWithGameLayer:gameLayer controllerType:Tilt controllerDelegate:gameLayer dominantHand:RightHanded];
+        DTControlsLayer *controlsLayer = [DTControlsLayer controlsLayerWithGameLayer:gameLayer controllerType:ControllerTypeTilt controllerDelegate:gameLayer dominantHand:DominantHandRight];
         gameLayer.controlsLayer = controlsLayer;
         
         [self addChild:gameLayer z:-1]; // Make sure the map is behind the controls
