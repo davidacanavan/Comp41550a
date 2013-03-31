@@ -9,6 +9,7 @@
 #import "DTCharacter.h"
 #import "DTOptions.h"
 #import "DTWeapon.h"
+#import "DTLifeModel.h"
 
 @implementation DTCharacter
 
@@ -25,7 +26,7 @@
         _gameLayer = gameLayer;
         _sprite = [self loadSpriteAndAnimations]; // This method is overriden by subclasses to allow more functionality
         _sprite.position = position;
-        _life = life;
+        _lifeModel = [DTLifeModel lifeModelWithLife:life lower:0 upper:life delegate:nil];
         
         // Add the sprite to the layer
         [self addChild:_sprite];
@@ -72,7 +73,7 @@
 // Override of the setter to ensure the player's life never goes below 0 or beyond 100.
 -(void)setLife:(float)life
 {
-    _life = min(max(life, 0), 100);
+    _lifeModel.life = life;
 }
 
 -(void)notifyMovementStart {}

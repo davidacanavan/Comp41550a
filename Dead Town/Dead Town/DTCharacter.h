@@ -11,6 +11,7 @@
 @class DTGameLayer;
 @class DTOptions;
 @class DTWeapon;
+@class DTLifeModel;
 
 @interface DTCharacter : CCNode
 {
@@ -28,12 +29,11 @@
     BOOL _isMovingActionRunning;
 }
 
-// The amount of life the character has left, it's between 0 and 100.
-@property(nonatomic) float life;
 // The current weapon of the character
 @property(nonatomic) DTWeapon *weapon;
 @property(nonatomic) BOOL isPausing;
 @property(nonatomic) CGPoint position;
+@property(nonatomic, readonly) DTLifeModel *lifeModel;
 
 // Member initializer to create the class - this class should only be used as a base class.
 -(id)initWithPosition:(CGPoint)position gameLayer:(DTGameLayer *)gameLayer life:(float)life;

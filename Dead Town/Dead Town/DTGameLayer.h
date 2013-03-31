@@ -23,6 +23,7 @@
 @class DTControlsLayer;
 @class DTPausedLayer;
 @class DTStraightLineZombie;
+@class DTStatusLayer;
 
 @interface DTGameLayer : CCLayer <DTControllerDelegate, DTButtonDelegate>
 {
@@ -41,6 +42,7 @@
     DTPausedLayer *_pausedLayer;
     int _holdNumber;
     BOOL _joystickActive;
+    DTStatusLayer *_statusLayer;
 }
 
 @property(nonatomic) BOOL isFiring; // Set to true if the user is firing
@@ -48,6 +50,7 @@
 @property(nonatomic) BOOL isPausing; // Set to true to pause the game layer and all children
 @property(nonatomic, strong) DTControlsLayer *controlsLayer;
 
++(id)gameLayerWithStatusLayer:(DTStatusLayer *)statusLayer;
 -(void)centerViewportOnPosition:(CGPoint)position;
 -(BOOL)isWallAtTileCoordinate:(CGPoint)tileCoordinate;
 -(BOOL)isWallAtPosition:(CGPoint)position;

@@ -121,7 +121,12 @@
     _joystickSkin.backgroundSprite = [ColoredCircleSprite circleWithColor:ccc4(255, 255, 0, 120) radius:joystickRadius];
     _joystickSkin.thumbSprite = [ColoredCircleSprite circleWithColor:ccc4(0, 0, 100, 255) radius:joystickThumbRadius];
     CGSize joystickSize = _joystickSkin.contentSize;
-    _joystickSkin.position = ccp(padding + joystickSize.width / 2, padding + joystickSize.height / 2);
+    
+    if (_dominantHand == DominantHandRight)
+        _joystickSkin.position = ccp(padding + joystickSize.width / 2, padding + joystickSize.height / 2);
+    else
+        ;
+    
     _joystick = [[SneakyJoystick alloc] initWithRect:CGRectMake(0, 0, joystickRadius * 2, joystickRadius * 2)];
     _joystickSkin.joystick = _joystick;
     [self addChild:_joystickSkin];

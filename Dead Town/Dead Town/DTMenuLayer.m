@@ -22,9 +22,9 @@
         backgroundSprite.position = ccp(screen.width / 2, screen.height / 2);
         [self addChild: backgroundSprite z:-1];
         
-        CCSprite *titleSprite = [CCSprite spriteWithFile:@"dt_intro_title_0.png"];
-        titleSprite.position = ccp(screen.width / 2, screen.height * 0.67);
-        [self addChild: titleSprite z:1];
+        _titleSprite = [CCSprite spriteWithFile:@"dt_intro_title_0.png"];
+        _titleSprite.position = ccp(screen.width / 2, screen.height + _titleSprite.boundingBox.size.height / 2);
+        [self addChild: _titleSprite z:1];
         
         //[self initHeadingAnimation];
         //_headingSprite.position = ccp(screen.width / 2, screen.height / 2);
@@ -33,13 +33,29 @@
         CCMenuItemImage *onePlayerMenuItem = [GooeyStatics menuItemWithImageName:@"dt_intro_one_player.png" target:self selector:@selector(onePlayerModeSelected)];
         CCMenuItemImage *twoPlayerMenuItem = [GooeyStatics menuItemWithImageName:@"dt_intro_two_player.png" target:self selector:@selector(twoPlayerModeSelected)];
         
-        CCMenu *menu = [CCMenu menuWithItems:onePlayerMenuItem, twoPlayerMenuItem, nil];
-        [menu alignItemsHorizontallyWithPadding:40];
-        menu.position = ccp(screen.width / 2, screen.height * .35);
-        [self addChild:menu z:2];
+        _menu = [CCMenu menuWithItems:onePlayerMenuItem, twoPlayerMenuItem, nil];
+        [_menu alignItemsHorizontallyWithPadding:40];
+        _menu.position = ccp(screen.width / 2, -_menu.boundingBox.size.height / 2);
+        [self addChild:_menu z:2];
     }
     
     return self;
+}
+
+-(void)onEnterTransitionDidFinish
+{
+    [super onEnterTransitionDidFinish];
+    CGSize screen = [CCDirector sharedDirector].winSize;
+    [_titleSprite runAction: [CCSequence actions:
+                [CCMoveTo actionWithDuration:0.4 position:ccp(screen.width / 2, screen.height * 0.67)],
+                [CCCallFunc actionWithTarget:self selector:@selector(animateMenuIn)],
+                nil]];
+}
+
+-(void)animateMenuIn
+{
+    CGSize screen = [CCDirector sharedDirector].winSize;
+    [_menu runAction:[CCMoveTo actionWithDuration:0.2 position:ccp(screen.width / 2, screen.height * .35)]];
 }
 
 -(void)initHeadingAnimation

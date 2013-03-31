@@ -9,6 +9,8 @@
 #import "DTGameLayer.h"
 #import "DTBullet.h"
 #import "SimpleAudioEngine.h"
+#import "DTLifeModel.h"
+#import "DTStatusLayer.h"
 
 @implementation DTGameLayer
 
@@ -17,7 +19,12 @@
 @synthesize controlsLayer = _controlsLayer;
 @synthesize isHoldFiring = _isHoldFiring;
 
--(id)init
++(id)gameLayerWithStatusLayer:(DTStatusLayer *)statusLayer
+{
+    return [[self alloc] initWithStatusLayer:statusLayer];
+}
+
+-(id)initWithStatusLayer:(DTStatusLayer *)statusLayer
 {
     if ((self = [super init]))
     {
@@ -30,9 +37,11 @@
         _walls = [_tileMap layerNamed:@"Walls"];
         _walls.visible = YES; // Make sure no-one can see the transparent tiles!!!
         [self addChild:_tileMap];
+        _statusLayer = statusLayer;
         
         // Create the players TODO: second player!!!
         _player = [DTPlayer playerAtPosition:ccp(100, 100) gameLayer:self life:100];
+        _player.lifeModel.delegate = (id <DTLifeModelDelegate>) _statusLayer.lifeNode; // TODO: Do I have to cast this?
         [self addChild:_player];
         
         // TEST CODE!!!!

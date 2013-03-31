@@ -10,6 +10,7 @@
 #import "DTBullet.h"
 #import "DTOptions.h"
 #import "SimpleAudioEngine.h"
+#import "DTLifeModel.h"
 
 @implementation DTPlayer
 
@@ -76,6 +77,8 @@
 {
     DTBullet *bullet = [DTBullet bulletWithPosition:_sprite.position andAngle:_bulletAngle damage:10 maxDistance:-1 isPlayers:YES withGameLayer:_gameLayer];
     [_gameLayer addChild:bullet];
+    
+    self.lifeModel.life -= 10;
     
     if (_options.playSoundEffects)
         [[SimpleAudioEngine sharedEngine] playEffect:@"Pew.m4a"];

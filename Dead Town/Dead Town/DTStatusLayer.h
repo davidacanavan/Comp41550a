@@ -8,11 +8,14 @@
 
 #import "CCLayer.h"
 
-@interface DTPlayerStatusLayer : CCLayer
+@class DTLifeNode;
+
+@interface DTStatusLayer : CCLayer
 
 @property(nonatomic) float life;
 @property(nonatomic, readonly) float minLife, maxLife;
+@property(nonatomic, readonly) DTLifeNode *lifeNode;
 
-+(id)playerStatusLayerWithLife:(float)life minLife:(float)minLife maxLife:(float)maxLife;
++(id)statusLayerWithLife:(float)life minLife:(float)minLife maxLife:(float)maxLife;
 
 @end

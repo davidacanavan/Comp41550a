@@ -7,7 +7,19 @@
 //
 
 #import "cocos2d.h"
+#import "DTLifeModelDelegate.h"
 
-@interface DTLifeNode : CCNode
+@interface DTLifeNode : CCNode <DTLifeModelDelegate>
+{
+    @private // Layout/drawing variables
+    CGPoint _topLeft, _bottomRight;
+    CGPoint _topLeftInternal, _bottomRightInternal;
+    CGPoint _currentLifeInternal;
+    float _inset, _maxBarLength;
+}
+
+@property(nonatomic) float percentage;
+
++(id)lifeNodeWithRect:(CGRect)rect;
 
 @end

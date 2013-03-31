@@ -10,6 +10,7 @@
 #import "DTGameLayer.h"
 #import "DTControlsLayer.h"
 #import "DTPausedLayer.h"
+#import "DTStatusLayer.h"
 
 @implementation DTGameScene
 
@@ -23,12 +24,14 @@
     if (self = [super init])
     {
         // So this scene has a few layers to deal with - the controls, info and map layer
-        DTGameLayer *gameLayer = [DTGameLayer node];
-        DTControlsLayer *controlsLayer = [DTControlsLayer controlsLayerWithGameLayer:gameLayer controllerType:ControllerTypeTilt controllerDelegate:gameLayer dominantHand:DominantHandRight];
+        DTStatusLayer *statusLayer = [DTStatusLayer statusLayerWithLife:100 minLife:0 maxLife:100];
+        DTGameLayer *gameLayer = [DTGameLayer gameLayerWithStatusLayer:statusLayer];
+        DTControlsLayer *controlsLayer = [DTControlsLayer controlsLayerWithGameLayer:gameLayer controllerType:ControllerTypeJoystick controllerDelegate:gameLayer dominantHand:DominantHandRight];
         gameLayer.controlsLayer = controlsLayer;
         
         [self addChild:gameLayer z:-1]; // Make sure the map is behind the controls
         [self addChild:controlsLayer];
+        [self addChild:statusLayer];
     }
     
     return self;
