@@ -14,14 +14,13 @@
 @synthesize damage = _damage;
 @synthesize maxDistance = _maxDistance;
 @synthesize initialPosition = _initialPosition;
-@synthesize isPlayers = _isPlayers;
 
-+(id)bulletWithPosition:(CGPoint)initialPosition andAngle:(float)angleOfFire damage:(float)damage maxDistance:(float)maxDistance isPlayers:(BOOL)isPlayers withGameLayer:(DTGameLayer *)gameLayer
++(id)bulletWithPosition:(CGPoint)initialPosition andAngle:(float)angleOfFire damage:(float)damage maxDistance:(float)maxDistance owner:(DTCharacter *)owner withGameLayer:(DTGameLayer *)gameLayer
 {
-    return [[self alloc] initWithPosition:initialPosition andAngle:angleOfFire damage:damage maxDistance:maxDistance isPlayers:isPlayers withGameLayer:gameLayer];
+    return [[self alloc] initWithPosition:initialPosition andAngle:angleOfFire damage:damage maxDistance:maxDistance owner:owner withGameLayer:gameLayer];
 }
 
--(id)initWithPosition:(CGPoint)initialPosition andAngle:(float)angleOfFire damage:(float)damage maxDistance:(float)maxDistance isPlayers:(BOOL)isPlayers withGameLayer:(DTGameLayer*)gameLayer
+-(id)initWithPosition:(CGPoint)initialPosition andAngle:(float)angleOfFire damage:(float)damage maxDistance:(float)maxDistance owner:(DTCharacter *)owner withGameLayer:(DTGameLayer*)gameLayer
 {
     if (self = [super init])
     {
@@ -33,9 +32,9 @@
         _sprite.rotation = angleOfFire; // Make sure the bullet travels in the correct direction
         _damage = damage;
         _maxDistance = maxDistance;
-        _isPlayers = isPlayers;
+        _owner = owner;
         [self addChild:_sprite];
-        [self schedule:@selector(tick:)];
+        [self scheduleUpdate];
     }
     
     return self;
@@ -46,7 +45,7 @@
     _sprite.position = point;
 }
 
--(void)tick:(float)delta
+-(void)update:(ccTime)delta
 {
     if (_isExpired)
         return; // So this means the bullet has hit a target

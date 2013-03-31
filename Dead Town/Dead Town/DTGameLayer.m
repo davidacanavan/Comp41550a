@@ -11,10 +11,10 @@
 #import "SimpleAudioEngine.h"
 #import "DTLifeModel.h"
 #import "DTStatusLayer.h"
+#import "DTWeapon.h"
 
 @implementation DTGameLayer
 
-@synthesize isFiring = _isFiring;
 @synthesize isPausing = _isPausing;
 @synthesize controlsLayer = _controlsLayer;
 @synthesize isHoldFiring = _isHoldFiring;
@@ -41,6 +41,7 @@
         
         // Create the players TODO: second player!!!
         _player = [DTPlayer playerAtPosition:ccp(100, 100) gameLayer:self life:100];
+        _player.weapon = [DTWeapon weaponWithFireRate:10];
         _player.lifeModel.delegate = (id <DTLifeModelDelegate>) _statusLayer.lifeNode; // TODO: Do I have to cast this?
         [self addChild:_player];
         
@@ -55,11 +56,7 @@
         [self centerViewportOnPosition:[_player getPosition]];
         
         _isGameOver = NO;
-        _isFiring = NO;
-        _currentPlayerFireGap = MIN_PLAYER_FIRE_GAP; // Set the player to have not been firing at all
         _options = [DTOptions sharedOptions];
-        
-        _holdNumber = 0;
         
         [self unpause];
     }
@@ -190,24 +187,15 @@
         return;
     }
     
-    // So I use this variable to control how often the player can fire.
-    float minPlayerFireGap = MIN_PLAYER_FIRE_GAP; // _currentPlayerFireGap is set to MIN_PLAYER.. initially
-    _currentPlayerFireGap = MIN(minPlayerFireGap, _currentPlayerFireGap + delta);
-    
-    // So when it hits the minimum gap and the user wants to fire I allow it
-    if ((_isFiring || _isHoldFiring) && _currentPlayerFireGap == minPlayerFireGap)
-    {
+    if (_isHoldFiring)
         [_player fire]; // So let him fire
-        _isFiring = NO; // He's not firing anymore!
-        _currentPlayerFireGap = 0; // Put this to 0 so he can't fire for the MIN gap
-    }
 }
 
 #pragma mark-
 #pragma mark Button delegate implementation
 -(void)buttonPressed:(DTButton *)button
 {
-    _isFiring = YES;
+    [_player fire];
 }
 
 -(void)buttonHoldStarted:(DTButton *)button

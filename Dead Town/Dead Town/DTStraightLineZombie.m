@@ -19,11 +19,11 @@
 
 -(id)initWithPlayer: (DTPlayer *)player runningDistance:(float)runningDistance gameLayer:(DTGameLayer *)gameLayer position:(CGPoint)position life:(float)life
 {
-    if (self = [super initWithPosition:position gameLayer:gameLayer life:life])
+    if (self = [super initWithPosition:position gameLayer:gameLayer life:life characterType:CharacterTypeVillian])
     {
         _player = player;
         _runningDistance = runningDistance;
-        [self schedule:@selector(tick:)];
+        [self scheduleUpdate];
     }
     
     return self;
@@ -34,7 +34,7 @@
     return [CCSprite spriteWithFile:@"zombie_90%-11.png"];
 }
 
--(void)tick:(float)delta
+-(void)update:(ccTime)delta
 {
     int velocity = 120;
     CGPoint player = [_player getPosition];

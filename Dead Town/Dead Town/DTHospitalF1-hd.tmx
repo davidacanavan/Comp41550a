@@ -16,12 +16,12 @@
  </tileset>
  <layer name="Floor" width="32" height="32">
   <data encoding="base64" compression="zlib">
-   eJzt1TEOgCAMBVAOBWLx/vdSEibTaD9pKSEMf2HwaW1LCSEU5xxO2f6/H59cBklCPxu8Q2rPlfpZue5ZwY/tO7z8enaCNdf2kb4gA7+3L7a/pi/tRzLypfOosf9mrP9oH6m3hc/1W2LOycjv/S/bX9evM/Hut5G+JKjPzTkN8r92DFdnyR2E3D9opDuRjHwks/ieuQFAftza
+   eJztlMcRACAIBCnKOPbflw1gVkz32B+ycwxiiMgAkCAsQG/OZOG/xp+rVdS2d7P9vXOEH/4V/tp/8Gp+ab9rmLlk/lJ/+OF/2T/S8zR/7sZ4pr7mFnHvwJ9EZ53ZlQ==
   </data>
  </layer>
  <layer name="Walls" width="32" height="32">
   <data encoding="base64" compression="zlib">
-   eJzt1EsKACAMQ8GC97+zJ1D6iVVDHrgRccRFzZRaNw6un3xkCL/yLqSf+W8mP5N8Tr9z/rzoe2PyM3/N5Hv35cvv8Ct37s5WZminj57/0W77KtYEOUoDPQ==
+   eJztllEKACAIxYTuf+dOUJH2UGMD/8ShiGgGsGaIIhP8ffy7XO/OvfR7wI9f4Vfc3079Z/g981b3f6qPH//P/kjNiv6bO97h/4Y6TJSoAZY=
   </data>
  </layer>
 </map>

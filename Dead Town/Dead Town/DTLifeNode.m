@@ -20,12 +20,13 @@
 {
     if (self = [super init])
     {
+        // Save the size from the rect
         self.contentSize = rect.size;
         self.position = ccp(rect.origin.x + rect.size.width / 2, rect.origin.y - rect.size.height / 2);
-        _inset = 0.05 * rect.size.height;
         
-        // TODO: No need to recalculate these each time
+        // Save the layout stuff
         CGRect box = self.boundingBox;
+        _inset = 0.05 * rect.size.height;
         CGPoint insets = ccp(_inset, _inset);
         _topLeft = ccp(-box.size.width / 2, -box.size.height / 2);
         _bottomRight = ccp(box.size.width / 2, box.size.height / 2);

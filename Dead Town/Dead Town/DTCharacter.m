@@ -16,6 +16,7 @@
 @synthesize position = _position;
 
 -(id)initWithPosition:(CGPoint)position gameLayer:(DTGameLayer *)gameLayer life:(float)life
+        characterType:(CharacterType)characterType
 {
     if (self = [super init])
     {
@@ -27,6 +28,7 @@
         _sprite = [self loadSpriteAndAnimations]; // This method is overriden by subclasses to allow more functionality
         _sprite.position = position;
         _lifeModel = [DTLifeModel lifeModelWithLife:life lower:0 upper:life delegate:nil];
+        _characterType = characterType;
         
         // Add the sprite to the layer
         [self addChild:_sprite];
@@ -84,9 +86,27 @@
 // By default we just ask the weapon to fire for us.
 -(void)fire
 {
-    [_weapon fireAtAngle:_bulletAngle];
+    BOOL success = [_weapon fireAtAngle:_bulletAngle from:_sprite.position gameLayer:_gameLayer];
 }
 
+-(BOOL)isHero
+{
+    return self.characterType == CharacterTypeHero;
+}
+
+-(BOOL)isVillian
+{
+    return self.characterType == CharacterTypeVillian;
+}
+
+-(void)setWeapon:(DTWeapon *)weapon
+{
+    if (self.weapon) // Remove the old one
+        [self removeChild:_weapon cleanup:NO];
+    
+    _weapon = weapon; // Add it as a child so we can get the update call
+    [self addChild:_weapon];
+}
 
 @end
 

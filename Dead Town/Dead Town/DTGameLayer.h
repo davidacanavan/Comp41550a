@@ -16,8 +16,6 @@
 #import "DTControllerDelegate.h"
 #import "DTButtonDelegate.h"
 
-#define MIN_PLAYER_FIRE_GAP .1; // A fifth of a second
-
 @class DTPlayer;
 @class DTBullet;
 @class DTControlsLayer;
@@ -37,10 +35,8 @@
     DTPlayer *_player;
     CGSize _screen;
     BOOL _isGameOver;
-    float _currentPlayerFireGap;
     DTOptions *_options;
     DTPausedLayer *_pausedLayer;
-    int _holdNumber;
     BOOL _joystickActive;
     DTStatusLayer *_statusLayer;
 }

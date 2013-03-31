@@ -13,6 +13,8 @@
 @class DTWeapon;
 @class DTLifeModel;
 
+typedef enum {CharacterTypeHero, CharacterTypeVillian} CharacterType;
+
 @interface DTCharacter : CCNode
 {
     @protected
@@ -34,9 +36,11 @@
 @property(nonatomic) BOOL isPausing;
 @property(nonatomic) CGPoint position;
 @property(nonatomic, readonly) DTLifeModel *lifeModel;
+@property(nonatomic, readonly) CharacterType characterType;
 
 // Member initializer to create the class - this class should only be used as a base class.
--(id)initWithPosition:(CGPoint)position gameLayer:(DTGameLayer *)gameLayer life:(float)life;
+-(id)initWithPosition:(CGPoint)position gameLayer:(DTGameLayer *)gameLayer life:(float)life
+        characterType:(CharacterType)characterType;
 // Moves the character's sprite to the given board position.
 -(void)moveToPosition:(CGPoint)position;
 // Rotates the character's sprite to face the given point.
@@ -48,6 +52,8 @@
 -(void)fire;
 // This is called by charater when initialising to load and setup the various animations we may need for the characters. The returned node is assigned to the local variable _sprite - returns nil by default.
 -(CCSprite *)loadSpriteAndAnimations;
+-(BOOL)isHero;
+-(BOOL)isVillian;
 
 // --- Various controllable player methods that are called in response to joystick movements
 // or remote 'player two' connections.

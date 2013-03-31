@@ -7,7 +7,15 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "cocos2d.h"
 
 @interface DTLevel : NSObject
+{
+    CCTMXTiledMap *_map;
+    CCTMXLayer *_floor;
+    CCTMXLayer *_walls;
+}
+
++(id)levelWithTMXFile:(NSString *)tmxFile;
 
 @end

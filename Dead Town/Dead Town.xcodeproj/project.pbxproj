@@ -562,13 +562,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		2B05BC9D1708BC8E00D91DEB /* life */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = life;
-			sourceTree = "<group>";
-		};
 		2B05BC9F1708BC9500D91DEB /* heroes */ = {
 			isa = PBXGroup;
 			children = (
@@ -711,7 +704,6 @@
 				2B05BCA41708BE6800D91DEB /* general */,
 				2B05BCA01708BC9E00D91DEB /* villians */,
 				2B05BC9F1708BC9500D91DEB /* heroes */,
-				2B05BC9D1708BC8E00D91DEB /* life */,
 				2B5668D016EE28FD004FEA6C /* weapons */,
 			);
 			name = characters;

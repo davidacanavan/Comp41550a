@@ -4,6 +4,7 @@
 #import "DTGameLayer.h"
 
 @class DTGameLayer;
+@class DTCharacter;
 
 @interface DTBullet : CCNode
 {
@@ -22,12 +23,12 @@
 // The damage the bullet will cause.
 @property(nonatomic, readonly) float damage;
 // Whether the bullet belongs to the player or an enemy.
-@property(nonatomic, readonly) BOOL isPlayers;
+@property(nonatomic, readonly) DTCharacter *owner;
 // The initial position of the bullet.
 @property(nonatomic, readonly) CGPoint initialPosition;
 
 // Factory method to create the bullet
-+(id)bulletWithPosition:(CGPoint)initialPosition andAngle:(float)angleOfFire damage:(float)damage maxDistance:(float)maxDistance isPlayers:(BOOL)isPlayers withGameLayer:(DTGameLayer *)gameLayer;
++(id)bulletWithPosition:(CGPoint)initialPosition andAngle:(float)angleOfFire damage:(float)damage maxDistance:(float)maxDistance owner:(DTCharacter *)owner withGameLayer:(DTGameLayer *)gameLayer;
 -(void)moveToPoint:(CGPoint)point;
 
 @end

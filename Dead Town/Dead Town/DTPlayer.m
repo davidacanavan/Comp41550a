@@ -22,7 +22,7 @@
 
 -(id)initWithPlayerAtPosition:(CGPoint)position gameLayer:(DTGameLayer *)gameLayer life:(float)life
 {
-    if ((self = [super initWithPosition:position gameLayer:gameLayer life:life]))
+    if ((self = [super initWithPosition:position gameLayer:gameLayer life:life characterType:CharacterTypeHero]))
     {
     }
     
@@ -75,8 +75,7 @@
 
 -(void)fire
 {
-    DTBullet *bullet = [DTBullet bulletWithPosition:_sprite.position andAngle:_bulletAngle damage:10 maxDistance:-1 isPlayers:YES withGameLayer:_gameLayer];
-    [_gameLayer addChild:bullet];
+    [super fire];
     
     self.lifeModel.life -= 10;
     
