@@ -23,6 +23,7 @@
     _graphView.scale = 1;
     NSString *description = [CalcModel descriptionOfExpression:_expression];
     self.navigationItem.title = description;
+    self.navigationItem.backBarButtonItem.title = @"Back";
 }
 
 - (void)viewDidUnload
@@ -44,6 +45,11 @@
 {
     return UIInterfaceOrientationIsLandscape(interfaceOrientation) ||
                 interfaceOrientation == UIInterfaceOrientationPortrait;
+}
+
+-(void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
+{
+    [_graphView setNeedsDisplay];
 }
 
 @end

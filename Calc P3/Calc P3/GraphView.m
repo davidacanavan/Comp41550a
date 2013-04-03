@@ -19,7 +19,7 @@
     CGFloat height = rect.size.height;
     float xMax = width / 2 / _scale, xMin = -xMax; // Provided it's all centered
     float xCentre = width / 2, yCentre = height / 2;
-    float callStep = (xMax - xMin) / 100;
+    float callStep = (xMax - xMin) / 1000; // Lets give this a high enough resolution
     
     CGPoint previous = CGPointMake(xCentre + xMin * _scale, height - ([_dataSource evaluateFunctionAt:xMin] * _scale + yCentre));
     CGContextBeginPath(context);

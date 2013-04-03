@@ -165,7 +165,13 @@
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
+    // Do an = operation so the user won't miss out on the most recent operation
+    [_calcModel performOperation:@"=" withScreenValueOf:[self.calcDisplay.text doubleValue]];
     [[segue destinationViewController] setExpression:_calcModel.expression];
 }
+
+
+
+
 
 @end
