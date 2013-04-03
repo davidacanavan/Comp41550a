@@ -32,7 +32,6 @@
     int _tileDimension;
     CCTMXLayer *_floor;
     CCTMXLayer *_walls;
-    DTPlayer *_player;
     CGSize _screen;
     BOOL _isGameOver;
     DTOptions *_options;
@@ -45,6 +44,7 @@
 @property(nonatomic) BOOL isHoldFiring; // Set to true if the user is firing and holding the button
 @property(nonatomic) BOOL isPausing; // Set to true to pause the game layer and all children
 @property(nonatomic, strong) DTControlsLayer *controlsLayer;
+@property(nonatomic) DTPlayer *player;
 
 +(id)gameLayerWithStatusLayer:(DTStatusLayer *)statusLayer;
 -(void)centerViewportOnPosition:(CGPoint)position;

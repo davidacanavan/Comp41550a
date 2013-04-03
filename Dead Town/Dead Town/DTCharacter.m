@@ -14,9 +14,11 @@
 @implementation DTCharacter
 
 @synthesize position = _position;
+@synthesize sprite = _sprite;
+
 
 -(id)initWithPosition:(CGPoint)position gameLayer:(DTGameLayer *)gameLayer life:(float)life
-        characterType:(CharacterType)characterType
+        characterType:(DTCharacterType)characterType
 {
     if (self = [super init])
     {
@@ -62,7 +64,7 @@
     _bulletAngle = bulletAngle;
 }
 
--(CGPoint)getPosition
+-(CGPoint)getPosition // TODO: I shouldn't need to override this anymore
 {
     return _sprite.position;
 }
@@ -70,6 +72,7 @@
 -(void)setPosition:(CGPoint)position
 {
     _sprite.position = position;
+    _position = position;
 }
 
 // Override of the setter to ensure the player's life never goes below 0 or beyond 100.
@@ -99,12 +102,18 @@
     return self.characterType == CharacterTypeVillian;
 }
 
--(void)setWeapon:(DTWeapon *)weapon
+-(BOOL)isFriendlyWithCharacter:(DTCharacter *)character
 {
+    return self.characterType == character.characterType;
+}
+
+-(void)setWeapon:(DTWeapon *)weapon
+{ // TODO: Make sure the owner of the weapon is the character
     if (self.weapon) // Remove the old one
         [self removeChild:_weapon cleanup:NO];
     
     _weapon = weapon; // Add it as a child so we can get the update call
+    _weapon.owner = self; // Claim the weapon
     [self addChild:_weapon];
 }
 

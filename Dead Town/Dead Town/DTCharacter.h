@@ -13,14 +13,13 @@
 @class DTWeapon;
 @class DTLifeModel;
 
-typedef enum {CharacterTypeHero, CharacterTypeVillian} CharacterType;
+typedef enum {CharacterTypeHero, CharacterTypeVillian} DTCharacterType;
 
 @interface DTCharacter : CCNode
 {
     @protected
     DTGameLayer *_gameLayer; // The parent game layer
     DTOptions *_options; // General settings singleton
-    CCSprite *_sprite; // The sprite itself
     // The angle a bullet should fire at to be right on target.
     // This is different to the angle the sprite is facing but turnToFacePoint calculates both.
     float _bulletAngle;
@@ -36,11 +35,12 @@ typedef enum {CharacterTypeHero, CharacterTypeVillian} CharacterType;
 @property(nonatomic) BOOL isPausing;
 @property(nonatomic) CGPoint position;
 @property(nonatomic, readonly) DTLifeModel *lifeModel;
-@property(nonatomic, readonly) CharacterType characterType;
+@property(nonatomic, readonly) DTCharacterType characterType;
+@property(nonatomic, readonly) CCSprite *sprite;
 
 // Member initializer to create the class - this class should only be used as a base class.
 -(id)initWithPosition:(CGPoint)position gameLayer:(DTGameLayer *)gameLayer life:(float)life
-        characterType:(CharacterType)characterType;
+        characterType:(DTCharacterType)characterType;
 // Moves the character's sprite to the given board position.
 -(void)moveToPosition:(CGPoint)position;
 // Rotates the character's sprite to face the given point.
@@ -54,6 +54,7 @@ typedef enum {CharacterTypeHero, CharacterTypeVillian} CharacterType;
 -(CCSprite *)loadSpriteAndAnimations;
 -(BOOL)isHero;
 -(BOOL)isVillian;
+-(BOOL)isFriendlyWithCharacter:(DTCharacter *)character;
 
 // --- Various controllable player methods that are called in response to joystick movements
 // or remote 'player two' connections.

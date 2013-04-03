@@ -24,6 +24,8 @@
 {
     if ((self = [super initWithPosition:position gameLayer:gameLayer life:life characterType:CharacterTypeHero]))
     {
+        // No need to do anything here, the superclass call takes care of initialisation
+        // I kept this here in case I wan't to customise some stuff
     }
     
     return self;
@@ -54,7 +56,7 @@
     // A boolean to add extra safety to the calls - in case anything trips over each other
     if (!_isMovingActionRunning)
     {
-        [_sprite runAction:_movingAction];
+        [self.sprite runAction:_movingAction];
         _isMovingActionRunning = YES;
     }
 }
@@ -67,8 +69,8 @@
 {
     if (_isMovingActionRunning)
     {
-        [_sprite stopAction:_movingAction];
-        _sprite.displayFrame = [[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:@"Sprite0.png"];
+        [self.sprite stopAction:_movingAction];
+        self.sprite.displayFrame = [[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:@"Sprite0.png"];
         _isMovingActionRunning = NO;
     }
 }
@@ -76,9 +78,6 @@
 -(void)fire
 {
     [super fire];
-    
-    self.lifeModel.life -= 10;
-    
     if (_options.playSoundEffects)
         [[SimpleAudioEngine sharedEngine] playEffect:@"Pew.m4a"];
 }

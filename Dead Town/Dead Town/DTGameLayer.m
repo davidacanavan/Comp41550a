@@ -12,6 +12,7 @@
 #import "DTLifeModel.h"
 #import "DTStatusLayer.h"
 #import "DTWeapon.h"
+#import "DTConstantDamageCalculator.h"
 
 @implementation DTGameLayer
 
@@ -41,7 +42,7 @@
         
         // Create the players TODO: second player!!!
         _player = [DTPlayer playerAtPosition:ccp(100, 100) gameLayer:self life:100];
-        _player.weapon = [DTWeapon weaponWithFireRate:10];
+        _player.weapon = [DTWeapon weaponWithFireRate:10 damageCalculator:[DTConstantDamageCalculator damageWithDamage:10]];
         _player.lifeModel.delegate = (id <DTLifeModelDelegate>) _statusLayer.lifeNode; // TODO: Do I have to cast this?
         [self addChild:_player];
         

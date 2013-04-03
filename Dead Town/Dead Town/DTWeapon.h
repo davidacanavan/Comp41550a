@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
+#import "DTDamageCalculator.h"
 
 @class DTCharacter;
 @class DTGameLayer;
@@ -17,13 +18,16 @@
     @protected
     float _timeSinceLastFire; // The time since the last accepted call to fire (calls can be rejeted to prevent bullet rain).
     float _minimumTimeBetweenFires;
+    id <DTDamageCalculator> _damageCalculator;
 }
 
 // Whether this weapon belongs to the player or an enemy.
 @property(nonatomic) DTCharacter *owner;
+@property(nonatomic, readonly) float range;
 
 // Factory initializer for a weapon.
-+(id)weaponWithFireRate:(float)fireRate;
++(id)weaponWithFireRate:(float)fireRate damageCalculator:(id <DTDamageCalculator>)damageCalculator;
++(id)weaponWithFireRate:(float)fireRate damageCalculator:(id <DTDamageCalculator>)damageCalculator range:(float)range;
 -(BOOL)fireAtAngle:(float)angleOfFire from:(CGPoint)start gameLayer:(DTGameLayer *)gameLayer;
 
 @end

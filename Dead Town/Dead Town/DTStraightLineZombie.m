@@ -9,6 +9,8 @@
 #import "DTStraightLineZombie.h"
 #import "DTPlayer.h"
 #import "DTGameLayer.h"
+#import "DTWeapon.h"
+#import "DTConstantDamageCalculator.h"
 
 @implementation DTStraightLineZombie
 
@@ -23,6 +25,8 @@
     {
         _player = player;
         _runningDistance = runningDistance;
+        self.weapon = [DTWeapon weaponWithFireRate:2 damageCalculator:[DTConstantDamageCalculator damageWithDamage:5]
+                range:50];
         [self scheduleUpdate];
     }
     
@@ -38,7 +42,7 @@
 {
     int velocity = 120;
     CGPoint player = [_player getPosition];
-    CGPoint zombie = _sprite.position;
+    CGPoint zombie = self.sprite.position;
     float distance = ccpDistance(player, zombie);
     
     if (distance < _runningDistance) // Then run after the player!!!
@@ -60,6 +64,7 @@
         
         [self moveToPosition:newPosition];
         [self turnToFacePosition:player];
+        [self fire]; // Fire at the player!!!!
     }
 }
 

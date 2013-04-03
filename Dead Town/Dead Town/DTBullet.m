@@ -7,6 +7,7 @@
 //
 
 #import "DTBullet.h"
+#import "DTLifeModel.h"
 
 @implementation DTBullet
 
@@ -60,13 +61,30 @@
     
     // So if we've hit a wall we stop the bullet or if we've gone further than we allow.
     if ([_gameLayer isWallAtPosition:(newPosition)] || isPastMaxDistance)
-    {
-        _isExpired = YES;
-        [_gameLayer removeChild:self cleanup:NO];
+        [self registerExpiry];
+    else if (![self.owner isFriendlyWithCharacter:_gameLayer.player]
+             && CGRectIntersectsRect(_sprite.boundingBox, _gameLayer.player.sprite.boundingBox)) // TODO: I have to look at this whole sprite inside a CCNode issue with regards to the bounding box stuff
+    { // Now we have to check for a collision with a player or enemy
+        _gameLayer.player.lifeModel.life -= _damage;
+        [self registerExpiry];
     }
+    
+}
+
+-(void)registerExpiry
+{
+    _isExpired = YES;
+    [_gameLayer removeChild:self cleanup:NO];
 }
 
 @end
+
+
+
+
+
+
+
 
 
 

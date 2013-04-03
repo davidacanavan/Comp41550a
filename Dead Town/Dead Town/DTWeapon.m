@@ -12,17 +12,24 @@
 
 @implementation DTWeapon
 
-+(id)weaponWithFireRate:(float)fireRate
++(id)weaponWithFireRate:(float)fireRate damageCalculator:(id <DTDamageCalculator>)damageCalculator
 {
-    return [[self alloc] initWithFireRate:fireRate];
+    return [[self alloc] initWithFireRate:fireRate damageCalculator:damageCalculator range:-1];
 }
 
--(id)initWithFireRate:(float)fireRate
++(id)weaponWithFireRate:(float)fireRate damageCalculator:(id <DTDamageCalculator>)damageCalculator range:(float)range
+{
+    return [[self alloc] initWithFireRate:fireRate damageCalculator:damageCalculator range:range];
+}
+
+-(id)initWithFireRate:(float)fireRate damageCalculator:(id <DTDamageCalculator>)damageCalculator range:(float)range
 {
     if (self = [super init])
     {
         _minimumTimeBetweenFires = 1.0f / fireRate; // Convert to absolute time
         _timeSinceLastFire = 0; // Assume they haven't fired yet
+        _range = range;
+        _damageCalculator = damageCalculator;
         [self scheduleUpdate];
     }
     
@@ -33,9 +40,9 @@
 {
     if (_timeSinceLastFire >= _minimumTimeBetweenFires) // Then we can fire... like a boss
     {
-        // TODO: Do the fire
         _timeSinceLastFire = 0;
-        DTBullet *bullet = [DTBullet bulletWithPosition:start andAngle:angleOfFire damage:10 maxDistance:-1 owner:_owner withGameLayer:gameLayer];
+        DTBullet *bullet = [DTBullet bulletWithPosition:start andAngle:angleOfFire
+                damage:[_damageCalculator computeDamage] maxDistance:_range owner:_owner withGameLayer:gameLayer];
         [gameLayer addChild:bullet];
         return YES;
     }

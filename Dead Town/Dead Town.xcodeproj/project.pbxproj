@@ -48,6 +48,7 @@
 		2BB71ACF16D2DDEB001C636C /* player sprite-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 2BB71ACE16D2DDEB001C636C /* player sprite-hd.png */; };
 		2BB71AD116D2E7D5001C636C /* Tile_Test01-26.png in Resources */ = {isa = PBXBuildFile; fileRef = 2BB71AD016D2E7D5001C636C /* Tile_Test01-26.png */; };
 		2BB71AD516D2EA5A001C636C /* DTHospitalF1-hd.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 2BB71AD416D2EA5A001C636C /* DTHospitalF1-hd.tmx */; };
+		2BCE6295170C642E000935D6 /* DTConstantDamageCalculator.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BCE6294170C642E000935D6 /* DTConstantDamageCalculator.m */; };
 		2BDD70AE16E0DBAB00A31DD5 /* hospital_tileset.png in Resources */ = {isa = PBXBuildFile; fileRef = 2BDD70AD16E0DBAB00A31DD5 /* hospital_tileset.png */; };
 		2BDD70B116E0E05300A31DD5 /* DTIntroAnimation.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2BDD70AF16E0E05300A31DD5 /* DTIntroAnimation.plist */; };
 		2BDD70B216E0E05300A31DD5 /* DTIntroAnimation.png in Resources */ = {isa = PBXBuildFile; fileRef = 2BDD70B016E0E05300A31DD5 /* DTIntroAnimation.png */; };
@@ -256,6 +257,9 @@
 		2BB71ACE16D2DDEB001C636C /* player sprite-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "player sprite-hd.png"; path = "Sprites/player sprite-hd.png"; sourceTree = "<group>"; };
 		2BB71AD016D2E7D5001C636C /* Tile_Test01-26.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Tile_Test01-26.png"; path = "Sprites/Tile_Test01-26.png"; sourceTree = "<group>"; };
 		2BB71AD416D2EA5A001C636C /* DTHospitalF1-hd.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "DTHospitalF1-hd.tmx"; sourceTree = "<group>"; };
+		2BCE6291170C63AD000935D6 /* DTDamageCalculator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTDamageCalculator.h; sourceTree = "<group>"; };
+		2BCE6293170C642E000935D6 /* DTConstantDamageCalculator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTConstantDamageCalculator.h; sourceTree = "<group>"; };
+		2BCE6294170C642E000935D6 /* DTConstantDamageCalculator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTConstantDamageCalculator.m; sourceTree = "<group>"; };
 		2BDD70AD16E0DBAB00A31DD5 /* hospital_tileset.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hospital_tileset.png; sourceTree = "<group>"; };
 		2BDD70AF16E0E05300A31DD5 /* DTIntroAnimation.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = DTIntroAnimation.plist; path = Sprites/DTIntroAnimation.plist; sourceTree = "<group>"; };
 		2BDD70B016E0E05300A31DD5 /* DTIntroAnimation.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = DTIntroAnimation.png; path = Sprites/DTIntroAnimation.png; sourceTree = "<group>"; };
@@ -639,6 +643,7 @@
 				2B51EC4C16CFFB7C00B037F9 /* DTBullet.m */,
 				2B5668D116EE2914004FEA6C /* DTWeapon.h */,
 				2B5668D216EE2914004FEA6C /* DTWeapon.m */,
+				2BCE6296170C6434000935D6 /* damage */,
 			);
 			name = weapons;
 			sourceTree = "<group>";
@@ -734,6 +739,16 @@
 				2B86436016D23A02008FEB55 /* DTPausedLayer.m */,
 			);
 			name = pausing;
+			sourceTree = "<group>";
+		};
+		2BCE6296170C6434000935D6 /* damage */ = {
+			isa = PBXGroup;
+			children = (
+				2BCE6291170C63AD000935D6 /* DTDamageCalculator.h */,
+				2BCE6293170C642E000935D6 /* DTConstantDamageCalculator.h */,
+				2BCE6294170C642E000935D6 /* DTConstantDamageCalculator.m */,
+			);
+			name = damage;
 			sourceTree = "<group>";
 		};
 		2BE0758516B74A6D0073F28F = {
@@ -1445,6 +1460,7 @@
 				2BEC4E831705E19D00662EEB /* DTLevel.m in Sources */,
 				2B59000B170691AC00DBE43D /* DTLifeModel.m in Sources */,
 				2B05BCA31708BDD700D91DEB /* DTRemotePlayer.m in Sources */,
+				2BCE6295170C642E000935D6 /* DTConstantDamageCalculator.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
