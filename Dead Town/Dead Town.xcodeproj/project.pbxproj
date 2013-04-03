@@ -49,6 +49,7 @@
 		2BB71AD116D2E7D5001C636C /* Tile_Test01-26.png in Resources */ = {isa = PBXBuildFile; fileRef = 2BB71AD016D2E7D5001C636C /* Tile_Test01-26.png */; };
 		2BB71AD516D2EA5A001C636C /* DTHospitalF1-hd.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 2BB71AD416D2EA5A001C636C /* DTHospitalF1-hd.tmx */; };
 		2BCE6295170C642E000935D6 /* DTConstantDamageCalculator.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BCE6294170C642E000935D6 /* DTConstantDamageCalculator.m */; };
+		2BCE6299170C9E92000935D6 /* DTNormalDamageCalculator.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BCE6298170C9E92000935D6 /* DTNormalDamageCalculator.m */; };
 		2BDD70AE16E0DBAB00A31DD5 /* hospital_tileset.png in Resources */ = {isa = PBXBuildFile; fileRef = 2BDD70AD16E0DBAB00A31DD5 /* hospital_tileset.png */; };
 		2BDD70B116E0E05300A31DD5 /* DTIntroAnimation.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2BDD70AF16E0E05300A31DD5 /* DTIntroAnimation.plist */; };
 		2BDD70B216E0E05300A31DD5 /* DTIntroAnimation.png in Resources */ = {isa = PBXBuildFile; fileRef = 2BDD70B016E0E05300A31DD5 /* DTIntroAnimation.png */; };
@@ -260,6 +261,8 @@
 		2BCE6291170C63AD000935D6 /* DTDamageCalculator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTDamageCalculator.h; sourceTree = "<group>"; };
 		2BCE6293170C642E000935D6 /* DTConstantDamageCalculator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTConstantDamageCalculator.h; sourceTree = "<group>"; };
 		2BCE6294170C642E000935D6 /* DTConstantDamageCalculator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTConstantDamageCalculator.m; sourceTree = "<group>"; };
+		2BCE6297170C9E92000935D6 /* DTNormalDamageCalculator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTNormalDamageCalculator.h; sourceTree = "<group>"; };
+		2BCE6298170C9E92000935D6 /* DTNormalDamageCalculator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTNormalDamageCalculator.m; sourceTree = "<group>"; };
 		2BDD70AD16E0DBAB00A31DD5 /* hospital_tileset.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hospital_tileset.png; sourceTree = "<group>"; };
 		2BDD70AF16E0E05300A31DD5 /* DTIntroAnimation.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = DTIntroAnimation.plist; path = Sprites/DTIntroAnimation.plist; sourceTree = "<group>"; };
 		2BDD70B016E0E05300A31DD5 /* DTIntroAnimation.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = DTIntroAnimation.png; path = Sprites/DTIntroAnimation.png; sourceTree = "<group>"; };
@@ -747,6 +750,8 @@
 				2BCE6291170C63AD000935D6 /* DTDamageCalculator.h */,
 				2BCE6293170C642E000935D6 /* DTConstantDamageCalculator.h */,
 				2BCE6294170C642E000935D6 /* DTConstantDamageCalculator.m */,
+				2BCE6297170C9E92000935D6 /* DTNormalDamageCalculator.h */,
+				2BCE6298170C9E92000935D6 /* DTNormalDamageCalculator.m */,
 			);
 			name = damage;
 			sourceTree = "<group>";
@@ -1461,6 +1466,7 @@
 				2B59000B170691AC00DBE43D /* DTLifeModel.m in Sources */,
 				2B05BCA31708BDD700D91DEB /* DTRemotePlayer.m in Sources */,
 				2BCE6295170C642E000935D6 /* DTConstantDamageCalculator.m in Sources */,
+				2BCE6299170C9E92000935D6 /* DTNormalDamageCalculator.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
