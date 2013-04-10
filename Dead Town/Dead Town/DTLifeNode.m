@@ -22,15 +22,16 @@
     {
         // Save the size from the rect
         self.contentSize = rect.size;
-        self.position = ccp(rect.origin.x + rect.size.width / 2, rect.origin.y - rect.size.height / 2);
+        self.anchorPoint = ccp(0, 1);
+        self.position = ccp(rect.origin.x, rect.origin.y);
         
         // Save the layout stuff
         CGRect box = self.boundingBox;
         _inset = 0.05 * rect.size.height;
         CGPoint insets = ccp(_inset, _inset);
-        _topLeft = ccp(-box.size.width / 2, -box.size.height / 2);
-        _bottomRight = ccp(box.size.width / 2, box.size.height / 2);
-        _topLeftInternal = ccpAdd(_topLeft, insets);
+        CGPoint topLeft = CGPointZero;
+        _bottomRight = ccp(box.size.width, box.size.height);
+        _topLeftInternal = ccpAdd(topLeft, insets);
         _bottomRightInternal = ccpSub(_bottomRight, insets);
         _currentLifeInternal = _bottomRightInternal;
         _maxBarLength = ccpSub(_bottomRightInternal, _topLeftInternal).x;
@@ -41,8 +42,7 @@
 
 -(void)draw
 {
-    [super draw];
-    ccDrawSolidRect(_topLeft, _bottomRight, ccc4f(0, 0, 255, 255)); // Draw border
+    ccDrawSolidRect(CGPointZero, _bottomRight, ccc4f(0, 0, 255, 255)); // Draw border
     ccDrawSolidRect(_topLeftInternal, _bottomRightInternal, ccc4f(255, 0, 0, 50)); // Fill clear(ish)
     ccDrawSolidRect(_topLeftInternal, _currentLifeInternal, ccc4f(0, 250, 0, 255)); // Fill life
 }

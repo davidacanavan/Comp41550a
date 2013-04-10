@@ -8,8 +8,14 @@
 
 #import "CCScene.h"
 
-@interface DTGameScene : CCScene
+@class DTLevel;
 
-+(id)scene;
+@interface DTGameScene : CCScene
+{
+    @private
+    DTLevel *_level;
+}
+
++(id)sceneWithLevel:(DTLevel *)level;
 
 @end

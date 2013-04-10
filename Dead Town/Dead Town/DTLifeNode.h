@@ -12,7 +12,7 @@
 @interface DTLifeNode : CCNode <DTLifeModelDelegate>
 {
     @private // Layout/drawing variables
-    CGPoint _topLeft, _bottomRight;
+    CGPoint _bottomRight;
     CGPoint _topLeftInternal, _bottomRightInternal;
     CGPoint _currentLifeInternal;
     float _inset, _maxBarLength;

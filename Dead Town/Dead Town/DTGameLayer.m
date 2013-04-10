@@ -11,8 +11,9 @@
 #import "SimpleAudioEngine.h"
 #import "DTLifeModel.h"
 #import "DTStatusLayer.h"
-#import "DTWeapon.h"
+#import "DTHandGun.h"
 #import "DTConstantDamageCalculator.h"
+#import "DTLazerBeamNode.h"
 
 @implementation DTGameLayer
 
@@ -42,13 +43,18 @@
         
         // Create the players TODO: second player!!!
         _player = [DTPlayer playerAtPosition:ccp(100, 100) gameLayer:self life:100];
-        _player.weapon = [DTWeapon weaponWithFireRate:10 damageCalculator:[DTConstantDamageCalculator damageWithDamage:10]];
-        _player.lifeModel.delegate = (id <DTLifeModelDelegate>) _statusLayer.lifeNode; // TODO: Do I have to cast this?
+        _player.weapon = [DTHandGun weapon];
+        [_player.lifeModel addDelegate: (id <DTLifeModelDelegate>) _statusLayer.lifeNode]; // TODO: Do I have to cast this?
         [self addChild:_player];
         
+
         // TEST CODE!!!!
-        DTStraightLineZombie *zombie = [DTStraightLineZombie zombieWithPlayer:_player runningDistance:250 gameLayer:self position:ccp(150, 400) life:100];
-        [self addChild:zombie];
+        _zombie = [DTStraightLineZombie zombieWithPlayer:_player runningDistance:250 gameLayer:self position:ccp(150, 400) life:100];
+        [self addChild:_zombie];
+        
+        DTLazerBeamNode *lazer = [DTLazerBeamNode nodeWithOrigin:_player];
+        lazer.target = _zombie;
+        [self addChild: lazer];
         
         // Get some other variables we'll need
         _screen = [CCDirector sharedDirector].winSize;
@@ -140,6 +146,11 @@
 -(BOOL)isTileOutOfBounds:(CGPoint)tileCoordinate
 {
     return tileCoordinate.x < 0 || tileCoordinate.y < 0 || tileCoordinate.x >= _tileMapWidth || tileCoordinate.y >= _tileMapHeight; // TODO: Check the top end as well!
+}
+
+-(DTCharacter *)closestEnemyToCharacter:(DTCharacter *)player
+{
+    return _zombie;
 }
 
 -(void)gameOver

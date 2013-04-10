@@ -25,6 +25,10 @@
 		2B43E30D16EF8D64002F4401 /* DTButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B43E30C16EF8D64002F4401 /* DTButton.m */; };
 		2B51EC4D16CFFB7C00B037F9 /* DTBullet.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B51EC4C16CFFB7C00B037F9 /* DTBullet.m */; };
 		2B5668D316EE2914004FEA6C /* DTWeapon.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B5668D216EE2914004FEA6C /* DTWeapon.m */; };
+		2B5722AE171306F900AA0BF9 /* DTHandGun.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B5722AD171306F900AA0BF9 /* DTHandGun.m */; };
+		2B5722B317130FF200AA0BF9 /* DTLazerCanon.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B5722B217130FF200AA0BF9 /* DTLazerCanon.m */; };
+		2B5722B6171312F700AA0BF9 /* DTLazerBeamNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B5722B5171312F700AA0BF9 /* DTLazerBeamNode.m */; };
+		2B5722BB1713B11500AA0BF9 /* DTMaths.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B5722BA1713B11500AA0BF9 /* DTMaths.m */; };
 		2B59000B170691AC00DBE43D /* DTLifeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B59000A170691AC00DBE43D /* DTLifeModel.m */; };
 		2B7BEC0916D3FE0600BB01B7 /* Sprite0.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B7BEC0716D3FE0600BB01B7 /* Sprite0.png */; };
 		2B7BEC0A16D3FE0600BB01B7 /* zombie_90%-11.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B7BEC0816D3FE0600BB01B7 /* zombie_90%-11.png */; };
@@ -221,6 +225,14 @@
 		2B5668CF16EE1BE6004FEA6C /* DTControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTControllerDelegate.h; sourceTree = "<group>"; };
 		2B5668D116EE2914004FEA6C /* DTWeapon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTWeapon.h; sourceTree = "<group>"; };
 		2B5668D216EE2914004FEA6C /* DTWeapon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTWeapon.m; sourceTree = "<group>"; };
+		2B5722AC171306F900AA0BF9 /* DTHandGun.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTHandGun.h; sourceTree = "<group>"; };
+		2B5722AD171306F900AA0BF9 /* DTHandGun.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTHandGun.m; sourceTree = "<group>"; };
+		2B5722B117130FF200AA0BF9 /* DTLazerCanon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTLazerCanon.h; sourceTree = "<group>"; };
+		2B5722B217130FF200AA0BF9 /* DTLazerCanon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTLazerCanon.m; sourceTree = "<group>"; };
+		2B5722B4171312F700AA0BF9 /* DTLazerBeamNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTLazerBeamNode.h; sourceTree = "<group>"; };
+		2B5722B5171312F700AA0BF9 /* DTLazerBeamNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTLazerBeamNode.m; sourceTree = "<group>"; };
+		2B5722B91713B11500AA0BF9 /* DTMaths.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTMaths.h; sourceTree = "<group>"; };
+		2B5722BA1713B11500AA0BF9 /* DTMaths.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTMaths.m; sourceTree = "<group>"; };
 		2B590009170691AC00DBE43D /* DTLifeModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTLifeModel.h; sourceTree = "<group>"; };
 		2B59000A170691AC00DBE43D /* DTLifeModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTLifeModel.m; sourceTree = "<group>"; };
 		2B59000D170691BF00DBE43D /* DTLifeModelDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTLifeModelDelegate.h; sourceTree = "<group>"; };
@@ -646,9 +658,31 @@
 				2B51EC4C16CFFB7C00B037F9 /* DTBullet.m */,
 				2B5668D116EE2914004FEA6C /* DTWeapon.h */,
 				2B5668D216EE2914004FEA6C /* DTWeapon.m */,
+				2B5722AF1713070300AA0BF9 /* projectile weapons */,
+				2B5722B017130FC700AA0BF9 /* other weapons */,
 				2BCE6296170C6434000935D6 /* damage */,
 			);
 			name = weapons;
+			sourceTree = "<group>";
+		};
+		2B5722AF1713070300AA0BF9 /* projectile weapons */ = {
+			isa = PBXGroup;
+			children = (
+				2B5722AC171306F900AA0BF9 /* DTHandGun.h */,
+				2B5722AD171306F900AA0BF9 /* DTHandGun.m */,
+			);
+			name = "projectile weapons";
+			sourceTree = "<group>";
+		};
+		2B5722B017130FC700AA0BF9 /* other weapons */ = {
+			isa = PBXGroup;
+			children = (
+				2B5722B117130FF200AA0BF9 /* DTLazerCanon.h */,
+				2B5722B217130FF200AA0BF9 /* DTLazerCanon.m */,
+				2B5722B4171312F700AA0BF9 /* DTLazerBeamNode.h */,
+				2B5722B5171312F700AA0BF9 /* DTLazerBeamNode.m */,
+			);
+			name = "other weapons";
 			sourceTree = "<group>";
 		};
 		2B86436516D257A0008FEB55 /* sounds */ = {
@@ -1184,6 +1218,8 @@
 				2BF7A8D216C9BB7900D3063F /* GooeyStatics.m */,
 				2B86436816D25B46008FEB55 /* DTOptions.h */,
 				2B86436916D25B46008FEB55 /* DTOptions.m */,
+				2B5722B91713B11500AA0BF9 /* DTMaths.h */,
+				2B5722BA1713B11500AA0BF9 /* DTMaths.m */,
 			);
 			name = "base classes";
 			sourceTree = "<group>";
@@ -1467,6 +1503,10 @@
 				2B05BCA31708BDD700D91DEB /* DTRemotePlayer.m in Sources */,
 				2BCE6295170C642E000935D6 /* DTConstantDamageCalculator.m in Sources */,
 				2BCE6299170C9E92000935D6 /* DTNormalDamageCalculator.m in Sources */,
+				2B5722AE171306F900AA0BF9 /* DTHandGun.m in Sources */,
+				2B5722B317130FF200AA0BF9 /* DTLazerCanon.m in Sources */,
+				2B5722B6171312F700AA0BF9 /* DTLazerBeamNode.m in Sources */,
+				2B5722BB1713B11500AA0BF9 /* DTMaths.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

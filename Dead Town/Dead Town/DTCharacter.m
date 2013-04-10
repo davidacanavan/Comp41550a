@@ -89,7 +89,7 @@
 // By default we just ask the weapon to fire for us.
 -(void)fire
 {
-    BOOL success = [_weapon fireAtAngle:_bulletAngle from:_sprite.position gameLayer:_gameLayer];
+    [_weapon fireAtAngle:_bulletAngle from:_sprite.position gameLayer:_gameLayer];
 }
 
 -(BOOL)isHero

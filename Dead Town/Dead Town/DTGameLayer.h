@@ -26,21 +26,14 @@
 @interface DTGameLayer : CCLayer <DTControllerDelegate, DTButtonDelegate>
 {
     @private
-    CCTMXTiledMap *_tileMap;
-    int _tileMapWidth;
-    int _tileMapHeight;
-    int _tileDimension;
-    CCTMXLayer *_floor;
-    CCTMXLayer *_walls;
-    CGSize _screen;
     BOOL _isGameOver;
     DTOptions *_options;
     DTPausedLayer *_pausedLayer;
     BOOL _joystickActive;
     DTStatusLayer *_statusLayer;
+    DTStraightLineZombie *_zombie;
 }
 
-@property(nonatomic) BOOL isFiring; // Set to true if the user is firing
 @property(nonatomic) BOOL isHoldFiring; // Set to true if the user is firing and holding the button
 @property(nonatomic) BOOL isPausing; // Set to true to pause the game layer and all children
 @property(nonatomic, strong) DTControlsLayer *controlsLayer;
@@ -53,5 +46,10 @@
 -(CGPoint)tileCoordinateForPosition:(CGPoint)point;
 -(void)unpause;
 -(void)unpauseAll;
+-(DTCharacter *)closestEnemyToCharacter:(DTCharacter *)character;
 
 @end
+
+
+
+

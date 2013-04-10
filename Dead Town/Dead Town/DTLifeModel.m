@@ -25,6 +25,10 @@
         _upper = upper;
         _lower = lower;
         self.life = life; // Call the overidden method
+        _delegates = [NSMutableArray arrayWithCapacity:3]; // Allocate the array
+        
+        if (delegate)
+            [self addDelegate:delegate];
     }
     
     return self;
@@ -34,7 +38,9 @@
 {
     float old = _life;
     _life = fmaxf(fminf(life, _upper), _lower); // Bound the range
-    [_delegate lifeChangedFrom:old model:self];
+    
+    for (id <DTLifeModelDelegate> delegate in _delegates)
+        [delegate lifeChangedFrom:old model:self];
 }
 
 -(float)getPercentage
@@ -42,4 +48,20 @@
     return _life / (_upper - _lower);
 }
 
+-(void)addDelegate:(id <DTLifeModelDelegate>)delegate
+{
+    [_delegates addObject:delegate];
+}
+
+-(void)removeDelegate:(id <DTLifeModelDelegate>)delegate
+{
+    [_delegates removeObject:delegate];
+}
+
 @end
+
+
+
+
+
+
