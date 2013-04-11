@@ -9,6 +9,7 @@
 #import "DTHandGun.h"
 #import "DTBullet.h"
 #import "DTConstantDamageCalculator.h"
+#import "DTLevel.h"
 
 @implementation DTHandGun
 
@@ -19,7 +20,7 @@
 
 -(id)init
 {
-    if (self = [super initWithFireRate:4 damageCalculator:[DTConstantDamageCalculator damageWithDamage:10]])
+    if (self = [super initWithFireRate:6 damageCalculator:[DTConstantDamageCalculator damageWithDamage:51]])
     {
         
     }
@@ -27,11 +28,18 @@
     return self;
 }
 
--(void)onFireAccepted:(float)angleOfFire from:(CGPoint)start gameLayer:(DTGameLayer *)gameLayer
+-(void)onFireAccepted:(float)angleOfFire from:(CGPoint)start level:(DTLevel *)level
 {
-    DTBullet *bullet = [DTBullet bulletWithPosition:start andAngle:angleOfFire
-        damage:[_damageCalculator computeDamage] maxDistance:self.range owner:self.owner withGameLayer:gameLayer];
-    [gameLayer addChild:bullet];
+    DTBullet *bullet = [DTBullet bulletWithPosition:start angle:angleOfFire damage:[_damageCalculator computeDamage] maxDistance:self.range owner:self.owner level:level];
+    [level addChild:bullet];
 }
 
 @end
+
+
+
+
+
+
+
+

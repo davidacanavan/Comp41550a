@@ -10,9 +10,10 @@
 #import "DTCharacter.h"
 
 @class DTGameLayer;
+@class DTLevel;
 
 @interface DTPlayer : DTCharacter
 
-+(id)playerAtPosition:(CGPoint)point gameLayer:(DTGameLayer *)gameLayer life:(float)life;
++(id)playerWithLevel:(DTLevel *)level position:(CGPoint)position life:(float)life;
 
 @end

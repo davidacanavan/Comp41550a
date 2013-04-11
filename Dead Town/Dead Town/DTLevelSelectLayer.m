@@ -10,6 +10,7 @@
 #import "DTMenuScene.h"
 #import "GooeyStatics.h"
 #import "DTGameScene.h"
+#import "DTLevel.h"
 
 @implementation DTLevelSelectLayer
 
@@ -49,7 +50,9 @@
     
     if ([levelName isEqualToString:@"Hospital"])
     {
-        [director replaceScene: [CCTransitionFade transitionWithDuration: 1.0 scene: [DTGameScene scene] withColor:ccWHITE]];
+        DTLevel *level = [DTLevel levelWithTMXFile:@"DTHospitalF1.tmx"];
+        [director replaceScene: [CCTransitionFade transitionWithDuration: 1.0
+                scene: [DTGameScene sceneWithLevel:level] withColor:ccWHITE]];
     }
 }
 

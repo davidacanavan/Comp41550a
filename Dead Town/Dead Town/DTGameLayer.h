@@ -23,30 +23,22 @@
 @class DTStraightLineZombie;
 @class DTStatusLayer;
 
-@interface DTGameLayer : CCLayer <DTControllerDelegate, DTButtonDelegate>
+@interface DTGameLayer : CCLayer
 {
     @private
     BOOL _isGameOver;
     DTOptions *_options;
     DTPausedLayer *_pausedLayer;
-    BOOL _joystickActive;
-    DTStatusLayer *_statusLayer;
     DTStraightLineZombie *_zombie;
 }
 
-@property(nonatomic) BOOL isHoldFiring; // Set to true if the user is firing and holding the button
 @property(nonatomic) BOOL isPausing; // Set to true to pause the game layer and all children
 @property(nonatomic, strong) DTControlsLayer *controlsLayer;
-@property(nonatomic) DTPlayer *player;
+@property(nonatomic, strong) DTStatusLayer *statusLayer;
 
 +(id)gameLayerWithStatusLayer:(DTStatusLayer *)statusLayer;
--(void)centerViewportOnPosition:(CGPoint)position;
--(BOOL)isWallAtTileCoordinate:(CGPoint)tileCoordinate;
--(BOOL)isWallAtPosition:(CGPoint)position;
--(CGPoint)tileCoordinateForPosition:(CGPoint)point;
 -(void)unpause;
 -(void)unpauseAll;
--(DTCharacter *)closestEnemyToCharacter:(DTCharacter *)character;
 
 @end
 

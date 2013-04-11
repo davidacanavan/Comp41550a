@@ -8,6 +8,7 @@
 
 #import "DTBullet.h"
 #import "DTLifeModel.h"
+#import "DTLevel.h"
 
 @implementation DTBullet
 
@@ -16,16 +17,16 @@
 @synthesize maxDistance = _maxDistance;
 @synthesize initialPosition = _initialPosition;
 
-+(id)bulletWithPosition:(CGPoint)initialPosition andAngle:(float)angleOfFire damage:(float)damage maxDistance:(float)maxDistance owner:(DTCharacter *)owner withGameLayer:(DTGameLayer *)gameLayer
++(id)bulletWithPosition:(CGPoint)initialPosition angle:(float)angleOfFire damage:(float)damage maxDistance:(float)maxDistance owner:(DTCharacter *)owner level:(DTLevel *)level
 {
-    return [[self alloc] initWithPosition:initialPosition andAngle:angleOfFire damage:damage maxDistance:maxDistance owner:owner withGameLayer:gameLayer];
+    return [[self alloc] initWithPosition:initialPosition angle:angleOfFire damage:damage maxDistance:maxDistance owner:owner level:level];
 }
 
--(id)initWithPosition:(CGPoint)initialPosition andAngle:(float)angleOfFire damage:(float)damage maxDistance:(float)maxDistance owner:(DTCharacter *)owner withGameLayer:(DTGameLayer*)gameLayer
+-(id)initWithPosition:(CGPoint)initialPosition angle:(float)angleOfFire damage:(float)damage maxDistance:(float)maxDistance owner:(DTCharacter *)owner level:(DTLevel *)level
 {
     if (self = [super init])
     {
-        _gameLayer = gameLayer;
+        _level = level;
         _isExpired = NO; // Make sure the bullet actually exists for a little bit!
         _sprite = [ColoredCircleSprite circleWithColor:ccc4(0, 0, 100, 255) radius:2]; // TODO: Allow various sprites for this
         _sprite.position = initialPosition;
@@ -60,13 +61,23 @@
     BOOL isPastMaxDistance = _maxDistance == -1 ? NO : ccpDistance(newPosition, _initialPosition) > _maxDistance;
     
     // So if we've hit a wall we stop the bullet or if we've gone further than we allow.
-    if ([_gameLayer isWallAtPosition:(newPosition)] || isPastMaxDistance)
+    if ([_level isWallAtPosition:(newPosition)] || isPastMaxDistance)
         [self registerExpiry];
-    else if (![self.owner isFriendlyWithCharacter:_gameLayer.player]
-             && CGRectIntersectsRect(_sprite.boundingBox, _gameLayer.player.sprite.boundingBox)) // TODO: I have to look at this whole sprite inside a CCNode issue with regards to the bounding box stuff
+    else if (![self.owner isFriendlyWithCharacter:_level.player]
+             && CGRectIntersectsRect(_sprite.boundingBox, _level.player.sprite.boundingBox)) // TODO: I have to look at this whole sprite inside a CCNode issue with regards to the bounding box stuff
     { // Now we have to check for a collision with a player or enemy
-        _gameLayer.player.lifeModel.life -= _damage;
+        _level.player.lifeModel.life -= _damage;
         [self registerExpiry];
+    }
+    else
+    {
+        for (DTCharacter *villain in _level.villains)
+            if (CGRectIntersectsRect(_sprite.boundingBox, villain.sprite.boundingBox))
+            {
+                villain.lifeModel.life -= _damage;
+                [self registerExpiry];
+                break;
+            }
     }
     
 }
@@ -74,7 +85,7 @@
 -(void)registerExpiry
 {
     _isExpired = YES;
-    [_gameLayer removeChild:self cleanup:NO];
+    [_level removeChild:self cleanup:NO];
 }
 
 @end

@@ -9,7 +9,6 @@
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
 #import "DTGameLayer.h"
-#import "DTControlsLayer.h"
 #import "DTMenuScene.h"
 
 @class DTControlsLayer;
@@ -18,9 +17,8 @@
 {
     @private
     DTGameLayer *_gameLayer;
-    DTControlsLayer *_controlsLayer;
 }
 
-+(id)pausedLayerWithGameLayer:(DTGameLayer *)gameLayer andControlsLayer:(DTControlsLayer *)controlsLayer;
++(id)layerWithGameLayer:(DTGameLayer *)gameLayer;
 
 @end

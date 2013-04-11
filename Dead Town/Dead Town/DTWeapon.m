@@ -41,19 +41,19 @@
     return self;
 }
 
--(BOOL)fireAtAngle:(float)angleOfFire from:(CGPoint)start gameLayer:(DTGameLayer *)gameLayer
+-(BOOL)fireAtAngle:(float)angleOfFire from:(CGPoint)start level:(DTLevel *)level
 {
     if (_timeSinceLastFire >= _minimumTimeBetweenFires) // Then we can fire... like a boss
     {
         _timeSinceLastFire = 0;
-        [self onFireAccepted:angleOfFire from:start gameLayer:gameLayer];
+        [self onFireAccepted:angleOfFire from:start level:level];
         return YES;
     }
     
     return NO;
 }
 
--(void)onFireAccepted:(float)angleOfFire from:(CGPoint)start gameLayer:(DTGameLayer *)gameLayer {}
+-(void)onFireAccepted:(float)angleOfFire from:(CGPoint)start level:(DTLevel *)level {}
 
 -(void)updateTimeSinceLastFire:(ccTime)delta
 {

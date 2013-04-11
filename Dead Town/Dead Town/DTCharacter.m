@@ -10,6 +10,7 @@
 #import "DTOptions.h"
 #import "DTWeapon.h"
 #import "DTLifeModel.h"
+#import "DTLevel.h"
 
 @implementation DTCharacter
 
@@ -17,8 +18,8 @@
 @synthesize sprite = _sprite;
 
 
--(id)initWithPosition:(CGPoint)position gameLayer:(DTGameLayer *)gameLayer life:(float)life
-        characterType:(DTCharacterType)characterType
+-(id)initWithLevel:(DTLevel *)level position:(CGPoint)position life:(float)life
+     characterType:(DTCharacterType)characterType
 {
     if (self = [super init])
     {
@@ -26,10 +27,10 @@
         _options = [DTOptions sharedOptions];
         
         // Save the instance variables and set the sprite's position
-        _gameLayer = gameLayer;
+        _level = level;
         _sprite = [self loadSpriteAndAnimations]; // This method is overriden by subclasses to allow more functionality
         _sprite.position = position;
-        _lifeModel = [DTLifeModel lifeModelWithLife:life lower:0 upper:life delegate:nil];
+        _lifeModel = [DTLifeModel lifeModelWithLife:life lower:0 upper:life delegate:nil character:self];
         _characterType = characterType;
         
         // Add the sprite to the layer
@@ -89,7 +90,7 @@
 // By default we just ask the weapon to fire for us.
 -(void)fire
 {
-    [_weapon fireAtAngle:_bulletAngle from:_sprite.position gameLayer:_gameLayer];
+    [_weapon fireAtAngle:_bulletAngle from:_sprite.position level:_level];
 }
 
 -(BOOL)isHero

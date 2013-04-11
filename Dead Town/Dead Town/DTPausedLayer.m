@@ -11,17 +11,16 @@
 
 @implementation DTPausedLayer
 
-+(id)pausedLayerWithGameLayer:(DTGameLayer *)gameLayer andControlsLayer:(DTControlsLayer *)controlsLayer
++(id)layerWithGameLayer:(DTGameLayer *)gameLayer
 {
-    return [[self alloc] initWithGameLayer:gameLayer andControlsLayer:controlsLayer];
+    return [[self alloc] initWithGameLayer:gameLayer];
 }
 
--(id)initWithGameLayer:(DTGameLayer *)gameLayer andControlsLayer:(DTControlsLayer *)controlsLayer
+-(id)initWithGameLayer:(DTGameLayer *)gameLayer
 {
     if ((self = [super init]))
     {
         _gameLayer = gameLayer;
-        _controlsLayer = controlsLayer;
         
         CGSize screen = [[CCDirector sharedDirector] winSize];
         NSString *fontName = @"Marker Felt";

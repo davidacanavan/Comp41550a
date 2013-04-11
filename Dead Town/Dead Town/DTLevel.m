@@ -9,26 +9,37 @@
 #import "DTLevel.h"
 #import "DTCharacter.h"
 #import "DTGameLayer.h"
+#import "DTHandGun.h"
+#import "DTStraightLineZombie.h"
+#import "DTLazerBeamNode.h"
+#import "DTPlayer.h"
+#import "DTLifeModelDelegate.h"
+#import "DTStatusLayer.h"
+#import "DTLifeModel.h"
+#import "DTButton.h"
+#import "DTTrigger.h"
 
 @implementation DTLevel
 
-+(id)levelWithTMXFile:(NSString *)tmxFile gameLayer:(DTGameLayer *)gameLayer;
+@synthesize gameLayer = _gameLayer;
+@synthesize player = _player;
+
++(id)levelWithTMXFile:(NSString *)tmxFile;
 {
-    return [[self alloc] initWithTMXFile:tmxFile gameLayer:gameLayer];
+    return [[self alloc] initWithTMXFile:tmxFile];
 }
 
--(id)initWithTMXFile:(NSString *)tmxFile gameLayer:(DTGameLayer *)gameLayer
+-(id)initWithTMXFile:(NSString *)tmxFile
 {
     if (self = [super init])
     {
-        // Save the DTGameLayer reference
-        _gameLayer = gameLayer;
-        
         // Get all the  map variables
         _map = [CCTMXTiledMap tiledMapWithTMXFile:tmxFile];
         _floor = [_map layerNamed:@"Floor"];
-        _walls = [_map layerNamed:@"Walls"]; _walls.visible = YES;
-        _spawns = [_map objectGroupNamed:@"Spawns"];
+        _walls = [_map layerNamed:@"Walls"];
+        _spawnObjects = [_map objectGroupNamed:@"Spawns"];
+        _triggerObjects = [_map objectGroupNamed:@"Triggers"];
+        _walls.visible = NO; // Make sure no-one can see the transparent tiles!!!
         
         // Get some layout dimensions
         _retinaFactor = CC_CONTENT_SCALE_FACTOR();
@@ -36,21 +47,13 @@
         _tileMapWidth = _map.mapSize.width; // Measured in tiles!
         _tileMapHeight = _map.mapSize.height;
         _tileDimension = _map.tileSize.width / _retinaFactor; // Since they're square I don't need to look at the height - measured in pixels and scaled for retina!
-        
-        // Spawn the player at the start
-        NSDictionary *player = [_spawns objectNamed:@"Player Spawn"];
-        ccp([[player valueForKey:@"x"] floatValue] / _retinaFactor,
-            [[player valueForKey:@"y"] floatValue] / _retinaFactor);
-        [self onPlayerLoaded]; // Notify the subclass
     }
     
     return self;
 }
 
--(NSMutableArray *)closestEnemiesToPlayer
-{
-    return nil;
-}
+#pragma mark-
+#pragma mark TileMap Functions
 
 -(void)centerViewportOnPosition:(CGPoint) position
 {
@@ -91,7 +94,24 @@
         || tileCoordinate.x >= _tileMapWidth || tileCoordinate.y >= _tileMapHeight;
 }
 
--(void)onPlayerLoaded {};
+-(CGRect)createRectFromSpawn:(NSDictionary *)spawn
+{
+    return CGRectMake(
+        [[spawn valueForKey:@"x"] floatValue] / _retinaFactor,
+        [[spawn valueForKey:@"y"] floatValue] / _retinaFactor,
+        [[spawn valueForKey:@"width"] floatValue] / _retinaFactor,
+        [[spawn valueForKey:@"height"] floatValue] / _retinaFactor);
+}
+
+-(CGPoint)createRectCentreFromSpawn:(NSDictionary *)spawn
+{
+    return [self centreOfRect:[self createRectFromSpawn:spawn]];
+}
+
+-(CGPoint)centreOfRect:(CGRect)rect
+{
+    return ccp(rect.origin.x + rect.size.width / 2, rect.origin.y + rect.size.height / 2);
+}
 
 #pragma mark-
 #pragma mark Joystick Delegate
@@ -140,7 +160,10 @@
 
 -(void)buttonPressed:(DTButton *)button
 {
-    [_player fire];
+    if ([button.tag isEqualToString:@"fire"])
+        [_player fire];
+    else
+        _gameLayer.isPausing = YES; // TODO: Do the pausing better!!!
 }
 
 -(void)buttonHoldStarted:(DTButton *)button
@@ -162,7 +185,101 @@
 }
 
 #pragma mark-
+#pragma mark LifeModel Delegate
 
+-(void)lifeChangedFrom:(float)oldLife model:(DTLifeModel *)lifeModel character:(DTCharacter *)character
+{
+    if (character.characterType == CharacterTypeVillian && [lifeModel isZero])
+    {
+        [_villains removeObject: character]; // TODO: This could be faster
+        [self onVillainKilled:character];
+        [self removeChild:character cleanup:NO];
+    }// TODO: Something similar for our hero
+}
+
+#pragma mark-
+#pragma mark Subclass Overridables
+
+-(void)onPlayerLoaded {}
+-(void)onVillainKilled:(DTCharacter *)character {}
+-(void)onTriggerEncountered:(DTTrigger *)trigger {}
+-(void)onSpawnPointEncountered {}
+
+#pragma mark-
+#pragma mark Property Overrides
+
+-(void)setGameLayer:(DTGameLayer *)gameLayer
+{
+    // Save the DTGameLayer reference
+    _gameLayer = gameLayer;
+    [_gameLayer addChild:_map];
+    
+    // Create the players TODO: second player!!!
+    CGPoint playerPosition = [self createRectCentreFromSpawn:[_spawnObjects objectNamed:@"Player Spawn 0"]];
+    _player = [DTPlayer playerWithLevel:self position:playerPosition life:100];
+    _player.weapon = [DTHandGun weapon];
+    [_player.lifeModel addDelegate: (id <DTLifeModelDelegate>) _gameLayer.statusLayer.lifeNode]; // TODO: Do I have to cast this?
+    [self addChild:_player];
+    
+    // Get all the trigger rects and save them
+    NSMutableArray *triggerDicts = [_triggerObjects objects];
+    _triggers = [NSMutableArray arrayWithCapacity:[triggerDicts count]];
+    
+    // Save the triggers we have here for later
+    for (NSDictionary *dict in triggerDicts)
+    {
+        [_triggers addObject:[DTTrigger triggerWithName:[dict objectForKey:@"name"]
+                andRect:[self createRectFromSpawn:dict]]];
+    }
+    
+    _villains = [NSMutableArray arrayWithCapacity:20];
+    
+    [self centerViewportOnPosition:[_player getPosition]]; // Center over the player
+    [self onPlayerLoaded]; // Notify the subclass
+    
+    // TODO: TEST CODE!!!!
+    DTStraightLineZombie *zombie = [DTStraightLineZombie zombieWithLevel:self position:playerPosition life:100 player:_player runningDistance:250];
+    [_villains addObject:zombie];
+    [zombie.lifeModel addDelegate:self];
+    [self addChild:zombie];
+    
+    //DTLazerBeamNode *lazer = [DTLazerBeamNode nodeWithOrigin:_player];
+    //lazer.target = zombie;
+    //[self addChild: lazer];
+    
+    [_gameLayer addChild:self]; // Just so we can get the update
+    [self scheduleUpdate];
+}
+
+#pragma mark-
+#pragma mark Game Update
+
+-(void)update:(ccTime)delta
+{
+    if (_isHoldFiring)
+        [_player fire]; // So let him fire
+}
+
+#pragma mark-
+#pragma mark GameLayer Shortcuts
+
+// We wont actually add to this, but since the game thinks this is the game layer it decouples the classes a bit
+-(void)addChild:(CCNode *)node
+{
+    [_gameLayer addChild:node];
+}
+
+-(void)removeChild:(CCNode *)node cleanup:(BOOL)cleanup
+{
+    [_gameLayer removeChild:node cleanup:cleanup];
+}
+
+#pragma mark-
+
+-(void)addVillain:(DTCharacter *)villain
+{
+    [_villains addObject:villain];
+}
 
 @end
 

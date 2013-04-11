@@ -10,12 +10,12 @@
 
 @implementation DTLifeModel
 
-+(id)lifeModelWithLife:(float)life lower:(float)lower upper:(float)upper delegate:(id <DTLifeModelDelegate>)delegate
++(id)lifeModelWithLife:(float)life lower:(float)lower upper:(float)upper delegate:(id <DTLifeModelDelegate>)delegate character:(DTCharacter *) character
 {
-    return [[self alloc] initModelWithLife:life lower:lower upper:upper delegate:delegate];
+    return [[self alloc] initModelWithLife:life lower:lower upper:upper delegate:delegate character:character];
 }
 
--(id)initModelWithLife:(float)life lower:(float)lower upper:(float)upper delegate:(id <DTLifeModelDelegate>)delegate
+-(id)initModelWithLife:(float)life lower:(float)lower upper:(float)upper delegate:(id <DTLifeModelDelegate>)delegate character:(DTCharacter *) character
 {
     if (self = [super init])
     {
@@ -25,6 +25,7 @@
         _upper = upper;
         _lower = lower;
         self.life = life; // Call the overidden method
+        _character = character;
         _delegates = [NSMutableArray arrayWithCapacity:3]; // Allocate the array
         
         if (delegate)
@@ -40,12 +41,17 @@
     _life = fmaxf(fminf(life, _upper), _lower); // Bound the range
     
     for (id <DTLifeModelDelegate> delegate in _delegates)
-        [delegate lifeChangedFrom:old model:self];
+        [delegate lifeChangedFrom:old model:self character:_character];
 }
 
 -(float)getPercentage
 {
     return _life / (_upper - _lower);
+}
+
+-(BOOL)isZero
+{
+    return _life <= _lower;
 }
 
 -(void)addDelegate:(id <DTLifeModelDelegate>)delegate

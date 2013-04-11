@@ -8,7 +8,7 @@
 
 #import "cocos2d.h"
 
-@class DTGameLayer;
+@class DTLevel;
 @class DTOptions;
 @class DTWeapon;
 @class DTLifeModel;
@@ -18,7 +18,7 @@ typedef enum {CharacterTypeHero, CharacterTypeVillian} DTCharacterType;
 @interface DTCharacter : CCNode
 {
     @protected
-    DTGameLayer *_gameLayer; // The parent game layer
+    DTLevel *_level; // The parent game layer
     DTOptions *_options; // General settings singleton
     // The angle a bullet should fire at to be right on target.
     // This is different to the angle the sprite is facing but turnToFacePoint calculates both.
@@ -39,7 +39,7 @@ typedef enum {CharacterTypeHero, CharacterTypeVillian} DTCharacterType;
 @property(nonatomic, readonly) CCSprite *sprite;
 
 // Member initializer to create the class - this class should only be used as a base class.
--(id)initWithPosition:(CGPoint)position gameLayer:(DTGameLayer *)gameLayer life:(float)life
+-(id)initWithLevel:(DTLevel *)level position:(CGPoint)position life:(float)life
         characterType:(DTCharacterType)characterType;
 // Moves the character's sprite to the given board position.
 -(void)moveToPosition:(CGPoint)position;

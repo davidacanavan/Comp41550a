@@ -9,9 +9,10 @@
 #import <Foundation/Foundation.h>
 
 @class DTLifeModel;
+@class DTCharacter;
 
 @protocol DTLifeModelDelegate <NSObject>
 
--(void)lifeChangedFrom:(float)oldLife model:(DTLifeModel *)lifeModel;
+-(void)lifeChangedFrom:(float)oldLife model:(DTLifeModel *)lifeModel character:(DTCharacter *)character;
 
 @end

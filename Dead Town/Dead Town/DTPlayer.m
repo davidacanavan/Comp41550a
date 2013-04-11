@@ -15,14 +15,14 @@
 @implementation DTPlayer
 
 // Class method to allocate the class and call the constructor
-+(id)playerAtPosition:(CGPoint)position gameLayer:(DTGameLayer *)gameLayer life:(float)life
++(id)playerWithLevel:(DTLevel *)level position:(CGPoint)position life:(float)life
 {
-    return [[self alloc] initWithPlayerAtPosition:position gameLayer:gameLayer life:life];
+    return [[self alloc] initWithLevel:level position:position life:life];
 }
 
--(id)initWithPlayerAtPosition:(CGPoint)position gameLayer:(DTGameLayer *)gameLayer life:(float)life
+-(id)initWithLevel:(DTLevel *)level position:(CGPoint)position life:(float)life;
 {
-    if ((self = [super initWithPosition:position gameLayer:gameLayer life:life characterType:CharacterTypeHero]))
+    if ((self = [super initWithLevel:level position:position life:life characterType:CharacterTypeHero]))
     {
         // No need to do anything here, the superclass call takes care of initialisation
         // I kept this here in case I wan't to customise some stuff

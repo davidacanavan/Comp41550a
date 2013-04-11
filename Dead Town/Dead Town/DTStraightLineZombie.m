@@ -11,17 +11,18 @@
 #import "DTGameLayer.h"
 #import "DTWeapon.h"
 #import "DTConstantDamageCalculator.h"
+#import "DTLevel.h"
 
 @implementation DTStraightLineZombie
 
-+(id)zombieWithPlayer:(DTPlayer *)player runningDistance:(float)runningDistance gameLayer:(DTGameLayer *)gameLayer position:(CGPoint)position life:(float)life
++(id)zombieWithLevel:(DTLevel *)level position:(CGPoint)position life:(float)life player:(DTPlayer *)player runningDistance:(float)runningDistance
 {
-    return [[self alloc] initWithPlayer:player runningDistance:runningDistance gameLayer:gameLayer position:position life:life];
+    return [[self alloc] initWithLevel:level position:position life:life player:player runningDistance:runningDistance];
 }
 
--(id)initWithPlayer: (DTPlayer *)player runningDistance:(float)runningDistance gameLayer:(DTGameLayer *)gameLayer position:(CGPoint)position life:(float)life
+-(id)initWithLevel:(DTLevel *)level position:(CGPoint)position life:(float)life player:(DTPlayer *)player runningDistance:(float)runningDistance
 {
-    if (self = [super initWithPosition:position gameLayer:gameLayer life:life characterType:CharacterTypeVillian])
+    if (self = [super initWithLevel:level position:position life:life characterType:CharacterTypeVillian])
     {
         _player = player;
         _runningDistance = runningDistance;
@@ -59,7 +60,7 @@
         CGPoint newPosition = ccp(x, y);
         
         // So if the zombie is in a wall he doesn't have a line of sight anymore or else he's eating you already
-        if ([_gameLayer isWallAtPosition:newPosition])
+        if ([_level isWallAtPosition:newPosition])
             return;
         
         [self moveToPosition:newPosition];

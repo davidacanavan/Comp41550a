@@ -14,18 +14,74 @@
  <tileset firstgid="52" name="Hospital Tiles" tilewidth="64" tileheight="64">
   <image source="Hospital_Tile3.png" width="128" height="640"/>
  </tileset>
- <layer name="Floor" width="128" height="128" opacity="0.81">
+ <layer name="Floor" width="128" height="128">
   <data encoding="base64" compression="zlib">
-   eJzt2UsKwyAARVHXVfovtPvfUR06MQRpUsk7B95cueDEUgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAH7rXnfbaI/9rsGgc91po112vAdj9M/W9v/UXTt7F/2PqO2/1GvkndB/fvpn0z+b/tn0z6Z/Nv2z6Z9ty/7MT/9s+mdb2/9Z+n8DvTG/tf05Jv2zte/6689nYX9fQwhKAQ==
+   eJzt2otqwjAABdB81F6OPbrNbf//R2sZhdIlaU2sde05cEFFauDWkERDAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB6TZvXTN5WGxmX8NTmMZPn9YbGBeh/3/S/b/rft2H/D0H/W9WE+Pr+GPS/ZU3423Mq+t+OJszvXf/La0L+nKUmsTOa8brups1h8Lx7fBv0fylT6+yaxDoaf16s2/Fr+l/Of+j/LvzOC336azchPfcwz7CP7zYviXyF9fqP5XPmGMgb9pGbU0vmiSX77zN1X5JX0v8hkfG67Zz9p+amqfuSvHN+/8e9nbP/1Nj0X2ft/sdruy73kWvrfxlr9z83U/1TRv/7VtN/f3aXmrdj13sP8X1lbu/Z5WNiXJSp6X9qnzbnjK6/bul5nv7rnNr/1DptmO6MZuo3guPgvSX/6dR/nSXPf07NnPsldf9Q5pr6rwll5vY/XrddS6gzt3+2Sf/7NpzXU3tstusHob+x5g==
   </data>
  </layer>
  <layer name="Walls" width="128" height="128">
   <data encoding="base64" compression="zlib">
-   eJzt2TEKACEMRUHB+995eytdDAT/DAgWweZBGscAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAC4axYfeqtspH9/+meby/3mLte/v7X/ztyft+lJ/2z6Z9M/m/7Z9M+mfzb9s1X2pz/9s+mf7aS/v9/37PbnTfpns7OzfYlAATM=
+   eJzt2NEKgjAYgFHB93/nLiKC2PKf29Rt54BQlhp+OprbBgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB87IGFeR311X9u+q9N/7Xpv7Y98/rfOsYT+X+v/3xK5nH6z+PM/F3/fiLPWWqW1PFSx8+9T22TW0e5nucx2r/FdzhnlP6/Y4pnw22kxt5W57Tnva1xG0fzrMhnJdu0HttdB3VG6W+s72Ok/tFjEPeE/mfmjTW/i6+7+9fsq2Z/vOm/tjv6n5nP69/H1f1z32k9LhDTu3/0vm75jIm4nv1LRa8X8/92ntSf65X0f+JCnWh/5qT/2oyna3sBMDYDPQ==
   </data>
  </layer>
  <objectgroup name="Spawns" width="128" height="128">
   <object name="Player Spawn 0" x="77" y="8052" width="100" height="52"/>
-  <object name="Enemy Spawn 0" x="1011" y="7061" width="223" height="153"/>
+  <object name="ES0" x="1011" y="7061" width="223" height="153"/>
+  <object name="ES4" x="2621" y="7877" width="448" height="51"/>
+  <object name="ES3" x="1397" y="7817" width="60" height="107"/>
+  <object name="ES1" x="1068" y="7400" width="100" height="144"/>
+  <object name="ES2" x="1297" y="7353" width="152" height="88"/>
+  <object name="ES8" x="2499" y="6931" width="68" height="296"/>
+  <object name="ES9" x="2639" y="7205" width="268" height="68"/>
+  <object name="ES6" x="2151" y="7357" width="180" height="47"/>
+  <object name="ES5" x="1949" y="7247" width="79" height="319"/>
+  <object name="ES7" x="2413" y="7517" width="248" height="57"/>
+ </objectgroup>
+ <objectgroup name="Triggers" width="128" height="128">
+  <object name="T0" x="644" y="7048" width="52" height="115">
+   <properties>
+    <property name="ES" value="0"/>
+   </properties>
+  </object>
+  <object name="T1" x="699" y="7304" width="141" height="48">
+   <properties>
+    <property name="ES" value="1"/>
+   </properties>
+  </object>
+  <object name="T2" x="685" y="7753" width="105" height="45">
+   <properties>
+    <property name="ES" value="1"/>
+   </properties>
+  </object>
+  <object name="T3" x="1257" y="7557" width="228" height="49">
+   <properties>
+    <property name="ES" value="2"/>
+   </properties>
+  </object>
+  <object name="T4" x="1603" y="7795" width="51" height="155">
+   <properties>
+    <property name="ES" value="3"/>
+   </properties>
+  </object>
+  <object name="T5" x="2376" y="7857" width="44" height="89">
+   <properties>
+    <property name="ES" value="4"/>
+   </properties>
+  </object>
+  <object name="T7" x="2953" y="7215" width="45" height="103">
+   <properties>
+    <property name="ES" value="9"/>
+   </properties>
+  </object>
+  <object name="T6" x="2160" y="6985" width="165" height="44">
+   <properties>
+    <property name="ES" value="5, 6, 7"/>
+   </properties>
+  </object>
+  <object name="T7" x="2479" y="6664" width="488" height="67">
+   <properties>
+    <property name="ES" value="8"/>
+   </properties>
+  </object>
  </objectgroup>
 </map>

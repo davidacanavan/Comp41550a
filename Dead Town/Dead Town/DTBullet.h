@@ -3,7 +3,7 @@
 #import "ColoredCircleSprite.h"
 #import "DTGameLayer.h"
 
-@class DTGameLayer;
+@class DTLevel;
 @class DTCharacter;
 
 @interface DTBullet : CCNode
@@ -12,7 +12,7 @@
     // The sprite that actually represents the bullet.
     ColoredCircleSprite *_sprite;
     // The parent game layer which co-ordinates the game.
-    DTGameLayer *_gameLayer;
+    DTLevel *_level;
 }
 
 // True if the bullet has hit a valid target.
@@ -28,7 +28,7 @@
 @property(nonatomic, readonly) CGPoint initialPosition;
 
 // Factory method to create the bullet
-+(id)bulletWithPosition:(CGPoint)initialPosition andAngle:(float)angleOfFire damage:(float)damage maxDistance:(float)maxDistance owner:(DTCharacter *)owner withGameLayer:(DTGameLayer *)gameLayer;
++(id)bulletWithPosition:(CGPoint)initialPosition angle:(float)angleOfFire damage:(float)damage maxDistance:(float)maxDistance owner:(DTCharacter *)owner level:(DTLevel *)level;
 -(void)moveToPoint:(CGPoint)point;
 
 @end

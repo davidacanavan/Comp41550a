@@ -191,6 +191,8 @@
 		2BE0774416B768840073F28F /* DTGameScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BE0774316B768840073F28F /* DTGameScene.m */; };
 		2BE40E6316D19A96003C5065 /* tile_markers-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 2BE40E6116D19A96003C5065 /* tile_markers-hd.png */; };
 		2BE40E6416D19A96003C5065 /* tmw_desert_spacing-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 2BE40E6216D19A96003C5065 /* tmw_desert_spacing-hd.png */; };
+		2BEA51371716505300D2804E /* Hospital_Tile3.png in Resources */ = {isa = PBXBuildFile; fileRef = 2BEA51361716505300D2804E /* Hospital_Tile3.png */; };
+		2BEA513B171665E800D2804E /* DTTrigger.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BEA513A171665E800D2804E /* DTTrigger.m */; };
 		2BEC4E831705E19D00662EEB /* DTLevel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BEC4E821705E19D00662EEB /* DTLevel.m */; };
 		2BF7A8C716C8631500D3063F /* DTMenuLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BF7A8C616C8631500D3063F /* DTMenuLayer.m */; };
 		2BF7A8C916C864D800D3063F /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2BF7A8C816C864D800D3063F /* Default-568h@2x.png */; };
@@ -550,6 +552,9 @@
 		2BE0774316B768840073F28F /* DTGameScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTGameScene.m; sourceTree = "<group>"; };
 		2BE40E6116D19A96003C5065 /* tile_markers-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tile_markers-hd.png"; sourceTree = "<group>"; };
 		2BE40E6216D19A96003C5065 /* tmw_desert_spacing-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tmw_desert_spacing-hd.png"; sourceTree = "<group>"; };
+		2BEA51361716505300D2804E /* Hospital_Tile3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Hospital_Tile3.png; sourceTree = "<group>"; };
+		2BEA5139171665E800D2804E /* DTTrigger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTTrigger.h; sourceTree = "<group>"; };
+		2BEA513A171665E800D2804E /* DTTrigger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTTrigger.m; sourceTree = "<group>"; };
 		2BEC4E811705E19D00662EEB /* DTLevel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTLevel.h; sourceTree = "<group>"; };
 		2BEC4E821705E19D00662EEB /* DTLevel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTLevel.m; sourceTree = "<group>"; };
 		2BF7A8C516C8631500D3063F /* DTMenuLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTMenuLayer.h; sourceTree = "<group>"; };
@@ -710,6 +715,7 @@
 		2B980D3216CAA2370028BB93 /* sprites */ = {
 			isa = PBXGroup;
 			children = (
+				2BEA51361716505300D2804E /* Hospital_Tile3.png */,
 				2BDD70B916E0ED1A00A31DD5 /* dt_intro_one_player-hd.png */,
 				2BDD70BA16E0ED1A00A31DD5 /* dt_intro_two_player-hd.png */,
 				2BDD70B716E0EAEE00A31DD5 /* dt_intro_title_0-hd.png */,
@@ -1254,6 +1260,8 @@
 			children = (
 				2BEC4E811705E19D00662EEB /* DTLevel.h */,
 				2BEC4E821705E19D00662EEB /* DTLevel.m */,
+				2BEA5139171665E800D2804E /* DTTrigger.h */,
+				2BEA513A171665E800D2804E /* DTTrigger.m */,
 			);
 			name = level;
 			sourceTree = "<group>";
@@ -1362,6 +1370,7 @@
 				2BDD70B816E0EAEE00A31DD5 /* dt_intro_title_0-hd.png in Resources */,
 				2BDD70BB16E0ED1A00A31DD5 /* dt_intro_one_player-hd.png in Resources */,
 				2BDD70BC16E0ED1A00A31DD5 /* dt_intro_two_player-hd.png in Resources */,
+				2BEA51371716505300D2804E /* Hospital_Tile3.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1507,6 +1516,7 @@
 				2B5722B317130FF200AA0BF9 /* DTLazerCanon.m in Sources */,
 				2B5722B6171312F700AA0BF9 /* DTLazerBeamNode.m in Sources */,
 				2B5722BB1713B11500AA0BF9 /* DTMaths.m in Sources */,
+				2BEA513B171665E800D2804E /* DTTrigger.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -6,6 +6,7 @@
 //
 //
 
+#import "DTControlsLayer.h"
 #import "ColoredCircleSprite.h"
 #import "DTGameLayer.h"
 #import "SneakyJoystick.h"
@@ -20,22 +21,22 @@
 @synthesize dominantHand = _dominantHand;
 @synthesize controllerType = _controllerType;
 
-+(id)controlsLayerWithGameLayer:(DTGameLayer *)gameLayer controllerType:(ControllerType)controllerType controllerDelegate:(id <DTControllerDelegate>)controllerDelegate dominantHand:(DominantHand)dominantHand
++(id)layerWithControllerType:(ControllerType)controllerType controllerDelegate:(id <DTControllerDelegate>)controllerDelegate buttonDelegate:(id <DTButtonDelegate>)buttonDelegate dominantHand:(DominantHand)dominantHand
 {
-    return [[self alloc] initWithGameLayer:gameLayer controllerType:(ControllerType)controllerType controllerDelegate:controllerDelegate dominantHand:(DominantHand)dominantHand];
+    return [[self alloc] initWithControllerType:(ControllerType)controllerType controllerDelegate:controllerDelegate buttonDelegate:(id <DTButtonDelegate>)buttonDelegate dominantHand:(DominantHand)dominantHand];
 }
 
--(id)initWithGameLayer:(DTGameLayer *)gameLayer controllerType:(ControllerType)controllerType controllerDelegate:(id <DTControllerDelegate>)controllerDelegate dominantHand:(DominantHand)dominantHand
+-(id)initWithControllerType:(ControllerType)controllerType controllerDelegate:(id <DTControllerDelegate>)controllerDelegate buttonDelegate:(id <DTButtonDelegate>)buttonDelegate dominantHand:(DominantHand)dominantHand
 {
     if ((self = [super init]))
     {
         // Save some local variables
-        _gameLayer = gameLayer;
         _director = [CCDirector sharedDirector];
         _screen = _director.winSize;
         _controllerDelegate = controllerDelegate;
         _dominantHand = dominantHand;
         _controllerDelegate = controllerDelegate;
+        _buttonDelegate = buttonDelegate;
         
         // Create the buttons and what-nots
         if (controllerType == ControllerTypeJoystick)
@@ -64,13 +65,6 @@
     else // I'm talking tilt controls baby!
         if (!CGPointEqualToPoint(_tiltControlVelocity, CGPointZero))
             [_controllerDelegate controllerUpdated:_tiltControlVelocity delta:delta];
-    
-    // Check for a pause
-    if (_pauseButton.active)
-    {
-        [self pause];
-        _gameLayer.isPausing = YES;
-    }
 }
 
 -(void)pause
@@ -172,7 +166,7 @@
     CGSize fireButtonSize = fireButtonSkin.contentSize;
     fireButtonSkin.position = ccp(_screen.width - padding - fireButtonSize.width / 2, padding + fireButtonSize.height / 2);
     //_fireButton = [[SneakyButton alloc] initWithRect:CGRectMake(0, 0, buttonRadius * 2, buttonRadius * 2)];
-    _fireButton = [DTButton buttonWithRect:CGRectMake(0, 0, buttonRadius * 2, buttonRadius * 2) isHoldable:YES delegate:_gameLayer tag:@"fire"];
+    _fireButton = [DTButton buttonWithRect:CGRectMake(0, 0, buttonRadius * 2, buttonRadius * 2) isHoldable:YES delegate:_buttonDelegate tag:@"fire"];
     fireButtonSkin.button = _fireButton;
     [self addChild:fireButtonSkin];
 }
@@ -184,7 +178,7 @@
     pauseButtonSkin.defaultSprite = [ColoredCircleSprite circleWithColor: ccc4(255, 255, 0, 255)radius:buttonRadius];
     CGSize pauseButtonSize = pauseButtonSkin.contentSize;
     pauseButtonSkin.position = ccp(_screen.width - padding - pauseButtonSize.width / 2, _screen.height - padding - pauseButtonSize.height / 2);
-    _pauseButton = [[SneakyButton alloc] initWithRect:CGRectMake(0, 0, buttonRadius * 2, buttonRadius * 2)];
+    _pauseButton = [DTButton buttonWithRect:CGRectMake(0, 0, buttonRadius * 2, buttonRadius * 2) isHoldable:NO delegate:_buttonDelegate tag:@"pause"];
     pauseButtonSkin.button = _pauseButton;
     [self addChild:pauseButtonSkin];
 }

@@ -13,7 +13,7 @@
 @interface DTGameScene : CCScene
 {
     @private
-    DTLevel *_level;
+    DTLevel *_level; // Keep a strong reference to the level
 }
 
 +(id)sceneWithLevel:(DTLevel *)level;

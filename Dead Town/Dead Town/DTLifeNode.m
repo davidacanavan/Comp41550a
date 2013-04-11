@@ -47,7 +47,7 @@
     ccDrawSolidRect(_topLeftInternal, _currentLifeInternal, ccc4f(0, 250, 0, 255)); // Fill life
 }
 
--(void)lifeChangedFrom:(float)oldLife model:(DTLifeModel *)lifeModel
+-(void)lifeChangedFrom:(float)oldLife model:(DTLifeModel *)lifeModel character:(DTCharacter *)character
 {
     CGRect box = self.boundingBox;
     float barLength = [lifeModel getPercentage] * _maxBarLength;
