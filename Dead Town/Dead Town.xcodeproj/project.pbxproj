@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		2B05BCA31708BDD700D91DEB /* DTRemotePlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B05BCA21708BDD700D91DEB /* DTRemotePlayer.m */; };
+		2B05C4DF17179EFE0099DC6A /* DTPathFindZombie.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B05C4DE17179EFE0099DC6A /* DTPathFindZombie.m */; };
+		2B1B755D17171ECB000A4FAB /* Hospital_Tile4.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B1B755C17171ECB000A4FAB /* Hospital_Tile4.png */; };
 		2B3025CA16D93FBD00A3C0F1 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B3025C916D93FBD00A3C0F1 /* Default.png */; };
 		2B3025CF16D941ED00A3C0F1 /* TUA_Screen-02.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B3025CE16D941ED00A3C0F1 /* TUA_Screen-02.png */; };
 		2B36587716D693D800720844 /* DTLifeNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B36587616D693D800720844 /* DTLifeNode.m */; };
@@ -203,6 +205,9 @@
 /* Begin PBXFileReference section */
 		2B05BCA11708BDD700D91DEB /* DTRemotePlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTRemotePlayer.h; sourceTree = "<group>"; };
 		2B05BCA21708BDD700D91DEB /* DTRemotePlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTRemotePlayer.m; sourceTree = "<group>"; };
+		2B05C4DD17179EFE0099DC6A /* DTPathFindZombie.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTPathFindZombie.h; sourceTree = "<group>"; };
+		2B05C4DE17179EFE0099DC6A /* DTPathFindZombie.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTPathFindZombie.m; sourceTree = "<group>"; };
+		2B1B755C17171ECB000A4FAB /* Hospital_Tile4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Hospital_Tile4.png; sourceTree = "<group>"; };
 		2B3025C916D93FBD00A3C0F1 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		2B3025CE16D941ED00A3C0F1 /* TUA_Screen-02.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TUA_Screen-02.png"; sourceTree = "<group>"; };
 		2B36587516D693D700720844 /* DTLifeNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTLifeNode.h; sourceTree = "<group>"; };
@@ -602,6 +607,8 @@
 			children = (
 				2B86919016D3B57D00497D63 /* DTStraightLineZombie.h */,
 				2B86919116D3B57D00497D63 /* DTStraightLineZombie.m */,
+				2B05C4DD17179EFE0099DC6A /* DTPathFindZombie.h */,
+				2B05C4DE17179EFE0099DC6A /* DTPathFindZombie.m */,
 			);
 			name = villians;
 			sourceTree = "<group>";
@@ -715,6 +722,7 @@
 		2B980D3216CAA2370028BB93 /* sprites */ = {
 			isa = PBXGroup;
 			children = (
+				2B1B755C17171ECB000A4FAB /* Hospital_Tile4.png */,
 				2BEA51361716505300D2804E /* Hospital_Tile3.png */,
 				2BDD70B916E0ED1A00A31DD5 /* dt_intro_one_player-hd.png */,
 				2BDD70BA16E0ED1A00A31DD5 /* dt_intro_two_player-hd.png */,
@@ -1371,6 +1379,7 @@
 				2BDD70BB16E0ED1A00A31DD5 /* dt_intro_one_player-hd.png in Resources */,
 				2BDD70BC16E0ED1A00A31DD5 /* dt_intro_two_player-hd.png in Resources */,
 				2BEA51371716505300D2804E /* Hospital_Tile3.png in Resources */,
+				2B1B755D17171ECB000A4FAB /* Hospital_Tile4.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1517,6 +1526,7 @@
 				2B5722B6171312F700AA0BF9 /* DTLazerBeamNode.m in Sources */,
 				2B5722BB1713B11500AA0BF9 /* DTMaths.m in Sources */,
 				2BEA513B171665E800D2804E /* DTTrigger.m in Sources */,
+				2B05C4DF17179EFE0099DC6A /* DTPathFindZombie.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -22,7 +22,7 @@
 
 -(id)initWithLevel:(DTLevel *)level position:(CGPoint)position life:(float)life;
 {
-    if ((self = [super initWithLevel:level position:position life:life characterType:CharacterTypeHero]))
+    if ((self = [super initWithLevel:level position:position life:life characterType:CharacterTypeHero velocity:-1]))
     {
         // No need to do anything here, the superclass call takes care of initialisation
         // I kept this here in case I wan't to customise some stuff
@@ -75,9 +75,10 @@
     }
 }
 
--(void)fire
+-(void)onFireSuccess
 {
-    [super fire];
+    [super onFireSuccess];
+    
     if (_options.playSoundEffects)
         [[SimpleAudioEngine sharedEngine] playEffect:@"Pew.m4a"];
 }

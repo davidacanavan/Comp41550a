@@ -8,21 +8,20 @@
 
 #import "DTStraightLineZombie.h"
 #import "DTPlayer.h"
-#import "DTGameLayer.h"
 #import "DTWeapon.h"
 #import "DTConstantDamageCalculator.h"
 #import "DTLevel.h"
 
 @implementation DTStraightLineZombie
 
-+(id)zombieWithLevel:(DTLevel *)level position:(CGPoint)position life:(float)life player:(DTPlayer *)player runningDistance:(float)runningDistance
++(id)zombieWithLevel:(DTLevel *)level position:(CGPoint)position life:(float)life velocity:(float)velocity player:(DTPlayer *)player runningDistance:(float)runningDistance
 {
-    return [[self alloc] initWithLevel:level position:position life:life player:player runningDistance:runningDistance];
+    return [[self alloc] initWithLevel:level position:position life:life velocity:velocity player:player runningDistance:runningDistance];
 }
 
--(id)initWithLevel:(DTLevel *)level position:(CGPoint)position life:(float)life player:(DTPlayer *)player runningDistance:(float)runningDistance
+-(id)initWithLevel:(DTLevel *)level position:(CGPoint)position life:(float)life velocity:(float)velocity player:(DTPlayer *)player runningDistance:(float)runningDistance
 {
-    if (self = [super initWithLevel:level position:position life:life characterType:CharacterTypeVillian])
+    if (self = [super initWithLevel:level position:position life:life characterType:CharacterTypeVillian velocity:velocity])
     {
         _player = player;
         _runningDistance = runningDistance;
@@ -41,7 +40,6 @@
 
 -(void)update:(ccTime)delta
 {
-    int velocity = 120;
     CGPoint player = [_player getPosition];
     CGPoint zombie = self.sprite.position;
     float distance = ccpDistance(player, zombie);
@@ -51,7 +49,7 @@
         if (ccpFuzzyEqual(player, zombie, 15))
             return;
         
-        float movingDistance = velocity * delta;
+        float movingDistance = _velocity * delta;
         float slope = ((float) (player.y - zombie.y)) / (player.x - zombie.x);
         float c = player.y - slope * player.x; // The y-intercept
         float xComponentFactor = cos(atanf(slope));

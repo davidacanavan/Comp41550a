@@ -19,7 +19,7 @@
 
 
 -(id)initWithLevel:(DTLevel *)level position:(CGPoint)position life:(float)life
-     characterType:(DTCharacterType)characterType
+     characterType:(DTCharacterType)characterType velocity:(float)velocity
 {
     if (self = [super init])
     {
@@ -32,6 +32,7 @@
         _sprite.position = position;
         _lifeModel = [DTLifeModel lifeModelWithLife:life lower:0 upper:life delegate:nil character:self];
         _characterType = characterType;
+        _velocity = velocity;
         
         // Add the sprite to the layer
         [self addChild:_sprite];
@@ -90,8 +91,13 @@
 // By default we just ask the weapon to fire for us.
 -(void)fire
 {
-    [_weapon fireAtAngle:_bulletAngle from:_sprite.position level:_level];
+    BOOL success = [_weapon fireAtAngle:_bulletAngle from:_sprite.position level:_level];
+    
+    if (success)
+        [self onFireSuccess];
 }
+
+-(void)onFireSuccess {}
 
 -(BOOL)isHero
 {
@@ -118,7 +124,24 @@
     [self addChild:_weapon];
 }
 
+-(CGPoint)newPositionTowardsPosition:(CGPoint)position velocity:(float)velocity delta:(float)delta
+{
+    CGPoint current = self.sprite.position;
+    float movingDistance = velocity * delta; // Use a different velocity, this allows for more variation than the constant
+    float slope = ((float) (position.y - current.y)) / (position.x - current.x);
+    float c = position.y - slope * position.x; // The y-intercept
+    float xComponentFactor = cos(atanf(slope));
+    float x = current.x + movingDistance * xComponentFactor * (position.x < current.x ? -1 : 1);
+    float y = slope * x + c;
+    return ccp(x, y);
+}
+
 @end
+
+
+
+
+
 
 
 

@@ -11,17 +11,17 @@
  <tileset firstgid="4" name="Desert Tiles" tilewidth="64" tileheight="64" spacing="2" margin="2">
   <image source="tmw_desert_spacing-hd.png" width="530" height="398"/>
  </tileset>
- <tileset firstgid="52" name="Hospital Tiles" tilewidth="64" tileheight="64">
-  <image source="Hospital_Tile3.png" width="128" height="640"/>
+ <tileset firstgid="52" name="HT4" tilewidth="64" tileheight="64">
+  <image source="Hospital_Tile4.png" width="128" height="640"/>
  </tileset>
  <layer name="Floor" width="128" height="128">
   <data encoding="base64" compression="zlib">
-   eJzt2otqwjAABdB81F6OPbrNbf//R2sZhdIlaU2sde05cEFFauDWkERDAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB6TZvXTN5WGxmX8NTmMZPn9YbGBeh/3/S/b/rft2H/D0H/W9WE+Pr+GPS/ZU3423Mq+t+OJszvXf/La0L+nKUmsTOa8brups1h8Lx7fBv0fylT6+yaxDoaf16s2/Fr+l/Of+j/LvzOC336azchPfcwz7CP7zYviXyF9fqP5XPmGMgb9pGbU0vmiSX77zN1X5JX0v8hkfG67Zz9p+amqfuSvHN+/8e9nbP/1Nj0X2ft/sdruy73kWvrfxlr9z83U/1TRv/7VtN/f3aXmrdj13sP8X1lbu/Z5WNiXJSp6X9qnzbnjK6/bul5nv7rnNr/1DptmO6MZuo3guPgvSX/6dR/nSXPf07NnPsldf9Q5pr6rwll5vY/XrddS6gzt3+2Sf/7NpzXU3tstusHob+x5g==
+   eJzt2Qlu3CAYBlAO1SWpmsRtutz/Rh0rsmRRwHhhxst70i9lopjBfAZjJwQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAYNDd6q1QPwrHfm/dOZrrM/xWqJeJYzk2+V+b/K9N/tc2zv8pyP+supDe3/8K8j+zLvyfc67kfx5dqM9d/u11ofyeZU2l3tHE+7pPt3oefe5//hzkfy9T++w1lcoo/r5UtvHv9pB/F9rNk7cG/a11hPy/hI91Yaih7S7k945bazFOezA+r7+3es3UnzD//LbKP1W/w33Hctzv4Z41VHy/Omr+U2vqnvIfanxdtlQ6/7i/pXk0rj1Ykv9zpuJ5sGX+uTEdt9dS6X1U/Lk0jnuz5fyvGYel+ef6Jv91Hp1/vLfr62ui7an8S33vwvLn1VS/5b9d/rW1Jv/a76xtYyr/fm8659p6JPnPP/94zUqtV3PafqQ1+cfPQfE4pNr7GdLPlVN75veJfi3Jf866vfb5/4z5Tz2n1ZxzTX5rj6/NP7Vup/4feeX856x7pfGMx7X/2yX3yKFfS7Kb855hbZ0l/5ZVc71sOS9b5J+7j+XuX4+2p/xbjHvp3XXq2TOus8zznNr8433b3qo0v+557Z41/yOTf578r53/eF3f6x5lrXveu442hv8AxAIfqg==
   </data>
  </layer>
  <layer name="Walls" width="128" height="128">
   <data encoding="base64" compression="zlib">
-   eJzt2NEKgjAYgFHB93/nLiKC2PKf29Rt54BQlhp+OprbBgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB87IGFeR311X9u+q9N/7Xpv7Y98/rfOsYT+X+v/3xK5nH6z+PM/F3/fiLPWWqW1PFSx8+9T22TW0e5nucx2r/FdzhnlP6/Y4pnw22kxt5W57Tnva1xG0fzrMhnJdu0HttdB3VG6W+s72Ok/tFjEPeE/mfmjTW/i6+7+9fsq2Z/vOm/tjv6n5nP69/H1f1z32k9LhDTu3/0vm75jIm4nv1LRa8X8/92ntSf65X0f+JCnWh/5qT/2oyna3sBMDYDPQ==
+   eJzt2NuOgyAUBdAm/v8/z9Mk1ogebhZwrcSkFZB4dqW0nw8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8G8LHFdjmdtdhvJfm/zfTf7vJv932xKvr85F2hhLZH8v//VEfsft+0bORdr4rZzc92Mi5yJtfIv8z1JznM13Nn/q/dmY1LlIG9961iqaf4s+0bZSTz8nT5kl/2Otnq7nqmvK2drbqqY9nu2cPi3d1WlWd7+zIm05Y1rlX9K3Rk5tRl/z90ryj95Ty/x/XcerOkXuaVQtn//e+Ufm7EX+eddKjYmuldH5t5v2qzly1hL5510rNaa0NrX518xxbIvkP+r3/ZH8Y/1q9/8r5l+6/zsbU7o21+Sfs27X5rdq/tFr3/WpXRda5V+yN4hYJf+cmuTsuUprHF0/rsY+YZX8e4p+Xlo9lz3uqdf60ctI+dcoff5bf7ZGr9NRTv6jH5F77G3V/Gcm/zT5zztXCzPsUWqN8j00oj8KPgW5
   </data>
  </layer>
  <objectgroup name="Spawns" width="128" height="128">

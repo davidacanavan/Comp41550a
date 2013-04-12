@@ -32,6 +32,7 @@
     // Joystick/Button related variables
     BOOL _joystickActive;
     BOOL _isHoldFiring;
+    float _spawnCheckInterval, _spawnCheckTime;
 }
 
 @property(nonatomic) DTGameLayer *gameLayer;
@@ -46,6 +47,7 @@
 -(BOOL)isWallAtTileCoordinate:(CGPoint)tileCoordinate;
 -(BOOL)isWallAtPosition:(CGPoint)position;
 -(CGPoint)tileCoordinateForPosition:(CGPoint)point;
+-(CGPoint)positionForTileCoordinate:(CGPoint)tileCoordinate; // Returns the centre of the tile
 -(CGRect)createRectFromSpawn:(NSDictionary *)spawn;
 -(CGPoint)createRectCentreFromSpawn:(NSDictionary *)spawn;
 -(CGPoint)centreOfRect:(CGRect)rect;

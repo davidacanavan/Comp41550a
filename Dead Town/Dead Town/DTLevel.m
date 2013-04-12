@@ -18,6 +18,7 @@
 #import "DTLifeModel.h"
 #import "DTButton.h"
 #import "DTTrigger.h"
+#import "DTPathFindZombie.h"
 
 @implementation DTLevel
 
@@ -35,6 +36,10 @@
     {
         // Get all the  map variables
         _map = [CCTMXTiledMap tiledMapWithTMXFile:tmxFile];
+        
+        //for (CCTMXLayer *child in _map.children)
+            //[[child texture] setAliasTexParameters];
+        
         _floor = [_map layerNamed:@"Floor"];
         _walls = [_map layerNamed:@"Walls"];
         _spawnObjects = [_map objectGroupNamed:@"Spawns"];
@@ -47,6 +52,8 @@
         _tileMapWidth = _map.mapSize.width; // Measured in tiles!
         _tileMapHeight = _map.mapSize.height;
         _tileDimension = _map.tileSize.width / _retinaFactor; // Since they're square I don't need to look at the height - measured in pixels and scaled for retina!
+        _spawnCheckInterval = .2;
+        _spawnCheckTime = 0;
     }
     
     return self;
@@ -58,17 +65,24 @@
 -(void)centerViewportOnPosition:(CGPoint) position
 {
     CGPoint centerOfView = ccp(_screen.width / 2, _screen.height / 2);
-    _gameLayer.position = ccpSub(centerOfView, position);
+    CGPoint newPosition = ccpSub(centerOfView, position);
+    _gameLayer.position = ccp((int) newPosition.x, (int) newPosition.y); // Cast to int to prevent artifacts
 }
 
 // Converts the layer point to a tile coordinate (they go from top left)
 -(CGPoint)tileCoordinateForPosition:(CGPoint)point
 {
-    // So if the x or y are beyond the screen bounds then fix them to -1 as an off limit coordinate, otherwise we just adjust to normal
+    // So if the x or y are beyond the screen bounds then fix them to -1 as an off limit coordinate, otherwise we just adjust to normal TODO: why do i do this again?
     int x = (point.x < 0) ? -1 : point.x / _tileDimension;
     int mapDimensionInPoints = _tileMapHeight * _tileDimension;
     int y = (point.y > mapDimensionInPoints) ? -1 : (mapDimensionInPoints - point.y) / _tileDimension;
     return ccp(x, y);
+}
+
+-(CGPoint)positionForTileCoordinate:(CGPoint)tileCoordinate
+{ // Add half to centre the coordinate in the tile
+    return ccp(tileCoordinate.x * _tileDimension + _tileDimension / 2,
+               _tileDimension * _tileMapHeight - (tileCoordinate.y * _tileDimension) + _tileDimension / 2);
 }
 
 -(BOOL)isWallAtPosition:(CGPoint)position
@@ -237,12 +251,6 @@
     [self centerViewportOnPosition:[_player getPosition]]; // Center over the player
     [self onPlayerLoaded]; // Notify the subclass
     
-    // TODO: TEST CODE!!!!
-    DTStraightLineZombie *zombie = [DTStraightLineZombie zombieWithLevel:self position:playerPosition life:100 player:_player runningDistance:250];
-    [_villains addObject:zombie];
-    [zombie.lifeModel addDelegate:self];
-    [self addChild:zombie];
-    
     //DTLazerBeamNode *lazer = [DTLazerBeamNode nodeWithOrigin:_player];
     //lazer.target = zombie;
     //[self addChild: lazer];
@@ -252,12 +260,45 @@
 }
 
 #pragma mark-
-#pragma mark Game Update
+#pragma mark Game Updates
 
 -(void)update:(ccTime)delta
 {
     if (_isHoldFiring)
         [_player fire]; // So let him fire
+    
+    _spawnCheckTime += delta;
+    
+    if (_spawnCheckTime >= _spawnCheckInterval)
+    {
+        [self checkForTriggers];
+        _spawnCheckTime = 0;
+    }
+}
+
+-(void)checkForTriggers
+{
+    DTTrigger *triggerToBeRemoved = nil; // TODO: This assumes only one trigger is hit at a time, pretty reasonable me thinks
+    
+    for (DTTrigger *trigger in _triggers)
+    {
+        if (CGRectIntersectsRect(_player.sprite.boundingBox, trigger.rect))
+        {
+            NSDictionary *triggerVariables = [_triggerObjects objectNamed:trigger.name];
+            NSDictionary *spawnDict = [_spawnObjects objectNamed:[NSString stringWithFormat:@"ES%@", [triggerVariables objectForKey:@"ES"]]];
+            CGPoint spawnPoint = [self createRectCentreFromSpawn:spawnDict];
+            //DTStraightLineZombie *zombie = [DTStraightLineZombie zombieWithLevel:self position:spawnPoint
+                //life:100 velocity:120 player:_player runningDistance:250];
+            DTPathFindZombie *zombie = [DTPathFindZombie zombieWithLevel:self position:spawnPoint life:100 velocity:50 player:_player];
+            [_villains addObject:zombie];
+            [zombie.lifeModel addDelegate:self];
+            [self addChild:zombie];
+            triggerToBeRemoved = trigger; // Prevent lots of them coming along
+        }
+    }
+    
+    if (triggerToBeRemoved)
+        [_triggers removeObject:triggerToBeRemoved];
 }
 
 #pragma mark-

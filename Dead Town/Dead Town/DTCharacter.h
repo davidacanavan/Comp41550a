@@ -22,7 +22,7 @@ typedef enum {CharacterTypeHero, CharacterTypeVillian} DTCharacterType;
     DTOptions *_options; // General settings singleton
     // The angle a bullet should fire at to be right on target.
     // This is different to the angle the sprite is facing but turnToFacePoint calculates both.
-    float _bulletAngle;
+    float _bulletAngle, _velocity;
     
     // Various animation objects we'll need for the characters.
     CCRepeatForever *_movingAction;
@@ -40,7 +40,7 @@ typedef enum {CharacterTypeHero, CharacterTypeVillian} DTCharacterType;
 
 // Member initializer to create the class - this class should only be used as a base class.
 -(id)initWithLevel:(DTLevel *)level position:(CGPoint)position life:(float)life
-        characterType:(DTCharacterType)characterType;
+characterType:(DTCharacterType)characterType velocity:(float)velocity;
 // Moves the character's sprite to the given board position.
 -(void)moveToPosition:(CGPoint)position;
 // Rotates the character's sprite to face the given point.
@@ -55,6 +55,9 @@ typedef enum {CharacterTypeHero, CharacterTypeVillian} DTCharacterType;
 -(BOOL)isHero;
 -(BOOL)isVillian;
 -(BOOL)isFriendlyWithCharacter:(DTCharacter *)character;
+-(void)onFireSuccess;
+-(CGPoint)newPositionTowardsPosition:(CGPoint)position velocity:(float)velocity  delta:(float)delta;
+
 
 // --- Various controllable player methods that are called in response to joystick movements
 // or remote 'player two' connections.

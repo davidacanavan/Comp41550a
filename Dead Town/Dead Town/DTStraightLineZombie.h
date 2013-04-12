@@ -18,7 +18,7 @@
     float _runningDistance;
 }
 
-+(id)zombieWithLevel:(DTLevel *)level position:(CGPoint)position life:(float)life
++(id)zombieWithLevel:(DTLevel *)level position:(CGPoint)position life:(float)life velocity:(float)velocity
     player:(DTPlayer *)player runningDistance:(float)runningDistance;
 
 @end
