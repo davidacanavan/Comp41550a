@@ -66,7 +66,7 @@
 {
     CGPoint centerOfView = ccp(_screen.width / 2, _screen.height / 2);
     CGPoint newPosition = ccpSub(centerOfView, position);
-    _gameLayer.position = ccp((int) newPosition.x, (int) newPosition.y); // Cast to int to prevent artifacts
+    _gameLayer.position = ccp( newPosition.x,  newPosition.y); // Cast to int to prevent artifacts
 }
 
 // Converts the layer point to a tile coordinate (they go from top left)
@@ -82,7 +82,7 @@
 -(CGPoint)positionForTileCoordinate:(CGPoint)tileCoordinate
 { // Add half to centre the coordinate in the tile
     return ccp(tileCoordinate.x * _tileDimension + _tileDimension / 2,
-               _tileDimension * _tileMapHeight - (tileCoordinate.y * _tileDimension) + _tileDimension / 2);
+               _tileDimension * _tileMapHeight - (tileCoordinate.y * _tileDimension) - _tileDimension / 2);
 }
 
 -(BOOL)isWallAtPosition:(CGPoint)position
@@ -288,8 +288,8 @@
             NSDictionary *spawnDict = [_spawnObjects objectNamed:[NSString stringWithFormat:@"ES%@", [triggerVariables objectForKey:@"ES"]]];
             CGPoint spawnPoint = [self createRectCentreFromSpawn:spawnDict];
             //DTStraightLineZombie *zombie = [DTStraightLineZombie zombieWithLevel:self position:spawnPoint
-                //life:100 velocity:120 player:_player runningDistance:250];
-            DTPathFindZombie *zombie = [DTPathFindZombie zombieWithLevel:self position:spawnPoint life:100 velocity:50 player:_player];
+              //  life:100 velocity:120 player:_player runningDistance:250];
+            DTPathFindZombie *zombie = [DTPathFindZombie zombieWithLevel:self position:spawnPoint life:100 velocity:100 player:_player];
             [_villains addObject:zombie];
             [zombie.lifeModel addDelegate:self];
             [self addChild:zombie];

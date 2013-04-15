@@ -35,44 +35,20 @@
 -(CCSprite *)loadSpriteAndAnimations
 {
     // Set up the animation frames
-    CCSpriteBatchNode *spriteBatchNode = [CCSpriteBatchNode batchNodeWithFile:@"WalkingMan.png" capacity:10];
+    CCSpriteBatchNode *spriteBatchNode = [CCSpriteBatchNode batchNodeWithFile:@"player_01.png" capacity:10];
     [self addChild:spriteBatchNode]; // Doesn't render apparently but still needs to be part of the tree
-    [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"WalkingMan.plist"];
+    [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"player_01.plist"];
     NSMutableArray *frames = [NSMutableArray array];
     
     for (int i = 0; i < 8; i++)
     {
-        CCSpriteFrame *frame = [[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:[NSString stringWithFormat:@"Sprite%d.png", i]];
+        CCSpriteFrame *frame = [[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:[NSString stringWithFormat:@"sprite_0%d.png", i]];
         [frames addObject:frame];
     }
     
     _movingAnimation = [CCAnimation animationWithSpriteFrames:frames delay:0.1f]; // TODO: should i cache the animation or what?
     _movingAction = [CCRepeatForever actionWithAction:[CCAnimate actionWithAnimation:_movingAnimation]];
-    return [CCSprite spriteWithSpriteFrameName:@"Sprite0.png"];
-}
-
--(void)notifyMovementStart
-{
-    // A boolean to add extra safety to the calls - in case anything trips over each other
-    if (!_isMovingActionRunning)
-    {
-        [self.sprite runAction:_movingAction];
-        _isMovingActionRunning = YES;
-    }
-}
-
--(void)notifyMovementSpeed:(float)speed
-{
-}
-
--(void)notifyMovementEnd
-{
-    if (_isMovingActionRunning)
-    {
-        [self.sprite stopAction:_movingAction];
-        self.sprite.displayFrame = [[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:@"Sprite0.png"];
-        _isMovingActionRunning = NO;
-    }
+    return [CCSprite spriteWithSpriteFrameName:@"sprite_00.png"];
 }
 
 -(void)onFireSuccess

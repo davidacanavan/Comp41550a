@@ -33,9 +33,25 @@
     return self;
 }
 
+// Override - Set up the animations in the superclass call
 -(CCSprite *)loadSpriteAndAnimations
 {
-    return [CCSprite spriteWithFile:@"zombie_90%-11.png"];
+    int frameCount = 7, startNumber = 1;
+    CCSpriteBatchNode *spriteBatchNode = [CCSpriteBatchNode batchNodeWithFile:@"zombie_01.png" capacity:frameCount];
+    [self addChild:spriteBatchNode]; // Doesn't render apparently but still needs to be part of the tree
+    [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"zombie_01.plist"];
+    NSMutableArray *frames = [NSMutableArray array];
+    
+    for (int i = startNumber; i < startNumber + frameCount; i++)
+    {
+        CCSpriteFrame *frame = [[CCSpriteFrameCache sharedSpriteFrameCache]
+            spriteFrameByName:[NSString stringWithFormat:@"sprite_0%d.png", i]];
+        [frames addObject:frame];
+    }
+    
+    _movingAnimation = [CCAnimation animationWithSpriteFrames:frames delay:0.1f]; // TODO: should i cache the animation or what?
+    _movingAction = [CCRepeatForever actionWithAction:[CCAnimate actionWithAnimation:_movingAnimation]];
+    return [CCSprite spriteWithSpriteFrameName:@"sprite_01.png"];
 }
 
 -(void)update:(ccTime)delta

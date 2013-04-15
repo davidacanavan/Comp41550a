@@ -18,11 +18,11 @@
     {
         CGSize screen = [[CCDirector sharedDirector] winSize];
         
-        CCSprite *backgroundSprite = [CCSprite spriteWithFile:@"dt_intro_background.png"];
+        CCSprite *backgroundSprite = [CCSprite spriteWithFile:@"intro_background.png"];
         backgroundSprite.position = ccp(screen.width / 2, screen.height / 2);
         [self addChild: backgroundSprite z:-1];
         
-        _titleSprite = [CCSprite spriteWithFile:@"dt_intro_title_0.png"];
+        _titleSprite = [CCSprite spriteWithFile:@"intro_title.png"];
         _titleSprite.position = ccp(screen.width / 2, screen.height + _titleSprite.boundingBox.size.height / 2);
         [self addChild: _titleSprite z:1];
         
@@ -30,8 +30,8 @@
         //_headingSprite.position = ccp(screen.width / 2, screen.height / 2);
         //[self addChild:_headingSprite];
         
-        CCMenuItemImage *onePlayerMenuItem = [GooeyStatics menuItemWithImageName:@"dt_intro_one_player.png" target:self selector:@selector(onePlayerModeSelected)];
-        CCMenuItemImage *twoPlayerMenuItem = [GooeyStatics menuItemWithImageName:@"dt_intro_two_player.png" target:self selector:@selector(twoPlayerModeSelected)];
+        CCMenuItemImage *onePlayerMenuItem = [GooeyStatics menuItemWithImageName:@"intro_one_player.png" target:self selector:@selector(onePlayerModeSelected)];
+        CCMenuItemImage *twoPlayerMenuItem = [GooeyStatics menuItemWithImageName:@"intro_two_player.png" target:self selector:@selector(twoPlayerModeSelected)];
         
         _menu = [CCMenu menuWithItems:onePlayerMenuItem, twoPlayerMenuItem, nil];
         [_menu alignItemsHorizontallyWithPadding:40];

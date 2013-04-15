@@ -83,9 +83,29 @@
     _lifeModel.life = life;
 }
 
--(void)notifyMovementStart {}
--(void)notifyMovementEnd {}
--(void)notifyMovementSpeed:(float)speed {}
+
+-(void)notifyMovementStart
+{
+    // A boolean to add extra safety to the calls - in case anything trips over each other
+    if (!_isMovingActionRunning)
+    {
+        [self.sprite runAction:_movingAction];
+        _isMovingActionRunning = YES;
+    }
+}
+
+-(void)notifyMovementSpeed:(float)speed {} // TODO: change the speed with the controller for the player
+
+-(void)notifyMovementEnd
+{
+    if (_isMovingActionRunning)
+    {
+        [self.sprite stopAction:_movingAction];
+        self.sprite.displayFrame = [[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:@"sprite_00.png"];
+        _isMovingActionRunning = NO;
+    }
+}
+
 -(CCNode *)loadSpriteAndAnimations {return nil;}
 
 // By default we just ask the weapon to fire for us.
@@ -128,11 +148,24 @@
 {
     CGPoint current = self.sprite.position;
     float movingDistance = velocity * delta; // Use a different velocity, this allows for more variation than the constant
-    float slope = ((float) (position.y - current.y)) / (position.x - current.x);
-    float c = position.y - slope * position.x; // The y-intercept
-    float xComponentFactor = cos(atanf(slope));
-    float x = current.x + movingDistance * xComponentFactor * (position.x < current.x ? -1 : 1);
-    float y = slope * x + c;
+    float x, y;
+    CGPoint diff = ccpSub(position, current);
+    
+    // Better check if this isn't too good so we don't get an overflow an can move along the y
+    if (fabsf(diff.x) < X_SENSITIVITY)
+    {
+        x = current.x;
+        y = current.y + (diff.y > 0 ? 1 : -1) * movingDistance;
+    }
+    else
+    {
+        float slope = ((float) (diff.y)) / (diff.x);
+        float c = position.y - slope * position.x; // The y-intercept
+        float xComponentFactor = cos(atanf(slope));
+        x = current.x + movingDistance * xComponentFactor * (position.x < current.x ? -1 : 1);
+        y = slope * x + c;
+    }
+    
     return ccp(x, y);
 }
 

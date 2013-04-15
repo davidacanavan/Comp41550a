@@ -50,7 +50,7 @@
     
     if ([levelName isEqualToString:@"Hospital"])
     {
-        DTLevel *level = [DTLevel levelWithTMXFile:@"DTHospitalF1.tmx"];
+        DTLevel *level = [DTLevel levelWithTMXFile:@"hospitalF1.tmx"];
         [director replaceScene: [CCTransitionFade transitionWithDuration: 1.0
                 scene: [DTGameScene sceneWithLevel:level] withColor:ccWHITE]];
     }

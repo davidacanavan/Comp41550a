@@ -8,6 +8,8 @@
 
 #import "cocos2d.h"
 
+#define X_SENSITIVITY 0.05
+
 @class DTLevel;
 @class DTOptions;
 @class DTWeapon;

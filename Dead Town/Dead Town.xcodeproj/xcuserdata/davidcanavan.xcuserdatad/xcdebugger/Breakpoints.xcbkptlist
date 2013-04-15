@@ -8,11 +8,24 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Dead Town/DTPathFindZombie.m"
-         timestampString = "387433684.408491"
+         timestampString = "387750114.030766"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "95"
-         endingLineNumber = "95"
+         startingLineNumber = "180"
+         endingLineNumber = "180"
+         landmarkName = "-expandNode:toOpenNodes:withTargetNode:andClosedNodes:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Dead Town/DTPathFindZombie.m"
+         timestampString = "387750114.030766"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "100"
+         endingLineNumber = "100"
          landmarkName = "-findPathToPlayer"
          landmarkType = "5">
       </FileBreakpoint>
@@ -21,25 +34,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Dead Town/DTPathFindZombie.m"
-         timestampString = "387433756.72842"
+         timestampString = "387750114.030766"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "115"
-         endingLineNumber = "115"
-         landmarkName = "-findPathToPlayer"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "Dead Town/DTPathFindZombie.m"
-         timestampString = "387433946.267872"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "131"
-         endingLineNumber = "131"
-         landmarkName = "-findPathToPlayer"
+         startingLineNumber = "73"
+         endingLineNumber = "73"
+         landmarkName = "-update:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

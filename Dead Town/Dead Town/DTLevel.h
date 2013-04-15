@@ -27,7 +27,7 @@
     NSMutableArray *_triggers;
     // Layout stuff and coordinates
     float _retinaFactor;
-    int _tileMapWidth, _tileMapHeight, _tileDimension;
+    int _tileMapWidth, _tileMapHeight;
     CGSize _screen;
     // Joystick/Button related variables
     BOOL _joystickActive;
@@ -38,6 +38,7 @@
 @property(nonatomic) DTGameLayer *gameLayer;
 @property(nonatomic) DTPlayer *player;
 @property(nonatomic, readonly) NSMutableArray *villains;
+@property(nonatomic, readonly) int tileDimension;
 
 +(id)levelWithTMXFile:(NSString *)tmxFile;
 -(id)initWithTMXFile:(NSString *)tmxFile;

@@ -15,11 +15,13 @@
 @interface PathNode : NSObject
 
 @property(nonatomic) CGPoint tileCoordinate;
-@property(nonatomic) float costFromCurrent, costToEnd;
+@property(nonatomic) float costFromStart, costToEnd;
 @property(nonatomic, readonly) float totalCost;
 @property(nonatomic, strong) PathNode *parent; // TODO: Is weak ok to use here? Better read up on this better!
 
-+(id)nodeWithTileCoordinate:(CGPoint)tileCoordinate costFromCurrent:(float)costFromCurrent costToEnd:(float)costToEnd parent:(PathNode *)parent;
++(id)nodeWithTileCoordinate:(CGPoint)tileCoordinate costFromStart:(float)costFromStart costToEnd:(float)costToEnd parent:(PathNode *)parent;
+-(BOOL)isEqual:(id)node;
+-(NSString *)description;
 
 @end
 
@@ -37,34 +39,46 @@
         _player = player;
         self.weapon = [DTWeapon weaponWithFireRate:2 damageCalculator:[DTConstantDamageCalculator damageWithDamage:5]
                                              range:50];
-        _currentPathIndex = 0; // Where we are now in the path array
+        _currentPathIndex = -1; // Let's assume we're not on a path at all
+        [self notifyMovementStart];
         [self scheduleUpdate];
     }
     
     return self;
 }
 
+// Override - Set up the animations in the superclass call
 -(CCSprite *)loadSpriteAndAnimations
 {
-    return [CCSprite spriteWithFile:@"zombie_90%-11.png"];
+    int frameCount = 7, startNumber = 1;
+    CCSpriteBatchNode *spriteBatchNode = [CCSpriteBatchNode batchNodeWithFile:@"zombie_01.png" capacity:frameCount];
+    [self addChild:spriteBatchNode]; // Doesn't render apparently but still needs to be part of the tree
+    [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"zombie_01.plist"];
+    NSMutableArray *frames = [NSMutableArray array];
+    
+    for (int i = startNumber; i < startNumber + frameCount; i++)
+    {
+        CCSpriteFrame *frame = [[CCSpriteFrameCache sharedSpriteFrameCache]
+                                spriteFrameByName:[NSString stringWithFormat:@"sprite_0%d.png", i]];
+        [frames addObject:frame];
+    }
+    
+    _movingAnimation = [CCAnimation animationWithSpriteFrames:frames delay:0.05f]; // TODO: should i cache the animation or what?
+    _movingAction = [CCRepeatForever actionWithAction:[CCAnimate actionWithAnimation:_movingAnimation]];
+    return [CCSprite spriteWithSpriteFrameName:@"sprite_01.png"];
 }
 
 -(void)update:(ccTime)delta
 {
-    if (_currentPath) // Then we're following a path right now!
+    if (_currentPathIndex >= 0) // Then we're following a path right now! ... And still have some left
     {
         PathNode *node = [_currentPath objectAtIndex:_currentPathIndex];
         CGPoint targetPosition = [_level positionForTileCoordinate:node.tileCoordinate]; // TODO: Surely i can just store this!
         
-        if (ccpFuzzyEqual(self.sprite.position, _player.sprite.position, 15)) // We're at the player
-            _currentPath = nil;
-        else if (ccpFuzzyEqual(targetPosition, self.sprite.position, 5)) // We have arrived at the next tile
-        {
-            _currentPathIndex++;
-            
-            if (_currentPathIndex == [_currentPath count]) // Then we are at the final tile
-                _currentPath = nil;
-        }
+        if (ccpFuzzyEqual(self.sprite.position, _player.sprite.position, _level.tileDimension * 1.5)) // We're at the player
+            _currentPathIndex = -1;
+        else if (ccpFuzzyEqual(targetPosition, self.sprite.position, 2)) // We have arrived at the next tile
+            _currentPathIndex--;
         else // Move some more to the next tile
         {
             CGPoint newPosition = [super newPositionTowardsPosition:targetPosition velocity:_velocity delta:delta];
@@ -72,12 +86,12 @@
             self.sprite.position = newPosition;
         }
     }
-    else if (ccpFuzzyEqual(self.sprite.position, _player.sprite.position, 15))
+    else if (ccpFuzzyEqual(self.sprite.position, _player.sprite.position, _level.tileDimension * 1.5))
         ; // Then we're attacking! TODO: Put in a section where he acts like a straight line zombie
     else // Better get a path...
     {
         _currentPath = [self findPathToPlayer];
-        _currentPathIndex = 0;
+        _currentPathIndex = _currentPath ? [_currentPath count] - 1 : -1; // -1 if we didn't find a path
     }
 }
 
@@ -87,79 +101,143 @@
     CGPoint playerTileCoordinate = [_level tileCoordinateForPosition:_player.sprite.position];
     NSMutableArray *openNodes = [NSMutableArray array];
     NSMutableArray *closedNodes = [NSMutableArray array];
-    PathNode *rootNode = [PathNode nodeWithTileCoordinate:zombieTileCoordinate costFromCurrent:0
+    PathNode *rootNode = [PathNode nodeWithTileCoordinate:zombieTileCoordinate costFromStart:0
             costToEnd:ccpDistance(zombieTileCoordinate, playerTileCoordinate) parent:nil];
-    PathNode *currentNode = rootNode;
-    [closedNodes addObject:currentNode];
+    PathNode *targetNode = [PathNode nodeWithTileCoordinate:playerTileCoordinate costFromStart:0
+            costToEnd:0 parent:nil]; // For checking
+    [openNodes addObject:rootNode]; // So we'll start at the root and go from there
+    BOOL pathFound = NO;
+    NSMutableArray *finalPath = nil;
     
-    while (!CGPointEqualToPoint(currentNode.tileCoordinate, playerTileCoordinate)) // So keep going until we have the player
+    do // So keep going until we have the player
     {
-        // Look in all 8 directions and if we don't have a wall we can add the node to the open list
-        for (int row = -1; row <= 1; row++)
-            for (int col = -1; col <= 1; col++)
-            {
-                if (row == 0 && col == 0) // This is the current tile so we don't care
-                    continue;
-            
-                CGPoint tileCoordinate = ccpAdd(ccp(row, col), currentNode.tileCoordinate);
-                
-                if ([_level isWallAtTileCoordinate:tileCoordinate]) // If it's a wall ignore it
-                    continue;
-                
-                PathNode *node = [PathNode nodeWithTileCoordinate:tileCoordinate costFromCurrent:currentNode.costFromCurrent + 1
-                        costToEnd:ccpDistance(tileCoordinate, playerTileCoordinate) parent:currentNode];
-                [openNodes addObject:node];
-            }
+        PathNode *lowest = [self findNodeWithMinumumScore:openNodes]; // Get our lowest costing node from the open set
+        [closedNodes addObject:lowest]; // Add it to the searched nodes
+        [openNodes removeObject:lowest]; // Remove it from the ones left to search
         
-        float currentCost = 1000000000; // Start with something unattainably big
-        PathNode *lowest = nil; // TODO: use a priority queue, array's are pretty inefficient for this
-        
-        for (PathNode *node in openNodes) // Get the node with the lowest cost
+        if (CGPointEqualToPoint(lowest.tileCoordinate, playerTileCoordinate)) // We have arrived dear sirs!
         {
-            if (node.totalCost < currentCost) // TODO: Improve this for a tie - pick the child of the last iteration
-            { // TODO: make sure we don't revisit by checking for the parent node when we unfurl the child above
-                currentCost = node.totalCost;
-                lowest = node;
+            pathFound = YES;
+            finalPath = [NSMutableArray array];
+            
+            while (lowest != nil)
+            {
+                //NSLog(@"%@", lowest);
+                [finalPath addObject:lowest];
+                lowest = lowest.parent;
             }
+            
+            //NSLog(@"END!");
+            
+            [finalPath removeLastObject]; // This is the zombie's location so he doesn't need to care, he already knows he's here
+            
+            break;
         }
         
-        [openNodes removeObject:lowest]; // Make sure we don't go back here
-        currentNode = lowest;
-    }
+        [self expandNode:lowest toOpenNodes:openNodes withTargetNode:targetNode andClosedNodes:closedNodes];
+    } while ([openNodes count] > 0); // While we still have stuff to search
     
-    // Now lets remake the node chain so that the root is the first... TODO: This can be done waaaya better dave
-    NSMutableArray *stack = [NSMutableArray array];
+    return finalPath;
+}
+
+float ccpManhattanDistance(CGPoint current, CGPoint target)
+{
+    return fabsf(current.x - target.x) + fabsf(current.y - target.y);
+}
+
+-(PathNode *)findNodeWithMinumumScore:(NSMutableArray *)openNodes
+{
+    float currentCost = 1000000000; // Start with something unattainably big
+    PathNode *lowest = nil; // TODO: use a priority queue, array's are pretty inefficient for this
     
-    while (currentNode.parent != nil)
+    for (PathNode *node in openNodes) // Get the node with the lowest cost
     {
-        [stack addObject:currentNode];
-        currentNode = currentNode.parent;
+        if (node.totalCost < currentCost) // TODO: Improve this for a tie - pick the child of the last iteration
+        { // TODO: make sure we don't revisit by checking for the parent node when we unfurl the child above
+            currentCost = node.totalCost;
+            lowest = node;
+        }
     }
     
-    return stack;
+    return lowest;
+}
+
+-(void)expandNode:(PathNode *)currentNode toOpenNodes:(NSMutableArray *)openNodes withTargetNode:(PathNode *)targetNode andClosedNodes:(NSMutableArray *)closedNodes
+{
+    int moveCost = 1;
+    
+    // Look in all 8 directions and if we don't have a wall we can add the node to the open list
+    for (int row = -1; row <= 1; row++)
+    {
+        for (int col = -1; col <= 1; col++)
+        {
+            CGPoint tileCoordinate = ccpAdd(ccp(row, col), currentNode.tileCoordinate);
+            
+            if (![_level isWallAtTileCoordinate:tileCoordinate]) // If it's a wall ignore it
+            {
+                PathNode *node = [PathNode nodeWithTileCoordinate:tileCoordinate costFromStart:currentNode.costFromStart + moveCost costToEnd:ccpManhattanDistance(tileCoordinate, targetNode.tileCoordinate) parent:currentNode];
+                
+                if ([closedNodes containsObject:node]) // If it's in the closed nodes we just ignore it
+                    continue;
+                
+                int index = [openNodes indexOfObject:node];
+                
+                if (index == NSNotFound) // Add it to the the open list
+                    [openNodes addObject:node];
+                else // It's already there so we'll have to update the score
+                {
+                    PathNode *prior = [openNodes objectAtIndex:index]; // Get the previously calculated node
+                    
+                    // We have a more efficient way of getting here
+                    if (currentNode.costFromStart + moveCost < node.costFromStart)
+                        prior.costFromStart = currentNode.costFromStart + moveCost;
+                }
+            }
+        }
+    }
 }
 
 @end
 
 @implementation PathNode
 
-+(id)nodeWithTileCoordinate:(CGPoint)tileCoordinate costFromCurrent:(float)costFromCurrent costToEnd:(float)costToEnd parent:(PathNode *)parent
++(id)nodeWithTileCoordinate:(CGPoint)tileCoordinate costFromStart:(float)costFromStart costToEnd:(float)costToEnd parent:(PathNode *)parent
 {
-    return [[self alloc] initWithTileCoordinate:tileCoordinate costFromCurrent:costFromCurrent costToEnd:costToEnd parent:(PathNode *)parent];
+    return [[self alloc] initWithTileCoordinate:tileCoordinate costFromStart:costFromStart costToEnd:costToEnd parent:(PathNode *)parent];
 }
 
--(id)initWithTileCoordinate:(CGPoint)tileCoordinate costFromCurrent:(float)costFromCurrent costToEnd:(float)costToEnd parent:(PathNode *)parent
+-(id)initWithTileCoordinate:(CGPoint)tileCoordinate costFromStart:(float)costFromStart costToEnd:(float)costToEnd parent:(PathNode *)parent
 {
     if (self = [super init])
     {
         _tileCoordinate = tileCoordinate;
-        _costFromCurrent = costFromCurrent;
+        _costFromStart = costFromStart;
         _costToEnd = costToEnd;
-        _totalCost = costFromCurrent + costToEnd;
         _parent = parent;
     }
     
     return self;
+}
+
+-(float)totalCost
+{
+    return _costFromStart + _costToEnd;
+}
+
+-(BOOL)isEqual:(id)node
+{
+    if ([node isKindOfClass:[PathNode class]])
+    {
+        PathNode *pathNode = (PathNode *) node; // TODO: do i have to cast here?
+        return CGPointEqualToPoint(self.tileCoordinate, pathNode.tileCoordinate);
+    }
+                
+    return NO;
+}
+
+-(NSString *)description
+{
+    return [NSString stringWithFormat:@"%f, %f", self.tileCoordinate.x, self.tileCoordinate.y];
 }
 
 @end
