@@ -59,13 +59,13 @@
     for (int i = startNumber; i < startNumber + frameCount; i++)
     {
         CCSpriteFrame *frame = [[CCSpriteFrameCache sharedSpriteFrameCache]
-                                spriteFrameByName:[NSString stringWithFormat:@"sprite_0%d.png", i]];
+                                spriteFrameByName:[NSString stringWithFormat:@"zombie_01_0%d.png", i]];
         [frames addObject:frame];
     }
     
     _movingAnimation = [CCAnimation animationWithSpriteFrames:frames delay:0.05f]; // TODO: should i cache the animation or what?
     _movingAction = [CCRepeatForever actionWithAction:[CCAnimate actionWithAnimation:_movingAnimation]];
-    return [CCSprite spriteWithSpriteFrameName:@"sprite_01.png"];
+    return [CCSprite spriteWithSpriteFrameName:@"zombie_01_01.png"];
 }
 
 -(void)update:(ccTime)delta

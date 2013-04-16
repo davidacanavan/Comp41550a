@@ -42,13 +42,14 @@
     
     for (int i = 0; i < 8; i++)
     {
-        CCSpriteFrame *frame = [[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:[NSString stringWithFormat:@"sprite_0%d.png", i]];
+        CCSpriteFrame *frame = [[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:[NSString stringWithFormat:@"player_01_0%d.png", i]];
         [frames addObject:frame];
     }
     
+    _defaultFrameName = @"player_01_00.png";
     _movingAnimation = [CCAnimation animationWithSpriteFrames:frames delay:0.1f]; // TODO: should i cache the animation or what?
     _movingAction = [CCRepeatForever actionWithAction:[CCAnimate actionWithAnimation:_movingAnimation]];
-    return [CCSprite spriteWithSpriteFrameName:@"sprite_00.png"];
+    return [CCSprite spriteWithSpriteFrameName:_defaultFrameName];
 }
 
 -(void)onFireSuccess

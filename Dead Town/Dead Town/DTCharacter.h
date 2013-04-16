@@ -30,6 +30,7 @@ typedef enum {CharacterTypeHero, CharacterTypeVillian} DTCharacterType;
     CCRepeatForever *_movingAction;
     CCAnimation *_movingAnimation;
     BOOL _isMovingActionRunning;
+    NSString *_defaultFrameName;
 }
 
 // The current weapon of the character
@@ -52,7 +53,7 @@ characterType:(DTCharacterType)characterType velocity:(float)velocity;
 -(void)setPosition:(CGPoint)position;
 // Call this to request a fire, by default it calls fire on the current weapon.
 -(void)fire;
-// This is called by charater when initialising to load and setup the various animations we may need for the characters. The returned node is assigned to the local variable _sprite - returns nil by default.
+// This is called by charater when initialising to load and setup the various animations we may need for the characters. The returned node is assigned to the local variable _sprite - returns nil by default. Also set _defaultFrameName - TODO: Put this in the constructor
 -(CCSprite *)loadSpriteAndAnimations;
 -(BOOL)isHero;
 -(BOOL)isVillian;

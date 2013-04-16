@@ -101,7 +101,7 @@
     if (_isMovingActionRunning)
     {
         [self.sprite stopAction:_movingAction];
-        self.sprite.displayFrame = [[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:@"sprite_00.png"];
+        self.sprite.displayFrame = [[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:_defaultFrameName];
         _isMovingActionRunning = NO;
     }
 }
