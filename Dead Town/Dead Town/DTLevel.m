@@ -214,6 +214,7 @@
 #pragma mark-
 #pragma mark Subclass Overridables
 
+-(void)onGameLayerReady {}
 -(void)onPlayerLoaded {}
 -(void)onVillainKilled:(DTCharacter *)character {}
 -(void)onTriggerEncountered:(DTTrigger *)trigger {}
@@ -251,11 +252,8 @@
     [self centerViewportOnPosition:[_player getPosition]]; // Center over the player
     [self onPlayerLoaded]; // Notify the subclass
     
-    //DTLazerBeamNode *lazer = [DTLazerBeamNode nodeWithOrigin:_player];
-    //lazer.target = zombie;
-    //[self addChild: lazer];
-    
     [_gameLayer addChild:self]; // Just so we can get the update
+    [self onGameLayerReady]; // Notify the subclass that they can add things in
     [self scheduleUpdate];
 }
 
@@ -269,7 +267,7 @@
     
     _spawnCheckTime += delta;
     
-    if (_spawnCheckTime >= _spawnCheckInterval)
+    if (_shouldCheckForTriggers && _spawnCheckTime >= _spawnCheckInterval)
     {
         [self checkForTriggers];
         _spawnCheckTime = 0;
@@ -284,15 +282,7 @@
     {
         if (CGRectIntersectsRect(_player.sprite.boundingBox, trigger.rect))
         {
-            NSDictionary *triggerVariables = [_triggerObjects objectNamed:trigger.name];
-            NSDictionary *spawnDict = [_spawnObjects objectNamed:[NSString stringWithFormat:@"ES%@", [triggerVariables objectForKey:@"ES"]]];
-            CGPoint spawnPoint = [self createRectCentreFromSpawn:spawnDict];
-            //DTStraightLineZombie *zombie = [DTStraightLineZombie zombieWithLevel:self position:spawnPoint
-              //  life:100 velocity:120 player:_player runningDistance:250];
-            DTPathFindZombie *zombie = [DTPathFindZombie zombieWithLevel:self position:spawnPoint life:100 velocity:100 player:_player];
-            [_villains addObject:zombie];
-            [zombie.lifeModel addDelegate:self];
-            [self addChild:zombie];
+            [self onTriggerEncountered:trigger];
             triggerToBeRemoved = trigger; // Prevent lots of them coming along
         }
     }

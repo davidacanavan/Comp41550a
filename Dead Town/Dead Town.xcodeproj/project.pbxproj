@@ -22,6 +22,14 @@
 		2B5722BB1713B11500AA0BF9 /* DTMaths.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B5722BA1713B11500AA0BF9 /* DTMaths.m */; };
 		2B59000B170691AC00DBE43D /* DTLifeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B59000A170691AC00DBE43D /* DTLifeModel.m */; };
 		2B63A3F3171DE84F0075E802 /* Hospital_Tile-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B63A3F2171DE84F0075E802 /* Hospital_Tile-hd.png */; };
+		2B63A3F6171DFCC20075E802 /* DTLevelSelectLevel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B63A3F5171DFCC20075E802 /* DTLevelSelectLevel.m */; };
+		2B63A3F9171DFE330075E802 /* DTHospitalLevel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B63A3F8171DFE330075E802 /* DTHospitalLevel.m */; };
+		2B63A3FF171E0AD00075E802 /* level_select_apartments-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B63A3FB171E0AD00075E802 /* level_select_apartments-hd.png */; };
+		2B63A400171E0AD00075E802 /* level_select_hospital-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B63A3FC171E0AD00075E802 /* level_select_hospital-hd.png */; };
+		2B63A401171E0AD00075E802 /* level_select_officeblock-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B63A3FD171E0AD00075E802 /* level_select_officeblock-hd.png */; };
+		2B63A402171E0AD00075E802 /* level_select_sewer-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B63A3FE171E0AD00075E802 /* level_select_sewer-hd.png */; };
+		2B63A405171E0B090075E802 /* level_select_tileset-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B63A403171E0B090075E802 /* level_select_tileset-hd.png */; };
+		2B63A406171E0B090075E802 /* level_select-hd.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 2B63A404171E0B090075E802 /* level_select-hd.tmx */; };
 		2B86436116D23A02008FEB55 /* DTPausedLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B86436016D23A02008FEB55 /* DTPausedLayer.m */; };
 		2B86436416D25798008FEB55 /* Pew.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 2B86436316D25797008FEB55 /* Pew.m4a */; };
 		2B86436716D25B00008FEB55 /* BackingTrack.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 2B86436616D25B00008FEB55 /* BackingTrack.m4a */; };
@@ -174,13 +182,11 @@
 		2BE0772016B74A720073F28F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BE0771F16B74A720073F28F /* AppDelegate.m */; };
 		2BE0772616B74A720073F28F /* IntroLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BE0772516B74A720073F28F /* IntroLayer.m */; };
 		2BE0773E16B7673D0073F28F /* DTMenuScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BE0773D16B7673D0073F28F /* DTMenuScene.m */; };
-		2BE0774116B767540073F28F /* DTLevelSelectScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BE0774016B767540073F28F /* DTLevelSelectScene.m */; };
 		2BE0774416B768840073F28F /* DTGameScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BE0774316B768840073F28F /* DTGameScene.m */; };
 		2BEA513B171665E800D2804E /* DTTrigger.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BEA513A171665E800D2804E /* DTTrigger.m */; };
 		2BEC4E831705E19D00662EEB /* DTLevel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BEC4E821705E19D00662EEB /* DTLevel.m */; };
 		2BF7A8C716C8631500D3063F /* DTMenuLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BF7A8C616C8631500D3063F /* DTMenuLayer.m */; };
 		2BF7A8C916C864D800D3063F /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2BF7A8C816C864D800D3063F /* Default-568h@2x.png */; };
-		2BF7A8D016C9BB2600D3063F /* DTLevelSelectLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BF7A8CF16C9BB2600D3063F /* DTLevelSelectLayer.m */; };
 		2BF7A8D316C9BB7A00D3063F /* GooeyStatics.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BF7A8D216C9BB7900D3063F /* GooeyStatics.m */; };
 /* End PBXBuildFile section */
 
@@ -215,6 +221,16 @@
 		2B59000A170691AC00DBE43D /* DTLifeModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTLifeModel.m; sourceTree = "<group>"; };
 		2B59000D170691BF00DBE43D /* DTLifeModelDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTLifeModelDelegate.h; sourceTree = "<group>"; };
 		2B63A3F2171DE84F0075E802 /* Hospital_Tile-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Hospital_Tile-hd.png"; sourceTree = "<group>"; };
+		2B63A3F4171DFCC20075E802 /* DTLevelSelectLevel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTLevelSelectLevel.h; sourceTree = "<group>"; };
+		2B63A3F5171DFCC20075E802 /* DTLevelSelectLevel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTLevelSelectLevel.m; sourceTree = "<group>"; };
+		2B63A3F7171DFE330075E802 /* DTHospitalLevel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTHospitalLevel.h; sourceTree = "<group>"; };
+		2B63A3F8171DFE330075E802 /* DTHospitalLevel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTHospitalLevel.m; sourceTree = "<group>"; };
+		2B63A3FB171E0AD00075E802 /* level_select_apartments-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "level_select_apartments-hd.png"; sourceTree = "<group>"; };
+		2B63A3FC171E0AD00075E802 /* level_select_hospital-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "level_select_hospital-hd.png"; sourceTree = "<group>"; };
+		2B63A3FD171E0AD00075E802 /* level_select_officeblock-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "level_select_officeblock-hd.png"; sourceTree = "<group>"; };
+		2B63A3FE171E0AD00075E802 /* level_select_sewer-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "level_select_sewer-hd.png"; sourceTree = "<group>"; };
+		2B63A403171E0B090075E802 /* level_select_tileset-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "level_select_tileset-hd.png"; sourceTree = "<group>"; };
+		2B63A404171E0B090075E802 /* level_select-hd.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "level_select-hd.tmx"; sourceTree = "<group>"; };
 		2B86435F16D23A02008FEB55 /* DTPausedLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTPausedLayer.h; sourceTree = "<group>"; };
 		2B86436016D23A02008FEB55 /* DTPausedLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTPausedLayer.m; sourceTree = "<group>"; };
 		2B86436316D25797008FEB55 /* Pew.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = Pew.m4a; path = sounds/Pew.m4a; sourceTree = "<group>"; };
@@ -518,8 +534,6 @@
 		2BE0772516B74A720073F28F /* IntroLayer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IntroLayer.m; sourceTree = "<group>"; };
 		2BE0773C16B7673D0073F28F /* DTMenuScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTMenuScene.h; sourceTree = "<group>"; };
 		2BE0773D16B7673D0073F28F /* DTMenuScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTMenuScene.m; sourceTree = "<group>"; };
-		2BE0773F16B767540073F28F /* DTLevelSelectScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTLevelSelectScene.h; sourceTree = "<group>"; };
-		2BE0774016B767540073F28F /* DTLevelSelectScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTLevelSelectScene.m; sourceTree = "<group>"; };
 		2BE0774216B768840073F28F /* DTGameScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTGameScene.h; sourceTree = "<group>"; };
 		2BE0774316B768840073F28F /* DTGameScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTGameScene.m; sourceTree = "<group>"; };
 		2BEA5139171665E800D2804E /* DTTrigger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTTrigger.h; sourceTree = "<group>"; };
@@ -529,8 +543,6 @@
 		2BF7A8C516C8631500D3063F /* DTMenuLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTMenuLayer.h; sourceTree = "<group>"; };
 		2BF7A8C616C8631500D3063F /* DTMenuLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTMenuLayer.m; sourceTree = "<group>"; };
 		2BF7A8C816C864D800D3063F /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
-		2BF7A8CE16C9BB2500D3063F /* DTLevelSelectLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTLevelSelectLayer.h; sourceTree = "<group>"; };
-		2BF7A8CF16C9BB2600D3063F /* DTLevelSelectLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTLevelSelectLayer.m; sourceTree = "<group>"; };
 		2BF7A8D116C9BB7900D3063F /* GooeyStatics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GooeyStatics.h; sourceTree = "<group>"; };
 		2BF7A8D216C9BB7900D3063F /* GooeyStatics.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GooeyStatics.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -587,15 +599,6 @@
 				2B86918F16D3B57D00497D63 /* DTCharacter.m */,
 			);
 			name = general;
-			sourceTree = "<group>";
-		};
-		2B43C8CC16FE4A7D0022DDF3 /* level select */ = {
-			isa = PBXGroup;
-			children = (
-				2BF7A8CE16C9BB2500D3063F /* DTLevelSelectLayer.h */,
-				2BF7A8CF16C9BB2600D3063F /* DTLevelSelectLayer.m */,
-			);
-			name = "level select";
 			sourceTree = "<group>";
 		};
 		2B43C8CD16FE4A900022DDF3 /* menu */ = {
@@ -661,6 +664,17 @@
 			name = "other weapons";
 			sourceTree = "<group>";
 		};
+		2B63A3FA171E0ABB0075E802 /* level select */ = {
+			isa = PBXGroup;
+			children = (
+				2B63A3FB171E0AD00075E802 /* level_select_apartments-hd.png */,
+				2B63A3FC171E0AD00075E802 /* level_select_hospital-hd.png */,
+				2B63A3FD171E0AD00075E802 /* level_select_officeblock-hd.png */,
+				2B63A3FE171E0AD00075E802 /* level_select_sewer-hd.png */,
+			);
+			path = "level select";
+			sourceTree = "<group>";
+		};
 		2B86436516D257A0008FEB55 /* sounds */ = {
 			isa = PBXGroup;
 			children = (
@@ -715,6 +729,7 @@
 		2B9A9A34171C906400D2697B /* sprites */ = {
 			isa = PBXGroup;
 			children = (
+				2B63A3FA171E0ABB0075E802 /* level select */,
 				2B9A9A35171C906400D2697B /* characters */,
 				2B9A9A3A171C906400D2697B /* intro scene */,
 				2B9A9A40171C906400D2697B /* tile maps */,
@@ -755,6 +770,8 @@
 		2B9A9A40171C906400D2697B /* tile maps */ = {
 			isa = PBXGroup;
 			children = (
+				2B63A403171E0B090075E802 /* level_select_tileset-hd.png */,
+				2B63A404171E0B090075E802 /* level_select-hd.tmx */,
 				2B63A3F2171DE84F0075E802 /* Hospital_Tile-hd.png */,
 				2B9A9A42171C906400D2697B /* hospitalF1-hd.tmx */,
 				2B9A9A43171C906400D2697B /* tile_markers-hd.png */,
@@ -1224,7 +1241,6 @@
 				2BB71ACB16D29568001C636C /* pausing */,
 				2B980D2E16CA94040028BB93 /* game scene */,
 				2B43C8CD16FE4A900022DDF3 /* menu */,
-				2B43C8CC16FE4A7D0022DDF3 /* level select */,
 			);
 			name = layers;
 			sourceTree = "<group>";
@@ -1234,8 +1250,6 @@
 			children = (
 				2BE0773C16B7673D0073F28F /* DTMenuScene.h */,
 				2BE0773D16B7673D0073F28F /* DTMenuScene.m */,
-				2BE0773F16B767540073F28F /* DTLevelSelectScene.h */,
-				2BE0774016B767540073F28F /* DTLevelSelectScene.m */,
 				2BE0774216B768840073F28F /* DTGameScene.h */,
 				2BE0774316B768840073F28F /* DTGameScene.m */,
 			);
@@ -1249,6 +1263,10 @@
 				2BEC4E821705E19D00662EEB /* DTLevel.m */,
 				2BEA5139171665E800D2804E /* DTTrigger.h */,
 				2BEA513A171665E800D2804E /* DTTrigger.m */,
+				2B63A3F4171DFCC20075E802 /* DTLevelSelectLevel.h */,
+				2B63A3F5171DFCC20075E802 /* DTLevelSelectLevel.m */,
+				2B63A3F7171DFE330075E802 /* DTHospitalLevel.h */,
+				2B63A3F8171DFE330075E802 /* DTHospitalLevel.m */,
 			);
 			name = level;
 			sourceTree = "<group>";
@@ -1332,6 +1350,12 @@
 				2B9A9A4F171C906400D2697B /* tile_markers-hd.png in Resources */,
 				2B9A9A50171C906400D2697B /* tile_markers.png in Resources */,
 				2B63A3F3171DE84F0075E802 /* Hospital_Tile-hd.png in Resources */,
+				2B63A3FF171E0AD00075E802 /* level_select_apartments-hd.png in Resources */,
+				2B63A400171E0AD00075E802 /* level_select_hospital-hd.png in Resources */,
+				2B63A401171E0AD00075E802 /* level_select_officeblock-hd.png in Resources */,
+				2B63A402171E0AD00075E802 /* level_select_sewer-hd.png in Resources */,
+				2B63A405171E0B090075E802 /* level_select_tileset-hd.png in Resources */,
+				2B63A406171E0B090075E802 /* level_select-hd.tmx in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1446,10 +1470,8 @@
 				2BE0772016B74A720073F28F /* AppDelegate.m in Sources */,
 				2BE0772616B74A720073F28F /* IntroLayer.m in Sources */,
 				2BE0773E16B7673D0073F28F /* DTMenuScene.m in Sources */,
-				2BE0774116B767540073F28F /* DTLevelSelectScene.m in Sources */,
 				2BE0774416B768840073F28F /* DTGameScene.m in Sources */,
 				2BF7A8C716C8631500D3063F /* DTMenuLayer.m in Sources */,
-				2BF7A8D016C9BB2600D3063F /* DTLevelSelectLayer.m in Sources */,
 				2BF7A8D316C9BB7A00D3063F /* GooeyStatics.m in Sources */,
 				2B980D3116CA944A0028BB93 /* DTGameLayer.m in Sources */,
 				2B980D3A16CAA63F0028BB93 /* DTPlayer.m in Sources */,
@@ -1479,6 +1501,8 @@
 				2B5722BB1713B11500AA0BF9 /* DTMaths.m in Sources */,
 				2BEA513B171665E800D2804E /* DTTrigger.m in Sources */,
 				2B05C4DF17179EFE0099DC6A /* DTPathFindZombie.m in Sources */,
+				2B63A3F6171DFCC20075E802 /* DTLevelSelectLevel.m in Sources */,
+				2B63A3F9171DFE330075E802 /* DTHospitalLevel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

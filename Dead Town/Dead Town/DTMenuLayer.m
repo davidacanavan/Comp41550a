@@ -7,8 +7,9 @@
 //
 
 #import "DTMenuLayer.h"
-#import "DTLevelSelectScene.h"
+#import "DTGameScene.h"
 #import "GooeyStatics.h"
+#import "DTLevelSelectLevel.h"
 
 @implementation DTMenuLayer
 
@@ -81,7 +82,8 @@
 -(void)onePlayerModeSelected
 {
     CCDirector *director = [CCDirector sharedDirector];
-    [director replaceScene: [CCTransitionFade transitionWithDuration: 1.0 scene: [DTLevelSelectScene scene] withColor:ccWHITE]];
+    DTGameScene *scene = [DTGameScene sceneWithLevel:[DTLevelSelectLevel level]];
+    [director replaceScene: [CCTransitionFade transitionWithDuration: 1.0 scene:scene withColor:ccWHITE]];
 }
 
 // In this case we scan for another device using gamekit

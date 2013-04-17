@@ -63,7 +63,7 @@
         [frames addObject:frame];
     }
     
-    _movingAnimation = [CCAnimation animationWithSpriteFrames:frames delay:0.05f]; // TODO: should i cache the animation or what?
+    _movingAnimation = [CCAnimation animationWithSpriteFrames:frames delay:ANIMATION_RATE]; // TODO: should i cache the animation or what?
     _movingAction = [CCRepeatForever actionWithAction:[CCAnimate actionWithAnimation:_movingAnimation]];
     return [CCSprite spriteWithSpriteFrameName:@"zombie_01_01.png"];
 }

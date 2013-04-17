@@ -39,8 +39,8 @@
 @property(nonatomic) DTPlayer *player;
 @property(nonatomic, readonly) NSMutableArray *villains;
 @property(nonatomic, readonly) int tileDimension;
+@property(nonatomic) BOOL shouldCheckForTriggers;
 
-+(id)levelWithTMXFile:(NSString *)tmxFile;
 -(id)initWithTMXFile:(NSString *)tmxFile;
 
 // Coordinate functions
@@ -58,8 +58,10 @@
 // Handy methods
 -(void)addChild:(CCNode *)node;
 -(void)removeChild:(CCNode *)node cleanup:(BOOL)cleanup;
+-(void)update:(ccTime)delta;
 
 // Some methods you can override when you subclass me
+-(void)onGameLayerReady; // Called when it's ok to add your custom stuff to the GameLayer
 -(void)onPlayerLoaded;
 -(void)onVillainKilled:(DTCharacter *) character;
 -(void)onTriggerEncountered:(DTTrigger *)trigger;

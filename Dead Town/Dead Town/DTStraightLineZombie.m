@@ -25,8 +25,8 @@
     {
         _player = player;
         _runningDistance = runningDistance;
-        self.weapon = [DTWeapon weaponWithFireRate:2 damageCalculator:[DTConstantDamageCalculator damageWithDamage:5]
-                range:50];
+        self.weapon = [DTWeapon weaponWithFireRate:2 damageCalculator:[DTConstantDamageCalculator damageWithDamage:0.5]
+                range:30];
         [self scheduleUpdate];
     }
     
@@ -63,7 +63,10 @@
     if (distance < _runningDistance) // Then run after the player!!!
     {
         if (ccpFuzzyEqual(player, zombie, 15))
+        {
+            [self fire];
             return;
+        }
         
         float movingDistance = _velocity * delta;
         float slope = ((float) (player.y - zombie.y)) / (player.x - zombie.x);

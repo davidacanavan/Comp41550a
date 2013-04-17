@@ -8,6 +8,8 @@
 
 #import "DTCharacter.h"
 
+#define ANIMATION_RATE 0.05f
+
 @class DTPlayer;
 @class PathNode;
 
