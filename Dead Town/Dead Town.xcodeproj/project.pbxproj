@@ -268,6 +268,7 @@
 		2B89A09E1720D23000727C54 /* player_01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = player_01.png; sourceTree = "<group>"; };
 		2B89A09F1720D23000727C54 /* zombie_01.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = zombie_01.plist; sourceTree = "<group>"; };
 		2B89A0A01720D23000727C54 /* zombie_01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = zombie_01.png; sourceTree = "<group>"; };
+		2B89A0A51720E71200727C54 /* DTMultiplayerTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTMultiplayerTypes.h; sourceTree = "<group>"; };
 		2B980D2F16CA944A0028BB93 /* DTGameLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTGameLayer.h; sourceTree = "<group>"; };
 		2B980D3016CA944A0028BB93 /* DTGameLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTGameLayer.m; sourceTree = "<group>"; };
 		2B980D3816CAA63F0028BB93 /* DTPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTPlayer.h; sourceTree = "<group>"; };
@@ -711,6 +712,16 @@
 				2B86436316D25797008FEB55 /* Pew.m4a */,
 			);
 			name = sounds;
+			sourceTree = "<group>";
+		};
+		2B89A0A81720E71F00727C54 /* supporting files */ = {
+			isa = PBXGroup;
+			children = (
+				2B89A0A51720E71200727C54 /* DTMultiplayerTypes.h */,
+				2BEA5139171665E800D2804E /* DTTrigger.h */,
+				2BEA513A171665E800D2804E /* DTTrigger.m */,
+			);
+			name = "supporting files";
 			sourceTree = "<group>";
 		};
 		2B980D2E16CA94040028BB93 /* game scene */ = {
@@ -1301,8 +1312,7 @@
 			children = (
 				2BEC4E811705E19D00662EEB /* DTLevel.h */,
 				2BEC4E821705E19D00662EEB /* DTLevel.m */,
-				2BEA5139171665E800D2804E /* DTTrigger.h */,
-				2BEA513A171665E800D2804E /* DTTrigger.m */,
+				2B89A0A81720E71F00727C54 /* supporting files */,
 				2B63A3F4171DFCC20075E802 /* DTLevelSelectLevel.h */,
 				2B63A3F5171DFCC20075E802 /* DTLevelSelectLevel.m */,
 				2B63A3F7171DFE330075E802 /* DTHospitalLevel.h */,

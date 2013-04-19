@@ -12,6 +12,7 @@
 #import "DTControllerDelegate.h"
 #import "DTButtonDelegate.h"
 #import "DTLifeModelDelegate.h"
+#import "DTMultiplayerTypes.h"
 
 #define DEFAULT_PLAYER_NUMBER 1
 #define PLAYER_ONE 1
@@ -22,20 +23,6 @@
 @class DTGameLayer;
 @class DTPlayer;
 @class DTTrigger;
-
-// Multiplayer data enums
-typedef enum
-{
-    MessageTypePlayerReady, // When the player is ready to start
-    MessageTypePlayerMoved, // He's made a move
-    MessageTypePlayerKilled, // He's been killed
-    MessageTypePlayerQuit // He quit! That jerk face!
-} MessageType;
-
-typedef struct
-{
-    MessageType type;
-} Message;
 
 @interface DTLevel : CCNode <DTControllerDelegate, DTButtonDelegate, DTLifeModelDelegate, GKSessionDelegate>
 {

@@ -380,7 +380,7 @@
         NSKeyedArchiver *archiver = [[NSKeyedArchiver alloc] initForWritingWithMutableData:data];
         
         // Add messages start with a type code then we add the data
-        [archiver encodeInt:MultiplayerMessageTypePlayerMoved forKey:@"message_type"];
+        [archiver encodeInt:MessageTypePlayerMoved forKey:@"message_type"];
         [archiver encodeFloat:position.x forKey:@"x"];
         [archiver encodeFloat:position.y forKey:@"y"];
         [archiver finishEncoding];
@@ -395,11 +395,11 @@
 -(void)receiveData:(NSData *)data fromPeer:(NSString *)peer inSession:(GKSession *)session context:(void *)context
 {
     NSKeyedUnarchiver *unarchiver = [[NSKeyedUnarchiver alloc] initForReadingWithData:data];
-    MultiplayerMessageType messageType = [unarchiver decodeIntForKey:@"message_type"];
+    MessageType messageType = [unarchiver decodeIntForKey:@"message_type"];
     
     switch (messageType)
     {
-        case MultiplayerMessageTypePlayerMoved: // So if we have a move
+        case MessageTypePlayerMoved: // So if we have a move
             [self receivePlayerMoveFromUnarchiver:unarchiver];
         break;
             
