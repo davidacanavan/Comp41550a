@@ -154,6 +154,7 @@
     {
         [_player moveToPosition:newPosition]; // Update the player position
         [self centerViewportOnPosition:newPosition];
+        
         [self sendPlayerMoveToPosition:newPosition];
     }
     
@@ -288,14 +289,7 @@
 -(void)update:(ccTime)delta
 {
     if (_session) // If we're playing multiplayer jam the updates on the thread here
-    {
-        if (_remotePlayerHasNewPosition) // So he's moved... Lets move him
-        {
-            [_remotePlayer turnToFacePosition:_remotePlayerNewPosition];
-            _remotePlayer.sprite.position = _remotePlayerNewPosition;
-            _remotePlayerHasNewPosition = NO;
-        }
-    }
+        [self multiplayerUpdate:delta];
     
     if (_isHoldFiring)
         [_player fire]; // So let him fire
@@ -306,6 +300,16 @@
     {
         [self checkForTriggers];
         _spawnCheckTime = 0;
+    }
+}
+
+-(void)multiplayerUpdate:(ccTime)delta
+{
+    if (_remotePlayerHasNewPosition) // So he's moved... Lets move him
+    {
+        [_remotePlayer turnToFacePosition:_remotePlayerNewPosition];
+        _remotePlayer.sprite.position = _remotePlayerNewPosition;
+        _remotePlayerHasNewPosition = NO;
     }
 }
 
@@ -383,7 +387,7 @@
         
         // And send that beautiful data!
         [_session sendData:data toPeers:[NSArray arrayWithObject:self.peerIdentifier]
-              withDataMode:GKSendDataReliable error:nil];
+              withDataMode:GKSendDataUnreliable error:nil];
     }
 }
 

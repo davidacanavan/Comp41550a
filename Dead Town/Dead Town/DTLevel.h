@@ -23,14 +23,19 @@
 @class DTPlayer;
 @class DTTrigger;
 
-// Multiplayer data enum
+// Multiplayer data enums
 typedef enum
 {
-    MultiplayerMessageTypePlayerReady, // When the player is ready to start
-    MultiplayerMessageTypePlayerMoved, // He's made a move
-    MultiplayerMessageTypePlayerKilled, // He's been killed
-    MultiplayerMessageTypePlayerQuit // He quit! That jerk face!
-} MultiplayerMessageType;
+    MessageTypePlayerReady, // When the player is ready to start
+    MessageTypePlayerMoved, // He's made a move
+    MessageTypePlayerKilled, // He's been killed
+    MessageTypePlayerQuit // He quit! That jerk face!
+} MessageType;
+
+typedef struct
+{
+    MessageType type;
+} Message;
 
 @interface DTLevel : CCNode <DTControllerDelegate, DTButtonDelegate, DTLifeModelDelegate, GKSessionDelegate>
 {
