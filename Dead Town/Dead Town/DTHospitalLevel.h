@@ -8,8 +8,11 @@
 
 #import "DTLevel.h"
 
+#define LEVEL_NAME_HOSPITAL @"hospitalF1.tmx"
+
 @interface DTHospitalLevel : DTLevel
 
 +(id)level;
++(id)levelWithSession:(GKSession *)session peerIdentifier:(NSString *)peerIdentifier playerNumber:(int)playerNumber;
 
 @end

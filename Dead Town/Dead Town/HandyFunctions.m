@@ -6,9 +6,10 @@
 //
 //
 
-#import "GooeyStatics.h"
+#import "HandyFunctions.h"
+#import "UIKit/UIKit.h"
 
-@implementation GooeyStatics
+@implementation HandyFunctions
 
 +(CCMenuItemFont *)menuItemWithString:(NSString *)string fontName:(NSString *)fontName target:(id)target selector:(SEL)selector fontSize:(int)fontSize
 {
@@ -21,6 +22,12 @@
 +(CCMenuItemImage *)menuItemWithImageName:(NSString *)imageName target:(id)target selector:(SEL)selector
 {
     return [CCMenuItemImage itemWithNormalImage:imageName selectedImage:imageName target:target selector:selector];
+}
+
++(void)showAlertDialogEntitled:(NSString *)title withMessage:(NSString *)message
+{
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    [alert show];
 }
 
 @end

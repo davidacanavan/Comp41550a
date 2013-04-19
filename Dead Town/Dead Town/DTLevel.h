@@ -7,17 +7,32 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <GameKit/GameKit.h>
 #import "cocos2d.h"
 #import "DTControllerDelegate.h"
 #import "DTButtonDelegate.h"
 #import "DTLifeModelDelegate.h"
+
+#define DEFAULT_PLAYER_NUMBER 1
+#define PLAYER_ONE 1
+#define PLAYER_TWO 2
+#define DEFAULT_PLAYER_LIFE 100
 
 @class DTCharacter;
 @class DTGameLayer;
 @class DTPlayer;
 @class DTTrigger;
 
-@interface DTLevel : CCNode <DTControllerDelegate, DTButtonDelegate, DTLifeModelDelegate>
+// Multiplayer data enum
+typedef enum
+{
+    MultiplayerMessageTypePlayerReady, // When the player is ready to start
+    MultiplayerMessageTypePlayerMoved, // He's made a move
+    MultiplayerMessageTypePlayerKilled, // He's been killed
+    MultiplayerMessageTypePlayerQuit // He quit! That jerk face!
+} MultiplayerMessageType;
+
+@interface DTLevel : CCNode <DTControllerDelegate, DTButtonDelegate, DTLifeModelDelegate, GKSessionDelegate>
 {
     @protected
     // Map references
@@ -33,15 +48,25 @@
     BOOL _joystickActive;
     BOOL _isHoldFiring;
     float _spawnCheckInterval, _spawnCheckTime;
+    
+    // Some multiplayer variables - this lets us put them on the update thread so we don't get any jerkyness
+    BOOL _remotePlayerHasNewPosition;
+    CGPoint _remotePlayerNewPosition;
 }
 
 @property(nonatomic) DTGameLayer *gameLayer;
-@property(nonatomic) DTPlayer *player;
+@property(nonatomic) DTPlayer *player, *remotePlayer;
 @property(nonatomic, readonly) NSMutableArray *villains;
 @property(nonatomic, readonly) int tileDimension;
 @property(nonatomic) BOOL shouldCheckForTriggers;
 
+// Multiplayer session variables
+@property(nonatomic) GKSession *session;
+@property(nonatomic) NSString *peerIdentifier;
+@property(nonatomic) int playerNumber;
+
 -(id)initWithTMXFile:(NSString *)tmxFile;
+-(id)initWithTMXFile:(NSString *)tmxFile session:(GKSession *)session peerIdentifier:(NSString *)peerIdentifier playerNumber:(int)playerNumber;
 
 // Coordinate functions
 -(void)centerViewportOnPosition:(CGPoint)position;

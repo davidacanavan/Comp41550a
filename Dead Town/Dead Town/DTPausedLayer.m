@@ -7,7 +7,7 @@
 //
 
 #import "DTPausedLayer.h"
-#import "GooeyStatics.h"
+#import "HandyFunctions.h"
 
 @implementation DTPausedLayer
 
@@ -26,9 +26,9 @@
         NSString *fontName = @"Marker Felt";
         
         // Two menu items for one and two player modes
-        CCMenuItemFont *resumeMenuItem = [GooeyStatics menuItemWithString:@"Resume" fontName:fontName target:self selector:@selector(resumeItemPressed) fontSize:22];
-        CCMenuItemFont *optionsBlockMenuItem = [GooeyStatics menuItemWithString:@"Options" fontName:fontName target:self selector:@selector(optionsItemPressed) fontSize:22];
-        CCMenuItemFont *quitMenuItem = [GooeyStatics menuItemWithString:@"Quit" fontName:fontName target:self selector:@selector(quitItemPressed) fontSize:22];
+        CCMenuItemFont *resumeMenuItem = [HandyFunctions menuItemWithString:@"Resume" fontName:fontName target:self selector:@selector(resumeItemPressed) fontSize:22];
+        CCMenuItemFont *optionsBlockMenuItem = [HandyFunctions menuItemWithString:@"Options" fontName:fontName target:self selector:@selector(optionsItemPressed) fontSize:22];
+        CCMenuItemFont *quitMenuItem = [HandyFunctions menuItemWithString:@"Quit" fontName:fontName target:self selector:@selector(quitItemPressed) fontSize:22];
         CCMenu *pausedMenu = [CCMenu menuWithItems:resumeMenuItem, optionsBlockMenuItem, quitMenuItem, nil];
         
         [pausedMenu alignItemsVerticallyWithPadding:5]; // Stack the menu items on top of each other

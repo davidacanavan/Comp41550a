@@ -7,6 +7,7 @@
 //
 
 #import "CCScene.h"
+#import "Gamekit/GameKit.h"
 
 @class DTLevel;
 

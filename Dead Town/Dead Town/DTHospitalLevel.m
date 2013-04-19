@@ -15,12 +15,17 @@
 
 +(id)level
 {
-    return [[self alloc] initWithTMXFile:@"hospitalF1.tmx"];
+    return [[self alloc] initWithTMXFile:LEVEL_NAME_HOSPITAL session:nil peerIdentifier:nil playerNumber:DEFAULT_PLAYER_NUMBER];
 }
 
--(id)initWithTMXFile:(NSString *)tmxFile
++(id)levelWithSession:(GKSession *)session peerIdentifier:(NSString *)peerIdentifier playerNumber:(int)playerNumber
 {
-    if (self = [super initWithTMXFile:tmxFile])
+    return [[self alloc] initWithTMXFile:LEVEL_NAME_HOSPITAL session:session peerIdentifier:peerIdentifier playerNumber:playerNumber];
+}
+
+-(id)initWithTMXFile:(NSString *)tmxFile session:(GKSession *)session peerIdentifier:(NSString *)peerIdentifier playerNumber:(int)playerNumber
+{
+    if (self = [super initWithTMXFile:tmxFile session:session peerIdentifier:peerIdentifier playerNumber:playerNumber])
     {
         self.shouldCheckForTriggers = YES;
     }

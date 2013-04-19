@@ -8,6 +8,8 @@
 
 #import "DTLevel.h"
 
+#define LEVEL_NAME_LEVEL_SELECT @"level_select.tmx"
+
 @interface DTLevelSelectLevel : DTLevel
 {
     @private // I don't intend anyone to subclass this
@@ -15,5 +17,6 @@
 }
 
 +(id)level;
++(id)levelWithSession:(GKSession *)session peerIdentifier:(NSString *)peerIdentifier playerNumber:(int)playerNumber;
 
 @end

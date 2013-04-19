@@ -10,27 +10,26 @@
 #import "DTCharacter.h"
 #import "DTGameLayer.h"
 #import "DTHandGun.h"
-#import "DTStraightLineZombie.h"
-#import "DTLazerBeamNode.h"
 #import "DTPlayer.h"
 #import "DTLifeModelDelegate.h"
 #import "DTStatusLayer.h"
 #import "DTLifeModel.h"
 #import "DTButton.h"
 #import "DTTrigger.h"
-#import "DTPathFindZombie.h"
+#import "HandyFunctions.h"
 
 @implementation DTLevel
 
 @synthesize gameLayer = _gameLayer;
 @synthesize player = _player;
-
-+(id)levelWithTMXFile:(NSString *)tmxFile;
-{
-    return [[self alloc] initWithTMXFile:tmxFile];
-}
+@synthesize session = _session;
 
 -(id)initWithTMXFile:(NSString *)tmxFile
+{
+    return [self initWithTMXFile:tmxFile session:nil peerIdentifier:nil playerNumber:DEFAULT_PLAYER_NUMBER];
+}
+
+-(id)initWithTMXFile:(NSString *)tmxFile session:(GKSession *)session peerIdentifier:(NSString *)peerIdentifier playerNumber:(int)playerNumber
 {
     if (self = [super init])
     {
@@ -44,7 +43,7 @@
         _walls = [_map layerNamed:@"Walls"];
         _spawnObjects = [_map objectGroupNamed:@"Spawns"];
         _triggerObjects = [_map objectGroupNamed:@"Triggers"];
-        _walls.visible = NO; // Make sure no-one can see the transparent tiles!!!
+        _walls.visible = YES; // Make sure no-one can see the transparent tiles!!!
         
         // Get some layout dimensions
         _retinaFactor = CC_CONTENT_SCALE_FACTOR();
@@ -54,6 +53,11 @@
         _tileDimension = _map.tileSize.width / _retinaFactor; // Since they're square I don't need to look at the height - measured in pixels and scaled for retina!
         _spawnCheckInterval = .2;
         _spawnCheckTime = 0;
+        
+        // Save the multiplayer stuff
+        self.session = session;
+        self.peerIdentifier = peerIdentifier;
+        self.playerNumber = playerNumber;
     }
     
     return self;
@@ -66,7 +70,7 @@
 {
     CGPoint centerOfView = ccp(_screen.width / 2, _screen.height / 2);
     CGPoint newPosition = ccpSub(centerOfView, position);
-    _gameLayer.position = ccp( newPosition.x,  newPosition.y); // Cast to int to prevent artifacts
+    _gameLayer.position = ccp(newPosition.x,  newPosition.y); // Cast to int to prevent artifacts
 }
 
 // Converts the layer point to a tile coordinate (they go from top left)
@@ -150,6 +154,7 @@
     {
         [_player moveToPosition:newPosition]; // Update the player position
         [self centerViewportOnPosition:newPosition];
+        [self sendPlayerMoveToPosition:newPosition];
     }
     
 }
@@ -228,13 +233,7 @@
     // Save the DTGameLayer reference
     _gameLayer = gameLayer;
     [_gameLayer addChild:_map];
-    
-    // Create the players TODO: second player!!!
-    CGPoint playerPosition = [self createRectCentreFromSpawn:[_spawnObjects objectNamed:@"Player Spawn 0"]];
-    _player = [DTPlayer playerWithLevel:self position:playerPosition life:100];
-    _player.weapon = [DTHandGun weapon];
-    [_player.lifeModel addDelegate: (id <DTLifeModelDelegate>) _gameLayer.statusLayer.lifeNode]; // TODO: Do I have to cast this?
-    [self addChild:_player];
+    [self createPlayerOrPlayers];
     
     // Get all the trigger rects and save them
     NSMutableArray *triggerDicts = [_triggerObjects objects];
@@ -257,11 +256,47 @@
     [self scheduleUpdate];
 }
 
+-(void)createPlayerOrPlayers
+{
+    // Create the players
+    CGPoint playerOnePosition = [self createRectCentreFromSpawn:[_spawnObjects objectNamed:@"Player Spawn 0"]];
+    CGPoint playerTwoPosition = ccpAdd(playerOnePosition, ccp(_tileDimension, 5)); // TODO: Put them half-way in the rect instead
+    
+    if (_playerNumber == PLAYER_ONE) // Then we're player one! Excellent news!
+    {
+        _player = [DTPlayer playerWithLevel:self position:playerOnePosition life:DEFAULT_PLAYER_LIFE];
+        
+        if (_session) // Then we have a player 2 aswell
+            _remotePlayer = [DTPlayer playerWithLevel:self position:playerTwoPosition life:DEFAULT_PLAYER_LIFE];
+    }
+    else // We're player two! So that means we're definitely playing multiplayer
+    {
+        _player = [DTPlayer playerWithLevel:self position:playerTwoPosition life:DEFAULT_PLAYER_LIFE];
+        _remotePlayer = [DTPlayer playerWithLevel:self position:playerOnePosition life:DEFAULT_PLAYER_LIFE];
+    }
+    
+    [_player.lifeModel addDelegate: (id <DTLifeModelDelegate>) _gameLayer.statusLayer.lifeNode]; // TODO: Do I have to cast this?
+    [self addChild:_player];
+    
+    if (_session)
+        [self addChild:_remotePlayer];
+}
+
 #pragma mark-
 #pragma mark Game Updates
 
 -(void)update:(ccTime)delta
 {
+    if (_session) // If we're playing multiplayer jam the updates on the thread here
+    {
+        if (_remotePlayerHasNewPosition) // So he's moved... Lets move him
+        {
+            [_remotePlayer turnToFacePosition:_remotePlayerNewPosition];
+            _remotePlayer.sprite.position = _remotePlayerNewPosition;
+            _remotePlayerHasNewPosition = NO;
+        }
+    }
+    
     if (_isHoldFiring)
         [_player fire]; // So let him fire
     
@@ -305,14 +340,100 @@
     [_gameLayer removeChild:node cleanup:cleanup];
 }
 
-#pragma mark-
-
 -(void)addVillain:(DTCharacter *)villain
 {
     [_villains addObject:villain];
 }
 
+#pragma mark-
+#pragma mark Session, Send & Receive
+
+-(void)setSession:(GKSession *)session
+{
+    _session = session;
+    _session.delegate = self;
+    [_session setDataReceiveHandler:self withContext:nil];
+}
+
+-(void)invalidateLocalSession
+{
+    NSLog(@"Invalidate local session");
+    if (_session)
+    {
+        [_session disconnectFromAllPeers];
+        _session.available = NO;
+        [_session setDataReceiveHandler:nil withContext: nil];
+        _session.delegate = nil;
+        _session = nil;
+    }
+}
+
+-(void)sendPlayerMoveToPosition:(CGPoint)position
+{
+    if (_session) // So only if we have a valid session...
+    {
+        NSMutableData *data = [[NSMutableData alloc] init];
+        NSKeyedArchiver *archiver = [[NSKeyedArchiver alloc] initForWritingWithMutableData:data];
+        
+        // Add messages start with a type code then we add the data
+        [archiver encodeInt:MultiplayerMessageTypePlayerMoved forKey:@"message_type"];
+        [archiver encodeFloat:position.x forKey:@"x"];
+        [archiver encodeFloat:position.y forKey:@"y"];
+        [archiver finishEncoding];
+        
+        // And send that beautiful data!
+        [_session sendData:data toPeers:[NSArray arrayWithObject:self.peerIdentifier]
+              withDataMode:GKSendDataReliable error:nil];
+    }
+}
+
+// Called by the session when we've gotten some data delivered
+-(void)receiveData:(NSData *)data fromPeer:(NSString *)peer inSession:(GKSession *)session context:(void *)context
+{
+    NSKeyedUnarchiver *unarchiver = [[NSKeyedUnarchiver alloc] initForReadingWithData:data];
+    MultiplayerMessageType messageType = [unarchiver decodeIntForKey:@"message_type"];
+    
+    switch (messageType)
+    {
+        case MultiplayerMessageTypePlayerMoved: // So if we have a move
+            [self receivePlayerMoveFromUnarchiver:unarchiver];
+        break;
+            
+        default:
+            NSLog(@"Unknown data type? Huh?");
+        break;
+    }
+}
+
+// Receive a player move
+-(void)receivePlayerMoveFromUnarchiver:(NSKeyedUnarchiver *)unarchiver
+{
+    _remotePlayerNewPosition = ccp([unarchiver decodeFloatForKey:@"x"], [unarchiver decodeFloatForKey:@"y"]);
+    _remotePlayerHasNewPosition = YES;
+}
+
+#pragma mark-
+#pragma mark Session Delegate
+
+-(void)session:(GKSession *)session peer:(NSString *)peerIdentifier didChangeState:(GKPeerConnectionState)state
+{
+    if(state == GKPeerStateDisconnected) // We disconnected dawg
+    {// TODO: Pause the game (set this up so it's done properly), show a message and leave
+        self.gameLayer.isPausing = YES;
+        NSString *message = [NSString stringWithFormat:@"We have been disconnected from %@!", [session displayNameForPeer:peerIdentifier]];
+        [HandyFunctions showAlertDialogEntitled:@"Dead Town" withMessage:message];
+        [self invalidateLocalSession];
+        [[CCDirector sharedDirector] replaceScene:[DTMenuScene scene]];
+    }
+}
+
+// We don't care about these guys anymore since we've already made the connection
+-(void)session:(GKSession *)session didReceiveConnectionRequestFromPeer:(NSString *)peerIdentifier {}
+-(void) session:(GKSession *)session connectionWithPeerFailed:(NSString *)peerID withError:(NSError *)error {}
+-(void) session:(GKSession *)session didFailWithError:(NSError *)error {}
+
 @end
+
 
 
 

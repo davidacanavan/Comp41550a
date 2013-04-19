@@ -10,19 +10,23 @@
 #import "DTPlayer.h"
 #import "DTHospitalLevel.h"
 #import "DTGameScene.h"
-#import "GooeyStatics.h"
 #import "DTMenuScene.h"
 
 @implementation DTLevelSelectLevel
 
 +(id)level
 {
-    return [[self alloc] initWithTMXFile:@"level_select.tmx"];
+    return [[self alloc] initWithTMXFile:LEVEL_NAME_LEVEL_SELECT session:nil peerIdentifier:nil playerNumber:DEFAULT_PLAYER_NUMBER];
 }
 
--(id)initWithTMXFile:(NSString *)tmxFile
++(id)levelWithSession:(GKSession *)session peerIdentifier:(NSString *)peerIdentifier playerNumber:(int)playerNumber
 {
-    if (self = [super initWithTMXFile:tmxFile])
+    return [[self alloc] initWithTMXFile:LEVEL_NAME_LEVEL_SELECT session:session peerIdentifier:peerIdentifier playerNumber:playerNumber];
+}
+
+-(id)initWithTMXFile:(NSString *)tmxFile session:(GKSession *)session peerIdentifier:(NSString *)peerIdentifier playerNumber:(int)playerNumber
+{
+    if (self = [super initWithTMXFile:tmxFile session:session peerIdentifier:peerIdentifier playerNumber:playerNumber])
     {
         // Find out where the level names should be and add the name sprites
         CCTMXObjectGroup *levelNameLocations = [_map objectGroupNamed:@"Level Names Locations"];

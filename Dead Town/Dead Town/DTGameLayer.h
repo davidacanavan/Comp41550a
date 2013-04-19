@@ -7,12 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <GameKit/GameKit.h>
 #import "cocos2d.h"
 #import "DTPlayer.h"
 #import "SneakyJoystick.h"
 #import "DTPausedLayer.h"
 #import "DTOptions.h"
-#import "DTStraightLineZombie.h"
 #import "DTControllerDelegate.h"
 #import "DTButtonDelegate.h"
 
@@ -35,6 +35,7 @@
 @property(nonatomic) BOOL isPausing; // Set to true to pause the game layer and all children
 @property(nonatomic, strong) DTControlsLayer *controlsLayer;
 @property(nonatomic, strong) DTStatusLayer *statusLayer;
+@property(nonatomic, strong) GKSession *session;
 
 +(id)gameLayerWithStatusLayer:(DTStatusLayer *)statusLayer;
 -(void)unpause;

@@ -7,13 +7,9 @@
 //
 
 #import "DTGameLayer.h"
-#import "DTBullet.h"
 #import "SimpleAudioEngine.h"
 #import "DTLifeModel.h"
 #import "DTStatusLayer.h"
-#import "DTHandGun.h"
-#import "DTConstantDamageCalculator.h"
-#import "DTLazerBeamNode.h"
 #import "DTControlsLayer.h"
 
 @implementation DTGameLayer
@@ -31,9 +27,6 @@
     if ((self = [super init]))
     {
         _statusLayer = statusLayer;
-        
-
-        
         _isGameOver = NO;
         _options = [DTOptions sharedOptions];
         
