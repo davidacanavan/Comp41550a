@@ -26,5 +26,6 @@
 - (IBAction)backPressed:(UIButton *)sender;
 - (IBAction)setVariableAsOperand:(UIButton *)sender;
 - (IBAction)solveEquation:(UIButton *)sender;
+- (IBAction)updateGraphViewControllerWithCurrentExpression;
 
 @end

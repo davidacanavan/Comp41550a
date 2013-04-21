@@ -163,15 +163,31 @@
     [super viewDidUnload];
 }
 
+// Called on the iPhone when we have a push
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    // Do an = operation so the user won't miss out on the most recent operation
-    [_calcModel performOperation:@"=" withScreenValueOf:[self.calcDisplay.text doubleValue]];
+    // Pretend we had a hit of the equals button - Note: I changes this as it did not work properly in the last submission! I forgot to test it, forgive me!
+    [self operationPressed:_equalsButton]; 
     [[segue destinationViewController] setExpression:_calcModel.expression];
+}
+
+// Called on the iPad version
+-(void)updateGraphViewControllerWithCurrentExpression
+{
+    // Pretend we had a hit of the equals button - Note: I changes this as it did not work properly in the last submission! I forgot to test it, forgive me!
+    [self operationPressed:_equalsButton];
+    GraphViewController *graphViewController = [((UINavigationController *) [self.splitViewController.viewControllers objectAtIndex:1]).viewControllers objectAtIndex:0]; // Get the graph view controller
+    [graphViewController setExpression:_calcModel.expression]; // Set the expression
+    [graphViewController reloadCurrentExpressionToGraphView]; // Repaint the graph
 }
 
 
 
 
-
 @end
+
+
+
+
+
+

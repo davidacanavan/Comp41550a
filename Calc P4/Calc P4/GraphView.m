@@ -9,7 +9,8 @@
     if (!_dataSource)
         return;
     
-    [AxesDrawer drawAxesInRect:rect originAtPoint:CGPointMake(CGRectGetMidX(rect), CGRectGetMidY(rect)) scale:_scale];
+    CGPoint rectCentre = CGPointMake(CGRectGetMidX(rect), CGRectGetMidY(rect));
+    [AxesDrawer drawAxesInRect:rect originAtPoint:rectCentre scale:_scale];
     
     // Draw the function!
 	CGContextRef context = UIGraphicsGetCurrentContext();
