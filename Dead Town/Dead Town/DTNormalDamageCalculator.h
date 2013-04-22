@@ -9,8 +9,6 @@
 #import <Foundation/Foundation.h>
 #import "DTDamageCalculator.h"
 
-#define ARC4RANDOM_MAX 0x100000000;
-
 @interface DTNormalDamageCalculator : NSObject <DTDamageCalculator>
 {
     BOOL _needToGenerate;

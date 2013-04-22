@@ -83,7 +83,6 @@
     _lifeModel.life = life;
 }
 
-
 -(void)notifyMovementStart
 {
     // A boolean to add extra safety to the calls - in case anything trips over each other

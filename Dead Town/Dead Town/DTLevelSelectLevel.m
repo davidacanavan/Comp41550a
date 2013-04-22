@@ -35,9 +35,6 @@
         [self addTitleSpriteWithImageName:@"level_select_apartments.png" andCentre:[self createRectCentreFromSpawn:[levelNameLocations objectNamed:@"Level Name Apartments"]]];
         [self addTitleSpriteWithImageName:@"level_select_officeblock.png" andCentre:[self createRectCentreFromSpawn:[levelNameLocations objectNamed:@"Level Name Offices"]]];
         [self addTitleSpriteWithImageName:@"level_select_sewer.png" andCentre:[self createRectCentreFromSpawn:[levelNameLocations objectNamed:@"Level Name Sewer"]]];
-        
-        // Find out where the arrows should be and add them
-        CCTMXObjectGroup *arrowSpriteLocations = [_map objectGroupNamed:@"Arrow Sprites Locations"]; // TODO: have arrows here
     }
     
     return self;

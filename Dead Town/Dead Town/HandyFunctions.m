@@ -9,6 +9,8 @@
 #import "HandyFunctions.h"
 #import "UIKit/UIKit.h"
 
+#define ARC4RANDOM_MAX 0x100000000
+
 @implementation HandyFunctions
 
 +(CCMenuItemFont *)menuItemWithString:(NSString *)string fontName:(NSString *)fontName target:(id)target selector:(SEL)selector fontSize:(int)fontSize
@@ -30,4 +32,24 @@
     [alert show];
 }
 
++(float)uniformFrom:(float)min to:(float)max
+{
+    return (((float) arc4random()) / ARC4RANDOM_MAX) * (max - min) + min;
+}
+
+
+
 @end
+
+
+
+
+
+
+
+
+
+
+
+
+

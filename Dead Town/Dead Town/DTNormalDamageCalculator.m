@@ -7,6 +7,7 @@
 //
 
 #import "DTNormalDamageCalculator.h"
+#import "HandyFunctions.h"
 
 @implementation DTNormalDamageCalculator
 
@@ -26,12 +27,6 @@
     return self;
 }
 
--(float)generateStandardUniformFrom:(float)min to:(float)max
-{
-    float uniform01 = ((float) arc4random()) / ARC4RANDOM_MAX;
-    return (uniform01 - min) * max;
-}
-
 -(float)computeDamage
 {
     if (_needToGenerate)
@@ -40,8 +35,8 @@
         
         do
         {
-            u = [self generateStandardUniformFrom:-1 to:1];
-            v = [self generateStandardUniformFrom:-1 to:1];
+            u = [HandyFunctions uniformFrom:-1 to:1];
+            v = [HandyFunctions uniformFrom:-1 to:1];
             s = u * u + v * v;
         } while (s == 0 || s >= 1);
         

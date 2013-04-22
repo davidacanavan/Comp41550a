@@ -8,7 +8,7 @@
 
 #import "DTLazerBeamNode.h"
 #import "DTCharacter.h"
-#import "DTMaths.h"
+#import "HandyFunctions.h"
 
 @implementation DTLazerBeamNode
 
@@ -66,7 +66,7 @@ void generateLightning(CGPoint points[], int start, int end, float displacement,
     
     int midpointIndex = (start + end) / 2;
     CGPoint midpoint = ccpMidpoint(points[start], points[end]);
-    midpoint.y += ([DTMaths uniformWithLowerBound:-1 andUpperBound:1] / scale) * displacement;
+    midpoint.y += ([HandyFunctions uniformFrom:-1 to:1] / scale) * displacement;
     points[midpointIndex] = midpoint;
     generateLightning(points, start, midpointIndex, displacement, scale * scale);
     generateLightning(points, midpointIndex, end, displacement, scale * scale);

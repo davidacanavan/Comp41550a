@@ -23,13 +23,9 @@
         backgroundSprite.position = ccp(screen.width / 2, screen.height / 2);
         [self addChild: backgroundSprite z:-1];
         
-        _titleSprite = [CCSprite spriteWithFile:@"intro_title.png"];
+        _titleSprite = [self loadTitleAnimation];
         _titleSprite.position = ccp(screen.width / 2, screen.height + _titleSprite.boundingBox.size.height / 2);
         [self addChild: _titleSprite z:1];
-        
-        //[self initHeadingAnimation];
-        //_headingSprite.position = ccp(screen.width / 2, screen.height / 2);
-        //[self addChild:_headingSprite];
         
         CCMenuItemImage *onePlayerMenuItem = [HandyFunctions menuItemWithImageName:@"intro_one_player.png" target:self selector:@selector(onePlayerModeSelected)];
         CCMenuItemImage *twoPlayerMenuItem = [HandyFunctions menuItemWithImageName:@"intro_two_player.png" target:self selector:@selector(twoPlayerModeSelected)];
@@ -42,6 +38,9 @@
     
     return self;
 }
+
+#pragma mark-
+#pragma mark Animation Methods
 
 -(void)onEnterTransitionDidFinish
 {
@@ -56,27 +55,49 @@
 -(void)animateMenuIn
 {
     CGSize screen = [CCDirector sharedDirector].winSize;
-    [_menu runAction:[CCMoveTo actionWithDuration:0.2 position:ccp(screen.width / 2, screen.height * .35)]];
+    [_menu runAction:[CCSequence actions:
+                      [CCMoveTo actionWithDuration:0.2 position:ccp(screen.width / 2, screen.height * .35)],
+                      [CCCallFunc actionWithTarget:self selector:@selector(animateTitle)],
+                      nil]];
+}
+     
+-(void)animateTitle
+{
+    float uniform = [HandyFunctions uniformFrom:2 to:12];
+    NSLog(@"Random animation wait: %f", uniform);
+    CCDelayTime *delayBetweenAnimations = [CCDelayTime actionWithDuration:uniform];
+    [_titleSprite runAction:[CCSequence actions:delayBetweenAnimations, _titleAnimation,
+            [CCCallFunc actionWithTarget:self selector:@selector(animateTitle)], nil]];
+    _titleSprite.displayFrame = [[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:_defaultTitleAnimationFrameName];
 }
 
--(void)initHeadingAnimation
+-(void)animateTitleShake // TODO: maybe
+{
+    
+}
+
+// Override - Set up the animations in the superclass call
+-(CCSprite *)loadTitleAnimation
 {
     // Set up the animation frames
-    CCSpriteBatchNode *spriteBatchNode = [CCSpriteBatchNode batchNodeWithFile:@"DTIntroAnimation.png" capacity:10];
+    CCSpriteBatchNode *spriteBatchNode = [CCSpriteBatchNode batchNodeWithFile:@"intro_title.png" capacity:10];
     [self addChild:spriteBatchNode]; // Doesn't render apparently but still needs to be part of the tree
-    [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"DTIntroAnimation.plist"];
+    [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"intro_title.plist"];
     NSMutableArray *frames = [NSMutableArray array];
     
-    for (int i = 1; i <= 10; i++)
+    for (int i = 0; i < 10; i++)
     {
-        CCSpriteFrame *frame = [[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:[NSString stringWithFormat:@"DT Intro_%02d.png", i]];
+        CCSpriteFrame *frame = [[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:[NSString stringWithFormat:@"intro_title_%d.png", i]];
         [frames addObject:frame];
     }
     
-    _headingSprite = [CCSprite spriteWithSpriteFrameName:@"DT Intro_01.png"];
-    _headingAnimation = [CCAnimation animationWithSpriteFrames:frames delay:0.5f]; // TODO: should i cache the animation or what?
-    [CCAnimate actionWithAnimation:_headingAnimation];
+    _defaultTitleAnimationFrameName = @"intro_title_0.png";
+    _titleAnimation = [CCAnimate actionWithAnimation:[CCAnimation animationWithSpriteFrames:frames delay:0.06f]];
+    return [CCSprite spriteWithSpriteFrameName:_defaultTitleAnimationFrameName];
 }
+
+#pragma mark-
+#pragma mark Button Selectors
 
 // The one player mode has been selected - now we just have to replace the scene with the level select scene
 -(void)onePlayerModeSelected

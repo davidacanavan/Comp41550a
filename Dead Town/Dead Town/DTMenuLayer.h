@@ -16,9 +16,9 @@
 {
     @private
     // Some of the GUI bits
-    CCSprite *_headingSprite;  
-    CCAnimate *_headingAnimation;
     CCSprite *_titleSprite;
+    CCAnimate *_titleAnimation;
+    NSString *_defaultTitleAnimationFrameName;
     CCMenu *_menu;
     
     // The multiplayer stuff
