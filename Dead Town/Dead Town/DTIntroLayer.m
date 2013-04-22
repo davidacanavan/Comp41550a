@@ -6,12 +6,13 @@
 //
 //
 
-#import "DTMenuLayer.h"
+#import "DTIntroLayer.h"
 #import "DTGameScene.h"
 #import "HandyFunctions.h"
 #import "DTLevelSelectLevel.h"
+#import "DTOptionsScene.h"
 
-@implementation DTMenuLayer
+@implementation DTIntroLayer
 
 -(id)init
 {
@@ -110,7 +111,8 @@
 // In this case we scan for another device using gamekit
 -(void)twoPlayerModeSelected
 {
-    [self searchForPeer]; // Try find a player
+    [[CCDirector sharedDirector] pushScene:[DTOptionsScene scene]];
+    //[self searchForPeer]; // Try find a player
 }
 
 #pragma mark-

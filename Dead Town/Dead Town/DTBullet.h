@@ -10,7 +10,7 @@
 {
     @private
     // The sprite that actually represents the bullet.
-    ColoredCircleSprite *_sprite;
+    CCNode *_sprite;
     // The parent game layer which co-ordinates the game.
     DTLevel *_level;
 }
@@ -28,7 +28,7 @@
 @property(nonatomic, readonly) CGPoint initialPosition;
 
 // Factory method to create the bullet
-+(id)bulletWithPosition:(CGPoint)initialPosition angle:(float)angleOfFire damage:(float)damage maxDistance:(float)maxDistance owner:(DTCharacter *)owner level:(DTLevel *)level;
++(id)bulletWithPosition:(CGPoint)initialPosition angle:(float)angleOfFire damage:(float)damage maxDistance:(float)maxDistance owner:(DTCharacter *)owner level:(DTLevel *)level visible:(BOOL)visible;
 -(void)moveToPoint:(CGPoint)point;
 
 @end

@@ -8,8 +8,8 @@
 
 #import "CCScene.h"
 
-@interface DTMenuScene : CCScene 
+@interface DTIntroScene : CCScene 
 
-+(id) scene;
++(id)scene;
 
 @end

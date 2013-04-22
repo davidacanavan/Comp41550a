@@ -40,6 +40,7 @@ typedef enum {CharacterTypeHero, CharacterTypeVillian} DTCharacterType;
 @property(nonatomic, readonly) DTLifeModel *lifeModel;
 @property(nonatomic, readonly) DTCharacterType characterType;
 @property(nonatomic, readonly) CCSprite *sprite;
+@property(nonatomic, readonly) BOOL firesVisibleProjectile;
 
 // Member initializer to create the class - this class should only be used as a base class.
 -(id)initWithLevel:(DTLevel *)level position:(CGPoint)position life:(float)life

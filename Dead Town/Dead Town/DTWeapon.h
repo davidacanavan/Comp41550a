@@ -18,12 +18,12 @@
     @protected
     float _timeSinceLastFire; // The time since the last accepted call to fire (calls can be rejeted to prevent bullet rain).
     float _minimumTimeBetweenFires;
-    id <DTDamageCalculator> _damageCalculator;
 }
 
 // Whether this weapon belongs to the player or an enemy.
 @property(nonatomic) DTCharacter *owner;
 @property(nonatomic, readonly) float range;
+@property(nonatomic) id <DTDamageCalculator> damageCalculator;
 
 // Factory initializer for a weapon.
 +(id)weaponWithFireRate:(float)fireRate damageCalculator:(id <DTDamageCalculator>)damageCalculator;
@@ -35,3 +35,7 @@
 -(void)onFireAccepted:(float)angleOfFire from:(CGPoint)start level:(DTLevel *)level;
 
 @end
+
+
+
+

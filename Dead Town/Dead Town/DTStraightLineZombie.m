@@ -8,7 +8,7 @@
 
 #import "DTStraightLineZombie.h"
 #import "DTPlayer.h"
-#import "DTWeapon.h"
+#import "DTMelee.h"
 #import "DTConstantDamageCalculator.h"
 #import "DTLevel.h"
 
@@ -25,8 +25,7 @@
     {
         _player = player;
         _runningDistance = runningDistance;
-        self.weapon = [DTWeapon weaponWithFireRate:2 damageCalculator:[DTConstantDamageCalculator damageWithDamage:0.5]
-                range:30];
+        self.weapon = [DTMelee weapon];
         [self scheduleUpdate];
     }
     

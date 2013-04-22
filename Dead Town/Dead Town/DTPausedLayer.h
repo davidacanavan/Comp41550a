@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
 #import "DTGameLayer.h"
-#import "DTMenuScene.h"
+#import "DTIntroScene.h"
 
 @class DTControlsLayer;
 

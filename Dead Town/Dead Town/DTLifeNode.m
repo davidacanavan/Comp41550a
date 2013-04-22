@@ -49,9 +49,8 @@
 
 -(void)lifeChangedFrom:(float)oldLife model:(DTLifeModel *)lifeModel character:(DTCharacter *)character
 {
-    CGRect box = self.boundingBox;
     float barLength = [lifeModel getPercentage] * _maxBarLength;
-    _currentLifeInternal = ccp(-box.size.width / 2 + _inset + barLength,  _currentLifeInternal.y);
+    _currentLifeInternal = ccp(_inset + barLength,  _currentLifeInternal.y);
 }
 
 @end

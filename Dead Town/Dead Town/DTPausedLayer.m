@@ -53,7 +53,7 @@
 -(void)quitItemPressed
 {
     CCDirector *director = [CCDirector sharedDirector];
-    [director replaceScene: [CCTransitionFade transitionWithDuration: 1.0 scene: [DTMenuScene scene] withColor:ccWHITE]];
+    [director replaceScene: [CCTransitionFade transitionWithDuration: 1.0 scene: [DTIntroScene scene] withColor:ccWHITE]];
 }
 
 @end

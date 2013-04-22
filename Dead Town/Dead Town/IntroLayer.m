@@ -7,7 +7,7 @@
 //
 
 #import "IntroLayer.h"
-#import "DTMenuScene.h"
+#import "DTIntroScene.h"
 
 
 #pragma mark - IntroLayer
@@ -60,7 +60,7 @@
 -(void) makeTransition:(ccTime)dt
 {
     CCDirector *director = [CCDirector sharedDirector];
-	[director replaceScene: [CCTransitionFade transitionWithDuration: 1.0 scene: [DTMenuScene scene] withColor:ccWHITE]];
+	[director replaceScene: [CCTransitionFade transitionWithDuration: 1.0 scene: [DTIntroScene scene] withColor:ccWHITE]];
 }
 
 @end

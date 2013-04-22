@@ -12,7 +12,7 @@
 
 #define SESSION_ID_STRING @"dead_town_yo"
 
-@interface DTMenuLayer : CCLayer<GKPeerPickerControllerDelegate, GKSessionDelegate>
+@interface DTIntroLayer : CCLayer<GKPeerPickerControllerDelegate, GKSessionDelegate>
 {
     @private
     // Some of the GUI bits

@@ -6,10 +6,10 @@
 //
 //
 
-#import "DTMenuScene.h"
-#import "DTMenuLayer.h"
+#import "DTIntroScene.h"
+#import "DTIntroLayer.h"
 
-@implementation DTMenuScene
+@implementation DTIntroScene
 
 +(id)scene
 {
@@ -20,7 +20,7 @@
 {
     if (self = [super init])
     {
-        DTMenuLayer *layer = [DTMenuLayer node];
+        DTIntroLayer *layer = [DTIntroLayer node];
         [self addChild: layer];
     }
     

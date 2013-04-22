@@ -62,6 +62,11 @@
         [[SimpleAudioEngine sharedEngine] playEffect:@"Pew.m4a"];
 }
 
+-(BOOL)firesVisibleProjectile
+{
+    return YES;
+}
+
 @end
 
 

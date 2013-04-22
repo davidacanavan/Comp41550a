@@ -36,7 +36,7 @@
     // Let's fire lots of bullets at the same time!!!
     for (float angleChange = -angleSpread/ 2; angleChange < angleSpread / 2; angleChange += angleSpread / bulletCount)
     {
-        DTBullet *bullet = [DTBullet bulletWithPosition:start angle:angleOfFire + angleChange damage:[_damageCalculator computeDamage] maxDistance:self.range owner:self.owner level:level];
+        DTBullet *bullet = [DTBullet bulletWithPosition:start angle:angleOfFire + angleChange damage:[self.damageCalculator computeDamage] maxDistance:self.range owner:self.owner level:level visible:YES];
         [level addChild:bullet];
     }
 }

@@ -9,7 +9,7 @@
 #import "DTPathFindZombie.h"
 #import "DTPlayer.h"
 #import "DTConstantDamageCalculator.h"
-#import "DTWeapon.h"
+#import "DTMelee.h"
 #import "DTLevel.h"
 
 @interface PathNode : NSObject
@@ -37,8 +37,7 @@
     if (self = [super initWithLevel:level position:position life:life characterType:CharacterTypeVillian velocity:velocity])
     {
         _player = player;
-        self.weapon = [DTWeapon weaponWithFireRate:2 damageCalculator:[DTConstantDamageCalculator damageWithDamage:5]
-                                             range:50];
+        self.weapon = [DTMelee weapon];
         _currentPathIndex = -1; // Let's assume we're not on a path at all
         [self notifyMovementStart];
         [self scheduleUpdate];
@@ -87,7 +86,11 @@
         }
     }
     else if (ccpFuzzyEqual(self.sprite.position, _player.sprite.position, _level.tileDimension * 1.5))
-        ; // Then we're attacking! TODO: Put in a section where he acts like a straight line zombie
+    {
+        [self fire];
+        [self turnToFacePosition:_player.sprite.position];
+        // Then we're attacking! TODO: Put in a section where he acts like a straight line zombie
+    }
     else // Better get a path...
     {
         _currentPath = [self findPathToPlayer];
@@ -122,12 +125,9 @@
             
             while (lowest != nil)
             {
-                //NSLog(@"%@", lowest);
                 [finalPath addObject:lowest];
                 lowest = lowest.parent;
             }
-            
-            //NSLog(@"END!");
             
             [finalPath removeLastObject]; // This is the zombie's location so he doesn't need to care, he already knows he's here
             

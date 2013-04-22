@@ -424,7 +424,7 @@
         NSString *message = [NSString stringWithFormat:@"We have been disconnected from %@!", [session displayNameForPeer:peerIdentifier]];
         [HandyFunctions showAlertDialogEntitled:@"Dead Town" withMessage:message];
         [self invalidateLocalSession];
-        [[CCDirector sharedDirector] replaceScene:[DTMenuScene scene]];
+        [[CCDirector sharedDirector] replaceScene:[DTIntroScene scene]];
     }
 }
 

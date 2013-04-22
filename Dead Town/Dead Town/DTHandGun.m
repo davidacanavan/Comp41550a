@@ -30,7 +30,7 @@
 
 -(void)onFireAccepted:(float)angleOfFire from:(CGPoint)start level:(DTLevel *)level
 {
-    DTBullet *bullet = [DTBullet bulletWithPosition:start angle:angleOfFire damage:[_damageCalculator computeDamage] maxDistance:self.range owner:self.owner level:level];
+    DTBullet *bullet = [DTBullet bulletWithPosition:start angle:angleOfFire damage:[self.damageCalculator computeDamage] maxDistance:self.range owner:self.owner level:level visible:YES];
     [level addChild:bullet];
 }
 
