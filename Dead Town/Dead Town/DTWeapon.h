@@ -11,7 +11,7 @@
 #import "DTDamageCalculator.h"
 
 @class DTCharacter;
-@class DTGameLayer;
+@class DTLevel;
 
 @interface DTWeapon : CCNode // I extend CCNode to get the game loop update scheduled
 {
@@ -27,7 +27,11 @@
 
 // Factory initializer for a weapon.
 +(id)weaponWithFireRate:(float)fireRate damageCalculator:(id <DTDamageCalculator>)damageCalculator;
+-(id)initWithFireRate:(float)fireRate damageCalculator:(id <DTDamageCalculator>)damageCalculator;
 +(id)weaponWithFireRate:(float)fireRate damageCalculator:(id <DTDamageCalculator>)damageCalculator range:(float)range;
--(BOOL)fireAtAngle:(float)angleOfFire from:(CGPoint)start gameLayer:(DTGameLayer *)gameLayer;
+-(id)initWithFireRate:(float)fireRate damageCalculator:(id <DTDamageCalculator>)damageCalculator range:(float)range;
+-(BOOL)fireAtAngle:(float)angleOfFire from:(CGPoint)start level:(DTLevel *)level;
+// Override this to do the actual firing when it's been accepted - empty by default
+-(void)onFireAccepted:(float)angleOfFire from:(CGPoint)start level:(DTLevel *)level;
 
 @end
