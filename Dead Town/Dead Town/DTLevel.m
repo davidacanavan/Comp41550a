@@ -372,35 +372,32 @@
     }
 }
 
--(void)sendPlayerMoveToPosition:(CGPoint)position
+-(void)sendPlayerMoveToPosition:(CGPoint)position withVelocity:(CGPoint)velocity
 {
     if (_session) // So only if we have a valid session...
     {
-        NSMutableData *data = [[NSMutableData alloc] init];
-        NSKeyedArchiver *archiver = [[NSKeyedArchiver alloc] initForWritingWithMutableData:data];
-        
         // Add messages start with a type code then we add the data
-        [archiver encodeInt:MessageTypePlayerMoved forKey:@"message_type"];
-        [archiver encodeFloat:position.x forKey:@"x"];
-        [archiver encodeFloat:position.y forKey:@"y"];
-        [archiver finishEncoding];
+        DTMessagePlayerMoved message;
+        message.message.type = MessageTypePlayerMoved;
+        message.x = position.x;
+        message.y = position.y;
+        message.vx = velocity.x;
+        message.vy = velocity.y;
         
         // And send that beautiful data!
-        [_session sendData:data toPeers:[NSArray arrayWithObject:self.peerIdentifier]
-              withDataMode:GKSendDataUnreliable error:nil];
+        [_session sendData:[NSData dataWithBytes:&message length:sizeof(DTMessagePlayerMoved)] toPeers:[NSArray arrayWithObject:self.peerIdentifier] withDataMode:GKSendDataUnreliable error:nil];
     }
 }
 
 // Called by the session when we've gotten some data delivered
 -(void)receiveData:(NSData *)data fromPeer:(NSString *)peer inSession:(GKSession *)session context:(void *)context
 {
-    NSKeyedUnarchiver *unarchiver = [[NSKeyedUnarchiver alloc] initForReadingWithData:data];
-    MessageType messageType = [unarchiver decodeIntForKey:@"message_type"];
+    DTMessage *message = (DTMessage *) [data bytes];
     
-    switch (messageType)
+    switch (message->type)
     {
         case MessageTypePlayerMoved: // So if we have a move
-            [self receivePlayerMoveFromUnarchiver:unarchiver];
+            [self receivePlayerMove:message];
         break;
             
         default:
@@ -410,9 +407,10 @@
 }
 
 // Receive a player move
--(void)receivePlayerMoveFromUnarchiver:(NSKeyedUnarchiver *)unarchiver
+-(void)receivePlayerMove:(DTMessage *)message
 {
-    _remotePlayerNewPosition = ccp([unarchiver decodeFloatForKey:@"x"], [unarchiver decodeFloatForKey:@"y"]);
+    DTMessagePlayerMoved *moveMessage = (DTMessagePlayerMoved *) message;
+    _remotePlayerNewPosition = ccp(moveMessage->x, moveMessage->y);
     _remotePlayerHasNewPosition = YES;
 }
 

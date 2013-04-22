@@ -29,6 +29,8 @@
 		2B63A402171E0AD00075E802 /* level_select_sewer-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B63A3FE171E0AD00075E802 /* level_select_sewer-hd.png */; };
 		2B63A405171E0B090075E802 /* level_select_tileset-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B63A403171E0B090075E802 /* level_select_tileset-hd.png */; };
 		2B63A406171E0B090075E802 /* level_select-hd.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 2B63A404171E0B090075E802 /* level_select-hd.tmx */; };
+		2B679BF81724C51300D1202A /* DTMachineGun.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B679BF71724C51300D1202A /* DTMachineGun.m */; };
+		2B679BFC1724C55200D1202A /* DTShotgun.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B679BFB1724C55200D1202A /* DTShotgun.m */; };
 		2B86436116D23A02008FEB55 /* DTPausedLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B86436016D23A02008FEB55 /* DTPausedLayer.m */; };
 		2B86436416D25798008FEB55 /* Pew.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 2B86436316D25797008FEB55 /* Pew.m4a */; };
 		2B86436716D25B00008FEB55 /* BackingTrack.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 2B86436616D25B00008FEB55 /* BackingTrack.m4a */; };
@@ -243,6 +245,10 @@
 		2B63A3FE171E0AD00075E802 /* level_select_sewer-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "level_select_sewer-hd.png"; sourceTree = "<group>"; };
 		2B63A403171E0B090075E802 /* level_select_tileset-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "level_select_tileset-hd.png"; sourceTree = "<group>"; };
 		2B63A404171E0B090075E802 /* level_select-hd.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "level_select-hd.tmx"; sourceTree = "<group>"; };
+		2B679BF61724C51300D1202A /* DTMachineGun.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTMachineGun.h; sourceTree = "<group>"; };
+		2B679BF71724C51300D1202A /* DTMachineGun.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTMachineGun.m; sourceTree = "<group>"; };
+		2B679BFA1724C55200D1202A /* DTShotgun.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTShotgun.h; sourceTree = "<group>"; };
+		2B679BFB1724C55200D1202A /* DTShotgun.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTShotgun.m; sourceTree = "<group>"; };
 		2B86435F16D23A02008FEB55 /* DTPausedLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTPausedLayer.h; sourceTree = "<group>"; };
 		2B86436016D23A02008FEB55 /* DTPausedLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTPausedLayer.m; sourceTree = "<group>"; };
 		2B86436316D25797008FEB55 /* Pew.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = Pew.m4a; path = sounds/Pew.m4a; sourceTree = "<group>"; };
@@ -675,6 +681,10 @@
 			children = (
 				2B5722AC171306F900AA0BF9 /* DTHandGun.h */,
 				2B5722AD171306F900AA0BF9 /* DTHandGun.m */,
+				2B679BF61724C51300D1202A /* DTMachineGun.h */,
+				2B679BF71724C51300D1202A /* DTMachineGun.m */,
+				2B679BFA1724C55200D1202A /* DTShotgun.h */,
+				2B679BFB1724C55200D1202A /* DTShotgun.m */,
 			);
 			name = "projectile weapons";
 			sourceTree = "<group>";
@@ -1567,6 +1577,8 @@
 				2B05C4DF17179EFE0099DC6A /* DTPathFindZombie.m in Sources */,
 				2B63A3F6171DFCC20075E802 /* DTLevelSelectLevel.m in Sources */,
 				2B63A3F9171DFE330075E802 /* DTHospitalLevel.m in Sources */,
+				2B679BF81724C51300D1202A /* DTMachineGun.m in Sources */,
+				2B679BFC1724C55200D1202A /* DTShotgun.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

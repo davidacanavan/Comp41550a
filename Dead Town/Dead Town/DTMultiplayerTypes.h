@@ -12,17 +12,17 @@ typedef enum
     MessageTypePlayerMoved = 0, // He's made a move
     MessageTypePlayerKilled, // He's been killed
     MessageTypePlayerQuit // He quit! That jerk face!
-} MessageType;
+} DTMessageType;
 
 typedef struct
 {
-    MessageType type;
-} Message;
+    DTMessageType type;
+} DTMessage;
 
 typedef struct
 {
-    Message message; // Always start with a message so we can read this first from the void*
-    float x;
-    float y;
-} MessagePlayerMoved;
+    DTMessage message; // Always start with a message so we can read this first from the void*
+    float x, y;
+    float vx, vy;
+} DTMessagePlayerMoved;
 

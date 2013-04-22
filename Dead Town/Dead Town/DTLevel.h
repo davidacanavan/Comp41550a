@@ -72,6 +72,10 @@
 
 -(void)addVillain:(DTCharacter *)enemy;
 
+// Multiplayer methods
+-(void)sendPlayerMoveToPosition:(CGPoint)position withVelocity:(CGPoint)velocity;
+-(void)receivePlayerMove:(DTMessage *)message;
+
 // Handy methods
 -(void)addChild:(CCNode *)node;
 -(void)removeChild:(CCNode *)node cleanup:(BOOL)cleanup;
