@@ -14,5 +14,8 @@
 @property(nonatomic, strong) id <GraphDataSource> dataSource;
 @property(nonatomic) float scale;
 @property(nonatomic) CGPoint axesOrigin; // points are between 0 and 1 to keep it relative to screen size
+@property(nonatomic) BOOL isAxesOriginSet;
+
+-(void)translateAxesOriginBy:(CGPoint)translation;
 
 @end

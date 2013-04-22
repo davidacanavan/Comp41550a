@@ -121,15 +121,17 @@
     }
 }
 
+// Responds to double tap only - woohoo!
 - (IBAction)handleTap:(UITapGestureRecognizer *)sender
 {
-    if (sender.numberOfTouches != 1)
-        return;
-    
+    _graphView.isAxesOriginSet = NO; // We essentially move the axes back to the centre point
+    [_graphView setNeedsDisplay];
 }
 
 - (IBAction)handlePan:(UIPanGestureRecognizer *)sender
 {
+    CGPoint translation = [sender translationInView:_graphView];
+    [_graphView translateAxesOriginBy:translation];
 }
 
 @end

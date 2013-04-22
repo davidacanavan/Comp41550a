@@ -44,12 +44,12 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="O3d-QE-X00" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tapGestureRecognizer id="aaW-2I-i4v">
+                <tapGestureRecognizer numberOfTapsRequired="2" id="aaW-2I-i4v">
                     <connections>
                         <action selector="handleTap:" destination="6AD-On-hyC" id="0r9-mg-e7K"/>
                     </connections>
                 </tapGestureRecognizer>
-                <panGestureRecognizer minimumNumberOfTouches="1" id="b2q-KN-6zU">
+                <panGestureRecognizer minimumNumberOfTouches="1" maximumNumberOfTouches="1" id="b2q-KN-6zU">
                     <connections>
                         <action selector="handlePan:" destination="6AD-On-hyC" id="JhS-hg-65I"/>
                     </connections>

@@ -4,13 +4,15 @@
 
 @implementation GraphView
 
-- (void)drawRect:(CGRect)rect
+-(void)drawRect:(CGRect)rect
 {
     if (!_dataSource)
         return;
     
-    CGPoint rectCentre = CGPointMake(CGRectGetMidX(rect), CGRectGetMidY(rect));
-    [AxesDrawer drawAxesInRect:rect originAtPoint:rectCentre scale:_scale];
+    if (!_isAxesOriginSet)
+        _axesOrigin = CGPointMake(CGRectGetMidX(rect), CGRectGetMidY(rect));
+    
+    [AxesDrawer drawAxesInRect:rect originAtPoint:_axesOrigin scale:_scale];
     
     // Draw the function!
 	CGContextRef context = UIGraphicsGetCurrentContext();
@@ -45,7 +47,32 @@
     [self setNeedsDisplay];
 }
 
+-(void)setAxesOrigin:(CGPoint)axesOrigin
+{
+    _axesOrigin = axesOrigin;
+    _isAxesOriginSet = YES;
+    [self setNeedsDisplay];
+}
+
+-(void)translateAxesOriginBy:(CGPoint)translation
+{
+    self.axesOrigin = CGPointMake(_axesOrigin.x + translation.x,
+                                  _axesOrigin.y + translation.y);
+}
+
 @end
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
