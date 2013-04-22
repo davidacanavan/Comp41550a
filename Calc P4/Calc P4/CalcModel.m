@@ -309,6 +309,35 @@ const double RADIAN_TO_DEGREE_CONVERSION_FACTOR = M_PI / 180;
     return error != nil ? nil : array;
 }
 
+- (void)writeStateToUserDefaults:(NSUserDefaults *)defaults
+{
+    id propertyList = [CalcModel propertyListForExpression:self.expression];
+    [defaults setObject:propertyList forKey:@"calc model previous expression"];
+    [defaults setDouble:_operand forKey:@"calc model operand"];
+    [defaults setDouble:_waitingOperand forKey:@"calc model waiting operand"];
+    [defaults setDouble:_memoryStore forKey:@"calc model memory store"];
+    [defaults setObject:_waitingOperation forKey:@"calc model waiting operation"];
+    [defaults setBool:_isCalcInDegreeMode forKey:@"calc model is calc in degree mode"];
+    [defaults setObject:_waitingOperationStatus forKey:@"calc model waiting operation status"];
+    [defaults synchronize];
+}
+
+- (void)readStateFromUserDefaults:(NSUserDefaults *)defaults
+{
+    id propertyList = [defaults objectForKey:@"calc model previous expression"];
+    
+    if (propertyList) // In case it's nil, we don't want a crash later on the NSData*
+    {
+        _expression = [CalcModel expressionForPropertyList:propertyList];
+        _operand = [defaults doubleForKey:@"calc model operand"];
+        _waitingOperand = [defaults doubleForKey:@"calc model waiting operand"];
+        _memoryStore = [defaults doubleForKey:@"calc model memory store"];
+        _waitingOperation = [defaults objectForKey:@"calc model waiting operation"];
+        _isCalcInDegreeMode = [defaults boolForKey:@"calc model is calc in degree mode"];
+        _waitingOperationStatus = [defaults objectForKey:@"calc model waiting operation status"];
+    }
+}
+
 @end
 
 

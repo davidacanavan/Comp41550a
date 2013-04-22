@@ -1,6 +1,7 @@
 
 #import "GraphView.h"
 #import "AxesDrawer.h"
+#import "CalcModel.h"
 
 @implementation GraphView
 
@@ -29,9 +30,6 @@
     float callStep = (xMax - xMin) / 1000; // Lets give this a high enough resolution
     
     CGPoint previous = CGPointMake(xCentre - axesShift.x + xMin * _scale, height - ([_dataSource evaluateFunctionAt:xMin] * _scale + yCentre - axesShift.y));
-    //NSLog(@"Start!");
-    NSLog(@"%f", axesShift.x);
-    NSLog(@"%@", NSStringFromCGPoint(CGPointMake(xMin, [_dataSource evaluateFunctionAt:xMin])));
     CGContextBeginPath(context);
     CGContextMoveToPoint(context, previous.x, previous.y);
     

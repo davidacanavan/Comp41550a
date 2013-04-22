@@ -22,8 +22,23 @@
 -(void)viewDidLoad
 {
     [super viewDidLoad];
+    // Register for a background callback so we can save some stuff
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleDidEnterBackgroundNotification:) name:UIApplicationDidEnterBackgroundNotification object:nil];
     _calcModel.delegate = self;
     self.navigationItem.title = @"Graph Calc";
+    [self loadPreviousStateIfApplicable];
+}
+
+-(void)loadPreviousStateIfApplicable
+{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [_calcModel readStateFromUserDefaults:defaults];
+}
+
+-(void)handleDidEnterBackgroundNotification:(NSNotification *)notification
+{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [_calcModel writeStateToUserDefaults:defaults];
 }
 
 - (IBAction)digitPressed:(UIButton *)sender
@@ -181,8 +196,11 @@
     [graphViewController reloadCurrentExpressionToGraphView]; // Repaint the graph
 }
 
-
-
+-(CGSize)contentSizeForViewInPopover
+{
+    CGSize viewSize = self.view.bounds.size;
+    return CGSizeMake(viewSize.width, viewSize.height / 2.05);
+}
 
 @end
 

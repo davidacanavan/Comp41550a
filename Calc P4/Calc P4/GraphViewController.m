@@ -19,14 +19,21 @@
 
 -(void)viewDidLoad // This is called from the iPhone push since it's recreated each time
 {
-    _graphView.dataSource = [ExpressionDataSource dataSourceWithExpression:_expression];
-    _graphView.scale = 1;
+    // Register the quit listener and get the old graph if we had one
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleDidEnterBackgroundNotification:) name:UIApplicationDidEnterBackgroundNotification object:nil];
+    BOOL isPreviousStateLoaded = [self loadPreviousStateIfApplicable];
     
     if (!isIPad) // Only do this for iphone or else we get an error string as the title
     {
         NSString *description = [CalcModel descriptionOfExpression:_expression];
         self.navigationItem.title = description;
         self.navigationItem.backBarButtonItem.title = @"Back";
+    }
+    else if (isPreviousStateLoaded)
+    {
+        NSString *description = [CalcModel descriptionOfExpression:_expression];
+        self.navigationItem.title = description;
+        self.navigationItem.leftBarButtonItem = nil;
     }
     else
         self.navigationItem.leftBarButtonItem = nil; // So we nil it out be we have a strong ref to it - keep it hidden by default (bit of an API fix)
@@ -40,10 +47,48 @@
     _currentScaleChangeUntilWeAllowAPinch = 0;
 }
 
+-(BOOL)loadPreviousStateIfApplicable
+{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    id propertyList = [defaults objectForKey:@"previous_expression"];
+    id previousExpression = nil;
+    
+    if (propertyList) // In case it's nil, we don't want a crash later on the NSData*
+        previousExpression = [CalcModel expressionForPropertyList:propertyList];
+    
+    _expression = _expression == nil ? previousExpression : _expression; // So if we already have an expression lets use that. If not get the old one! Doesn't matter if they're both null, then nothing will happen.
+    
+    _graphView.dataSource = [ExpressionDataSource dataSourceWithExpression:_expression];
+    
+    // Get the values we have, floats are stored as 0 if they are unset
+    float scale = [defaults floatForKey:@"scale"];
+    float axisOriginX = [defaults floatForKey:@"axis_origin_x"];
+    float axisOriginY = [defaults floatForKey:@"axis_origin_y"];
+    
+    // See if we can assign them
+    _graphView.scale = scale == 0 ? 1 : scale;
+    
+    if (axisOriginX != 0 && axisOriginY != 0) // If not they're centered by the GraphView.
+        _graphView.axesOrigin = CGPointMake(axisOriginX, axisOriginY);
+    
+    return _expression == previousExpression;
+}
+
+-(void)handleDidEnterBackgroundNotification:(NSNotification *)notification
+{
+    id propertyList = [CalcModel propertyListForExpression:_expression];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:propertyList forKey:@"previous_expression"];
+    [defaults setFloat:_graphView.scale forKey:@"scale"];
+    [defaults setFloat:_graphView.axesOrigin.x forKey:@"axis_origin_x"];
+    [defaults setFloat:_graphView.axesOrigin.y forKey:@"axis_origin_y"];
+    [defaults synchronize];
+}
+
 -(void)reloadCurrentExpressionToGraphView // This is called manually in the iPad version to reload
 {
     _graphView.dataSource = [ExpressionDataSource dataSourceWithExpression:_expression];
-    _graphView.scale = 1; // Reset the scale...
+    _graphView.scale = 1; // Reset the scale... this is on purpose, i think new graphs should be scale-reset
     self.navigationItem.title = [CalcModel descriptionOfExpression:_expression];
     [_graphView setNeedsDisplay]; // And repaint
 }

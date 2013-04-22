@@ -32,6 +32,9 @@
 + (NSString *)descriptionOfExpression:(id)anExpression;
 + (id)propertyListForExpression:(id)anExpression;
 + (id)expressionForPropertyList:(id)propertyList;
+// P4 new methods!
+- (void)writeStateToUserDefaults:(NSUserDefaults *)defaults;
+- (void)readStateFromUserDefaults:(NSUserDefaults *)defaults;
 
 
 @end
