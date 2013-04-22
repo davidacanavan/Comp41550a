@@ -154,8 +154,7 @@
     {
         [_player moveToPosition:newPosition]; // Update the player position
         [self centerViewportOnPosition:newPosition];
-        
-        [self sendPlayerMoveToPosition:newPosition];
+        [self sendPlayerMoveToPosition:newPosition withVelocity:velocity];
     }
     
 }
