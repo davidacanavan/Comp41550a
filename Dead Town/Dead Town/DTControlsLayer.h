@@ -26,8 +26,6 @@ typedef enum {ControllerTypeJoystick, ControllerTypeTilt} ControllerType;
     // The map layer - this makes it easy to update the player position
     SneakyJoystickSkinnedBase *_joystickSkin;
     SneakyJoystick *_joystick;
-    SneakyButton *_fireButton;
-    SneakyButton *_pauseButton;
     CCDirector *_director;
     id <DTControllerDelegate> _controllerDelegate;
     id <DTButtonDelegate> _buttonDelegate;
@@ -40,6 +38,7 @@ typedef enum {ControllerTypeJoystick, ControllerTypeTilt} ControllerType;
 @property(nonatomic) BOOL isPausing;
 @property(nonatomic) DominantHand dominantHand;
 @property(nonatomic) ControllerType controllerType;
+@property(nonatomic, readonly) DTButton *fireButton, *pauseButton;
 
 +(id)layerWithControllerType:(ControllerType)controllerType controllerDelegate:(id <DTControllerDelegate>)controllerDelegate buttonDelegate:(id <DTButtonDelegate>)buttonDelegate dominantHand:(DominantHand)dominantHand;
 

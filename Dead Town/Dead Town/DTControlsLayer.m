@@ -165,7 +165,6 @@
     fireButtonSkin.pressSprite = [ColoredCircleSprite circleWithColor: ccc4(255, 255, 0, 255)radius:buttonRadius];
     CGSize fireButtonSize = fireButtonSkin.contentSize;
     fireButtonSkin.position = ccp(_screen.width - padding - fireButtonSize.width / 2, padding + fireButtonSize.height / 2);
-    //_fireButton = [[SneakyButton alloc] initWithRect:CGRectMake(0, 0, buttonRadius * 2, buttonRadius * 2)];
     _fireButton = [DTButton buttonWithRect:CGRectMake(0, 0, buttonRadius * 2, buttonRadius * 2) isHoldable:YES delegate:_buttonDelegate tag:@"fire"];
     fireButtonSkin.button = _fireButton;
     [self addChild:fireButtonSkin];
