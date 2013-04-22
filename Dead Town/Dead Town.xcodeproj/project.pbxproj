@@ -319,6 +319,7 @@
 		2BBFAB1F1725AB9D004329C2 /* DTOptionsScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTOptionsScene.m; sourceTree = "<group>"; };
 		2BBFAB231725B0DE004329C2 /* DTOptionsLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTOptionsLayer.h; sourceTree = "<group>"; };
 		2BBFAB241725B0DE004329C2 /* DTOptionsLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTOptionsLayer.m; sourceTree = "<group>"; };
+		2BBFAB261725C810004329C2 /* DTControlsLayerConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTControlsLayerConstants.h; sourceTree = "<group>"; };
 		2BCE6291170C63AD000935D6 /* DTDamageCalculator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTDamageCalculator.h; sourceTree = "<group>"; };
 		2BCE6293170C642E000935D6 /* DTConstantDamageCalculator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTConstantDamageCalculator.h; sourceTree = "<group>"; };
 		2BCE6294170C642E000935D6 /* DTConstantDamageCalculator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTConstantDamageCalculator.m; sourceTree = "<group>"; };
@@ -672,6 +673,7 @@
 		2B5668CC16EE1750004FEA6C /* controls layer */ = {
 			isa = PBXGroup;
 			children = (
+				2BBFAB261725C810004329C2 /* DTControlsLayerConstants.h */,
 				2B980D3B16CAAE3A0028BB93 /* DTControlsLayer.h */,
 				2B980D3C16CAAE3A0028BB93 /* DTControlsLayer.m */,
 				2B5668CF16EE1BE6004FEA6C /* DTControllerDelegate.h */,

@@ -7,13 +7,14 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "CCNode.h"
+#import "DTControlsLayerConstants.h"
 
 @interface DTOptions : NSObject
 
 @property(nonatomic) BOOL playSoundEffects;
 @property(nonatomic) BOOL playBackgroundMusic;
-@property(nonatomic) BOOL useTiltControls;
+@property(nonatomic) ControllerType controllerType;
+@property(nonatomic) DominantHand dominantHand;
 
 +(id)sharedOptions;
 

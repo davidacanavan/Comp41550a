@@ -8,11 +8,12 @@
 
 #import "DTOptions.h"
 
-@implementation DTOptions
+#define PLAY_BACKGROUND_MUSIC @"play_bg"
+#define PLAY_SOUND_EFFECTS @"play_fx"
+#define CONTROLLER_TYPE @"c_type"
+#define DOMINANT_HAND @"dom_hand"
 
-@synthesize playBackgroundMusic = _playBackgroundMusic;
-@synthesize playSoundEffects = _playSoundEffects;
-@synthesize useTiltControls = _useTiltControls;
+@implementation DTOptions
 
 +(id)sharedOptions
 {
@@ -34,15 +35,19 @@
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
         
         // Check to see if this is a first run or not
-        if (![defaults valueForKey:@"play_background_music"])
+        if (![defaults valueForKey:PLAY_BACKGROUND_MUSIC])
         {
-            [defaults setBool:YES forKey:@"play_background_music"];
-            [defaults setBool:YES forKey:@"play_sound_effects"];
+            [defaults setBool:YES forKey:PLAY_BACKGROUND_MUSIC];
+            [defaults setBool:YES forKey:PLAY_SOUND_EFFECTS];
+            [defaults setInteger:ControllerTypeJoystick forKey:CONTROLLER_TYPE];
+            [defaults setInteger:DominantHandRight forKey:DOMINANT_HAND];
             [defaults synchronize];
         }
         
-     _playBackgroundMusic = [defaults boolForKey:@"play_background_music"];
-     _playSoundEffects = [defaults boolForKey:@"play_sound_effects"];
+        _playBackgroundMusic = [defaults boolForKey:PLAY_BACKGROUND_MUSIC];
+        _playSoundEffects = [defaults boolForKey:PLAY_SOUND_EFFECTS];
+        _controllerType = [defaults integerForKey:CONTROLLER_TYPE];
+        _dominantHand = [defaults integerForKey:DOMINANT_HAND];
     }
     
     return self;
@@ -52,7 +57,7 @@
 {
     _playBackgroundMusic = playBackgroundMusic;
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [defaults setBool:playBackgroundMusic forKey:@"play_background_music"];
+    [defaults setBool:playBackgroundMusic forKey:PLAY_BACKGROUND_MUSIC];
     [defaults synchronize];
 }
 
@@ -60,7 +65,23 @@
 {
     _playSoundEffects = playSoundEffects;
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [defaults setBool:playSoundEffects forKey:@"play_sound_effects"];
+    [defaults setBool:playSoundEffects forKey:PLAY_SOUND_EFFECTS];
+    [defaults synchronize];
+}
+
+-(void)setControllerType:(ControllerType)controllerType
+{
+    _controllerType = controllerType;
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setInteger:controllerType forKey:CONTROLLER_TYPE];
+    [defaults synchronize];
+}
+
+-(void)setDominantHand:(DominantHand)dominantHand
+{
+    _dominantHand = dominantHand;
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setInteger:dominantHand forKey:DOMINANT_HAND];
     [defaults synchronize];
 }
 

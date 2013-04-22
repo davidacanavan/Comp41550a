@@ -10,15 +10,13 @@
 #import "cocos2d.h"
 #import "DTControllerDelegate.h"
 #import "DTButtonDelegate.h"
+#import "DTControlsLayerConstants.h"
 
 @class DTGameLayer;
 @class SneakyJoystick;
 @class SneakyJoystickSkinnedBase;
 @class SneakyButton;
 @class SneakyButtonSkinnedBase;
-
-typedef enum {DominantHandLeft, DominantHandRight} DominantHand;
-typedef enum {ControllerTypeJoystick, ControllerTypeTilt} ControllerType;
 
 @interface DTControlsLayer : CCLayer <CCTargetedTouchDelegate, UIAccelerometerDelegate>
 {

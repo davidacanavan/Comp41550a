@@ -6,8 +6,18 @@
 //
 //
 
-#import "CCLayer.h"
+#import "cocos2d.h"
+
+@class DTOptions;
 
 @interface DTOptionsLayer : CCLayer
+{
+    @private
+    CCMenuItemFont *_musicOn, *_musicOff;
+    CCMenuItemFont *_soundFxOn, *_soundFxOff;
+    CCMenuItemFont *_contolsJoystick, *_controlsTilt;
+    CCMenuItemFont *_handRight, *_handLeft;
+    DTOptions *_options;
+}
 
 @end

@@ -21,6 +21,9 @@
 @synthesize dominantHand = _dominantHand;
 @synthesize controllerType = _controllerType;
 
+#pragma mark-
+#pragma mark Initialization Code
+
 +(id)layerWithControllerType:(ControllerType)controllerType controllerDelegate:(id <DTControllerDelegate>)controllerDelegate buttonDelegate:(id <DTButtonDelegate>)buttonDelegate dominantHand:(DominantHand)dominantHand
 {
     return [[self alloc] initWithControllerType:(ControllerType)controllerType controllerDelegate:controllerDelegate buttonDelegate:(id <DTButtonDelegate>)buttonDelegate dominantHand:(DominantHand)dominantHand];
@@ -90,7 +93,7 @@
     if (_controllerType == controllerType) // So nothing is changing...
         return;
     
-    if (_controllerType == ControllerTypeJoystick) // We're moving to the joystick from the tilt
+    if (controllerType == ControllerTypeJoystick) // We're moving to the joystick from the tilt
     {
         [self removeTiltControls];
         [self addJoystick];

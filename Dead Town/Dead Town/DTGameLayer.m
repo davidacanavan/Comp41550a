@@ -36,6 +36,16 @@
     return self;
 }
 
+-(void)onEnter // Gotta see if the defaults have been changed
+{
+    [super onEnter];
+    
+    if (_options.controllerType != self.controlsLayer.controllerType)
+        self.controlsLayer.controllerType = _options.controllerType;
+    if (_options.dominantHand != self.controlsLayer.dominantHand)
+        self.controlsLayer.dominantHand = _options.dominantHand;
+}
+
 -(void)gameOver
 {
     
