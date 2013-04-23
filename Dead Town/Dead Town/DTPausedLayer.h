@@ -14,11 +14,5 @@
 @class DTControlsLayer;
 
 @interface DTPausedLayer : CCLayer
-{
-    @private
-    DTGameLayer *_gameLayer;
-}
-
-+(id)layerWithGameLayer:(DTGameLayer *)gameLayer;
 
 @end

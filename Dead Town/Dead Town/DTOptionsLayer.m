@@ -36,7 +36,7 @@
         CCMenuItemToggle *handToggle = [CCMenuItemToggle itemWithTarget:self selector:@selector(toggleForHandHit:) items:_handRight, _handLeft, nil];
         handToggle.selectedIndex = _options.dominantHand == DominantHandRight ? 0 : 1;
         
-        CCMenuItemFont *resumeButton = [HandyFunctions menuItemWithString:@"resume" fontName:fontName target:self selector:@selector(resumeButtonHit) fontSize:fontSize];
+        CCMenuItemFont *resumeButton = [HandyFunctions menuItemWithString:@"Back" fontName:fontName target:self selector:@selector(backButtonHit) fontSize:fontSize];
         
         CCMenu *menu = [CCMenu menuWithItems:musicToggle, soundFxToggle, controlsToggle, handToggle, resumeButton, nil];
         
@@ -86,7 +86,7 @@
         _options.controllerType = ControllerTypeTilt;
 }
 
--(void)resumeButtonHit
+-(void)backButtonHit
 {
     [[CCDirector sharedDirector] popScene];
 }

@@ -18,7 +18,7 @@
 }
 
 @property(nonatomic, readonly) DTCharacter *origin;
-@property(nonatomic) DTCharacter *target;
+@property(nonatomic, weak) DTCharacter *target;
 
 +(id)nodeWithOrigin:(DTCharacter *)origin;
 

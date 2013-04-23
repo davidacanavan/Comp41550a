@@ -15,6 +15,8 @@
 #import "SneakyJoystickSkinnedBase.h"
 #import "DTButton.h"
 
+#define PADDING 15
+
 @implementation DTControlsLayer
 
 @synthesize isPausing = _isPausing;
@@ -41,7 +43,6 @@
         _controllerDelegate = controllerDelegate;
         _buttonDelegate = buttonDelegate;
         
-        // Create the buttons and what-nots
         if (controllerType == ControllerTypeJoystick)
             [self addJoystick];
         else
@@ -111,19 +112,12 @@
 -(void)addJoystick
 {
     // Some variables to get the sizes of the controls
-    int padding = 15, joystickRadius = 36, joystickThumbRadius = joystickRadius / 3;
+    int joystickRadius = 36, joystickThumbRadius = joystickRadius / 3;
     
     // Create the joystick skin from plain old dots
     _joystickSkin = [[SneakyJoystickSkinnedBase alloc] init];
     _joystickSkin.backgroundSprite = [ColoredCircleSprite circleWithColor:ccc4(255, 255, 0, 120) radius:joystickRadius];
     _joystickSkin.thumbSprite = [ColoredCircleSprite circleWithColor:ccc4(0, 0, 100, 255) radius:joystickThumbRadius];
-    CGSize joystickSize = _joystickSkin.contentSize;
-    
-    if (_dominantHand == DominantHandRight)
-        _joystickSkin.position = ccp(padding + joystickSize.width / 2, padding + joystickSize.height / 2);
-    else
-        ;
-    
     _joystick = [[SneakyJoystick alloc] initWithRect:CGRectMake(0, 0, joystickRadius * 2, joystickRadius * 2)];
     _joystickSkin.joystick = _joystick;
     [self addChild:_joystickSkin];
@@ -132,9 +126,6 @@
 
 -(void)removeJoystick
 {
-    if (_controllerType != ControllerTypeJoystick)
-        return;
-    
     [self removeChild:_joystick cleanup:NO];
     _joystick = nil;
 }
@@ -152,10 +143,17 @@
 
 -(void)removeTiltControls
 {
-    if (_controllerType != ControllerTypeTilt)
+    self.isAccelerometerEnabled = NO;
+}
+
+-(void)setDominantHand:(DominantHand)dominantHand
+{
+    if (dominantHand == _dominantHand) // No change
         return;
     
-    self.isAccelerometerEnabled = NO;
+    
+    
+    _dominantHand = dominantHand;
 }
 
 // Create the shoot button and add it to the layer

@@ -9,10 +9,9 @@
 #import "DTLazerBeamNode.h"
 #import "DTCharacter.h"
 #import "HandyFunctions.h"
+#import "DTLifeModel.h"
 
 @implementation DTLazerBeamNode
-
-@synthesize target = _target;
 
 +(id)nodeWithOrigin:(DTCharacter *)origin
 {
@@ -40,12 +39,11 @@
 
 -(void)setTarget:(DTCharacter *)target
 {
-    _target = target;
+    if (target == _target && target != nil) // If it's the same guy we don't need to worry
+        return;
     
-    if (target) // Then we'll have to keep firing
-        [self scheduleUpdate];
-    else // Or we'll stop if he's out of range or dead
-        [self unscheduleUpdate];
+    _target = target;
+    [self scheduleUpdate];
 }
 
 -(void)draw
@@ -55,7 +53,7 @@
     points[0] = CGPointZero;
     points[_detail - 1] = ccp(contentSize_.width, 0);
     glLineWidth(_thickness);
-    generateLightning(points, 0, _detail - 1, _displacement, 1.1); // TODO: I don't need to recreate the points each time
+    generateLightning(points, 0, _detail - 1, _displacement, 1.1); // TODO: I don't need to recreate the points each time but it's not hitting the fps so it's ok
     ccDrawPoly(points, _detail, NO);
 }
 
@@ -74,6 +72,13 @@ void generateLightning(CGPoint points[], int start, int end, float displacement,
 
 -(void)update:(ccTime)delta
 {
+    if (_target.lifeModel.isZero) // In case they've died
+    {
+        [self unscheduleUpdate]; // Stop updating and hide
+        self.visible = NO;
+        return;
+    }
+    
     CGPoint origin = [_origin getPosition], target = [_target getPosition];
     contentSize_.width = ccpDistance(origin, target);
     self.position = origin;

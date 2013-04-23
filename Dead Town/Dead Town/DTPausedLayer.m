@@ -8,20 +8,14 @@
 
 #import "DTPausedLayer.h"
 #import "HandyFunctions.h"
+#import "DTOptionsScene.h"
 
 @implementation DTPausedLayer
 
-+(id)layerWithGameLayer:(DTGameLayer *)gameLayer
-{
-    return [[self alloc] initWithGameLayer:gameLayer];
-}
-
--(id)initWithGameLayer:(DTGameLayer *)gameLayer
+-(id)init
 {
     if ((self = [super init]))
     {
-        _gameLayer = gameLayer;
-        
         CGSize screen = [[CCDirector sharedDirector] winSize];
         NSString *fontName = @"Marker Felt";
         
@@ -41,13 +35,13 @@
 
 -(void)resumeItemPressed
 {
-    [_gameLayer unpauseAll];
-    [[self parent] removeChild:self cleanup:NO];
+    [[CCDirector sharedDirector] popScene];
 }
 
 -(void)optionsItemPressed
 {
-    
+    CCDirector *director = [CCDirector sharedDirector];
+    [director pushScene: [CCTransitionFade transitionWithDuration: 1.0 scene: [DTOptionsScene scene] withColor:ccWHITE]];
 }
 
 -(void)quitItemPressed

@@ -111,8 +111,7 @@
 // In this case we scan for another device using gamekit
 -(void)twoPlayerModeSelected
 {
-    [[CCDirector sharedDirector] pushScene:[DTOptionsScene scene]];
-    //[self searchForPeer]; // Try find a player
+    [self searchForPeer]; // Try find a player
 }
 
 #pragma mark-

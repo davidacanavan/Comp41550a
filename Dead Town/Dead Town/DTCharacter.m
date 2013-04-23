@@ -105,6 +105,11 @@
     }
 }
 
+-(void)notifyHoldFireStop
+{
+    //[_weapon onHoldFireCompleted];
+}
+
 -(CCNode *)loadSpriteAndAnimations {return nil;}
 
 // By default we just ask the weapon to fire for us.

@@ -17,6 +17,7 @@
 #import "DTButton.h"
 #import "DTTrigger.h"
 #import "HandyFunctions.h"
+#import "DTPausedScene.h"
 
 @implementation DTLevel
 
@@ -76,7 +77,7 @@
 // Converts the layer point to a tile coordinate (they go from top left)
 -(CGPoint)tileCoordinateForPosition:(CGPoint)point
 {
-    // So if the x or y are beyond the screen bounds then fix them to -1 as an off limit coordinate, otherwise we just adjust to normal TODO: why do i do this again?
+    // So if the x or y are beyond the screen bounds then fix them to -1 as an off limit coordinate, otherwise we just adjust to normal.
     int x = (point.x < 0) ? -1 : point.x / _tileDimension;
     int mapDimensionInPoints = _tileMapHeight * _tileDimension;
     int y = (point.y > mapDimensionInPoints) ? -1 : (mapDimensionInPoints - point.y) / _tileDimension;
@@ -177,12 +178,14 @@
 #pragma mark-
 #pragma mark Button Delegate
 
--(void)buttonPressed:(DTButton *)button
+-(void)buttonPressed:(DTButton *)button // Delegate from the controls layer
 {
     if ([button.tag isEqualToString:@"fire"])
+    {
         [_player fire];
+    }
     else
-        _gameLayer.isPausing = YES; // TODO: Do the pausing better!!!
+        [[CCDirector sharedDirector] pushScene:[DTPausedScene scene]];
 }
 
 -(void)buttonHoldStarted:(DTButton *)button
@@ -210,7 +213,7 @@
 {
     if (character.characterType == CharacterTypeVillian && [lifeModel isZero])
     {
-        [_villains removeObject: character]; // TODO: This could be faster
+        [_enemies removeObject: character]; // TODO: This could be faster
         [self onVillainKilled:character];
         [self removeChild:character cleanup:NO];
     }// TODO: Something similar for our hero
@@ -246,7 +249,7 @@
                 andRect:[self createRectFromSpawn:dict]]];
     }
     
-    _villains = [NSMutableArray arrayWithCapacity:20];
+    _enemies = [NSMutableArray arrayWithCapacity:20];
     
     [self centerViewportOnPosition:[_player getPosition]]; // Center over the player
     [self onPlayerLoaded]; // Notify the subclass
@@ -343,9 +346,38 @@
     [_gameLayer removeChild:node cleanup:cleanup];
 }
 
--(void)addVillain:(DTCharacter *)villain
+-(void)addEnemy:(DTCharacter *)enemy toLayer:(BOOL)toLayer
 {
-    [_villains addObject:villain];
+    [_enemies addObject:enemy];
+    
+    if (toLayer)
+        [self addChild:enemy];
+}
+
+// TODO: This only returns 1 for now - don't need multiple yet
+-(NSMutableArray *)closestNumberOf:(int)number enemiesToPlayer:(DTPlayer *)player
+{
+        if ([_enemies count] == 0)
+            return nil;
+        
+    NSMutableArray *array = [NSMutableArray arrayWithCapacity:number];
+    DTCharacter *closest = [_enemies objectAtIndex:0];
+    float currentMin = ccpDistance(player.sprite.position, closest.sprite.position);
+    
+    for (int i = 1; i < [_enemies count]; i++)
+    {
+        DTCharacter *next = [_enemies objectAtIndex:i];
+        float distance = ccpDistance(player.sprite.position, next.sprite.position);
+        
+        if (distance < currentMin)
+        {
+            currentMin = distance;
+            closest = next;
+        }
+    }
+    
+    [array addObject:closest];
+    return array;
 }
 
 #pragma mark-

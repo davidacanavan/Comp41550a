@@ -38,8 +38,8 @@
 @property(nonatomic, strong) GKSession *session;
 
 +(id)gameLayerWithStatusLayer:(DTStatusLayer *)statusLayer;
--(void)unpause;
--(void)unpauseAll;
+//-(void)unpause;
+//-(void)unpauseAll;
 
 @end
 

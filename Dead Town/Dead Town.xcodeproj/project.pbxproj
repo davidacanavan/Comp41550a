@@ -864,13 +864,13 @@
 			path = "tile maps";
 			sourceTree = "<group>";
 		};
-		2BB71ACB16D29568001C636C /* pausing */ = {
+		2BB71ACB16D29568001C636C /* paused scene */ = {
 			isa = PBXGroup;
 			children = (
 				2B86435F16D23A02008FEB55 /* DTPausedLayer.h */,
 				2B86436016D23A02008FEB55 /* DTPausedLayer.m */,
 			);
-			name = pausing;
+			name = "paused scene";
 			sourceTree = "<group>";
 		};
 		2BBFAB211725B090004329C2 /* status layer */ = {
@@ -1339,7 +1339,7 @@
 		2BE0773716B766880073F28F /* layers */ = {
 			isa = PBXGroup;
 			children = (
-				2BB71ACB16D29568001C636C /* pausing */,
+				2BB71ACB16D29568001C636C /* paused scene */,
 				2B980D2E16CA94040028BB93 /* game scene */,
 				2B43C8CD16FE4A900022DDF3 /* intro scene */,
 				2BBFAB221725B0C2004329C2 /* options scene */,
@@ -1652,7 +1652,7 @@
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -1671,7 +1671,7 @@
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;
 			};

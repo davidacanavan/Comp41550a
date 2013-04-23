@@ -30,7 +30,8 @@
         _isGameOver = NO;
         _options = [DTOptions sharedOptions];
         
-        [self unpause];
+        //[self unpause];
+        [self scheduleUpdate];
     }
     
     return self;
@@ -42,15 +43,27 @@
     
     if (_options.controllerType != self.controlsLayer.controllerType)
         self.controlsLayer.controllerType = _options.controllerType;
+    
     if (_options.dominantHand != self.controlsLayer.dominantHand)
         self.controlsLayer.dominantHand = _options.dominantHand;
+    
+    if (_options.playBackgroundMusic)
+        [[SimpleAudioEngine sharedEngine] playBackgroundMusic:@"BackingTrack.m4a" loop:YES];
+}
+
+-(void)onExit
+{
+    [super onExit];
+    
+    if (_options.playBackgroundMusic)
+        [[SimpleAudioEngine sharedEngine] stopBackgroundMusic];
 }
 
 -(void)gameOver
 {
     
 }
-
+/*
 -(void)pause
 {
     _isPausing = NO;
@@ -77,21 +90,21 @@
     [self unpause];
     [_controlsLayer unpause];
 }
-
--(void)gameLoopUpdate:(float)delta
+*/
+-(void)update:(float)delta
 {
     if (_isGameOver) // So check for the game over condition and end if it's all done
     {
         [self gameOver];
         return;
     }
-    
+    /*
     if (_isPausing) // Check for a pause request
     {
         [self pause];
         [_controlsLayer pause];
         return;
-    }
+    }*/
     
 }
 

@@ -8,11 +8,12 @@
 
 #import "DTWeapon.h"
 
-#define BEAM_COUNT 3;
+@class DTLazerBeamNode;
 
 @interface DTLazerCanon : DTWeapon
 {
-    NSMutableArray *_beamArray;
+    @private
+    DTLazerBeamNode *_lazerBeam;
 }
 
 +(id)weapon;

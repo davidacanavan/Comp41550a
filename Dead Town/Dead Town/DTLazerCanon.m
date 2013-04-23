@@ -9,6 +9,9 @@
 #import "DTLazerCanon.h"
 #import "DTConstantDamageCalculator.h"
 #import "DTLazerBeamNode.h"
+#import "DTLevel.h"
+#import "DTCharacter.h"
+#import "DTLifeModel.h"
 
 @implementation DTLazerCanon
 
@@ -19,10 +22,8 @@
 
 -(id)init
 {
-    if (self = [super initWithFireRate:100 damageCalculator:[DTConstantDamageCalculator damageWithDamage:0.5f] range:40])
+    if (self = [super initWithFireRate:100 damageCalculator:[DTConstantDamageCalculator damageWithDamage:3.0f] range:40])
     {
-        int beamCount = BEAM_COUNT;
-        _beamArray = [NSMutableArray arrayWithCapacity:beamCount];
     }
     
     return self;
@@ -31,13 +32,51 @@
 -(void)setOwner:(DTCharacter *)owner
 {
     [super setOwner:owner];
-    int beamCount = BEAM_COUNT;
+    _lazerBeam = [DTLazerBeamNode nodeWithOrigin:owner];
+    [self addChild:_lazerBeam]; // So they can get the callback
+    _lazerBeam.visible = NO;
+}
+
+-(void)onFireAccepted:(float)angleOfFire from:(CGPoint)start level:(DTLevel *)level
+{
+    NSMutableArray *closestEnemies = [level closestNumberOf:1 enemiesToPlayer:(DTPlayer *) self.owner]; // TODO: I won't let a zombie own this one! not a big deal for now but better to be correct in future in case i change my mind
     
-    for (int i = 0; i < beamCount; i++)
-        [_beamArray addObject:[DTLazerBeamNode nodeWithOrigin:owner]];
+    if (closestEnemies)
+    {
+        DTCharacter *enemy = [closestEnemies objectAtIndex:0];
+        _lazerBeam.target = enemy;
+        _lazerBeam.visible = YES;
+        enemy.lifeModel.life -= [self.damageCalculator computeDamage];
+    }
+}
+
+-(void)onFireCompleted
+{
+    _lazerBeam.visible = NO;
+}
+
+-(void)onHoldFireCompleted
+{
+    _lazerBeam.visible = NO;
 }
 
 @end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

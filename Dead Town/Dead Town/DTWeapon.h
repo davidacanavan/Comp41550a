@@ -33,6 +33,8 @@
 -(BOOL)fireAtAngle:(float)angleOfFire from:(CGPoint)start level:(DTLevel *)level;
 // Override this to do the actual firing when it's been accepted - empty by default
 -(void)onFireAccepted:(float)angleOfFire from:(CGPoint)start level:(DTLevel *)level;
+//-(void)onFireCompleted;
+//-(void)onHoldFireCompleted;
 
 @end
 

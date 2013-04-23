@@ -48,7 +48,7 @@
 
 @property(nonatomic) DTGameLayer *gameLayer;
 @property(nonatomic) DTPlayer *player, *remotePlayer;
-@property(nonatomic, readonly) NSMutableArray *villains;
+@property(nonatomic, readonly) NSMutableArray *enemies;
 @property(nonatomic, readonly) int tileDimension;
 @property(nonatomic) BOOL shouldCheckForTriggers;
 
@@ -70,7 +70,8 @@
 -(CGPoint)createRectCentreFromSpawn:(NSDictionary *)spawn;
 -(CGPoint)centreOfRect:(CGRect)rect;
 
--(void)addVillain:(DTCharacter *)enemy;
+-(void)addEnemy:(DTCharacter *)enemy toLayer:(BOOL)toLayer;
+-(NSMutableArray *)closestNumberOf:(int)number enemiesToPlayer:(DTPlayer *)player;
 
 // Multiplayer methods
 -(void)sendPlayerMoveToPosition:(CGPoint)position withVelocity:(CGPoint)velocity;

@@ -43,9 +43,8 @@
     //  life:100 velocity:120 player:_player runningDistance:250];
     
     DTPathFindZombie *zombie = [DTPathFindZombie zombieWithLevel:self position:spawnPoint life:100 velocity:100 player:self.player];
-    [self.villains addObject:zombie];
     [zombie.lifeModel addDelegate:self];
-    [self addChild:zombie];
+    [self addEnemy:zombie toLayer:YES];
 }
 
 @end

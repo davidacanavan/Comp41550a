@@ -77,10 +77,10 @@
     }
     else if (isFriendlyWithPlayer) // Check for a collision with an enemy if we're the player
     {
-        for (DTCharacter *villain in _level.villains)
-            if (CGRectIntersectsRect(_sprite.boundingBox, villain.sprite.boundingBox))
+        for (DTCharacter *enemy in _level.enemies)
+            if (CGRectIntersectsRect(_sprite.boundingBox, enemy.sprite.boundingBox))
             {
-                villain.lifeModel.life -= _damage;
+                enemy.lifeModel.life -= _damage;
                 [self registerExpiry];
                 break;
             }
