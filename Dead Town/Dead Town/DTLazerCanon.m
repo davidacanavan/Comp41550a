@@ -41,7 +41,7 @@
 {
     NSMutableArray *closestEnemies = [level closestNumberOf:1 enemiesToPlayer:(DTPlayer *) self.owner]; // TODO: I won't let a zombie own this one! not a big deal for now but better to be correct in future in case i change my mind
     
-    if (closestEnemies)
+    if (closestEnemies) // TODO: fire more than 1 lazer but it's not a big deal right now
     {
         DTCharacter *enemy = [closestEnemies objectAtIndex:0];
         _lazerBeam.target = enemy;
@@ -50,14 +50,18 @@
     }
 }
 
--(void)onFireCompleted
+-(void)notifyHoldFireStart
 {
-    _lazerBeam.visible = NO;
+    _lazerBeam.isHoldFiring = YES;
+    
+    if (_lazerBeam.target != nil) // If we've no target then there's no need to make the lazer visible
+        _lazerBeam.visible = YES;
 }
 
--(void)onHoldFireCompleted
+-(void)notifyHoldFireStop
 {
     _lazerBeam.visible = NO;
+    _lazerBeam.isHoldFiring = NO;
 }
 
 @end

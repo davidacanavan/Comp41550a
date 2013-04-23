@@ -54,13 +54,14 @@
 }
 
 -(void)onFireAccepted:(float)angleOfFire from:(CGPoint)start level:(DTLevel *)level {}
--(void)onFireCompleted {}
--(void)onHoldFireCompleted {}
 
 -(void)updateTimeSinceLastFire:(ccTime)delta
 {
     _timeSinceLastFire += delta;
 }
+
+-(void)notifyHoldFireStart {}
+-(void)notifyHoldFireStop {}
 
 @end
 

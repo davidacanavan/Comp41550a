@@ -83,6 +83,9 @@
     _lifeModel.life = life;
 }
 
+#pragma mark-
+#pragma mark Subclass Notifications
+
 -(void)notifyMovementStart
 {
     // A boolean to add extra safety to the calls - in case anything trips over each other
@@ -105,9 +108,14 @@
     }
 }
 
+-(void)notifyHoldFireStart
+{
+    [self.weapon notifyHoldFireStart];
+}
+
 -(void)notifyHoldFireStop
 {
-    //[_weapon onHoldFireCompleted];
+    [self.weapon notifyHoldFireStop];
 }
 
 -(CCNode *)loadSpriteAndAnimations {return nil;}

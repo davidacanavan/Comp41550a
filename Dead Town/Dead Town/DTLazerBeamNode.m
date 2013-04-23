@@ -23,9 +23,9 @@
     if (self = [super init])
     {
         // Some internal stuff
-        _detail = 25;
-        _thickness = 2;
-        _displacement = 10;
+        _detail = DEFAULT_DETAIL;
+        _thickness = DEFAULT_THICKNESS;
+        _displacement = DEFAULT_DISPLACEMENT;
         
         // From the input
         _origin = origin;
@@ -42,7 +42,7 @@
     if (target == _target && target != nil) // If it's the same guy we don't need to worry
         return;
     
-    _target = target;
+    _target = target; // Tell us who the target is and set up an update call
     [self scheduleUpdate];
 }
 
@@ -76,6 +76,7 @@ void generateLightning(CGPoint points[], int start, int end, float displacement,
     {
         [self unscheduleUpdate]; // Stop updating and hide
         self.visible = NO;
+        _target = nil;
         return;
     }
     
@@ -99,6 +100,31 @@ void generateLightning(CGPoint points[], int start, int end, float displacement,
         angleValue += 180;
     
     self.rotation = angleValue;
+}
+
+-(void)setThickness:(float)thickness
+{
+    if (thickness < MINIMUM_THICKNESS)
+        return;
+    
+    _thickness = thickness;
+}
+
+-(void)setDisplacement:(float)displacement
+{
+    if (displacement < MINIMUM_DISPLACEMENT)
+        return;
+    
+    _displacement = displacement;
+    contentSize_.height = _displacement * 2;
+}
+
+-(void)setDetail:(int)detail
+{
+    if (detail < MINIMUM_DETAIL)
+        return;
+    
+    _detail = detail;
 }
 
 @end

@@ -72,7 +72,8 @@ characterType:(DTCharacterType)characterType velocity:(float)velocity;
 -(void)notifyMovementEnd;
 // Tells the animation what speed to move the player at - empty by default.
 -(void)notifyMovementSpeed:(float)speed;
-//-(void)notifyHoldFireStop;
+-(void)notifyHoldFireStart;
+-(void)notifyHoldFireStop;
 
 @end
 

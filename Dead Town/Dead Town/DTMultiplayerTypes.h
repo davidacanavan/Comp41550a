@@ -6,12 +6,14 @@
 //
 //
 
-// Multiplayer data enums
+// Multiplayer data enums and structs
 typedef enum
 {
     MessageTypePlayerMoved = 0, // He's made a move
     MessageTypePlayerKilled, // He's been killed
-    MessageTypePlayerQuit // He quit! That jerk face!
+    MessageTypePlayerQuit, // He quit! That jerk face!
+    MessageTypePlayerFired, // He's taken a shot, started or stopped shooting
+    MessageTypeWeaponChanged // He's gotten a new gun
 } DTMessageType;
 
 typedef struct
@@ -25,4 +27,16 @@ typedef struct
     float x, y;
     float vx, vy;
 } DTMessagePlayerMoved;
+
+typedef enum
+{
+    FireTypeShot, // Discrete shot
+    FireTypeHoldStart, // Start of a continuous fire
+    FireTypeHoldEnd // End of a continuous fire
+} DTFireType;
+
+
+
+
+
 

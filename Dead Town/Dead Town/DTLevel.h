@@ -43,7 +43,7 @@
     
     // Some multiplayer variables - this lets us put them on the update thread so we don't get any jerkyness
     BOOL _remotePlayerHasNewPosition;
-    CGPoint _remotePlayerNewPosition;
+    CGPoint _remotePlayerNewPosition, _remotePlayerNewVelocity;
 }
 
 @property(nonatomic) DTGameLayer *gameLayer;

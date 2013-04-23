@@ -191,6 +191,7 @@
 -(void)buttonHoldStarted:(DTButton *)button
 {
     _isHoldFiring = YES;
+    [_player notifyHoldFireStart];
 }
 
 -(void)buttonHoldContinued:(DTButton *)button
@@ -204,6 +205,7 @@
         [_player notifyMovementStart];
     
     _isHoldFiring = NO;
+    [_player notifyHoldFireStop];
 }
 
 #pragma mark-
@@ -451,7 +453,7 @@
 -(void)session:(GKSession *)session peer:(NSString *)peerIdentifier didChangeState:(GKPeerConnectionState)state
 {
     if(state == GKPeerStateDisconnected) // We disconnected dawg
-    {// TODO: Pause the game (set this up so it's done properly), show a message and leave
+    {
         self.gameLayer.isPausing = YES;
         NSString *message = [NSString stringWithFormat:@"We have been disconnected from %@!", [session displayNameForPeer:peerIdentifier]];
         [HandyFunctions showAlertDialogEntitled:@"Dead Town" withMessage:message];
