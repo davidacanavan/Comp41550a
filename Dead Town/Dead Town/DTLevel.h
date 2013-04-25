@@ -32,10 +32,12 @@
     CCTMXLayer *_floor, *_walls;
     CCTMXObjectGroup *_spawnObjects, *_triggerObjects, *_pickupObjects;
     NSMutableArray *_triggers, *_pickups;
+    
     // Layout stuff and coordinates
     float _retinaFactor;
     int _tileMapWidth, _tileMapHeight;
     CGSize _screen;
+    
     // Joystick/Button related variables
     BOOL _joystickActive;
     BOOL _isHoldFiring;
@@ -56,6 +58,9 @@
 @property(nonatomic) GKSession *session;
 @property(nonatomic) NSString *peerIdentifier;
 @property(nonatomic) int playerNumber;
+
+// State control variables
+@property(nonatomic) BOOL isGameOver;
 
 -(id)initWithTMXFile:(NSString *)tmxFile;
 -(id)initWithTMXFile:(NSString *)tmxFile session:(GKSession *)session peerIdentifier:(NSString *)peerIdentifier playerNumber:(int)playerNumber;
@@ -84,10 +89,13 @@
 
 // Some methods you can override when you subclass me
 -(void)onGameLayerReady; // Called when it's ok to add your custom stuff to the GameLayer
--(void)onPlayerLoaded;
--(void)onVillainKilled:(DTCharacter *) character;
--(void)onTriggerEncountered:(DTTrigger *)trigger;
--(void)onSpawnPointEncountered;
+-(void)onPlayerLoaded; // Called when the player is loaded
+-(BOOL)onPlayerDead; // Return a bool whether we should go to game over or not
+-(BOOL)onRemotePlayerDead; // Same as above
+-(void)onVillainKilled:(DTCharacter *) character; // Called when we kill a villain
+-(void)onTriggerEncountered:(DTTrigger *)trigger; // Called when we encounter a trigger
+-(void)onSpawnPointEncountered; // Called when we encounter a spawn point
+-(void)onGameOver; // By default goes back to the intro scene
 
 @end
 

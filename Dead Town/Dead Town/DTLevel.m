@@ -219,7 +219,27 @@
         [_enemies removeObject: character]; // TODO: This could be faster
         [self onVillainKilled:character];
         [self removeChild:character cleanup:NO];
-    }// TODO: Something similar for our hero
+    }
+    else if (character == _player)
+    {
+        if ([lifeModel isZero])
+        {
+            BOOL shouldGameOver = [self onPlayerDead];
+            
+            if (shouldGameOver)
+                self.isGameOver = YES;
+        }
+    }
+    else if (character == _remotePlayer) // character won't ever be nil so this is ok
+    {
+        if ([lifeModel isZero])
+        {
+            BOOL shouldGameOver = [self onRemotePlayerDead];
+            
+            if (shouldGameOver)
+                self.isGameOver = YES;
+        }
+    }
 }
 
 #pragma mark-
@@ -227,9 +247,16 @@
 
 -(void)onGameLayerReady {}
 -(void)onPlayerLoaded {}
+-(BOOL)onPlayerDead {return YES;} // Returning yes means i just call gameOver by default
+-(BOOL)onRemotePlayerDead; {return YES;} // Same as above for the default behaviour
 -(void)onVillainKilled:(DTCharacter *)character {}
 -(void)onTriggerEncountered:(DTTrigger *)trigger {}
 -(void)onSpawnPointEncountered {}
+
+-(void)onGameOver
+{
+    [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration: 1.0 scene: [DTIntroScene scene] withColor:ccWHITE]];
+}
 
 #pragma mark-
 #pragma mark Property Overrides
@@ -240,7 +267,18 @@
     _gameLayer = gameLayer;
     [_gameLayer addChild:_map];
     [self createPlayerOrPlayers];
+    [self initialiseArrays]; // Get the arrays from the object layers etc...
     
+    [self centerViewportOnPosition:[_player getPosition]]; // Center over the player
+    [self onPlayerLoaded]; // Notify the subclass
+    
+    [_gameLayer addChild:self]; // Just so we can get the update
+    [self onGameLayerReady]; // Notify the subclass that they can add things in
+    [self scheduleUpdate];
+}
+
+-(void)initialiseArrays
+{
     // Get all the trigger rects and save them
     NSMutableArray *triggerDicts = [_triggerObjects objects];
     _triggers = [NSMutableArray arrayWithCapacity:[triggerDicts count]];
@@ -249,17 +287,10 @@
     for (NSDictionary *dict in triggerDicts)
     {
         [_triggers addObject:[DTTrigger triggerWithName:[dict objectForKey:@"name"]
-                andRect:[self createRectFromSpawn:dict]]];
+                                                andRect:[self createRectFromSpawn:dict]]];
     }
     
     _enemies = [NSMutableArray arrayWithCapacity:20];
-    
-    [self centerViewportOnPosition:[_player getPosition]]; // Center over the player
-    [self onPlayerLoaded]; // Notify the subclass
-    
-    [_gameLayer addChild:self]; // Just so we can get the update
-    [self onGameLayerReady]; // Notify the subclass that they can add things in
-    [self scheduleUpdate];
 }
 
 -(void)createPlayerOrPlayers
@@ -270,15 +301,15 @@
     
     if (_playerNumber == PLAYER_ONE) // Then we're player one! Excellent news!
     {
-        _player = [DTPlayer playerWithLevel:self position:playerOnePosition life:DEFAULT_PLAYER_LIFE];
+        _player = [DTPlayer playerWithLevel:self position:playerOnePosition life:DEFAULT_PLAYER_LIFE firstLifeModelDelegate:self];
         
         if (_session) // Then we have a player 2 aswell
-            _remotePlayer = [DTPlayer playerWithLevel:self position:playerTwoPosition life:DEFAULT_PLAYER_LIFE];
+            _remotePlayer = [DTPlayer playerWithLevel:self position:playerTwoPosition life:DEFAULT_PLAYER_LIFE firstLifeModelDelegate:self];
     }
     else // We're player two! So that means we're definitely playing multiplayer
     {
-        _player = [DTPlayer playerWithLevel:self position:playerTwoPosition life:DEFAULT_PLAYER_LIFE];
-        _remotePlayer = [DTPlayer playerWithLevel:self position:playerOnePosition life:DEFAULT_PLAYER_LIFE];
+        _player = [DTPlayer playerWithLevel:self position:playerTwoPosition life:DEFAULT_PLAYER_LIFE firstLifeModelDelegate:self];
+        _remotePlayer = [DTPlayer playerWithLevel:self position:playerOnePosition life:DEFAULT_PLAYER_LIFE firstLifeModelDelegate:self];
     }
     
     [_player.lifeModel addDelegate: (id <DTLifeModelDelegate>) _gameLayer.statusLayer.lifeNode]; // TODO: Do I have to cast this?
@@ -293,6 +324,12 @@
 
 -(void)update:(ccTime)delta
 {
+    if (self.isGameOver)
+    {
+        [self unscheduleUpdate];
+        [self onGameOver];
+    }
+        
     if (_session) // If we're playing multiplayer jam the updates on the thread here
         [self multiplayerUpdate:delta];
     
@@ -455,7 +492,6 @@
 {
     if(state == GKPeerStateDisconnected) // We disconnected dawg
     {
-        self.gameLayer.isPausing = YES;
         NSString *message = [NSString stringWithFormat:@"We have been disconnected from %@!", [session displayNameForPeer:peerIdentifier]];
         [HandyFunctions showAlertDialogEntitled:@"Dead Town" withMessage:message];
         [self invalidateLocalSession];

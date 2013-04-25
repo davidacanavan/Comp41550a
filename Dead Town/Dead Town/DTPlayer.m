@@ -22,6 +22,13 @@
     return [[self alloc] initWithLevel:level position:position life:life];
 }
 
++(id)playerWithLevel:(DTLevel *)level position:(CGPoint)position life:(float)life firstLifeModelDelegate:(id <DTLifeModelDelegate>)firstDelegate
+{
+    DTPlayer *player = [[self alloc] initWithLevel:level position:position life:life];
+    [player.lifeModel addDelegate:firstDelegate]; // Add the delegate
+    return player;
+}
+
 -(id)initWithLevel:(DTLevel *)level position:(CGPoint)position life:(float)life;
 {
     if ((self = [super initWithLevel:level position:position life:life characterType:CharacterTypeHero velocity:-1]))

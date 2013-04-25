@@ -26,20 +26,15 @@
 @interface DTGameLayer : CCLayer
 {
     @private
-    BOOL _isGameOver;
     DTOptions *_options;
     DTPausedLayer *_pausedLayer;
     DTStraightLineZombie *_zombie;
 }
 
-@property(nonatomic) BOOL isPausing; // Set to true to pause the game layer and all children
 @property(nonatomic, strong) DTControlsLayer *controlsLayer;
 @property(nonatomic, strong) DTStatusLayer *statusLayer;
-@property(nonatomic, strong) GKSession *session;
 
 +(id)gameLayerWithStatusLayer:(DTStatusLayer *)statusLayer;
-//-(void)unpause;
-//-(void)unpauseAll;
 
 @end
 

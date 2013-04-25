@@ -14,7 +14,6 @@
 
 @implementation DTGameLayer
 
-@synthesize isPausing = _isPausing;
 @synthesize controlsLayer = _controlsLayer;
 
 #pragma mark-
@@ -30,10 +29,7 @@
     if ((self = [super init]))
     {
         _statusLayer = statusLayer;
-        _isGameOver = NO;
         _options = [DTOptions sharedOptions];
-        
-        [self scheduleUpdate];
     }
     
     return self;
@@ -62,32 +58,6 @@
     
     if (_options.playBackgroundMusic)
         [[SimpleAudioEngine sharedEngine] stopBackgroundMusic];
-}
-
-// TODO: Haven't done a game over yet
--(void)gameOver
-{
-    
-}
-
-#pragma mark-
-#pragma mark Game Loop
-
--(void)update:(float)delta
-{
-    if (_isGameOver) // So check for the game over condition and end if it's all done
-    {
-        [self gameOver];
-        return;
-    }
-    /*
-    if (_isPausing) // Check for a pause request
-    {
-        [self pause];
-        [_controlsLayer pause];
-        return;
-    }*/
-    
 }
 
 @end
