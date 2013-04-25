@@ -31,7 +31,7 @@
 
 -(void)onFireAccepted:(float)angleOfFire from:(CGPoint)start level:(DTLevel *)level
 {
-    float angleSpread = M_PI / 2; // So the bullets go out a quarter of a circle!
+    float angleSpread = 90; // So the bullets go out a quarter of a circle!
     
     // Let's fire lots of bullets at the same time!!!
     for (float angleChange = -angleSpread/ 2; angleChange < angleSpread / 2; angleChange += angleSpread / SHOTGUN_BULLET_COUNT)

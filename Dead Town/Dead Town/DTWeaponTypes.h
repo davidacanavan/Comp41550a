@@ -15,9 +15,9 @@
 #define HANDGUN_DAMAGE 51
 
 // Shotgun
-#define SHOTGUN_FIRE_RATE 5
+#define SHOTGUN_FIRE_RATE 1
 #define SHOTGUN_DAMAGE 51
-#define SHOTGUN_BULLET_COUNT 8
+#define SHOTGUN_BULLET_COUNT 5
 
 // Machine Gun
 #define MACHINE_GUN_FIRE_RATE 15

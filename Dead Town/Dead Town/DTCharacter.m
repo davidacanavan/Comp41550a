@@ -147,7 +147,7 @@
 }
 
 -(void)setWeapon:(DTWeapon *)weapon
-{ // TODO: Make sure the owner of the weapon is the character
+{ // TODO: Make sure the owner of the weapon is the character - no biggy really
     if (self.weapon) // Remove the old one
         [self removeChild:_weapon cleanup:NO];
     

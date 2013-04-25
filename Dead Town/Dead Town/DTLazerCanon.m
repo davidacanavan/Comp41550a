@@ -40,6 +40,9 @@
 
 -(void)onFireAccepted:(float)angleOfFire from:(CGPoint)start level:(DTLevel *)level
 {
+    if (!_lazerBeam.isHoldFiring) // We only allow hold fires for the lazer since it's continuous really
+        return;
+    
     NSMutableArray *closestEnemies = [level closestNumberOf:1 enemiesToPlayer:(DTPlayer *) self.owner]; // TODO: I won't let a zombie own this one! not a big deal for now but better to be correct in future in case i change my mind
     
     if (closestEnemies) // TODO: fire more than 1 lazer but it's not a big deal right now

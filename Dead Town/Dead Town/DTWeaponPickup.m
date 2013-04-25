@@ -20,6 +20,8 @@
     if (self = [super init])
     {
         _weapon = weapon;
+        _sprite = [CCSprite spriteWithFile:@"shotgun_pickup.png"];
+        [self addChild:_sprite];
     }
     
     return self;
@@ -27,7 +29,7 @@
 
 -(void)applyPickupToCharacter:(DTCharacter *)character
 {
-    
+    character.weapon = _weapon; // give them the weapon
 }
 
 @end

@@ -22,6 +22,7 @@
 #import "DTPickup.h"
 #import "DTWeaponPickup.h"
 #import "DTHealthPickup.h"
+#import "DTShotgun.h"
 
 @implementation DTLevel
 
@@ -336,7 +337,11 @@
         }
         else // It's a weapon
         {
-            
+            Class weapon = NSClassFromString([dict objectForKey:@"Class"]); // Get the weapon class
+            DTWeaponPickup *weaponPickup = [DTWeaponPickup pickupWithWeapon:[weapon weapon]]; // Create the weapon pickup
+            [self addChild:weaponPickup];
+            weaponPickup.sprite.position = [self createRectCentreFromTileMapObject:dict];
+            [_pickups addObject:weaponPickup];
         }
     }
     
