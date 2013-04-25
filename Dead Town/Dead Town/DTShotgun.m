@@ -14,6 +14,9 @@
 
 @implementation DTShotgun
 
+#pragma mark-
+#pragma Initialisation
+
 +(id)weapon
 {
     return [[self alloc] init];
@@ -23,22 +26,45 @@
 {
     if (self = [super initWithFireRate:SHOTGUN_FIRE_RATE damageCalculator:[DTConstantDamageCalculator damageWithDamage:SHOTGUN_DAMAGE]])
     {
-        
+        _numberOfBulletsPerShot = SHOTGUN_DEFAULT_BULLET_COUNT;
+        _angularSpread = SHOTGUN_DEFAULT_ANGULAR_SPREAD;
+        _pickupImageName = SHOTGUN_PICKUP_IMAGE_NAME;
     }
     
     return self;
 }
 
+#pragma mark-
+#pragma mark Superclass Overrides
+
 -(void)onFireAccepted:(float)angleOfFire from:(CGPoint)start level:(DTLevel *)level
 {
-    float angleSpread = 90; // So the bullets go out a quarter of a circle!
-    
     // Let's fire lots of bullets at the same time!!!
-    for (float angleChange = -angleSpread/ 2; angleChange < angleSpread / 2; angleChange += angleSpread / SHOTGUN_BULLET_COUNT)
+    for (float angleChange = -_angularSpread / 2; angleChange < _angularSpread / 2; angleChange += _angularSpread / _numberOfBulletsPerShot)
     {
         DTBullet *bullet = [DTBullet bulletWithPosition:start angle:angleOfFire + angleChange damage:[self.damageCalculator computeDamage] maxDistance:self.range owner:self.owner level:level visible:YES];
         [level addChild:bullet];
     }
 }
 
+#pragma mark-
+#pragma mark Property Overrides
+
+-(void)setNumberOfBulletsPerShot:(int)numberOfBulletsPerShot
+{
+    _numberOfBulletsPerShot = (int) max(min(numberOfBulletsPerShot, SHOTGUN_MAX_BULLET_COUNT), SHOTGUN_MIN_BULLET_COUNT);
+}
+
+-(void)setAngularSpread:(float)angularSpread
+{
+    _angularSpread = (int) max(min(angularSpread, SHOTGUN_MAX_ANGULAR_SPREAD), SHOTGUN_MIN_ANGULAR_SPREAD);
+}
+
 @end
+
+
+
+
+
+
+

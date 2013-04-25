@@ -23,7 +23,7 @@
 {
     if (self = [super initWithFireRate:HANDGUN_FIRE_RATE damageCalculator:[DTConstantDamageCalculator damageWithDamage:HANDGUN_DAMAGE]])
     {
-        
+        _pickupImageName = HANDGUN_PICKUP_IMAGE_NAME;
     }
     
     return self;

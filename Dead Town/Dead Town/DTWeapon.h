@@ -18,12 +18,14 @@
     @protected
     float _timeSinceLastFire; // The time since the last accepted call to fire (calls can be rejeted to prevent bullet rain).
     float _minimumTimeBetweenFires;
+    NSString *_pickupImageName; // So the subclass can access the property
 }
 
 // Whether this weapon belongs to the player or an enemy.
 @property(nonatomic) DTCharacter *owner;
 @property(nonatomic, readonly) float range;
 @property(nonatomic) id <DTDamageCalculator> damageCalculator;
+@property(nonatomic, readonly) NSString *pickupImageName;
 
 // Factory initializer for a weapon.
 +(id)weaponWithFireRate:(float)fireRate damageCalculator:(id <DTDamageCalculator>)damageCalculator;

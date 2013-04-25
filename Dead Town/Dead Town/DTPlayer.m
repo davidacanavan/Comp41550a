@@ -35,8 +35,7 @@
     {
         // No need to do anything here, the superclass call takes care of initialisation
         // I kept this here in case I wan't to customise some stuff
-        //self.weapon = [DTHandGun weapon];
-        self.weapon = [DTLazerCanon weapon];
+        self.weapon = [DTHandGun weapon];
     }
     
     return self;

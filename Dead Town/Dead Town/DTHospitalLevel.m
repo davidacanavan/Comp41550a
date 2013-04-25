@@ -9,6 +9,7 @@
 #import "DTHospitalLevel.h"
 #import "DTTrigger.h"
 #import "DTPathFindZombie.h"
+#import "DTStraightLineZombie.h"
 #import "DTLifeModel.h"
 
 @implementation DTHospitalLevel
@@ -39,8 +40,7 @@
     NSDictionary *spawnDict = [_spawnObjects objectNamed:[NSString stringWithFormat:@"ES%@", [triggerVariables objectForKey:@"ES"]]];
     CGPoint spawnPoint = [self createRectCentreFromTileMapObject:spawnDict];
     
-    //DTStraightLineZombie *zombie = [DTStraightLineZombie zombieWithLevel:self position:spawnPoint
-    //  life:100 velocity:120 player:_player runningDistance:250];
+    //DTStraightLineZombie *zombie = [DTStraightLineZombie zombieWithLevel:self position:spawnPoint life:100 velocity:120 player:self.player runningDistance:250];
     
     DTPathFindZombie *zombie = [DTPathFindZombie zombieWithLevel:self position:spawnPoint life:100 velocity:100 player:self.player];
     [zombie.lifeModel addDelegate:self];

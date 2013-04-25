@@ -41,6 +41,12 @@
 		2B684B531729AA2D0000993A /* health_pickup.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B684B511729AA2D0000993A /* health_pickup.png */; };
 		2B684B561729C2A30000993A /* shotgun_pickup-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B684B541729C2A20000993A /* shotgun_pickup-hd.png */; };
 		2B684B571729C2A30000993A /* shotgun_pickup.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B684B551729C2A30000993A /* shotgun_pickup.png */; };
+		2B684B5E1729DD000000993A /* handgun_pickup-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B684B581729DD000000993A /* handgun_pickup-hd.png */; };
+		2B684B5F1729DD000000993A /* handgun_pickup.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B684B591729DD000000993A /* handgun_pickup.png */; };
+		2B684B601729DD000000993A /* lazer_canon_pickup-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B684B5A1729DD000000993A /* lazer_canon_pickup-hd.png */; };
+		2B684B611729DD000000993A /* lazer_canon_pickup.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B684B5B1729DD000000993A /* lazer_canon_pickup.png */; };
+		2B684B621729DD000000993A /* machine_gun_pickup-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B684B5C1729DD000000993A /* machine_gun_pickup-hd.png */; };
+		2B684B631729DD000000993A /* machine_gun_pickup.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B684B5D1729DD000000993A /* machine_gun_pickup.png */; };
 		2B86436116D23A02008FEB55 /* DTPausedLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B86436016D23A02008FEB55 /* DTPausedLayer.m */; };
 		2B86436416D25798008FEB55 /* Pew.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 2B86436316D25797008FEB55 /* Pew.m4a */; };
 		2B86436716D25B00008FEB55 /* BackingTrack.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 2B86436616D25B00008FEB55 /* BackingTrack.m4a */; };
@@ -276,6 +282,12 @@
 		2B684B511729AA2D0000993A /* health_pickup.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = health_pickup.png; path = pickups/health_pickup.png; sourceTree = "<group>"; };
 		2B684B541729C2A20000993A /* shotgun_pickup-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "shotgun_pickup-hd.png"; path = "pickups/shotgun_pickup-hd.png"; sourceTree = "<group>"; };
 		2B684B551729C2A30000993A /* shotgun_pickup.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = shotgun_pickup.png; path = pickups/shotgun_pickup.png; sourceTree = "<group>"; };
+		2B684B581729DD000000993A /* handgun_pickup-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "handgun_pickup-hd.png"; path = "pickups/handgun_pickup-hd.png"; sourceTree = "<group>"; };
+		2B684B591729DD000000993A /* handgun_pickup.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = handgun_pickup.png; path = pickups/handgun_pickup.png; sourceTree = "<group>"; };
+		2B684B5A1729DD000000993A /* lazer_canon_pickup-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "lazer_canon_pickup-hd.png"; path = "pickups/lazer_canon_pickup-hd.png"; sourceTree = "<group>"; };
+		2B684B5B1729DD000000993A /* lazer_canon_pickup.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = lazer_canon_pickup.png; path = pickups/lazer_canon_pickup.png; sourceTree = "<group>"; };
+		2B684B5C1729DD000000993A /* machine_gun_pickup-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "machine_gun_pickup-hd.png"; path = "pickups/machine_gun_pickup-hd.png"; sourceTree = "<group>"; };
+		2B684B5D1729DD000000993A /* machine_gun_pickup.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = machine_gun_pickup.png; path = pickups/machine_gun_pickup.png; sourceTree = "<group>"; };
 		2B86435F16D23A02008FEB55 /* DTPausedLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTPausedLayer.h; sourceTree = "<group>"; };
 		2B86436016D23A02008FEB55 /* DTPausedLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTPausedLayer.m; sourceTree = "<group>"; };
 		2B86436316D25797008FEB55 /* Pew.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = Pew.m4a; path = sounds/Pew.m4a; sourceTree = "<group>"; };
@@ -778,6 +790,12 @@
 		2B684B4E1729A9860000993A /* pickups */ = {
 			isa = PBXGroup;
 			children = (
+				2B684B581729DD000000993A /* handgun_pickup-hd.png */,
+				2B684B591729DD000000993A /* handgun_pickup.png */,
+				2B684B5A1729DD000000993A /* lazer_canon_pickup-hd.png */,
+				2B684B5B1729DD000000993A /* lazer_canon_pickup.png */,
+				2B684B5C1729DD000000993A /* machine_gun_pickup-hd.png */,
+				2B684B5D1729DD000000993A /* machine_gun_pickup.png */,
 				2B684B541729C2A20000993A /* shotgun_pickup-hd.png */,
 				2B684B551729C2A30000993A /* shotgun_pickup.png */,
 				2B684B501729AA2D0000993A /* health_pickup-hd.png */,
@@ -1562,6 +1580,12 @@
 				2B684B531729AA2D0000993A /* health_pickup.png in Resources */,
 				2B684B561729C2A30000993A /* shotgun_pickup-hd.png in Resources */,
 				2B684B571729C2A30000993A /* shotgun_pickup.png in Resources */,
+				2B684B5E1729DD000000993A /* handgun_pickup-hd.png in Resources */,
+				2B684B5F1729DD000000993A /* handgun_pickup.png in Resources */,
+				2B684B601729DD000000993A /* lazer_canon_pickup-hd.png in Resources */,
+				2B684B611729DD000000993A /* lazer_canon_pickup.png in Resources */,
+				2B684B621729DD000000993A /* machine_gun_pickup-hd.png in Resources */,
+				2B684B631729DD000000993A /* machine_gun_pickup.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

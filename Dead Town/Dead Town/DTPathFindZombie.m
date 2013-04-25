@@ -17,7 +17,7 @@
 @property(nonatomic) CGPoint tileCoordinate;
 @property(nonatomic) float costFromStart, costToEnd;
 @property(nonatomic, readonly) float totalCost;
-@property(nonatomic, strong) PathNode *parent; // TODO: Is weak ok to use here? Better read up on this better!
+@property(nonatomic, strong) PathNode *parent;
 
 +(id)nodeWithTileCoordinate:(CGPoint)tileCoordinate costFromStart:(float)costFromStart costToEnd:(float)costToEnd parent:(PathNode *)parent;
 -(BOOL)isEqual:(id)node;
@@ -75,7 +75,10 @@
         CGPoint targetPosition = [_level positionForTileCoordinate:node.tileCoordinate]; // TODO: Surely i can just store this!
         
         if (ccpFuzzyEqual(self.sprite.position, _player.sprite.position, _level.tileDimension * 1.5)) // We're at the player
-            _currentPathIndex = -1;
+        {
+            _currentPathIndex = -1; // So if we're close enough just make a run for the player!
+            [self moveToPosition:[self newPositionTowardsPosition:_player.sprite.position velocity:_velocity delta:delta]];
+        }
         else if (ccpFuzzyEqual(targetPosition, self.sprite.position, 2)) // We have arrived at the next tile
             _currentPathIndex--;
         else // Move some more to the next tile
@@ -87,9 +90,11 @@
     }
     else if (ccpFuzzyEqual(self.sprite.position, _player.sprite.position, _level.tileDimension * 1.5))
     {
-        [self fire];
+        if (!ccpFuzzyEqual(self.sprite.position, _player.sprite.position, 15))
+            [self moveToPosition:[self newPositionTowardsPosition:_player.sprite.position velocity:_velocity delta:delta]];
+        
         [self turnToFacePosition:_player.sprite.position];
-        // Then we're attacking! TODO: Put in a section where he acts like a straight line zombie
+        [self fire];
     }
     else // Better get a path...
     {

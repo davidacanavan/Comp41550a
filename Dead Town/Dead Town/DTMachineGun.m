@@ -23,7 +23,7 @@
 {// TODO: maybe put the constant damage thing with a default for projectiles as a singleton?
     if (self = [super initWithFireRate:MACHINE_GUN_FIRE_RATE damageCalculator:[DTConstantDamageCalculator damageWithDamage:MACHINE_GUN_DAMAGE]])
     {
-        
+        _pickupImageName = MACHINE_GUN_PICKUP_IMAGE_NAME;
     }
     
     return self;

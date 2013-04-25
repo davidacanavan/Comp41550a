@@ -7,6 +7,7 @@
 //
 
 #import "DTWeaponPickup.h"
+#import "DTWeapon.h"
 
 @implementation DTWeaponPickup
 
@@ -20,7 +21,7 @@
     if (self = [super init])
     {
         _weapon = weapon;
-        _sprite = [CCSprite spriteWithFile:@"shotgun_pickup.png"];
+        _sprite = [CCSprite spriteWithFile:weapon.pickupImageName];
         [self addChild:_sprite];
     }
     

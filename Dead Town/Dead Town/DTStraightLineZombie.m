@@ -61,19 +61,15 @@
     
     if (distance < _runningDistance) // Then run after the player!!!
     {
+        [self notifyMovementStart];
+        
         if (ccpFuzzyEqual(player, zombie, 15))
         {
             [self fire];
             return;
         }
         
-        float movingDistance = _velocity * delta;
-        float slope = ((float) (player.y - zombie.y)) / (player.x - zombie.x);
-        float c = player.y - slope * player.x; // The y-intercept
-        float xComponentFactor = cos(atanf(slope));
-        float x = zombie.x + movingDistance * xComponentFactor * (player.x < zombie.x ? -1 : 1);
-        float y = slope * x + c;
-        CGPoint newPosition = ccp(x, y);
+        CGPoint newPosition = [self newPositionTowardsPosition:player velocity:_velocity delta:delta];//ccp(x, y);
         
         // So if the zombie is in a wall he doesn't have a line of sight anymore or else he's eating you already
         if ([_level isWallAtPosition:newPosition])
@@ -83,6 +79,8 @@
         [self turnToFacePosition:player];
         [self fire]; // Fire at the player!!!!
     }
+    else
+        [self notifyMovementEnd];
 }
 
 @end

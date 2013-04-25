@@ -25,6 +25,7 @@
 {
     if (self = [super initWithFireRate:LAZER_CANON_FIRE_RATE damageCalculator:[DTConstantDamageCalculator damageWithDamage:LAZER_CANON_DAMAGE] range:LAZER_CANON_RANGE])
     {
+        _pickupImageName = LAZER_CANON_PICKUP_IMAGE_NAME;
     }
     
     return self;
@@ -67,6 +68,7 @@
     _lazerBeam.visible = NO;
     _lazerBeam.isHoldFiring = NO;
 }
+
 
 @end
 

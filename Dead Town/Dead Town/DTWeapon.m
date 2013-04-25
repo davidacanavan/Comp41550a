@@ -64,6 +64,14 @@
 -(void)notifyHoldFireStart {}
 -(void)notifyHoldFireStop {}
 
+-(NSString *)pickupImageName
+{
+    if (_pickupImageName == nil)
+        NSLog(@"No image has been specified for the weapon pickup!");
+    
+    return _pickupImageName;
+}
+
 @end
 
 
