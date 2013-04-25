@@ -33,6 +33,9 @@
     return self;
 }
 
+#pragma mark-
+#pragma mark Button Selectors
+
 -(void)resumeItemPressed
 {
     [[CCDirector sharedDirector] popScene];

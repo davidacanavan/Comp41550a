@@ -25,6 +25,9 @@
 @synthesize player = _player;
 @synthesize session = _session;
 
+#pragma mark-
+#pragma mark Initialisation
+
 -(id)initWithTMXFile:(NSString *)tmxFile
 {
     return [self initWithTMXFile:tmxFile session:nil peerIdentifier:nil playerNumber:DEFAULT_PLAYER_NUMBER];
@@ -37,13 +40,11 @@
         // Get all the  map variables
         _map = [CCTMXTiledMap tiledMapWithTMXFile:tmxFile];
         
-        //for (CCTMXLayer *child in _map.children)
-            //[[child texture] setAliasTexParameters];
-        
         _floor = [_map layerNamed:@"Floor"];
         _walls = [_map layerNamed:@"Walls"];
         _spawnObjects = [_map objectGroupNamed:@"Spawns"];
         _triggerObjects = [_map objectGroupNamed:@"Triggers"];
+        _pickupObjects = [_map objectGroupNamed:@"Pickups"];
         _walls.visible = YES; // Make sure no-one can see the transparent tiles!!!
         
         // Get some layout dimensions
@@ -52,7 +53,7 @@
         _tileMapWidth = _map.mapSize.width; // Measured in tiles!
         _tileMapHeight = _map.mapSize.height;
         _tileDimension = _map.tileSize.width / _retinaFactor; // Since they're square I don't need to look at the height - measured in pixels and scaled for retina!
-        _spawnCheckInterval = .2;
+        _spawnCheckInterval = .2; // TODO: same for triggers and pickups?
         _spawnCheckTime = 0;
         
         // Save the multiplayer stuff

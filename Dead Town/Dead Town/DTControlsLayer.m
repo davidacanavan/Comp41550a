@@ -8,14 +8,11 @@
 
 #import "DTControlsLayer.h"
 #import "ColoredCircleSprite.h"
-#import "DTGameLayer.h"
 #import "SneakyJoystick.h"
 #import "SneakyButton.h"
 #import "SneakyButtonSkinnedBase.h"
 #import "SneakyJoystickSkinnedBase.h"
 #import "DTButton.h"
-
-#define PADDING 15
 
 @implementation DTControlsLayer
 
@@ -24,7 +21,7 @@
 @synthesize controllerType = _controllerType;
 
 #pragma mark-
-#pragma mark Initialization Code
+#pragma mark Initialisation
 
 +(id)layerWithControllerType:(ControllerType)controllerType controllerDelegate:(id <DTControllerDelegate>)controllerDelegate buttonDelegate:(id <DTButtonDelegate>)buttonDelegate dominantHand:(DominantHand)dominantHand
 {
@@ -58,7 +55,7 @@
     return self;
 }
 
--(void)tick:(float)delta
+-(void)update:(ccTime)delta
 {
     // So we're moving the character a little bit - so tell the game layer to move him!
     if (_joystick)
@@ -71,22 +68,12 @@
             [_controllerDelegate controllerUpdated:_tiltControlVelocity delta:delta];
 }
 
--(void)pause
-{
-    [self unschedule:@selector(tick:)];
-    
-    if (_joystick)
-        [_director.touchDispatcher removeDelegate:self];
-    
-    _joystickSkin.visible = NO;
-}
-
 -(void)unpause
 {
     if (_joystick)
         [_director.touchDispatcher addTargetedDelegate:self priority:0 swallowsTouches:NO]; // Register touch events
     
-    [self schedule:@selector(tick:)]; // Schedule the tick to run on the game loop
+    [self scheduleUpdate]; // Schedule the tick to run on the game loop
 }
 
 -(void)setControllerType:(ControllerType)controllerType

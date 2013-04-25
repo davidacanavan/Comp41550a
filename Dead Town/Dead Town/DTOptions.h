@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "DTControlsLayerConstants.h"
+#import "DTGuiTypes.h"
 
 @interface DTOptions : NSObject
 

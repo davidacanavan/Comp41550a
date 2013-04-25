@@ -17,6 +17,9 @@
 @synthesize isPausing = _isPausing;
 @synthesize controlsLayer = _controlsLayer;
 
+#pragma mark-
+#pragma mark Initialisation
+
 +(id)gameLayerWithStatusLayer:(DTStatusLayer *)statusLayer
 {
     return [[self alloc] initWithStatusLayer:statusLayer];
@@ -30,12 +33,14 @@
         _isGameOver = NO;
         _options = [DTOptions sharedOptions];
         
-        //[self unpause];
         [self scheduleUpdate];
     }
     
     return self;
 }
+
+#pragma mark-
+#pragma mark Entry/Exit
 
 -(void)onEnter // Gotta see if the defaults have been changed
 {
@@ -59,38 +64,15 @@
         [[SimpleAudioEngine sharedEngine] stopBackgroundMusic];
 }
 
+// TODO: Haven't done a game over yet
 -(void)gameOver
 {
     
 }
-/*
--(void)pause
-{
-    _isPausing = NO;
-    [self unschedule:@selector(gameLoopUpdate:)];
-    _pausedLayer = [DTPausedLayer layerWithGameLayer:self];
-    [[self parent] addChild:_pausedLayer z:1];
-    
-    if (_options.playBackgroundMusic)
-        [[SimpleAudioEngine sharedEngine] stopBackgroundMusic];
-}
 
--(void)unpause
-{
-    // Schedule the tick so we can check for pausing and gameover
-    [self schedule:@selector(gameLoopUpdate:)];
-    
-    if (_options.playBackgroundMusic)
-        [[SimpleAudioEngine sharedEngine] playBackgroundMusic:@"BackingTrack.m4a" loop:YES];
-    
-}
+#pragma mark-
+#pragma mark Game Loop
 
--(void)unpauseAll
-{
-    [self unpause];
-    [_controlsLayer unpause];
-}
-*/
 -(void)update:(float)delta
 {
     if (_isGameOver) // So check for the game over condition and end if it's all done

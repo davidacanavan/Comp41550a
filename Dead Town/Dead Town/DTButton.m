@@ -12,6 +12,9 @@
 
 @synthesize tag = _tag;
 
+#pragma mark-
+#pragma mark Initialisation
+
 +buttonWithRect:(CGRect)rect isHoldable:(BOOL)isHoldable delegate:(id <DTButtonDelegate>)delegate tag:(NSString *) tag
 {
     return [[self alloc] initWithRect:rect isHoldable:isHoldable delegate:delegate tag:tag];
@@ -26,13 +29,16 @@
         _qualifyingTimeForHold = 5.0 / 60;
         _currentHoldTime = 0;
         _tag = tag;
-        [self schedule:@selector(gameLoopUpdate:)]; // Check for presses and so forth
+        [self scheduleUpdate]; // Check for presses and so forth
     }
     
     return self;
 }
 
--(void)gameLoopUpdate:(float)delta
+#pragma mark-
+#pragma mark Game Loop
+
+-(void)update:(float)delta
 {
     if (self.active)
     {
@@ -58,6 +64,9 @@
         }
     }
 }
+
+#pragma mark-
+#pragma mark Touch Delegate Override
 
 -(void)ccTouchEnded:(UITouch *)touch withEvent:(UIEvent *)event
 {

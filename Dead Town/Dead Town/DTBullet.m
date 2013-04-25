@@ -9,6 +9,7 @@
 #import "DTBullet.h"
 #import "DTLifeModel.h"
 #import "DTLevel.h"
+#import "DTWeaponTypes.h"
 
 @implementation DTBullet
 
@@ -32,7 +33,7 @@
         if (visible)
             _sprite = [CCSprite spriteWithFile:@"pistol_bullet.png"]; // TODO: should probably cache this for speed
         else // This is for the enemies with invisible bullets (put the alpha and radius back when you're done!)
-            _sprite = [ColoredCircleSprite circleWithColor:ccc4(0, 0, 100, 255) radius:2];
+            _sprite = [ColoredCircleSprite circleWithColor:ccc4(0, 0, 100, 255) radius:INVISIBLE_BULLET_RADIUS];
     
         _sprite.position = initialPosition;
         _initialPosition = initialPosition;
@@ -57,7 +58,7 @@
     if (_isExpired)
         return; // So this means the bullet has hit a target
     
-    int velocity = 400;
+    int velocity = BULLET_VELOCITY;
     float angle = CC_DEGREES_TO_RADIANS(_sprite.rotation);
     CGPoint circlePosition = ccpMult(ccpForAngle(angle), velocity * delta);
     CGPoint newPosition = ccpAdd(_sprite.position, circlePosition);
@@ -72,7 +73,6 @@
     else if (!isFriendlyWithPlayer && CGRectIntersectsRect(_sprite.boundingBox, _level.player.sprite.boundingBox))
     { // Now we have to check for a collision with a player
         _level.player.lifeModel.life -= _damage;
-        NSLog(@"%f", _damage);
         [self registerExpiry];
     }
     else if (isFriendlyWithPlayer) // Check for a collision with an enemy if we're the player

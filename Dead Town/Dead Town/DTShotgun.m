@@ -10,6 +10,7 @@
 #import "DTConstantDamageCalculator.h"
 #import "DTBullet.h"
 #import "DTLevel.h"
+#import "DTWeaponTypes.h"
 
 @implementation DTShotgun
 
@@ -20,7 +21,7 @@
 
 -(id)init
 {
-    if (self = [super initWithFireRate:5 damageCalculator:[DTConstantDamageCalculator damageWithDamage:51]])
+    if (self = [super initWithFireRate:SHOTGUN_FIRE_RATE damageCalculator:[DTConstantDamageCalculator damageWithDamage:SHOTGUN_DAMAGE]])
     {
         
     }
@@ -31,10 +32,9 @@
 -(void)onFireAccepted:(float)angleOfFire from:(CGPoint)start level:(DTLevel *)level
 {
     float angleSpread = M_PI / 2; // So the bullets go out a quarter of a circle!
-    int bulletCount = 8;
     
     // Let's fire lots of bullets at the same time!!!
-    for (float angleChange = -angleSpread/ 2; angleChange < angleSpread / 2; angleChange += angleSpread / bulletCount)
+    for (float angleChange = -angleSpread/ 2; angleChange < angleSpread / 2; angleChange += angleSpread / SHOTGUN_BULLET_COUNT)
     {
         DTBullet *bullet = [DTBullet bulletWithPosition:start angle:angleOfFire + angleChange damage:[self.damageCalculator computeDamage] maxDistance:self.range owner:self.owner level:level visible:YES];
         [level addChild:bullet];

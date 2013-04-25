@@ -9,6 +9,7 @@
 #import "DTWeapon.h"
 #import "DTBullet.h"
 #import "DTGameLayer.h"
+#import "DTWeaponTypes.h"
 
 @implementation DTWeapon
 
@@ -24,7 +25,7 @@
 
 -(id)initWithFireRate:(float)fireRate damageCalculator:(id <DTDamageCalculator>)damageCalculator
 {
-    return [self initWithFireRate:fireRate damageCalculator:damageCalculator range:-1];
+    return [self initWithFireRate:fireRate damageCalculator:damageCalculator range:WEAPON_UNLIMITED_RANGE];
 }
 
 -(id)initWithFireRate:(float)fireRate damageCalculator:(id <DTDamageCalculator>)damageCalculator range:(float)range

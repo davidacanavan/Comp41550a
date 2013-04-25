@@ -10,6 +10,8 @@
 		2B05C4DF17179EFE0099DC6A /* DTPathFindZombie.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B05C4DE17179EFE0099DC6A /* DTPathFindZombie.m */; };
 		2B3025CA16D93FBD00A3C0F1 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B3025C916D93FBD00A3C0F1 /* Default.png */; };
 		2B3025CF16D941ED00A3C0F1 /* TUA_Screen-02.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B3025CE16D941ED00A3C0F1 /* TUA_Screen-02.png */; };
+		2B339D01172990080083F9CE /* DTWeaponPickup.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B339D00172990080083F9CE /* DTWeaponPickup.m */; };
+		2B339D04172990160083F9CE /* DTHealthPickup.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B339D03172990160083F9CE /* DTHealthPickup.m */; };
 		2B36587716D693D800720844 /* DTLifeNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B36587616D693D800720844 /* DTLifeNode.m */; };
 		2B36587B16D697C700720844 /* DTStatusLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B36587A16D697C700720844 /* DTStatusLayer.m */; };
 		2B43E30D16EF8D64002F4401 /* DTButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B43E30C16EF8D64002F4401 /* DTButton.m */; };
@@ -218,6 +220,12 @@
 		2B05C4DE17179EFE0099DC6A /* DTPathFindZombie.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTPathFindZombie.m; sourceTree = "<group>"; };
 		2B3025C916D93FBD00A3C0F1 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		2B3025CE16D941ED00A3C0F1 /* TUA_Screen-02.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TUA_Screen-02.png"; sourceTree = "<group>"; };
+		2B339CFE17298FBD0083F9CE /* DTPickup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTPickup.h; sourceTree = "<group>"; };
+		2B339CFF172990080083F9CE /* DTWeaponPickup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTWeaponPickup.h; sourceTree = "<group>"; };
+		2B339D00172990080083F9CE /* DTWeaponPickup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTWeaponPickup.m; sourceTree = "<group>"; };
+		2B339D02172990160083F9CE /* DTHealthPickup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTHealthPickup.h; sourceTree = "<group>"; };
+		2B339D03172990160083F9CE /* DTHealthPickup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTHealthPickup.m; sourceTree = "<group>"; };
+		2B339D051729946B0083F9CE /* DTWeaponTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTWeaponTypes.h; sourceTree = "<group>"; };
 		2B36587516D693D700720844 /* DTLifeNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTLifeNode.h; sourceTree = "<group>"; };
 		2B36587616D693D800720844 /* DTLifeNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTLifeNode.m; sourceTree = "<group>"; };
 		2B36587916D697C700720844 /* DTStatusLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTStatusLayer.h; sourceTree = "<group>"; };
@@ -319,7 +327,6 @@
 		2BBFAB1F1725AB9D004329C2 /* DTOptionsScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTOptionsScene.m; sourceTree = "<group>"; };
 		2BBFAB231725B0DE004329C2 /* DTOptionsLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTOptionsLayer.h; sourceTree = "<group>"; };
 		2BBFAB241725B0DE004329C2 /* DTOptionsLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTOptionsLayer.m; sourceTree = "<group>"; };
-		2BBFAB261725C810004329C2 /* DTControlsLayerConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTControlsLayerConstants.h; sourceTree = "<group>"; };
 		2BCE6291170C63AD000935D6 /* DTDamageCalculator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTDamageCalculator.h; sourceTree = "<group>"; };
 		2BCE6293170C642E000935D6 /* DTConstantDamageCalculator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTConstantDamageCalculator.h; sourceTree = "<group>"; };
 		2BCE6294170C642E000935D6 /* DTConstantDamageCalculator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTConstantDamageCalculator.m; sourceTree = "<group>"; };
@@ -588,6 +595,7 @@
 		2BE0773D16B7673D0073F28F /* DTIntroScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTIntroScene.m; sourceTree = "<group>"; };
 		2BE0774216B768840073F28F /* DTGameScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTGameScene.h; sourceTree = "<group>"; };
 		2BE0774316B768840073F28F /* DTGameScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTGameScene.m; sourceTree = "<group>"; };
+		2BE81AAB1726F14900532020 /* DTGuiTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTGuiTypes.h; sourceTree = "<group>"; };
 		2BEA5139171665E800D2804E /* DTTrigger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTTrigger.h; sourceTree = "<group>"; };
 		2BEA513A171665E800D2804E /* DTTrigger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTTrigger.m; sourceTree = "<group>"; };
 		2BEC4E811705E19D00662EEB /* DTLevel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTLevel.h; sourceTree = "<group>"; };
@@ -651,6 +659,28 @@
 			name = general;
 			sourceTree = "<group>";
 		};
+		2B339CFB17298F130083F9CE /* level nodes */ = {
+			isa = PBXGroup;
+			children = (
+				2B980D3716CAA5D60028BB93 /* characters */,
+				2B5668D016EE28FD004FEA6C /* weapons */,
+				2B339CFD17298F800083F9CE /* pickups */,
+			);
+			name = "level nodes";
+			sourceTree = "<group>";
+		};
+		2B339CFD17298F800083F9CE /* pickups */ = {
+			isa = PBXGroup;
+			children = (
+				2B339CFE17298FBD0083F9CE /* DTPickup.h */,
+				2B339CFF172990080083F9CE /* DTWeaponPickup.h */,
+				2B339D00172990080083F9CE /* DTWeaponPickup.m */,
+				2B339D02172990160083F9CE /* DTHealthPickup.h */,
+				2B339D03172990160083F9CE /* DTHealthPickup.m */,
+			);
+			name = pickups;
+			sourceTree = "<group>";
+		};
 		2B43C8CD16FE4A900022DDF3 /* intro scene */ = {
 			isa = PBXGroup;
 			children = (
@@ -673,7 +703,6 @@
 		2B5668CC16EE1750004FEA6C /* controls layer */ = {
 			isa = PBXGroup;
 			children = (
-				2BBFAB261725C810004329C2 /* DTControlsLayerConstants.h */,
 				2B980D3B16CAAE3A0028BB93 /* DTControlsLayer.h */,
 				2B980D3C16CAAE3A0028BB93 /* DTControlsLayer.m */,
 				2B5668CF16EE1BE6004FEA6C /* DTControllerDelegate.h */,
@@ -745,14 +774,13 @@
 			name = sounds;
 			sourceTree = "<group>";
 		};
-		2B89A0A81720E71F00727C54 /* supporting files */ = {
+		2B89A0A81720E71F00727C54 /* objects */ = {
 			isa = PBXGroup;
 			children = (
-				2B89A0A51720E71200727C54 /* DTMultiplayerTypes.h */,
 				2BEA5139171665E800D2804E /* DTTrigger.h */,
 				2BEA513A171665E800D2804E /* DTTrigger.m */,
 			);
-			name = "supporting files";
+			name = objects;
 			sourceTree = "<group>";
 		};
 		2B980D2E16CA94040028BB93 /* game scene */ = {
@@ -772,7 +800,6 @@
 				2B05BCA41708BE6800D91DEB /* general */,
 				2B05BCA01708BC9E00D91DEB /* villians */,
 				2B05BC9F1708BC9500D91DEB /* heroes */,
-				2B5668D016EE28FD004FEA6C /* weapons */,
 			);
 			name = characters;
 			sourceTree = "<group>";
@@ -945,9 +972,9 @@
 			isa = PBXGroup;
 			children = (
 				2BEC4E7F1705E17900662EEB /* level */,
+				2B339CFB17298F130083F9CE /* level nodes */,
 				2B86436516D257A0008FEB55 /* sounds */,
 				2B980D3E16CAB1180028BB93 /* sneakyness */,
-				2B980D3716CAA5D60028BB93 /* characters */,
 				2BE0773616B7667D0073F28F /* base classes */,
 				2BE0773716B766880073F28F /* layers */,
 				2BE0773816B766930073F28F /* scenes */,
@@ -1324,10 +1351,8 @@
 		2BE0773616B7667D0073F28F /* base classes */ = {
 			isa = PBXGroup;
 			children = (
-				2BE0771E16B74A720073F28F /* AppDelegate.h */,
-				2BE0771F16B74A720073F28F /* AppDelegate.m */,
-				2BE0772416B74A720073F28F /* IntroLayer.h */,
-				2BE0772516B74A720073F28F /* IntroLayer.m */,
+				2BE81AA81726F06500532020 /* defaults */,
+				2BE81AA91726F09300532020 /* types & constants */,
 				2BF7A8D116C9BB7900D3063F /* HandyFunctions.h */,
 				2BF7A8D216C9BB7900D3063F /* HandyFunctions.m */,
 				2B86436816D25B46008FEB55 /* DTOptions.h */,
@@ -1362,16 +1387,45 @@
 			name = scenes;
 			sourceTree = "<group>";
 		};
+		2BE81AA81726F06500532020 /* defaults */ = {
+			isa = PBXGroup;
+			children = (
+				2BE0771E16B74A720073F28F /* AppDelegate.h */,
+				2BE0771F16B74A720073F28F /* AppDelegate.m */,
+				2BE0772416B74A720073F28F /* IntroLayer.h */,
+				2BE0772516B74A720073F28F /* IntroLayer.m */,
+			);
+			name = defaults;
+			sourceTree = "<group>";
+		};
+		2BE81AA91726F09300532020 /* types & constants */ = {
+			isa = PBXGroup;
+			children = (
+				2B89A0A51720E71200727C54 /* DTMultiplayerTypes.h */,
+				2BE81AAB1726F14900532020 /* DTGuiTypes.h */,
+				2B339D051729946B0083F9CE /* DTWeaponTypes.h */,
+			);
+			name = "types & constants";
+			sourceTree = "<group>";
+		};
+		2BE81AAA1726F0A800532020 /* levels */ = {
+			isa = PBXGroup;
+			children = (
+				2B63A3F4171DFCC20075E802 /* DTLevelSelectLevel.h */,
+				2B63A3F5171DFCC20075E802 /* DTLevelSelectLevel.m */,
+				2B63A3F7171DFE330075E802 /* DTHospitalLevel.h */,
+				2B63A3F8171DFE330075E802 /* DTHospitalLevel.m */,
+			);
+			name = levels;
+			sourceTree = "<group>";
+		};
 		2BEC4E7F1705E17900662EEB /* level */ = {
 			isa = PBXGroup;
 			children = (
 				2BEC4E811705E19D00662EEB /* DTLevel.h */,
 				2BEC4E821705E19D00662EEB /* DTLevel.m */,
-				2B89A0A81720E71F00727C54 /* supporting files */,
-				2B63A3F4171DFCC20075E802 /* DTLevelSelectLevel.h */,
-				2B63A3F5171DFCC20075E802 /* DTLevelSelectLevel.m */,
-				2B63A3F7171DFE330075E802 /* DTHospitalLevel.h */,
-				2B63A3F8171DFE330075E802 /* DTHospitalLevel.m */,
+				2B89A0A81720E71F00727C54 /* objects */,
+				2BE81AAA1726F0A800532020 /* levels */,
 			);
 			name = level;
 			sourceTree = "<group>";
@@ -1631,6 +1685,8 @@
 				2BBFAB1D1725AB86004329C2 /* DTPausedScene.m in Sources */,
 				2BBFAB201725AB9D004329C2 /* DTOptionsScene.m in Sources */,
 				2BBFAB251725B0DE004329C2 /* DTOptionsLayer.m in Sources */,
+				2B339D01172990080083F9CE /* DTWeaponPickup.m in Sources */,
+				2B339D04172990160083F9CE /* DTHealthPickup.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

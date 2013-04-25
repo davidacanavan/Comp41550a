@@ -30,8 +30,8 @@
     // Map references
     CCTMXTiledMap *_map;
     CCTMXLayer *_floor, *_walls;
-    CCTMXObjectGroup *_spawnObjects, *_triggerObjects;
-    NSMutableArray *_triggers;
+    CCTMXObjectGroup *_spawnObjects, *_triggerObjects, *_pickupObjects;
+    NSMutableArray *_triggers, *_pickups;
     // Layout stuff and coordinates
     float _retinaFactor;
     int _tileMapWidth, _tileMapHeight;
@@ -41,7 +41,7 @@
     BOOL _isHoldFiring;
     float _spawnCheckInterval, _spawnCheckTime;
     
-    // Some multiplayer variables - this lets us put them on the update thread so we don't get any jerkyness
+    // Some multiplayer variables - this lets us put them on the update thread so we don't get any jerkyness, experimental!
     BOOL _remotePlayerHasNewPosition;
     CGPoint _remotePlayerNewPosition, _remotePlayerNewVelocity;
 }
@@ -50,7 +50,7 @@
 @property(nonatomic) DTPlayer *player, *remotePlayer;
 @property(nonatomic, readonly) NSMutableArray *enemies;
 @property(nonatomic, readonly) int tileDimension;
-@property(nonatomic) BOOL shouldCheckForTriggers;
+@property(nonatomic) BOOL shouldCheckForTriggers, shouldCheckForPickups;
 
 // Multiplayer session variables
 @property(nonatomic) GKSession *session;

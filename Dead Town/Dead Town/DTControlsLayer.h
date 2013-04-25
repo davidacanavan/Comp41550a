@@ -10,7 +10,7 @@
 #import "cocos2d.h"
 #import "DTControllerDelegate.h"
 #import "DTButtonDelegate.h"
-#import "DTControlsLayerConstants.h"
+#import "DTGuiTypes.h"
 
 @class DTGameLayer;
 @class SneakyJoystick;
@@ -39,9 +39,6 @@
 @property(nonatomic, readonly) DTButton *fireButton, *pauseButton;
 
 +(id)layerWithControllerType:(ControllerType)controllerType controllerDelegate:(id <DTControllerDelegate>)controllerDelegate buttonDelegate:(id <DTButtonDelegate>)buttonDelegate dominantHand:(DominantHand)dominantHand;
-
--(void)pause;
--(void)unpause;
 
 @end
 

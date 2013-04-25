@@ -10,6 +10,7 @@
 #import "DTConstantDamageCalculator.h"
 #import "DTBullet.h"
 #import "DTLevel.h"
+#import "DTWeaponTypes.h"
 
 @implementation DTMachineGun
 
@@ -20,7 +21,7 @@
 
 -(id)init
 {// TODO: maybe put the constant damage thing with a default for projectiles as a singleton?
-    if (self = [super initWithFireRate:15 damageCalculator:[DTConstantDamageCalculator damageWithDamage:51]])
+    if (self = [super initWithFireRate:MACHINE_GUN_FIRE_RATE damageCalculator:[DTConstantDamageCalculator damageWithDamage:MACHINE_GUN_DAMAGE]])
     {
         
     }

@@ -12,6 +12,7 @@
 #import "DTLevel.h"
 #import "DTCharacter.h"
 #import "DTLifeModel.h"
+#import "DTWeaponTypes.h"
 
 @implementation DTLazerCanon
 
@@ -22,7 +23,7 @@
 
 -(id)init
 {
-    if (self = [super initWithFireRate:100 damageCalculator:[DTConstantDamageCalculator damageWithDamage:3.0f] range:40])
+    if (self = [super initWithFireRate:LAZER_CANON_FIRE_RATE damageCalculator:[DTConstantDamageCalculator damageWithDamage:LAZER_CANON_DAMAGE] range:LAZER_CANON_RANGE])
     {
     }
     

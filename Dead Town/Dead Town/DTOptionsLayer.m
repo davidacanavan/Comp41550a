@@ -9,7 +9,7 @@
 #import "DTOptionsLayer.h"
 #import "HandyFunctions.h"
 #import "DTOptions.h"
-#import "DTControlsLayerConstants.h"
+#import "DTGuiTypes.h"
 
 @implementation DTOptionsLayer
 
@@ -18,11 +18,9 @@
     if (self = [super init])
     {
         _options = [DTOptions sharedOptions];
-        
         CGSize screen = [[CCDirector sharedDirector] winSize];
-        NSString *fontName = @"Marker Felt";
-        int fontSize = 22;
-        [self allocateMenuItemsWithFontName:fontName andFontSize:fontSize]; // Create the individual menu items themselves
+        
+        [self allocateMenuItemsWithFontName]; // Create the individual menu items themselves
         
         CCMenuItemToggle *musicToggle = [CCMenuItemToggle itemWithTarget:self selector:@selector(toggleForMusicHit:) items:_musicOn, _musicOff, nil];
         musicToggle.selectedIndex = _options.playBackgroundMusic ? 0 : 1;
@@ -36,7 +34,7 @@
         CCMenuItemToggle *handToggle = [CCMenuItemToggle itemWithTarget:self selector:@selector(toggleForHandHit:) items:_handRight, _handLeft, nil];
         handToggle.selectedIndex = _options.dominantHand == DominantHandRight ? 0 : 1;
         
-        CCMenuItemFont *resumeButton = [HandyFunctions menuItemWithString:@"Back" fontName:fontName target:self selector:@selector(backButtonHit) fontSize:fontSize];
+        CCMenuItemFont *resumeButton = [HandyFunctions menuItemWithString:@"Back" fontName:GOOEY_FONT_NAME target:self selector:@selector(backButtonHit) fontSize:GOOEY_FONT_SIZE];
         
         CCMenu *menu = [CCMenu menuWithItems:musicToggle, soundFxToggle, controlsToggle, handToggle, resumeButton, nil];
         
@@ -48,17 +46,20 @@
     return self;
 }
 
--(void)allocateMenuItemsWithFontName:(NSString *)fontName andFontSize:(int)fontSize
+-(void)allocateMenuItemsWithFontName
 {
-    _musicOn = [HandyFunctions menuItemWithString:@"Music: On" fontName:fontName fontSize:fontSize];
-    _musicOff = [HandyFunctions menuItemWithString:@"Music: Off" fontName:fontName fontSize:fontSize];
-    _soundFxOn = [HandyFunctions menuItemWithString:@"Sound FX: On" fontName:fontName fontSize:fontSize];
-    _soundFxOff = [HandyFunctions menuItemWithString:@"Sound FX: Off" fontName:fontName fontSize:fontSize];
-    _contolsJoystick = [HandyFunctions menuItemWithString:@"Controls: Joystick" fontName:fontName fontSize:fontSize];
-    _controlsTilt = [HandyFunctions menuItemWithString:@"Controls: Tilt" fontName:fontName fontSize:fontSize];
-    _handRight = [HandyFunctions menuItemWithString:@"Hand: Right" fontName:fontName fontSize:fontSize];
-    _handLeft = [HandyFunctions menuItemWithString:@"Hand: Left" fontName:fontName fontSize:fontSize];
+    _musicOn = [HandyFunctions menuItemWithString:@"Music: On" fontName:GOOEY_FONT_NAME fontSize:GOOEY_FONT_SIZE];
+    _musicOff = [HandyFunctions menuItemWithString:@"Music: Off" fontName:GOOEY_FONT_NAME fontSize:GOOEY_FONT_SIZE];
+    _soundFxOn = [HandyFunctions menuItemWithString:@"Sound FX: On" fontName:GOOEY_FONT_NAME fontSize:GOOEY_FONT_SIZE];
+    _soundFxOff = [HandyFunctions menuItemWithString:@"Sound FX: Off" fontName:GOOEY_FONT_NAME fontSize:GOOEY_FONT_SIZE];
+    _contolsJoystick = [HandyFunctions menuItemWithString:@"Controls: Joystick" fontName:GOOEY_FONT_NAME fontSize:GOOEY_FONT_SIZE];
+    _controlsTilt = [HandyFunctions menuItemWithString:@"Controls: Tilt" fontName:GOOEY_FONT_NAME fontSize:GOOEY_FONT_SIZE];
+    _handRight = [HandyFunctions menuItemWithString:@"Hand: Right" fontName:GOOEY_FONT_NAME fontSize:GOOEY_FONT_SIZE];
+    _handLeft = [HandyFunctions menuItemWithString:@"Hand: Left" fontName:GOOEY_FONT_NAME fontSize:GOOEY_FONT_SIZE];
 }
+
+#pragma mark-
+#pragma mark Button Selectors
 
 -(void)toggleForMusicHit:(CCMenuItemToggle *)toggle
 {

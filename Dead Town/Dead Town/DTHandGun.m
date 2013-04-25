@@ -10,6 +10,7 @@
 #import "DTBullet.h"
 #import "DTConstantDamageCalculator.h"
 #import "DTLevel.h"
+#import "DTWeaponTypes.h"
 
 @implementation DTHandGun
 
@@ -20,7 +21,7 @@
 
 -(id)init
 {
-    if (self = [super initWithFireRate:6 damageCalculator:[DTConstantDamageCalculator damageWithDamage:51]])
+    if (self = [super initWithFireRate:HANDGUN_FIRE_RATE damageCalculator:[DTConstantDamageCalculator damageWithDamage:HANDGUN_DAMAGE]])
     {
         
     }
