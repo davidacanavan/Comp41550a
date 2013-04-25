@@ -18,6 +18,10 @@
 #import "DTTrigger.h"
 #import "HandyFunctions.h"
 #import "DTPausedScene.h"
+#import "SimpleAudioEngine.h"
+#import "DTPickup.h"
+#import "DTWeaponPickup.h"
+#import "DTHealthPickup.h"
 
 @implementation DTLevel
 
@@ -37,6 +41,9 @@
 {
     if (self = [super init])
     {
+        // Get the user settings and options
+        _options = [DTOptions sharedOptions];
+        
         // Get all the  map variables
         _map = [CCTMXTiledMap tiledMapWithTMXFile:tmxFile];
         
@@ -114,7 +121,7 @@
         || tileCoordinate.x >= _tileMapWidth || tileCoordinate.y >= _tileMapHeight;
 }
 
--(CGRect)createRectFromSpawn:(NSDictionary *)spawn
+-(CGRect)createRectFromTileMapObject:(NSDictionary *)spawn
 {
     return CGRectMake(
         [[spawn valueForKey:@"x"] floatValue] / _retinaFactor,
@@ -123,9 +130,9 @@
         [[spawn valueForKey:@"height"] floatValue] / _retinaFactor);
 }
 
--(CGPoint)createRectCentreFromSpawn:(NSDictionary *)spawn
+-(CGPoint)createRectCentreFromTileMapObject:(NSDictionary *)spawn
 {
-    return [self centreOfRect:[self createRectFromSpawn:spawn]];
+    return [self centreOfRect:[self createRectFromTileMapObject:spawn]];
 }
 
 -(CGPoint)centreOfRect:(CGRect)rect
@@ -250,11 +257,30 @@
 -(BOOL)onPlayerDead {return YES;} // Returning yes means i just call gameOver by default
 -(BOOL)onRemotePlayerDead; {return YES;} // Same as above for the default behaviour
 -(void)onVillainKilled:(DTCharacter *)character {}
--(void)onTriggerEncountered:(DTTrigger *)trigger {}
+-(BOOL)onTriggerEncountered:(DTTrigger *)trigger {return YES;} // Remove the trigger by default
+
+-(BOOL)onWeaponPickupEncountered:(DTWeaponPickup *)pickup byPlayer:(DTPlayer *)player
+{
+    [pickup applyPickupToCharacter:player];
+    return YES;
+}
+
+-(BOOL)onHealthPickupEncountered:(DTHealthPickup *)pickup byPlayer:(DTPlayer *)player
+{
+    [pickup applyPickupToCharacter:player];
+    return YES;
+}
+
 -(void)onSpawnPointEncountered {}
 
 -(void)onGameOver
 {
+    if (_options.playSoundEffects)
+    {
+        [[SimpleAudioEngine sharedEngine] stopBackgroundMusic];
+        [[SimpleAudioEngine sharedEngine] playEffect:@"player_death.mp3"]; // http://soundbible.com/1791-Torture.html
+    }
+    
     [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration: 1.0 scene: [DTIntroScene scene] withColor:ccWHITE]];
 }
 
@@ -287,16 +313,39 @@
     for (NSDictionary *dict in triggerDicts)
     {
         [_triggers addObject:[DTTrigger triggerWithName:[dict objectForKey:@"name"]
-                                                andRect:[self createRectFromSpawn:dict]]];
+                                                andRect:[self createRectFromTileMapObject:dict]]];
     }
     
+    // Make some space for the enemies
     _enemies = [NSMutableArray arrayWithCapacity:20];
+    
+    // Make space for the pickups from the object layer
+    NSMutableArray *pickupDicts = [_pickupObjects objects];
+    _pickups = [NSMutableArray arrayWithCapacity:[pickupDicts count]];
+    
+    // Save the triggers we have here for later
+    for (NSDictionary *dict in pickupDicts)
+    {
+        if ([[dict objectForKey:@"Class"] isEqualToString:@"DTHealthPickup"]) // It's some health! Hooray!
+        {
+            float health = [[dict objectForKey:@"Health Change"] floatValue];
+            DTHealthPickup *healthPickup = [DTHealthPickup pickupWithHealth:health];
+            [self addChild:healthPickup];
+            healthPickup.sprite.position = [self createRectCentreFromTileMapObject:dict];
+            [_pickups addObject:healthPickup];
+        }
+        else // It's a weapon
+        {
+            
+        }
+    }
+    
 }
 
 -(void)createPlayerOrPlayers
 {
     // Create the players
-    CGPoint playerOnePosition = [self createRectCentreFromSpawn:[_spawnObjects objectNamed:@"Player Spawn 0"]];
+    CGPoint playerOnePosition = [self createRectCentreFromTileMapObject:[_spawnObjects objectNamed:@"Player Spawn 0"]];
     CGPoint playerTwoPosition = ccpAdd(playerOnePosition, ccp(_tileDimension, 5)); // TODO: Put them half-way in the rect instead
     
     if (_playerNumber == PLAYER_ONE) // Then we're player one! Excellent news!
@@ -341,6 +390,7 @@
     if (_shouldCheckForTriggers && _spawnCheckTime >= _spawnCheckInterval)
     {
         [self checkForTriggers];
+        [self checkForPickups];
         _spawnCheckTime = 0;
     }
 }
@@ -359,17 +409,47 @@
 {
     DTTrigger *triggerToBeRemoved = nil; // TODO: This assumes only one trigger is hit at a time, pretty reasonable me thinks
     
+    // I never break the loop since you can intersect multiple ones (TODO: then again the checks would be so quick it could be an optimisation - not a biggie though for now)
     for (DTTrigger *trigger in _triggers)
     {
         if (CGRectIntersectsRect(_player.sprite.boundingBox, trigger.rect))
         {
-            [self onTriggerEncountered:trigger];
-            triggerToBeRemoved = trigger; // Prevent lots of them coming along
+            BOOL shouldRemove = [self onTriggerEncountered:trigger];
+            
+            if (shouldRemove)
+                triggerToBeRemoved = trigger; // Prevent lots of them coming along
         }
     }
     
     if (triggerToBeRemoved)
         [_triggers removeObject:triggerToBeRemoved];
+}
+
+-(void)checkForPickups
+{
+    id <DTPickup> pickupToBeRemoved = nil;
+    
+    for (id <DTPickup> pickup in _pickups)
+    {
+        if (CGRectIntersectsRect(_player.sprite.boundingBox, pickup.sprite.boundingBox))
+        {
+            BOOL shouldRemove;
+            
+            if ([pickup isKindOfClass:[DTHealthPickup class]])
+                shouldRemove = [self onHealthPickupEncountered:pickup byPlayer:_player];
+            else
+                shouldRemove = [self onWeaponPickupEncountered:pickup byPlayer:_player];
+            
+            if (shouldRemove)
+                pickupToBeRemoved = pickup; // Prevent lots of them coming along
+        }
+    }
+    
+    if (pickupToBeRemoved)
+    {
+        [self removeChild:pickupToBeRemoved cleanup:NO];
+        [_pickups removeObject:pickupToBeRemoved];
+    }
 }
 
 #pragma mark-

@@ -23,10 +23,16 @@
 @class DTGameLayer;
 @class DTPlayer;
 @class DTTrigger;
+@class DTOptions;
+@class DTWeaponPickup;
+@class DTHealthPickup;
 
 @interface DTLevel : CCNode <DTControllerDelegate, DTButtonDelegate, DTLifeModelDelegate, GKSessionDelegate>
 {
     @protected
+    // User settings
+    DTOptions *_options;
+    
     // Map references
     CCTMXTiledMap *_map;
     CCTMXLayer *_floor, *_walls;
@@ -71,8 +77,8 @@
 -(BOOL)isWallAtPosition:(CGPoint)position;
 -(CGPoint)tileCoordinateForPosition:(CGPoint)point;
 -(CGPoint)positionForTileCoordinate:(CGPoint)tileCoordinate; // Returns the centre of the tile
--(CGRect)createRectFromSpawn:(NSDictionary *)spawn;
--(CGPoint)createRectCentreFromSpawn:(NSDictionary *)spawn;
+-(CGRect)createRectFromTileMapObject:(NSDictionary *)spawn;
+-(CGPoint)createRectCentreFromTileMapObject:(NSDictionary *)spawn;
 -(CGPoint)centreOfRect:(CGRect)rect;
 
 -(void)addEnemy:(DTCharacter *)enemy toLayer:(BOOL)toLayer;
@@ -93,9 +99,11 @@
 -(BOOL)onPlayerDead; // Return a bool whether we should go to game over or not
 -(BOOL)onRemotePlayerDead; // Same as above
 -(void)onVillainKilled:(DTCharacter *) character; // Called when we kill a villain
--(void)onTriggerEncountered:(DTTrigger *)trigger; // Called when we encounter a trigger
+-(BOOL)onTriggerEncountered:(DTTrigger *)trigger; // Called when we encounter a trigger - return yes to remove from layer (yes by default)
+-(BOOL)onWeaponPickupEncountered:(DTWeaponPickup *)pickup byPlayer:(DTPlayer *)player; // by default: applies the pickup to the player (plays a sound)
+-(BOOL)onHealthPickupEncountered:(DTWeaponPickup *)pickup byPlayer:(DTPlayer *)player; // by default: as above
 -(void)onSpawnPointEncountered; // Called when we encounter a spawn point
--(void)onGameOver; // By default goes back to the intro scene
+-(void)onGameOver; // By default goes back to the intro scene and plays the death noise
 
 @end
 

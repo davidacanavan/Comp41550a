@@ -9,9 +9,10 @@
 #import <Foundation/Foundation.h>
 #import "DTPickup.h"
 
-@interface DTHealthPickup : NSObject <DTPickup>
+@interface DTHealthPickup : CCNode <DTPickup>
 
 @property(nonatomic, readonly) float health;
+@property(nonatomic, readonly) CCSprite *sprite;
 
 +(id)pickupWithHealth:(float)health;
 

@@ -7,6 +7,7 @@
 //
 
 #import "DTHealthPickup.h"
+#import "DTLifeModel.h"
 
 @implementation DTHealthPickup
 
@@ -20,6 +21,8 @@
     if (self = [super init])
     {
         _health = health;
+        _sprite = [CCSprite spriteWithFile:@"health_pickup.png"];
+        [self addChild:_sprite];
     }
     
     return self;
@@ -27,6 +30,14 @@
 
 -(void)applyPickupToCharacter:(DTCharacter *)character
 {
+    character.lifeModel.life += _health;
 }
 
 @end
+
+
+
+
+
+
+

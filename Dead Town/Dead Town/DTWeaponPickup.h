@@ -14,6 +14,7 @@
 @interface DTWeaponPickup : NSObject <DTPickup>
 
 @property(nonatomic, readonly) DTWeapon *weapon;
+@property(nonatomic, readonly) CCSprite *sprite;
 
 +(id)pickupWithWeapon:(DTWeapon *)weapon;
 

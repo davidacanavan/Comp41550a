@@ -11,6 +11,8 @@
 
 @protocol DTPickup <NSObject>
 
+@property(nonatomic, readonly) CCSprite *sprite;
+
 -(void)applyPickupToCharacter:(DTCharacter *)character;
 
 @end

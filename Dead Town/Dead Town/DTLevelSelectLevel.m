@@ -31,10 +31,10 @@
         // Find out where the level names should be and add the name sprites
         CCTMXObjectGroup *levelNameLocations = [_map objectGroupNamed:@"Level Names Locations"];
         _levelNameSprites = [NSMutableArray arrayWithCapacity:4];
-        [self addTitleSpriteWithImageName:@"level_select_hospital.png" andCentre:[self createRectCentreFromSpawn:[levelNameLocations objectNamed:@"Level Name Hospital"]]];
-        [self addTitleSpriteWithImageName:@"level_select_apartments.png" andCentre:[self createRectCentreFromSpawn:[levelNameLocations objectNamed:@"Level Name Apartments"]]];
-        [self addTitleSpriteWithImageName:@"level_select_officeblock.png" andCentre:[self createRectCentreFromSpawn:[levelNameLocations objectNamed:@"Level Name Offices"]]];
-        [self addTitleSpriteWithImageName:@"level_select_sewer.png" andCentre:[self createRectCentreFromSpawn:[levelNameLocations objectNamed:@"Level Name Sewer"]]];
+        [self addTitleSpriteWithImageName:@"level_select_hospital.png" andCentre:[self createRectCentreFromTileMapObject:[levelNameLocations objectNamed:@"Level Name Hospital"]]];
+        [self addTitleSpriteWithImageName:@"level_select_apartments.png" andCentre:[self createRectCentreFromTileMapObject:[levelNameLocations objectNamed:@"Level Name Apartments"]]];
+        [self addTitleSpriteWithImageName:@"level_select_officeblock.png" andCentre:[self createRectCentreFromTileMapObject:[levelNameLocations objectNamed:@"Level Name Offices"]]];
+        [self addTitleSpriteWithImageName:@"level_select_sewer.png" andCentre:[self createRectCentreFromTileMapObject:[levelNameLocations objectNamed:@"Level Name Sewer"]]];
     }
     
     return self;

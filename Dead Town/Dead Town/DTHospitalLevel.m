@@ -33,11 +33,11 @@
     return self;
 }
 
--(void)onTriggerEncountered:(DTTrigger *)trigger
+-(BOOL)onTriggerEncountered:(DTTrigger *)trigger
 {
     NSDictionary *triggerVariables = [_triggerObjects objectNamed:trigger.name];
     NSDictionary *spawnDict = [_spawnObjects objectNamed:[NSString stringWithFormat:@"ES%@", [triggerVariables objectForKey:@"ES"]]];
-    CGPoint spawnPoint = [self createRectCentreFromSpawn:spawnDict];
+    CGPoint spawnPoint = [self createRectCentreFromTileMapObject:spawnDict];
     
     //DTStraightLineZombie *zombie = [DTStraightLineZombie zombieWithLevel:self position:spawnPoint
     //  life:100 velocity:120 player:_player runningDistance:250];
@@ -45,6 +45,7 @@
     DTPathFindZombie *zombie = [DTPathFindZombie zombieWithLevel:self position:spawnPoint life:100 velocity:100 player:self.player];
     [zombie.lifeModel addDelegate:self];
     [self addEnemy:zombie toLayer:YES];
+    return YES;
 }
 
 @end
