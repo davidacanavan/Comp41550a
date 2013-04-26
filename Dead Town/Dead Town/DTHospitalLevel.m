@@ -13,6 +13,7 @@
 #import "DTLifeModel.h"
 #import "DTOptions.h"
 #import "HandyFunctions.h"
+#import "CCDirector.h"
 
 @implementation DTHospitalLevel
 
@@ -44,8 +45,12 @@
 
 -(BOOL)onTriggerEncountered:(DTTrigger *)trigger
 {
-    NSDictionary *triggerVariables = [_triggerObjects objectNamed:trigger.name];
+    if ([trigger.name isEqualToString:@"End Game"])
+    {
+        [self navigateBackToIntroScreenWithTitle:@"Fantastic!" andMessage:@"You didn't die... Yet!"];
+    }
     
+    NSDictionary *triggerVariables = [_triggerObjects objectNamed:trigger.name];
     NSArray *spawnPointsToActivate = [[triggerVariables objectForKey:@"ES"] componentsSeparatedByString:@" "];
     
     for (NSString *spawnCode in spawnPointsToActivate)

@@ -17,7 +17,7 @@
 
 // Shotgun
 #define SHOTGUN_PICKUP_IMAGE_NAME @"shotgun_pickup.png"
-#define SHOTGUN_FIRE_RATE 1
+#define SHOTGUN_FIRE_RATE 4
 #define SHOTGUN_DAMAGE 51
 #define SHOTGUN_MIN_ANGULAR_SPREAD 30
 #define SHOTGUN_MAX_ANGULAR_SPREAD 180
@@ -34,7 +34,7 @@
 // Lazer Canon
 #define LAZER_CANON_PICKUP_IMAGE_NAME @"lazer_canon_pickup.png"
 #define LAZER_CANON_FIRE_RATE 100
-#define LAZER_CANON_DAMAGE 3
+#define LAZER_CANON_DAMAGE 20
 #define LAZER_CANON_RANGE 40
 
 

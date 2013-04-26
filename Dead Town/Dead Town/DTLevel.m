@@ -609,6 +609,12 @@
 -(void) session:(GKSession *)session connectionWithPeerFailed:(NSString *)peerID withError:(NSError *)error {}
 -(void) session:(GKSession *)session didFailWithError:(NSError *)error {}
 
+-(void)navigateBackToIntroScreenWithTitle:(NSString *)title andMessage:(NSString *)message
+{
+    [HandyFunctions showAlertDialogEntitled:title withMessage:message];
+    [[CCDirector sharedDirector] replaceScene: [CCTransitionFade transitionWithDuration: 1.0 scene: [DTIntroScene scene] withColor:ccWHITE]];
+}
+
 @end
 
 

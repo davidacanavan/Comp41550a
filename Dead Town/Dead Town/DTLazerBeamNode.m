@@ -32,6 +32,9 @@
         self.anchorPoint = ccp(0.5, 0);
         contentSize_.height = _displacement * 2;
         self.position = [origin getPosition];
+        
+        self.visible = NO;
+        [self scheduleUpdate];
     }
     
     return self;
@@ -43,7 +46,6 @@
         return;
     
     _target = target; // Tell us who the target is and set up an update call
-    [self scheduleUpdate];
 }
 
 -(void)draw
@@ -74,13 +76,13 @@ void generateLightning(CGPoint points[], int start, int end, float displacement,
 {
     if (_target.lifeModel.isZero) // In case they've died
     {
-        [self unscheduleUpdate]; // Stop updating and hide
         self.visible = NO;
         _target = nil;
         return;
     }
     
-    CGPoint origin = [_origin getPosition], target = [_target getPosition];
+    // Draw the target offscreen if we have a null, it will be invisble anyway
+    CGPoint origin = [_origin getPosition], target = (_target == nil) ? CGPointZero : [_target getPosition];
     contentSize_.width = ccpDistance(origin, target);
     self.position = origin;
     [self turnToFacePosition:target];

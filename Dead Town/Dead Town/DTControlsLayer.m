@@ -99,14 +99,14 @@
 // Create the joystick and add it to the layer
 -(void)addJoystick
 {
-    // Some variables to get the sizes of the controls
-    int joystickRadius = 36, joystickThumbRadius = joystickRadius / 3;
+    CCSprite *background = [CCSprite spriteWithFile:@"joystick_back.png"];
+    CCSprite *thumb = [CCSprite spriteWithFile:@"joystick_nav.png"];
     
     // Create the joystick skin from plain old dots
     _joystickSkin = [[SneakyJoystickSkinnedBase alloc] init];
-    _joystickSkin.backgroundSprite = [ColoredCircleSprite circleWithColor:ccc4(255, 255, 0, 120) radius:joystickRadius];
-    _joystickSkin.thumbSprite = [ColoredCircleSprite circleWithColor:ccc4(0, 0, 100, 255) radius:joystickThumbRadius];
-    _joystick = [[SneakyJoystick alloc] initWithRect:CGRectMake(0, 0, joystickRadius * 2, joystickRadius * 2)];
+    _joystickSkin.backgroundSprite = background;
+    _joystickSkin.thumbSprite = thumb;
+    _joystick = [[SneakyJoystick alloc] initWithRect:CGRectMake(0, 0, background.contentSize.width, background.contentSize.height)];
     _joystickSkin.joystick = _joystick;
     [self addChild:_joystickSkin];
     _joystickSkin.visible = NO;
@@ -157,15 +157,13 @@
 // Create the shoot button and add it to the layer
 -(void)setUpSneakyFireButton
 {
-    int buttonRadius = 24;
     _fireButtonSkin = [[SneakyButtonSkinnedBase alloc] init];
-    _fireButtonSkin.defaultSprite = [ColoredCircleSprite circleWithColor: ccc4(255, 255, 0, 255)radius:buttonRadius];
-    _fireButtonSkin.activatedSprite = [ColoredCircleSprite circleWithColor: ccc4(255, 255, 0, 255)radius:buttonRadius];
-    _fireButtonSkin.pressSprite = [ColoredCircleSprite circleWithColor: ccc4(255, 255, 0, 255)radius:buttonRadius];
+    CCSprite *sprite = [CCSprite spriteWithFile:@"fire_button.png"];
+    _fireButtonSkin.defaultSprite = sprite;
     
     [HandyFunctions layoutNodeFromGooeyConstants:_fireButtonSkin toCorner:DTLayoutCornerBottomRight];
     
-    _fireButton = [DTButton buttonWithRect:CGRectMake(0, 0, buttonRadius * 2, buttonRadius * 2) isHoldable:YES delegate:_buttonDelegate tag:@"fire"];
+    _fireButton = [DTButton buttonWithRect:CGRectMake(0, 0, sprite.contentSize.width, sprite.contentSize.height) isHoldable:YES delegate:_buttonDelegate tag:@"fire"]; // TODO: I know this is a bad way to handle this! I will change!!!!
     _fireButtonSkin.button = _fireButton;
     [self addChild:_fireButtonSkin];
 }

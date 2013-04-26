@@ -110,6 +110,8 @@
 -(void)onSpawnPointEncountered; // Called when we encounter a spawn point
 -(void)onGameOver; // By default goes back to the intro scene and plays the death noise
 
+-(void)navigateBackToIntroScreenWithTitle:(NSString *)title andMessage:(NSString *)message;
+
 @end
 
 
