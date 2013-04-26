@@ -33,6 +33,7 @@
 {
     DTBullet *bullet = [DTBullet bulletWithPosition:start angle:angleOfFire damage:[self.damageCalculator computeDamage] maxDistance:self.range owner:self.owner level:level visible:YES];
     [level addChild:bullet];
+    [_options playSoundbyteIfOptionsAllow:@"gun_shot.mp3"];
 }
 
 @end

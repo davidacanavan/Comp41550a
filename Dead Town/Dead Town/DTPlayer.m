@@ -62,14 +62,6 @@
     return [CCSprite spriteWithSpriteFrameName:_defaultFrameName];
 }
 
--(void)onFireSuccess
-{
-    [super onFireSuccess];
-    
-    if (_options.canPlaySoundEffects)
-        [[SimpleAudioEngine sharedEngine] playEffect:@"Pew.m4a"];
-}
-
 -(BOOL)firesVisibleProjectile
 {
     return YES;

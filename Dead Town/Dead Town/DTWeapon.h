@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
 #import "DTDamageCalculator.h"
+#import "DTOptions.h"
 
 @class DTCharacter;
 @class DTLevel;
@@ -19,6 +20,7 @@
     float _timeSinceLastFire; // The time since the last accepted call to fire (calls can be rejeted to prevent bullet rain).
     float _minimumTimeBetweenFires;
     NSString *_pickupImageName; // So the subclass can access the property
+    DTOptions *_options;
 }
 
 // Whether this weapon belongs to the player or an enemy.

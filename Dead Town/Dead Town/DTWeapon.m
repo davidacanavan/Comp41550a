@@ -36,6 +36,7 @@
         _timeSinceLastFire = 0; // Assume they haven't fired yet
         _range = range;
         _damageCalculator = damageCalculator;
+        _options = [DTOptions sharedOptions];
         [self schedule:@selector(updateTimeSinceLastFire:)];
     }
     

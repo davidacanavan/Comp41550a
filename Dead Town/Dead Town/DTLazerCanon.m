@@ -52,6 +52,7 @@
         _lazerBeam.target = enemy;
         _lazerBeam.visible = YES;
         enemy.lifeModel.life -= [self.damageCalculator computeDamage];
+        [_options playSoundbyteIfOptionsAllow:@"hiss.m4a"];
     }
 }
 
