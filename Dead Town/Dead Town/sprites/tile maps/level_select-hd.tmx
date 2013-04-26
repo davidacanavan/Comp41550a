@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="60" height="10" tilewidth="64" tileheight="64">
+ <tileset firstgid="1" name="Transparents" tilewidth="64" tileheight="64">
+  <image source="tile_markers-hd.png" width="192" height="64"/>
+  <tile id="2">
+   <properties>
+    <property name="IsWall" value="Yes"/>
+   </properties>
+  </tile>
+ </tileset>
+ <tileset firstgid="4" name="LS1" tilewidth="64" tileheight="64">
+  <image source="level_select_tileset-hd.png" width="128" height="384"/>
+ </tileset>
+ <layer name="Floor" width="60" height="10">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo4B6gA2IOYGYfYD00xuM+pe++llGGOYYYZh1hOFRMLwBAALABIE=
+  </data>
+ </layer>
+ <layer name="Walls" width="60" height="10">
+  <data encoding="base64" compression="zlib">
+   eJxjYKAfYMaC6amf3gDdfeT4lxL99AZD3b/Y0he+dEbIvYTMoYd/8fkJn7+IUU9reXLAYM8jyGDUvwNjBr0Atfw7lPAoQAUAr4cBVw==
+  </data>
+ </layer>
+ <objectgroup name="Spawns" width="60" height="10">
+  <object name="Player Spawn 0" x="671" y="346" width="103" height="145"/>
+ </objectgroup>
+ <objectgroup name="Level Names Locations" width="60" height="10">
+  <object name="Level Name Hospital" x="994" y="221" width="340" height="71"/>
+  <object name="Level Name Apartments" x="1771" y="44" width="235" height="60"/>
+  <object name="Level Name Offices" x="2277" y="215" width="257" height="89"/>
+  <object name="Level Name Sewer" x="2804" y="37" width="215" height="69"/>
+ </objectgroup>
+ <objectgroup name="Arrow Sprites Locations" width="60" height="10">
+  <object name="Arrow Sprite Hospital" x="1145" y="315" width="44" height="44"/>
+  <object name="Arrow Sprite Apartments" x="1869" y="139" width="37" height="35"/>
+  <object name="Arrow Sprite Offices" x="2385" y="325" width="36" height="37"/>
+  <object name="Arrow Sprite Sewer" x="2897" y="137" width="29" height="33"/>
+ </objectgroup>
+</map>

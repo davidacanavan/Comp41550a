@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="128" height="128" tilewidth="64" tileheight="64">
+ <tileset firstgid="1" name="Transparents" tilewidth="64" tileheight="64">
+  <image source="tile_markers-hd.png" width="192" height="64"/>
+  <tile id="2">
+   <properties>
+    <property name="IsWall" value="Yes"/>
+   </properties>
+  </tile>
+ </tileset>
+ <tileset firstgid="4" name="HT5" tilewidth="64" tileheight="64">
+  <image source="Hospital_Tile-hd.png" width="384" height="640"/>
+ </tileset>
+ <layer name="Floor" width="128" height="128">
+  <data encoding="base64" compression="zlib">
+   eJzt2tlu1DAYBlBfQFtBp2oZ4IKCVLFIwAVwwSKV938vJiqWXNfOntl6jvSrnTKTOPniJRlCAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACiz5t631Jfdtc0tuDtpl7/r9Pk91jvdtc0tiDmf1Mo+R+/tP/ndR7kf+za8tf/j1+a/2WQ/7GqrfN/hvv5v0penwX5H7qYe5pzWumaP8//Isj/UHXlXqo8f+P/fLqes0yp0jOafF33ZFNXyevm96ehnP9qUy+C/OfUtc7uqpNNvaxUKaN8f6W1Xf63fVj/LdlPdvk8s0/+q45/v6lU3/zz7ed5Pwt340KsmH8pk6XO49R+0lW7Gs/S4/q7qQ+Vug3zHFMp/3Xy+iyU+3tev7LXzedeVPY5h7Tdcc6Klc9Xh5p/WxvGXP9jxv+Lwt/a6jb53KrjGKaoHf91ob1t/ahW3xdqd5cx+V9VKu8HU+b/89DvnObb20b+sc3NPWqe/8dNfVqoDUuYq/8368A8y7b845zftf5btWwr3V68PpbqR7XnkY8x/3S+bvrpdShnWcs/vZfP13ZNPQ8Pr4mu/Nva3nft3rZ2zPOP41Np/D+ke9Oh+d+E+9/DxnMwNv8pa4m4va7vA5v35PemQ/YRt5H3/3Uo59+sTffl/q7LnOu/XeV/OqDt+bqiqbOBx5+PWaXxKq19nhPG5B+fzef3Qfl5KG3vW3h4X9nct3WtmWvzetOukwFtL12vFwOPf0zt65wwpf/X7tOaNdu6Y3v5dseenz6fz9ser9/SuP013I3X8Wfp+8ihdUz9v9Tff2/qT3h43KV5sPY9b/PeMXNkbFfbvmrZXRba/iP7OVftc/9vxs85xr91j/e0VZ/rpW+2fWrIc6a+VZvHdvV8p8sc67/S/89dotr2M+bZdeneM69j6ec1ffPP1237Vm39a+nvbh5D/oes9Oxi6lwl/8MRj/FNpR5z/um4vq9rlKm2OXcd2jn8B746fQ0=
+  </data>
+ </layer>
+ <layer name="Walls" width="128" height="128">
+  <data encoding="base64" compression="zlib">
+   eJzt2NuOgyAUBdAm/f9/nqdJGoNy5EAFulZiZrQqyubWvl4AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAwL93YGNftXzlv7f3x99Sv5f/3vT/3yb/3/Y++f/qGOuJrO9r+6znzvc4+e+j5ft76Xz59xH5nSWzlcorlX+2f3WMvB71mM2/xzmjje4nT7XnVfIv/f7zzXocnc8M+fduny3531kT3jmeVaunnvf/puN7Rc5ruffZsdb875TZw1V7q41Xq4z/0fyj79Bzbs+U2cNZPR2f4cksW/Ts/6Pzr5X5rflf/uXPotlGxpJo+Wdll8rMjMHR/GvPMpu7+ZfqKpN/VO/875Rx/CyS/yzze80T4/8T+UfunVn/1O6/Y/6t67/SNa1jcyb/47XZ9n9l1/yj966d01o/PfL/3G9ZG0SecZf8r/pu6Zpov87OC61jx/HzbHusPedses7/WdH20rNf9jbiOUeaKf+MbP/vldns9XR0J//Zt8g7jrZr/isrrRFGl7WKX81/VFtYrQ5XWKNkzTIPzegPS1YGcw==
+  </data>
+ </layer>
+ <objectgroup name="Spawns" width="128" height="128">
+  <object name="Player Spawn 0" x="77" y="8052" width="100" height="52"/>
+  <object name="ES0" x="1068" y="7186" width="262" height="88">
+   <properties>
+    <property name="DTPathFindZombie" value="0"/>
+    <property name="DTStraightLineZombie" value="6"/>
+   </properties>
+  </object>
+  <object name="ES4" x="2865" y="7876" width="175" height="52">
+   <properties>
+    <property name="DTPathFindZombie" value="0"/>
+    <property name="DTStraightLineZombie" value="8"/>
+   </properties>
+  </object>
+  <object name="ES3" x="1315" y="7816" width="60" height="107">
+   <properties>
+    <property name="DTPathFindZombie" value="2"/>
+    <property name="DTStraightLineZombie" value="5"/>
+   </properties>
+  </object>
+  <object name="ES1" x="1158" y="7419" width="49" height="138">
+   <properties>
+    <property name="DTPathFindZombie" value="3"/>
+    <property name="DTStraightLineZombie" value="0"/>
+   </properties>
+  </object>
+  <object name="ES2" x="1304" y="7227" width="152" height="88">
+   <properties>
+    <property name="DTPathFindZombie" value="1"/>
+    <property name="DTStraightLineZombie" value="3"/>
+   </properties>
+  </object>
+  <object name="ES8" x="2499" y="6931" width="68" height="296">
+   <properties>
+    <property name="DTPathFindZombie" value="4"/>
+    <property name="DTStraightLineZombie" value="0"/>
+   </properties>
+  </object>
+  <object name="ES9" x="2639" y="7205" width="268" height="68">
+   <properties>
+    <property name="DTPathFindZombie" value="2"/>
+    <property name="DTStraightLineZombie" value="1"/>
+   </properties>
+  </object>
+  <object name="ES6" x="2151" y="7357" width="180" height="47">
+   <properties>
+    <property name="DTPathFindZombie" value="0"/>
+    <property name="DTStraightLineZombie" value="10"/>
+   </properties>
+  </object>
+  <object name="ES5" x="1949" y="7247" width="79" height="319">
+   <properties>
+    <property name="DTPathFindZombie" value="6"/>
+    <property name="DTStraightLineZombie" value="0"/>
+   </properties>
+  </object>
+  <object name="ES7" x="2413" y="7517" width="248" height="57">
+   <properties>
+    <property name="DTPathFindZombie" value="1"/>
+    <property name="DTStraightLineZombie" value="2"/>
+   </properties>
+  </object>
+  <object name="ES11" x="3740" y="7772" width="80" height="211">
+   <properties>
+    <property name="DTPathFindZombie" value="12"/>
+    <property name="DTStraightLineZombie" value="20"/>
+   </properties>
+  </object>
+  <object name="ES12" x="5210" y="7732" width="101" height="240">
+   <properties>
+    <property name="DTPathFindZombie" value="10"/>
+    <property name="DTStraightLineZombie" value="25"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup name="Triggers" width="128" height="128">
+  <object name="T0" x="644" y="7014" width="54" height="183">
+   <properties>
+    <property name="ES" value="0"/>
+   </properties>
+  </object>
+  <object name="T1" x="678" y="7235" width="212" height="72">
+   <properties>
+    <property name="ES" value="1"/>
+   </properties>
+  </object>
+  <object name="T2" x="673" y="7753" width="105" height="45">
+   <properties>
+    <property name="ES" value="1"/>
+   </properties>
+  </object>
+  <object name="T3" x="1257" y="7557" width="228" height="49">
+   <properties>
+    <property name="ES" value="2"/>
+   </properties>
+  </object>
+  <object name="T4" x="1603" y="7795" width="51" height="155">
+   <properties>
+    <property name="ES" value="3"/>
+   </properties>
+  </object>
+  <object name="T5" x="2376" y="7857" width="44" height="89">
+   <properties>
+    <property name="ES" value="4"/>
+   </properties>
+  </object>
+  <object name="T8" x="2953" y="7215" width="45" height="103">
+   <properties>
+    <property name="ES" value="9"/>
+   </properties>
+  </object>
+  <object name="T6" x="2160" y="6985" width="165" height="44">
+   <properties>
+    <property name="ES" value="5 6 7"/>
+   </properties>
+  </object>
+  <object name="T7" x="2479" y="6664" width="488" height="67">
+   <properties>
+    <property name="ES" value="8"/>
+   </properties>
+  </object>
+  <object name="T11" x="4367" y="7799" width="130" height="74">
+   <properties>
+    <property name="ES" value="11 12"/>
+   </properties>
+  </object>
+  <object name="End Game" x="6179" y="7094" width="73" height="152"/>
+ </objectgroup>
+ <objectgroup name="Pickups" width="128" height="128">
+  <object name="Health-20" x="955" y="7393" width="70" height="54">
+   <properties>
+    <property name="Class" value="DTHealthPickup"/>
+    <property name="Health Change" value="20"/>
+   </properties>
+  </object>
+  <object name="Shotgun 0" x="1505" y="7850" width="79" height="36">
+   <properties>
+    <property name="Class" value="DTShotgun"/>
+   </properties>
+  </object>
+  <object name="Machine Gun 0" x="2181" y="7153" width="102" height="45">
+   <properties>
+    <property name="Class" value="DTMachineGun"/>
+   </properties>
+  </object>
+  <object name="Lazer Canon 0" x="4237" y="7808" width="102" height="45">
+   <properties>
+    <property name="Class" value="DTLazerCanon"/>
+   </properties>
+  </object>
+  <object name="Handgun 0" x="118" y="7963" width="102" height="45">
+   <properties>
+    <property name="Class" value="DTHandGun"/>
+   </properties>
+  </object>
+  <object name="Health-100" x="2288" y="7337" width="73" height="58">
+   <properties>
+    <property name="Class" value="DTHealthPickup"/>
+    <property name="Health Change" value="100"/>
+   </properties>
+  </object>
+  <object name="Health-20" x="1760" y="7844" width="70" height="54">
+   <properties>
+    <property name="Class" value="DTHealthPickup"/>
+    <property name="Health Change" value="20"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>
