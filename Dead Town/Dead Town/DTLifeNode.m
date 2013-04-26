@@ -11,23 +11,25 @@
 
 @implementation DTLifeNode
 
-+(id)lifeNodeWithRect:(CGRect)rect
+#pragma mark-
+#pragma mark Initialisation
+
++(id)lifeNodeWithSize:(CGSize)size
 {
-    return [[self alloc] initWithRect:rect];
+    return [[self alloc] initWithSize1:size];
 }
 
--(id)initWithRect:(CGRect)rect
+-(id)initWithSize1:(CGSize)size // had to tag the method with a 1 since it's a duplicate
 {
     if (self = [super init])
     {
         // Save the size from the rect
-        self.contentSize = rect.size;
+        self.contentSize = size;
         self.anchorPoint = ccp(0, 1);
-        self.position = ccp(rect.origin.x, rect.origin.y);
         
         // Save the layout stuff
         CGRect box = self.boundingBox;
-        _inset = 0.05 * rect.size.height;
+        _inset = 0.05 * size.height;
         CGPoint insets = ccp(_inset, _inset);
         CGPoint topLeft = CGPointZero;
         _bottomRight = ccp(box.size.width, box.size.height);
@@ -40,12 +42,18 @@
     return self;
 }
 
+#pragma mark-
+#pragma mark Custom Painting
+
 -(void)draw
 {
     ccDrawSolidRect(CGPointZero, _bottomRight, ccc4f(0, 0, 255, 255)); // Draw border
     ccDrawSolidRect(_topLeftInternal, _bottomRightInternal, ccc4f(255, 0, 0, 50)); // Fill clear(ish)
     ccDrawSolidRect(_topLeftInternal, _currentLifeInternal, ccc4f(0, 250, 0, 255)); // Fill life
 }
+
+#pragma mark-
+#pragma mark Life Model Delegate
 
 -(void)lifeChangedFrom:(float)oldLife model:(DTLifeModel *)lifeModel character:(DTCharacter *)character
 {

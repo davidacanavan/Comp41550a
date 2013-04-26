@@ -7,6 +7,7 @@
 //
 
 #import "cocos2d.h"
+#import "DTGuiTypes.h"
 
 @interface HandyFunctions : NSObject
 
@@ -16,5 +17,7 @@
 +(CCMenuItemImage *)menuItemWithImageName:(NSString *)imageName target:(id)target selector:(SEL)selector;
 +(void)showAlertDialogEntitled:(NSString *)title withMessage:(NSString *)message;
 +(float)uniformFrom:(float)min to:(float)max;
++(void)layoutNode:(CCNode *)node toCorner:(DTLayoutCorner)corner leftPadding:(float)leftPadding rightPadding:(float)rightPadding topPadding:(float)topPadding bottomPadding:(float)bottomPadding;
++(void)layoutNodeFromGooeyConstants:(CCNode *)node toCorner:(DTLayoutCorner)corner;
 
 @end

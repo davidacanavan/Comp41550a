@@ -66,7 +66,7 @@
 {
     [super onFireSuccess];
     
-    if (_options.playSoundEffects)
+    if (_options.canPlaySoundEffects)
         [[SimpleAudioEngine sharedEngine] playEffect:@"Pew.m4a"];
 }
 

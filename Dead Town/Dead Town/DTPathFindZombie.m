@@ -74,7 +74,8 @@
         PathNode *node = [_currentPath objectAtIndex:_currentPathIndex];
         CGPoint targetPosition = [_level positionForTileCoordinate:node.tileCoordinate]; // TODO: Surely i can just store this!
         
-        if (ccpFuzzyEqual(self.sprite.position, _player.sprite.position, _level.tileDimension * 1.5)) // We're at the player
+        // If we're within one and a half tile distance from the player we don't need to pathfind anymore
+        if (ccpFuzzyEqual(self.sprite.position, _player.sprite.position, _level.tileDimension * 1.5))
         {
             _currentPathIndex = -1; // So if we're close enough just make a run for the player!
             [self moveToPosition:[self newPositionTowardsPosition:_player.sprite.position velocity:_velocity delta:delta]];
@@ -91,7 +92,12 @@
     else if (ccpFuzzyEqual(self.sprite.position, _player.sprite.position, _level.tileDimension * 1.5))
     {
         if (!ccpFuzzyEqual(self.sprite.position, _player.sprite.position, 15))
-            [self moveToPosition:[self newPositionTowardsPosition:_player.sprite.position velocity:_velocity delta:delta]];
+        {
+            CGPoint newPosition = [self newPositionTowardsPosition:_player.sprite.position velocity:_velocity delta:delta];
+            
+            if (![_level isWallAtPosition:newPosition])
+                [self moveToPosition:newPosition];
+        }
         
         [self turnToFacePosition:_player.sprite.position];
         [self fire];

@@ -14,7 +14,6 @@
 		2B339D04172990160083F9CE /* DTHealthPickup.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B339D03172990160083F9CE /* DTHealthPickup.m */; };
 		2B36587716D693D800720844 /* DTLifeNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B36587616D693D800720844 /* DTLifeNode.m */; };
 		2B36587B16D697C700720844 /* DTStatusLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B36587A16D697C700720844 /* DTStatusLayer.m */; };
-		2B3901ED1729A5D9002798E2 /* player_death.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2B3901EC1729A5D9002798E2 /* player_death.mp3 */; };
 		2B43E30D16EF8D64002F4401 /* DTButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B43E30C16EF8D64002F4401 /* DTButton.m */; };
 		2B51EC4D16CFFB7C00B037F9 /* DTBullet.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B51EC4C16CFFB7C00B037F9 /* DTBullet.m */; };
 		2B5668D316EE2914004FEA6C /* DTWeapon.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B5668D216EE2914004FEA6C /* DTWeapon.m */; };
@@ -47,6 +46,20 @@
 		2B684B611729DD000000993A /* lazer_canon_pickup.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B684B5B1729DD000000993A /* lazer_canon_pickup.png */; };
 		2B684B621729DD000000993A /* machine_gun_pickup-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B684B5C1729DD000000993A /* machine_gun_pickup-hd.png */; };
 		2B684B631729DD000000993A /* machine_gun_pickup.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B684B5D1729DD000000993A /* machine_gun_pickup.png */; };
+		2B684B6C172A175E0000993A /* player_all_you_got.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2B684B66172A175E0000993A /* player_all_you_got.mp3 */; };
+		2B684B6D172A175E0000993A /* player_burn_punk.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2B684B67172A175E0000993A /* player_burn_punk.mp3 */; };
+		2B684B6E172A175E0000993A /* player_death.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2B684B68172A175E0000993A /* player_death.mp3 */; };
+		2B684B6F172A175E0000993A /* player_good_squishy.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2B684B69172A175E0000993A /* player_good_squishy.mp3 */; };
+		2B684B70172A175E0000993A /* player_hell_yeah.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2B684B6A172A175E0000993A /* player_hell_yeah.mp3 */; };
+		2B684B71172A175E0000993A /* player_lock_and_load.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2B684B6B172A175E0000993A /* player_lock_and_load.mp3 */; };
+		2B684B73172A176C0000993A /* backing_track.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2B684B72172A176C0000993A /* backing_track.mp3 */; };
+		2B684B75172A35F30000993A /* README in Resources */ = {isa = PBXBuildFile; fileRef = 2B684B74172A35EC0000993A /* README */; };
+		2B684B7D172A38B50000993A /* fire_button-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B684B77172A38B50000993A /* fire_button-hd.png */; };
+		2B684B7E172A38B50000993A /* fire_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B684B78172A38B50000993A /* fire_button.png */; };
+		2B684B7F172A38B50000993A /* joystick_back-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B684B79172A38B50000993A /* joystick_back-hd.png */; };
+		2B684B80172A38B50000993A /* joystick_back.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B684B7A172A38B50000993A /* joystick_back.png */; };
+		2B684B81172A38B50000993A /* joystick_nav-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B684B7B172A38B50000993A /* joystick_nav-hd.png */; };
+		2B684B82172A38B50000993A /* joystick_nav.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B684B7C172A38B50000993A /* joystick_nav.png */; };
 		2B86436116D23A02008FEB55 /* DTPausedLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B86436016D23A02008FEB55 /* DTPausedLayer.m */; };
 		2B86436416D25798008FEB55 /* Pew.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 2B86436316D25797008FEB55 /* Pew.m4a */; };
 		2B86436716D25B00008FEB55 /* BackingTrack.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 2B86436616D25B00008FEB55 /* BackingTrack.m4a */; };
@@ -241,7 +254,6 @@
 		2B36587616D693D800720844 /* DTLifeNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTLifeNode.m; sourceTree = "<group>"; };
 		2B36587916D697C700720844 /* DTStatusLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTStatusLayer.h; sourceTree = "<group>"; };
 		2B36587A16D697C700720844 /* DTStatusLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTStatusLayer.m; sourceTree = "<group>"; };
-		2B3901EC1729A5D9002798E2 /* player_death.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = player_death.mp3; path = sounds/player_death.mp3; sourceTree = "<group>"; };
 		2B43E30A16EF8B95002F4401 /* DTButtonDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTButtonDelegate.h; sourceTree = "<group>"; };
 		2B43E30B16EF8D64002F4401 /* DTButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTButton.h; sourceTree = "<group>"; };
 		2B43E30C16EF8D64002F4401 /* DTButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTButton.m; sourceTree = "<group>"; };
@@ -288,6 +300,20 @@
 		2B684B5B1729DD000000993A /* lazer_canon_pickup.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = lazer_canon_pickup.png; path = pickups/lazer_canon_pickup.png; sourceTree = "<group>"; };
 		2B684B5C1729DD000000993A /* machine_gun_pickup-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "machine_gun_pickup-hd.png"; path = "pickups/machine_gun_pickup-hd.png"; sourceTree = "<group>"; };
 		2B684B5D1729DD000000993A /* machine_gun_pickup.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = machine_gun_pickup.png; path = pickups/machine_gun_pickup.png; sourceTree = "<group>"; };
+		2B684B66172A175E0000993A /* player_all_you_got.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = player_all_you_got.mp3; path = sounds/player/player_all_you_got.mp3; sourceTree = "<group>"; };
+		2B684B67172A175E0000993A /* player_burn_punk.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = player_burn_punk.mp3; path = sounds/player/player_burn_punk.mp3; sourceTree = "<group>"; };
+		2B684B68172A175E0000993A /* player_death.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = player_death.mp3; path = sounds/player/player_death.mp3; sourceTree = "<group>"; };
+		2B684B69172A175E0000993A /* player_good_squishy.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = player_good_squishy.mp3; path = sounds/player/player_good_squishy.mp3; sourceTree = "<group>"; };
+		2B684B6A172A175E0000993A /* player_hell_yeah.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = player_hell_yeah.mp3; path = sounds/player/player_hell_yeah.mp3; sourceTree = "<group>"; };
+		2B684B6B172A175E0000993A /* player_lock_and_load.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = player_lock_and_load.mp3; path = sounds/player/player_lock_and_load.mp3; sourceTree = "<group>"; };
+		2B684B72172A176C0000993A /* backing_track.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = backing_track.mp3; path = sounds/backing_track.mp3; sourceTree = "<group>"; };
+		2B684B74172A35EC0000993A /* README */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
+		2B684B77172A38B50000993A /* fire_button-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "fire_button-hd.png"; path = "controls/fire_button-hd.png"; sourceTree = "<group>"; };
+		2B684B78172A38B50000993A /* fire_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = fire_button.png; path = controls/fire_button.png; sourceTree = "<group>"; };
+		2B684B79172A38B50000993A /* joystick_back-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "joystick_back-hd.png"; path = "controls/joystick_back-hd.png"; sourceTree = "<group>"; };
+		2B684B7A172A38B50000993A /* joystick_back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = joystick_back.png; path = controls/joystick_back.png; sourceTree = "<group>"; };
+		2B684B7B172A38B50000993A /* joystick_nav-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "joystick_nav-hd.png"; path = "controls/joystick_nav-hd.png"; sourceTree = "<group>"; };
+		2B684B7C172A38B50000993A /* joystick_nav.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = joystick_nav.png; path = controls/joystick_nav.png; sourceTree = "<group>"; };
 		2B86435F16D23A02008FEB55 /* DTPausedLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTPausedLayer.h; sourceTree = "<group>"; };
 		2B86436016D23A02008FEB55 /* DTPausedLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTPausedLayer.m; sourceTree = "<group>"; };
 		2B86436316D25797008FEB55 /* Pew.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = Pew.m4a; path = sounds/Pew.m4a; sourceTree = "<group>"; };
@@ -804,11 +830,46 @@
 			name = pickups;
 			sourceTree = "<group>";
 		};
+		2B684B64172A173E0000993A /* player */ = {
+			isa = PBXGroup;
+			children = (
+				2B684B66172A175E0000993A /* player_all_you_got.mp3 */,
+				2B684B67172A175E0000993A /* player_burn_punk.mp3 */,
+				2B684B68172A175E0000993A /* player_death.mp3 */,
+				2B684B69172A175E0000993A /* player_good_squishy.mp3 */,
+				2B684B6A172A175E0000993A /* player_hell_yeah.mp3 */,
+				2B684B6B172A175E0000993A /* player_lock_and_load.mp3 */,
+			);
+			name = player;
+			sourceTree = "<group>";
+		};
+		2B684B65172A17440000993A /* weapons */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = weapons;
+			sourceTree = "<group>";
+		};
+		2B684B76172A38290000993A /* controls */ = {
+			isa = PBXGroup;
+			children = (
+				2B684B77172A38B50000993A /* fire_button-hd.png */,
+				2B684B78172A38B50000993A /* fire_button.png */,
+				2B684B79172A38B50000993A /* joystick_back-hd.png */,
+				2B684B7A172A38B50000993A /* joystick_back.png */,
+				2B684B7B172A38B50000993A /* joystick_nav-hd.png */,
+				2B684B7C172A38B50000993A /* joystick_nav.png */,
+			);
+			name = controls;
+			sourceTree = "<group>";
+		};
 		2B86436516D257A0008FEB55 /* sounds */ = {
 			isa = PBXGroup;
 			children = (
-				2B3901EC1729A5D9002798E2 /* player_death.mp3 */,
+				2B684B64172A173E0000993A /* player */,
+				2B684B65172A17440000993A /* weapons */,
 				2B86436616D25B00008FEB55 /* BackingTrack.m4a */,
+				2B684B72172A176C0000993A /* backing_track.mp3 */,
 				2B86436316D25797008FEB55 /* Pew.m4a */,
 			);
 			name = sounds;
@@ -865,6 +926,7 @@
 		2B9A9A34171C906400D2697B /* sprites */ = {
 			isa = PBXGroup;
 			children = (
+				2B684B76172A38290000993A /* controls */,
 				2B63A3FA171E0ABB0075E802 /* level select */,
 				2B9A9A35171C906400D2697B /* characters */,
 				2B684B4E1729A9860000993A /* pickups */,
@@ -976,6 +1038,7 @@
 		2BE0758516B74A6D0073F28F = {
 			isa = PBXGroup;
 			children = (
+				2B684B74172A35EC0000993A /* README */,
 				2B3025CE16D941ED00A3C0F1 /* TUA_Screen-02.png */,
 				2B3025C916D93FBD00A3C0F1 /* Default.png */,
 				2BF7A8C816C864D800D3063F /* Default-568h@2x.png */,
@@ -1575,7 +1638,6 @@
 				2B679C041724CBF900D1202A /* intro_title.png in Resources */,
 				2BBFAB1517259EA1004329C2 /* pistol_bullet-hd.png in Resources */,
 				2BBFAB1617259EA1004329C2 /* pistol_bullet.png in Resources */,
-				2B3901ED1729A5D9002798E2 /* player_death.mp3 in Resources */,
 				2B684B521729AA2D0000993A /* health_pickup-hd.png in Resources */,
 				2B684B531729AA2D0000993A /* health_pickup.png in Resources */,
 				2B684B561729C2A30000993A /* shotgun_pickup-hd.png in Resources */,
@@ -1586,6 +1648,20 @@
 				2B684B611729DD000000993A /* lazer_canon_pickup.png in Resources */,
 				2B684B621729DD000000993A /* machine_gun_pickup-hd.png in Resources */,
 				2B684B631729DD000000993A /* machine_gun_pickup.png in Resources */,
+				2B684B6C172A175E0000993A /* player_all_you_got.mp3 in Resources */,
+				2B684B6D172A175E0000993A /* player_burn_punk.mp3 in Resources */,
+				2B684B6E172A175E0000993A /* player_death.mp3 in Resources */,
+				2B684B6F172A175E0000993A /* player_good_squishy.mp3 in Resources */,
+				2B684B70172A175E0000993A /* player_hell_yeah.mp3 in Resources */,
+				2B684B71172A175E0000993A /* player_lock_and_load.mp3 in Resources */,
+				2B684B73172A176C0000993A /* backing_track.mp3 in Resources */,
+				2B684B75172A35F30000993A /* README in Resources */,
+				2B684B7D172A38B50000993A /* fire_button-hd.png in Resources */,
+				2B684B7E172A38B50000993A /* fire_button.png in Resources */,
+				2B684B7F172A38B50000993A /* joystick_back-hd.png in Resources */,
+				2B684B80172A38B50000993A /* joystick_back.png in Resources */,
+				2B684B81172A38B50000993A /* joystick_nav-hd.png in Resources */,
+				2B684B82172A38B50000993A /* joystick_nav.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

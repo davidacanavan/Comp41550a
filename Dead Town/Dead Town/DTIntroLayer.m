@@ -11,6 +11,7 @@
 #import "HandyFunctions.h"
 #import "DTLevelSelectLevel.h"
 #import "DTOptionsScene.h"
+#import "DTOptions.h"
 
 @implementation DTIntroLayer
 
@@ -35,6 +36,8 @@
         [_menu alignItemsHorizontallyWithPadding:40];
         _menu.position = ccp(screen.width / 2, -_menu.boundingBox.size.height / 2);
         [self addChild:_menu z:2];
+        
+        _options = [DTOptions sharedOptions];
     }
     
     return self;
@@ -51,6 +54,7 @@
                 [CCMoveTo actionWithDuration:0.4 position:ccp(screen.width / 2, screen.height * 0.67)],
                 [CCCallFunc actionWithTarget:self selector:@selector(animateMenuIn)],
                 nil]];
+    [_options playBackgroundTrackIfOptionsAllow:@"backing_track.mp3" onLoop:YES];
 }
 
 -(void)animateMenuIn
@@ -65,7 +69,6 @@
 -(void)animateTitle
 {
     float uniform = [HandyFunctions uniformFrom:2 to:12];
-    NSLog(@"Random animation wait: %f", uniform);
     CCDelayTime *delayBetweenAnimations = [CCDelayTime actionWithDuration:uniform];
     [_titleSprite runAction:[CCSequence actions:delayBetweenAnimations, _titleAnimation,
             [CCCallFunc actionWithTarget:self selector:@selector(animateTitle)], nil]];

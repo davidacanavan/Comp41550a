@@ -48,19 +48,24 @@
     if (_options.dominantHand != self.controlsLayer.dominantHand)
         self.controlsLayer.dominantHand = _options.dominantHand;
     
-    if (_options.playBackgroundMusic)
-        [[SimpleAudioEngine sharedEngine] playBackgroundMusic:@"BackingTrack.m4a" loop:YES];
+    if (_options.dominantHand != self.statusLayer.dominantHand)
+        self.statusLayer.dominantHand = _options.dominantHand;
 }
 
--(void)onExit
+-(void)onEnterTransitionDidFinish // Keep the music playing if we can!
 {
-    [super onExit];
-    
-    if (_options.playBackgroundMusic)
-        [[SimpleAudioEngine sharedEngine] stopBackgroundMusic];
+    [super onEnterTransitionDidFinish];
+    [_options playBackgroundTrackIfOptionsAllow:@"backing_track.mp3" onLoop:YES];
 }
 
 @end
+
+
+
+
+
+
+
 
 
 

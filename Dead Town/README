@@ -1,0 +1,19 @@
+
+Dead Town Project Install Notes
+-----------------
+
+There's not actually anything external you need to install for the project to work.
+
+iPhone- Please run this on a retina iphone as it is how I have tested it for the presentation.
+        However, I will issue another update to make it work on non-hd devices. This is to do with
+        the tile-maps on SD devices, I usually fix this as I go but I wished to focus my time
+        on actual project content for the minute (as the minutes are few!) - or at least until the presentation is over.
+
+Multiplayer - this was experimental and the last thing i came to look at. It only works on the level
+              select screen as I have not coded it further. It would link well with my lvel API, the 
+              latency is the problem!
+              
+TODOs - I have left a few TODO's here and there as there are many areas where I could improve the code
+        but didn't have time.
+        
+Hopefully you enjoy the game!

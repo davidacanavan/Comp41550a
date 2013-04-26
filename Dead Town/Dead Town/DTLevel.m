@@ -22,7 +22,6 @@
 #import "DTPickup.h"
 #import "DTWeaponPickup.h"
 #import "DTHealthPickup.h"
-#import "DTShotgun.h"
 
 @implementation DTLevel
 
@@ -61,8 +60,11 @@
         _tileMapWidth = _map.mapSize.width; // Measured in tiles!
         _tileMapHeight = _map.mapSize.height;
         _tileDimension = _map.tileSize.width / _retinaFactor; // Since they're square I don't need to look at the height - measured in pixels and scaled for retina!
-        _spawnCheckInterval = .2; // TODO: same for triggers and pickups?
-        _spawnCheckTime = 0;
+        _objectCheckInterval = .2; // TODO: same for triggers and pickups?
+        _objectCheckTime = 0;
+        
+        // Other things
+        _enemyDeathCount = 0;
         
         // Save the multiplayer stuff
         self.session = session;
@@ -139,6 +141,22 @@
 -(CGPoint)centreOfRect:(CGRect)rect
 {
     return ccp(rect.origin.x + rect.size.width / 2, rect.origin.y + rect.size.height / 2);
+}
+
+-(CGPoint)positionOfZombieNumber:(int)number of:(int)total inSpawnRect:(CGRect)rect
+{ // For now i space them accross the longest side and centred along the other - this could be expanded in future
+    CGSize size = rect.size;
+    
+    if (size.width > size.height) // We're moving along the x
+    {
+        float increment = size.width / total;
+        return ccp(rect.origin.x + number * increment, rect.origin.y); // TODO: Not centered yet...
+    }
+    else // Along the y
+    {
+        float increment = size.height / total;
+        return ccp(rect.origin.x, rect.origin.y + number * increment);
+    }
 }
 
 #pragma mark-
@@ -227,9 +245,12 @@
         [_enemies removeObject: character]; // TODO: This could be faster
         [self onVillainKilled:character];
         [self removeChild:character cleanup:NO];
+        _enemyDeathCount++;
     }
     else if (character == _player)
     {
+        [self onPlayerLifeChangedFrom:oldLife to:lifeModel.life];
+        
         if ([lifeModel isZero])
         {
             BOOL shouldGameOver = [self onPlayerDead];
@@ -276,14 +297,13 @@
 
 -(void)onGameOver
 {
-    if (_options.playSoundEffects)
-    {
-        [[SimpleAudioEngine sharedEngine] stopBackgroundMusic];
-        [[SimpleAudioEngine sharedEngine] playEffect:@"player_death.mp3"]; // http://soundbible.com/1791-Torture.html
-    }
+    [_options stopBackgroundTrackIfOptionsAllow];
+    [_options playSoundbyteIfOptionsAllow:@"player_death.mp3"]; // http://soundbible.com/1791-Torture.html
     
     [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration: 1.0 scene: [DTIntroScene scene] withColor:ccWHITE]];
 }
+
+-(void)onPlayerLifeChangedFrom:(float)oldLife to:(float)newLife {}
 
 #pragma mark-
 #pragma mark Property Overrides
@@ -390,13 +410,13 @@
     if (_isHoldFiring)
         [_player fire]; // So let him fire
     
-    _spawnCheckTime += delta;
+    _objectCheckTime += delta;
     
-    if (_shouldCheckForTriggers && _spawnCheckTime >= _spawnCheckInterval)
+    if (_shouldCheckForObjects && _objectCheckTime >= _objectCheckInterval)
     {
         [self checkForTriggers];
-        [self checkForPickups];
-        _spawnCheckTime = 0;
+        [self checkForPickups]; // TODO: spawn points etc.. it's ok for the demo not to have them since these are the key ones
+        _objectCheckTime = 0;
     }
 }
 

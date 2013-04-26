@@ -21,24 +21,28 @@
 @interface DTControlsLayer : CCLayer <CCTargetedTouchDelegate, UIAccelerometerDelegate>
 {
     @private
-    // The map layer - this makes it easy to update the player position
+    // Sneaky API stuff
     SneakyJoystickSkinnedBase *_joystickSkin;
     SneakyJoystick *_joystick;
+    SneakyButtonSkinnedBase *_fireButtonSkin, *_pauseButtonSkin;
+    
     CCDirector *_director;
     id <DTControllerDelegate> _controllerDelegate;
     id <DTButtonDelegate> _buttonDelegate;
     CGSize _screen;
+    
+    // Accelerometer controls
     float _lastAccelerometerTime;
     BOOL _wasTilting;
     CGPoint _tiltControlVelocity;
 }
 
 @property(nonatomic) BOOL isPausing;
-@property(nonatomic) DominantHand dominantHand;
-@property(nonatomic) ControllerType controllerType;
+@property(nonatomic) DTDominantHand dominantHand;
+@property(nonatomic) DTControllerType controllerType;
 @property(nonatomic, readonly) DTButton *fireButton, *pauseButton;
 
-+(id)layerWithControllerType:(ControllerType)controllerType controllerDelegate:(id <DTControllerDelegate>)controllerDelegate buttonDelegate:(id <DTButtonDelegate>)buttonDelegate dominantHand:(DominantHand)dominantHand;
++(id)layerWithControllerType:(DTControllerType)controllerType controllerDelegate:(id <DTControllerDelegate>)controllerDelegate buttonDelegate:(id <DTButtonDelegate>)buttonDelegate dominantHand:(DTDominantHand)dominantHand;
 
 @end
 

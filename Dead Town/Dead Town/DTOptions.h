@@ -9,13 +9,23 @@
 #import <Foundation/Foundation.h>
 #import "DTGuiTypes.h"
 
-@interface DTOptions : NSObject
+@class SimpleAudioEngine;
 
-@property(nonatomic) BOOL playSoundEffects;
-@property(nonatomic) BOOL playBackgroundMusic;
-@property(nonatomic) ControllerType controllerType;
-@property(nonatomic) DominantHand dominantHand;
+@interface DTOptions : NSObject
+{
+    @private
+    SimpleAudioEngine *_audioEngine;
+}
+
+@property(nonatomic) BOOL canPlaySoundEffects;
+@property(nonatomic) BOOL canPlayBackgroundMusic;
+@property(nonatomic) DTControllerType controllerType;
+@property(nonatomic) DTDominantHand dominantHand;
 
 +(id)sharedOptions;
+-(void)playSoundbyteIfOptionsAllow:(NSString *)name;
+-(void)playBackgroundTrackIfOptionsAllow:(NSString *)name onLoop:(BOOL)onLoop;
+-(void)stopBackgroundTrackIfOptionsAllow;
+-(void)stopBackgroundTrack;
 
 @end

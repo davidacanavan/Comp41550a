@@ -13,6 +13,7 @@
 #import "SneakyButtonSkinnedBase.h"
 #import "SneakyJoystickSkinnedBase.h"
 #import "DTButton.h"
+#import "HandyFunctions.h"
 
 @implementation DTControlsLayer
 
@@ -23,12 +24,12 @@
 #pragma mark-
 #pragma mark Initialisation
 
-+(id)layerWithControllerType:(ControllerType)controllerType controllerDelegate:(id <DTControllerDelegate>)controllerDelegate buttonDelegate:(id <DTButtonDelegate>)buttonDelegate dominantHand:(DominantHand)dominantHand
++(id)layerWithControllerType:(DTControllerType)controllerType controllerDelegate:(id <DTControllerDelegate>)controllerDelegate buttonDelegate:(id <DTButtonDelegate>)buttonDelegate dominantHand:(DTDominantHand)dominantHand
 {
-    return [[self alloc] initWithControllerType:(ControllerType)controllerType controllerDelegate:controllerDelegate buttonDelegate:(id <DTButtonDelegate>)buttonDelegate dominantHand:(DominantHand)dominantHand];
+    return [[self alloc] initWithControllerType:(DTControllerType)controllerType controllerDelegate:controllerDelegate buttonDelegate:(id <DTButtonDelegate>)buttonDelegate dominantHand:(DTDominantHand)dominantHand];
 }
 
--(id)initWithControllerType:(ControllerType)controllerType controllerDelegate:(id <DTControllerDelegate>)controllerDelegate buttonDelegate:(id <DTButtonDelegate>)buttonDelegate dominantHand:(DominantHand)dominantHand
+-(id)initWithControllerType:(DTControllerType)controllerType controllerDelegate:(id <DTControllerDelegate>)controllerDelegate buttonDelegate:(id <DTButtonDelegate>)buttonDelegate dominantHand:(DTDominantHand)dominantHand
 {
     if ((self = [super init]))
     {
@@ -40,7 +41,7 @@
         _controllerDelegate = controllerDelegate;
         _buttonDelegate = buttonDelegate;
         
-        if (controllerType == ControllerTypeJoystick)
+        if (controllerType == DTControllerTypeJoystick)
             [self addJoystick];
         else
             [self addTiltControls];
@@ -76,12 +77,12 @@
     [self scheduleUpdate]; // Schedule the tick to run on the game loop
 }
 
--(void)setControllerType:(ControllerType)controllerType
+-(void)setControllerType:(DTControllerType)controllerType
 {
     if (_controllerType == controllerType) // So nothing is changing...
         return;
     
-    if (controllerType == ControllerTypeJoystick) // We're moving to the joystick from the tilt
+    if (controllerType == DTControllerTypeJoystick) // We're moving to the joystick from the tilt
     {
         [self removeTiltControls];
         [self addJoystick];
@@ -133,12 +134,22 @@
     self.isAccelerometerEnabled = NO;
 }
 
--(void)setDominantHand:(DominantHand)dominantHand
+-(void)setDominantHand:(DTDominantHand)dominantHand
 {
     if (dominantHand == _dominantHand) // No change
         return;
     
-    
+    // Ok so we're changing to a different hand
+    if (dominantHand == DTDominantHandLeft)
+    { // Pause button on the top left, fire button on the bottom left
+        [HandyFunctions layoutNodeFromGooeyConstants:_pauseButtonSkin toCorner:DTLayoutCornerTopLeft];
+        [HandyFunctions layoutNodeFromGooeyConstants:_fireButtonSkin toCorner:DTLayoutCornerBottomLeft];
+    }
+    else
+    {
+        [HandyFunctions layoutNodeFromGooeyConstants:_pauseButtonSkin toCorner:DTLayoutCornerTopRight];
+        [HandyFunctions layoutNodeFromGooeyConstants:_fireButtonSkin toCorner:DTLayoutCornerBottomRight];
+    }
     
     _dominantHand = dominantHand;
 }
@@ -146,28 +157,30 @@
 // Create the shoot button and add it to the layer
 -(void)setUpSneakyFireButton
 {
-    int padding = 15, buttonRadius = 24;
-    SneakyButtonSkinnedBase *fireButtonSkin = [[SneakyButtonSkinnedBase alloc] init];
-    fireButtonSkin.defaultSprite = [ColoredCircleSprite circleWithColor: ccc4(255, 255, 0, 255)radius:buttonRadius];
-    fireButtonSkin.activatedSprite = [ColoredCircleSprite circleWithColor: ccc4(255, 255, 0, 255)radius:buttonRadius];
-    fireButtonSkin.pressSprite = [ColoredCircleSprite circleWithColor: ccc4(255, 255, 0, 255)radius:buttonRadius];
-    CGSize fireButtonSize = fireButtonSkin.contentSize;
-    fireButtonSkin.position = ccp(_screen.width - padding - fireButtonSize.width / 2, padding + fireButtonSize.height / 2);
+    int buttonRadius = 24;
+    _fireButtonSkin = [[SneakyButtonSkinnedBase alloc] init];
+    _fireButtonSkin.defaultSprite = [ColoredCircleSprite circleWithColor: ccc4(255, 255, 0, 255)radius:buttonRadius];
+    _fireButtonSkin.activatedSprite = [ColoredCircleSprite circleWithColor: ccc4(255, 255, 0, 255)radius:buttonRadius];
+    _fireButtonSkin.pressSprite = [ColoredCircleSprite circleWithColor: ccc4(255, 255, 0, 255)radius:buttonRadius];
+    
+    [HandyFunctions layoutNodeFromGooeyConstants:_fireButtonSkin toCorner:DTLayoutCornerBottomRight];
+    
     _fireButton = [DTButton buttonWithRect:CGRectMake(0, 0, buttonRadius * 2, buttonRadius * 2) isHoldable:YES delegate:_buttonDelegate tag:@"fire"];
-    fireButtonSkin.button = _fireButton;
-    [self addChild:fireButtonSkin];
+    _fireButtonSkin.button = _fireButton;
+    [self addChild:_fireButtonSkin];
 }
 
 -(void)setUpSneakyPauseButton
 {
-    int padding = 15, buttonRadius = 12;
-    SneakyButtonSkinnedBase *pauseButtonSkin = [[SneakyButtonSkinnedBase alloc] init];
-    pauseButtonSkin.defaultSprite = [ColoredCircleSprite circleWithColor: ccc4(255, 255, 0, 255)radius:buttonRadius];
-    CGSize pauseButtonSize = pauseButtonSkin.contentSize;
-    pauseButtonSkin.position = ccp(_screen.width - padding - pauseButtonSize.width / 2, _screen.height - padding - pauseButtonSize.height / 2);
+    int buttonRadius = 12;
+    _pauseButtonSkin = [[SneakyButtonSkinnedBase alloc] init];
+    _pauseButtonSkin.defaultSprite = [ColoredCircleSprite circleWithColor: ccc4(255, 255, 0, 255)radius:buttonRadius];
+
+    [HandyFunctions layoutNodeFromGooeyConstants:_pauseButtonSkin toCorner:DTLayoutCornerTopRight];
+    
     _pauseButton = [DTButton buttonWithRect:CGRectMake(0, 0, buttonRadius * 2, buttonRadius * 2) isHoldable:NO delegate:_buttonDelegate tag:@"pause"];
-    pauseButtonSkin.button = _pauseButton;
-    [self addChild:pauseButtonSkin];
+    _pauseButtonSkin.button = _pauseButton;
+    [self addChild:_pauseButtonSkin];
 }
 
 #pragma mark-
@@ -209,8 +222,11 @@
 -(BOOL)ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event
 {
     CGPoint touchPoint = [_director convertToGL:[touch locationInView:[_director view]]];
+     // Only let the left half of the screen receive the touch events if it's right hand dominant
+    BOOL receiveTouchEvent = _dominantHand == DTDominantHandRight ? touchPoint.x < _screen.width / 2 : touchPoint.x > _screen.width / 2;
     
-    if (touchPoint.x < _screen.width / 2) // Only let the left half of the screen receive the touch events
+    
+    if (receiveTouchEvent)
     {
         _joystickSkin.position = touchPoint;
         _joystickSkin.visible = YES;
@@ -223,8 +239,10 @@
 -(void)ccTouchEnded:(UITouch *)touch withEvent:(UIEvent *)event
 {
     CGPoint touchPoint = [_director convertToGL:[touch locationInView:[_director view]]];
+    // Same idea as in ccTouchBegan
+    BOOL receiveTouchEvent = _dominantHand == DTDominantHandRight ? touchPoint.x < _screen.width / 2 : touchPoint.x > _screen.width / 2;
     
-    if (touchPoint.x < _screen.width / 2) // Stops the joystick from disappearing when you take a shot
+    if (receiveTouchEvent)
     {
         _joystickSkin.visible = NO;
         [_controllerDelegate controllerMoveEnded]; // Tell the game layer that the joystick has stopped moving

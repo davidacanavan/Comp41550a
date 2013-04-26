@@ -14,5 +14,14 @@
 #define GOOEY_PADDING_TOP 15
 #define GOOEY_PADDING_BOTTOM 15
 
-typedef enum {DominantHandLeft, DominantHandRight} DominantHand;
-typedef enum {ControllerTypeJoystick, ControllerTypeTilt} ControllerType;
+#define GOOEY_LIFE_NODE_WIDTH 160
+#define GOOEY_LIFE_NODE_HEIGHT 20
+
+typedef enum {DTDominantHandLeft, DTDominantHandRight} DTDominantHand;
+typedef enum {DTControllerTypeJoystick, DTControllerTypeTilt} DTControllerType;
+
+typedef enum
+{
+    DTLayoutCornerTopLeft, DTLayoutCornerTopRight,
+    DTLayoutCornerBottomLeft, DTLayoutCornerBottomRight
+} DTLayoutCorner;

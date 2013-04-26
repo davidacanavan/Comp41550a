@@ -47,7 +47,9 @@
     // Joystick/Button related variables
     BOOL _joystickActive;
     BOOL _isHoldFiring;
-    float _spawnCheckInterval, _spawnCheckTime;
+    
+    // Object checking
+    float _objectCheckInterval, _objectCheckTime;
     
     // Some multiplayer variables - this lets us put them on the update thread so we don't get any jerkyness, experimental!
     BOOL _remotePlayerHasNewPosition;
@@ -58,7 +60,8 @@
 @property(nonatomic) DTPlayer *player, *remotePlayer;
 @property(nonatomic, readonly) NSMutableArray *enemies;
 @property(nonatomic, readonly) int tileDimension;
-@property(nonatomic) BOOL shouldCheckForTriggers, shouldCheckForPickups;
+@property(nonatomic) BOOL shouldCheckForObjects;
+@property(nonatomic) int enemyDeathCount;
 
 // Multiplayer session variables
 @property(nonatomic) GKSession *session;
@@ -80,6 +83,7 @@
 -(CGRect)createRectFromTileMapObject:(NSDictionary *)spawn;
 -(CGPoint)createRectCentreFromTileMapObject:(NSDictionary *)spawn;
 -(CGPoint)centreOfRect:(CGRect)rect;
+-(CGPoint)positionOfZombieNumber:(int)number of:(int)total inSpawnRect:(CGRect)rect;
 
 -(void)addEnemy:(DTCharacter *)enemy toLayer:(BOOL)toLayer;
 -(NSMutableArray *)closestNumberOf:(int)number enemiesToPlayer:(DTPlayer *)player;
@@ -96,6 +100,7 @@
 // Some methods you can override when you subclass me
 -(void)onGameLayerReady; // Called when it's ok to add your custom stuff to the GameLayer
 -(void)onPlayerLoaded; // Called when the player is loaded
+-(void)onPlayerLifeChangedFrom:(float)oldLife to:(float)newLife;
 -(BOOL)onPlayerDead; // Return a bool whether we should go to game over or not
 -(BOOL)onRemotePlayerDead; // Same as above
 -(void)onVillainKilled:(DTCharacter *) character; // Called when we kill a villain

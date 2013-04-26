@@ -23,16 +23,16 @@
         [self allocateMenuItemsWithFontName]; // Create the individual menu items themselves
         
         CCMenuItemToggle *musicToggle = [CCMenuItemToggle itemWithTarget:self selector:@selector(toggleForMusicHit:) items:_musicOn, _musicOff, nil];
-        musicToggle.selectedIndex = _options.playBackgroundMusic ? 0 : 1;
+        musicToggle.selectedIndex = _options.canPlayBackgroundMusic ? 0 : 1;
         
         CCMenuItemToggle *soundFxToggle = [CCMenuItemToggle itemWithTarget:self selector:@selector(toggleForSoundFxHit:) items:_soundFxOn, _soundFxOff, nil];
-        soundFxToggle.selectedIndex = _options.playSoundEffects ? 0 : 1;
+        soundFxToggle.selectedIndex = _options.canPlaySoundEffects ? 0 : 1;
         
         CCMenuItemToggle *controlsToggle = [CCMenuItemToggle itemWithTarget:self selector:@selector(toggleForControlsHit:) items:_contolsJoystick, _controlsTilt, nil];
-        controlsToggle.selectedIndex = _options.controllerType == ControllerTypeJoystick ? 0 : 1;
+        controlsToggle.selectedIndex = _options.controllerType == DTControllerTypeJoystick ? 0 : 1;
         
         CCMenuItemToggle *handToggle = [CCMenuItemToggle itemWithTarget:self selector:@selector(toggleForHandHit:) items:_handRight, _handLeft, nil];
-        handToggle.selectedIndex = _options.dominantHand == DominantHandRight ? 0 : 1;
+        handToggle.selectedIndex = _options.dominantHand == DTDominantHandRight ? 0 : 1;
         
         CCMenuItemFont *resumeButton = [HandyFunctions menuItemWithString:@"Back" fontName:GOOEY_FONT_NAME target:self selector:@selector(backButtonHit) fontSize:GOOEY_FONT_SIZE];
         
@@ -63,28 +63,34 @@
 
 -(void)toggleForMusicHit:(CCMenuItemToggle *)toggle
 {
-    _options.playBackgroundMusic = toggle.selectedItem == _musicOn;
+    BOOL isMusicOn = toggle.selectedItem == _musicOn;
+    
+    if (!isMusicOn) // Then turn it off!!!
+        [_options stopBackgroundTrack];
+    
+    _options.canPlayBackgroundMusic = isMusicOn;
+    
 }
 
 -(void)toggleForSoundFxHit:(CCMenuItemToggle *)toggle
 {
-    _options.playSoundEffects = toggle.selectedItem == _soundFxOn;
+    _options.canPlaySoundEffects = toggle.selectedItem == _soundFxOn;
 }
 
 -(void)toggleForControlsHit:(CCMenuItemToggle *)toggle
 {
     if (toggle.selectedItem == _contolsJoystick)
-        _options.controllerType = ControllerTypeJoystick;
+        _options.controllerType = DTControllerTypeJoystick;
     else
-        _options.controllerType = ControllerTypeTilt;
+        _options.controllerType = DTControllerTypeTilt;
 }
 
 -(void)toggleForHandHit:(CCMenuItemToggle *)toggle
 {
     if (toggle.selectedItem == _handRight)
-        _options.controllerType = ControllerTypeJoystick;
+        _options.dominantHand = DTDominantHandRight;
     else
-        _options.controllerType = ControllerTypeTilt;
+        _options.dominantHand = DTDominantHandLeft;
 }
 
 -(void)backButtonHit

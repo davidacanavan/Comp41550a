@@ -27,7 +27,7 @@
         // So this scene has a few layers to deal with - the controls, info and map layer
         DTStatusLayer *statusLayer = [DTStatusLayer statusLayerWithLife:100 minLife:0 maxLife:100];
         DTGameLayer *gameLayer = [DTGameLayer gameLayerWithStatusLayer:statusLayer];
-        DTControlsLayer *controlsLayer = [DTControlsLayer layerWithControllerType:ControllerTypeJoystick controllerDelegate:level buttonDelegate:level dominantHand:DominantHandRight];
+        DTControlsLayer *controlsLayer = [DTControlsLayer layerWithControllerType:DTControllerTypeJoystick controllerDelegate:level buttonDelegate:level dominantHand:DTDominantHandRight];
         gameLayer.controlsLayer = controlsLayer;
         
         [self addChild:gameLayer z:-1]; // Make sure the map is behind the controls

@@ -27,8 +27,6 @@
 {
     @private
     DTOptions *_options;
-    DTPausedLayer *_pausedLayer;
-    DTStraightLineZombie *_zombie;
 }
 
 @property(nonatomic, strong) DTControlsLayer *controlsLayer;

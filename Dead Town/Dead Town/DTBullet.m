@@ -33,7 +33,7 @@
         if (visible)
             _sprite = [CCSprite spriteWithFile:@"pistol_bullet.png"]; // TODO: should probably cache this for speed
         else // This is for the enemies with invisible bullets (put the alpha and radius back when you're done!)
-            _sprite = [ColoredCircleSprite circleWithColor:ccc4(0, 0, 100, 255) radius:INVISIBLE_BULLET_RADIUS];
+            _sprite = [ColoredCircleSprite circleWithColor:ccc4(0, 0, 100, 0) radius:INVISIBLE_BULLET_RADIUS];
     
         _sprite.position = initialPosition;
         _initialPosition = initialPosition;

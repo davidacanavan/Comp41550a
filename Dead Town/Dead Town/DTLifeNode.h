@@ -20,6 +20,6 @@
 
 @property(nonatomic) float percentage;
 
-+(id)lifeNodeWithRect:(CGRect)rect;
++(id)lifeNodeWithSize:(CGSize)size;
 
 @end

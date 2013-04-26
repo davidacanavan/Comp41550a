@@ -12,6 +12,8 @@
 
 #define SESSION_ID_STRING @"dead_town_yo"
 
+@class DTOptions;
+
 @interface DTIntroLayer : CCLayer<GKPeerPickerControllerDelegate, GKSessionDelegate>
 {
     @private
@@ -27,6 +29,9 @@
     NSString *_peerIdentifier;
     int _playerNumber;
     GKPeerConnectionState _currentPeerConnectionState;
+    
+    // Options - as always
+    DTOptions *_options;
 }
 
 @end
