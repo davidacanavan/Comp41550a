@@ -52,7 +52,7 @@
         _spawnObjects = [_map objectGroupNamed:@"Spawns"];
         _triggerObjects = [_map objectGroupNamed:@"Triggers"];
         _pickupObjects = [_map objectGroupNamed:@"Pickups"];
-        _walls.visible = YES; // Make sure no-one can see the transparent tiles!!!
+        _walls.visible = NO; // Make sure no-one can see the transparent tiles!!!
         
         // Get some layout dimensions
         _retinaFactor = CC_CONTENT_SCALE_FACTOR();
