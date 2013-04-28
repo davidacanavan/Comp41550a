@@ -111,24 +111,14 @@
     [_popover presentPopoverFromBarButtonItem:_barButton permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
 }
 
-- (IBAction)zoomInButtonPressed:(UIButton *)sender
+-(void)zoomInBy:(float)changeInFactor
 {
-    [self zoomIn];
+    _graphView.scale = fminf(_graphView.scale + changeInFactor, 4);
 }
 
--(void)zoomIn
+-(void)zoomOutBy:(float)changeInFactor
 {
-    _graphView.scale = fminf(_graphView.scale + .2, 4);
-}
-
-- (IBAction)zoomOutButtonPressed:(UIButton *)sender
-{
-    [self zoomOut];
-}
-
--(void)zoomOut
-{
-    _graphView.scale = fmaxf(_graphView.scale - .2, .2);
+    _graphView.scale = fmaxf(_graphView.scale - changeInFactor, .2);
 }
 
 -(BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -153,17 +143,11 @@
 
 - (IBAction)handlePinch:(UIPinchGestureRecognizer *)sender
 {
-    _currentScaleChangeUntilWeAllowAPinch += sender.scale;
-    
-    if (fabsf(_currentScaleChangeUntilWeAllowAPinch) > _scaleChangeUntilWeAllowAPinch)
-    {
-        if (sender.velocity > 0)
-            [self zoomIn];
-        else
-            [self zoomOut];
-        
-        _currentScaleChangeUntilWeAllowAPinch = 0;
-    }
+    if (sender.velocity > 0)
+        [self zoomInBy:.01]; // This factor seemed to give a nice flow to the pinch
+    else
+        [self zoomOutBy: .01];
+
 }
 
 // Responds to double tap only - woohoo!
@@ -176,7 +160,8 @@
 - (IBAction)handlePan:(UIPanGestureRecognizer *)sender
 {
     CGPoint translation = [sender translationInView:_graphView];
-    [_graphView translateAxesOriginBy:translation];
+    CGPoint scaled = CGPointMake(translation.x / 5, translation.y / 5); // Reduce the sensitivity of the translation a bit so it's not so jerky
+    [_graphView translateAxesOriginBy:scaled];
 }
 
 @end
