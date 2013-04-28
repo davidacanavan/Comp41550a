@@ -178,13 +178,34 @@
     
     [_player turnToFacePosition:newPosition]; // Tell him where to look
     
-    if (![self isWallAtPosition:newPosition])
-    {
-        [_player moveToPosition:newPosition]; // Update the player position
-        [self centerViewportOnPosition:newPosition];
-        [self sendPlayerMoveToPosition:newPosition withVelocity:velocity];
-    }
+    BOOL isWallAtNewPosition = [self isWallAtPosition:newPosition];
     
+    if (isWallAtNewPosition) // Ok so we'll see if he can move in either of the directions seperately
+    {
+        // Try the x move if possible then the y if we can
+        CGPoint xPosition = ccp(oldPosition.x + velocity.x * delta, oldPosition.y);
+        CGPoint yPosition = ccp(oldPosition.x, oldPosition.y + velocity.y * delta);
+        
+        if (![self isWallAtPosition:xPosition]) // So we can move in the x!
+        {
+            velocity.y = 0; // Make sure they can't move in the y at all
+            [self moveThePlayerToPosition:xPosition withVelocity:velocity];
+        }
+        else if (![self isWallAtPosition:yPosition]) // No x, but the y looks good
+        {
+            velocity.x = 0;
+            [self moveThePlayerToPosition:yPosition withVelocity:velocity];
+        }
+    }
+    else
+        [self moveThePlayerToPosition:newPosition withVelocity:velocity];
+}
+
+-(void)moveThePlayerToPosition:(CGPoint)position withVelocity:(CGPoint)velocity
+{
+    [_player moveToPosition:position]; // Update the player position
+    [self centerViewportOnPosition:position];
+    [self sendPlayerMoveToPosition:position withVelocity:velocity];
 }
 
 -(void)controllerMoveStarted
