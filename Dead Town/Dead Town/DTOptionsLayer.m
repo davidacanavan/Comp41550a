@@ -13,7 +13,12 @@
 
 @implementation DTOptionsLayer
 
--(id)init
++(id)layerWithBackgroundSprite:(CCSprite *)backgroundSprite
+{
+    return [[self alloc] initWithBackgroundSprite:backgroundSprite];
+}
+
+-(id)initWithBackgroundSprite:(CCSprite *)backgroundSprite
 {
     if (self = [super init])
     {
@@ -41,6 +46,11 @@
         [menu alignItemsVerticallyWithPadding:5]; // Stack the menu items on top of each other
         [menu setPosition:ccp(screen.width / 2, screen.height / 2)]; // Center them on the screen
         [self addChild:menu];
+        
+        // Add the background image
+        backgroundSprite.position = ccp(screen.width / 2, screen.height / 2);
+        backgroundSprite.color = ccc3(70, 70, 70); // Lets shade it a bit
+        [self addChild:backgroundSprite z:-1];
     }
     
     return self;

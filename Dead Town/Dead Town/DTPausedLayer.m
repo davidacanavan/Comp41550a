@@ -12,7 +12,12 @@
 
 @implementation DTPausedLayer
 
--(id)init
++(id)layerWithBackgroundSprite:(CCSprite *)backgroundSprite
+{
+    return [[self alloc] initWithBackgroundSprite:backgroundSprite];
+}
+
+-(id)initWithBackgroundSprite:(CCSprite *)backgroundSprite
 {
     if ((self = [super init]))
     {
@@ -28,9 +33,21 @@
         [pausedMenu alignItemsVerticallyWithPadding:5]; // Stack the menu items on top of each other
         [pausedMenu setPosition:ccp(screen.width / 2, screen.height / 2)];
         [self addChild:pausedMenu];
+        
+        // Add the background image
+        _backgroundSprite = backgroundSprite;
     }
     
     return self;
+}
+
+-(void)onEnter
+{
+    [super onEnter];
+    CGSize screen = [[CCDirector sharedDirector] winSize];
+    _backgroundSprite.position = ccp(screen.width / 2, screen.height / 2);
+    _backgroundSprite.color = ccc3(70, 70, 70); // Lets shade it a bit
+    [self addChild:_backgroundSprite z:-1];
 }
 
 #pragma mark-
@@ -44,7 +61,8 @@
 -(void)optionsItemPressed
 {
     CCDirector *director = [CCDirector sharedDirector];
-    [director pushScene: [CCTransitionFade transitionWithDuration: 1.0 scene: [DTOptionsScene scene] withColor:ccWHITE]];
+    [_backgroundSprite removeFromParentAndCleanup:NO]; // So we don't have this added twice
+    [director pushScene: [DTOptionsScene sceneWithBackgroundSprite:_backgroundSprite]];
 }
 
 -(void)quitItemPressed

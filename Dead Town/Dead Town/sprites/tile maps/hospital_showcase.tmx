@@ -1,15 +1,15 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" width="128" height="128" tilewidth="64" tileheight="64">
- <tileset firstgid="1" name="Transparents" tilewidth="64" tileheight="64">
-  <image source="tile_markers-hd.png" width="192" height="64"/>
+<?xml version="1.0" encoding="utf-8"?>
+<map height="128" orientation="orthogonal" tileheight="32" tilewidth="32" version="1.0" width="128">
+ <tileset firstgid="1" name="Transparents" tileheight="32" tilewidth="32">
+  <image height="32" source="tile_markers.png" width="96"/>
   <tile id="2">
    <properties>
     <property name="IsWall" value="Yes"/>
    </properties>
   </tile>
  </tileset>
- <tileset firstgid="4" name="HT5" tilewidth="64" tileheight="64">
-  <image source="Hospital_Tile-hd.png" width="384" height="640"/>
+ <tileset firstgid="4" name="HT5" tileheight="32" tilewidth="32">
+  <image height="320" source="Hospital_Tile.png" width="192"/>
   <tile id="12">
    <properties>
     <property name="walkable_end_x" value=".8"/>
@@ -203,178 +203,217 @@
    </properties>
   </tile>
  </tileset>
- <layer name="Floor" width="128" height="128">
-  <data encoding="base64" compression="zlib">
-   eJzt2tlu1DAYBlBfQFtBp2oZ4IKCVLFIwAVwwSKV938vJiqWXNfOntl6jvSrnTKTOPniJRlCAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACiz5t631Jfdtc0tuDtpl7/r9Pk91jvdtc0tiDmf1Mo+R+/tP/ndR7kf+za8tf/j1+a/2WQ/7GqrfN/hvv5v0penwX5H7qYe5pzWumaP8//Isj/UHXlXqo8f+P/fLqes0yp0jOafF33ZFNXyevm96ehnP9qUy+C/OfUtc7uqpNNvaxUKaN8f6W1Xf63fVj/LdlPdvk8s0/+q45/v6lU3/zz7ed5Pwt340KsmH8pk6XO49R+0lW7Gs/S4/q7qQ+Vug3zHFMp/3Xy+iyU+3tev7LXzedeVPY5h7Tdcc6Klc9Xh5p/WxvGXP9jxv+Lwt/a6jb53KrjGKaoHf91ob1t/ahW3xdqd5cx+V9VKu8HU+b/89DvnObb20b+sc3NPWqe/8dNfVqoDUuYq/8368A8y7b845zftf5btWwr3V68PpbqR7XnkY8x/3S+bvrpdShnWcs/vZfP13ZNPQ8Pr4mu/Nva3nft3rZ2zPOP41Np/D+ke9Oh+d+E+9/DxnMwNv8pa4m4va7vA5v35PemQ/YRt5H3/3Uo59+sTffl/q7LnOu/XeV/OqDt+bqiqbOBx5+PWaXxKq19nhPG5B+fzef3Qfl5KG3vW3h4X9nct3WtmWvzetOukwFtL12vFwOPf0zt65wwpf/X7tOaNdu6Y3v5dseenz6fz9ser9/SuP013I3X8Wfp+8ihdUz9v9Tff2/qT3h43KV5sPY9b/PeMXNkbFfbvmrZXRba/iP7OVftc/9vxs85xr91j/e0VZ/rpW+2fWrIc6a+VZvHdvV8p8sc67/S/89dotr2M+bZdeneM69j6ec1ffPP1237Vm39a+nvbh5D/oes9Oxi6lwl/8MRj/FNpR5z/um4vq9rlKm2OXcd2jn8B746fQ0=
+ <layer height="128" name="Floor" width="128">
+  <data compression="zlib" encoding="base64">
+   eJzt2tlu1DAYBlBfQFtBp2oZ4IKCVLFIwAVwwSKV938vEhVLrmtnn7XnSL/aKTMZJ1+8JCEEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACD63NT7jvqyu6axBW+bev2/TpPfY73bXdPYgpj/TaHkf/zS/p/XeZD/sevKX/8/fmn+l0H+x6q2zv8Z7uf/Knl9FuR/6GLuac5ppWv+PP+LIP9D1Zd7qfL8jf/L6bvPMqdK92jydd2Tpq6S1+3vT0M5/1VTL4L8l9S3zu6rk6ZeVqqUUf59pbVd/rd9WP9tsp/s8n7mkPxXPf9+U6mh+efbz/N+Fu7GhVgx/1ImmzqOc/tJX+1qPEv3629THyp1G5bZp1L+6+T1WSj397x+Za/bz72ofOcS0nbHOStWPl8dav5dbZhy/k8Z/y8Kf+uq2+Rzq559mKO2/9eF9nb1o1p931C7+0zJ/6pSeT+YM/+fh2HHNN/eNvKPbW6vUfP8Pzb1aUNt2ISl+n+7Dsyz7Mo/zvl9679Vx7bS7cXzY1P9qHY/8jHmn87XbT+9DuUsa/mn1/L52q6t5+HhOdGXf1fbh67du9aOef5xfCqN/4d0bTo2/5tw/zlsPAZT85+zlojb63se2L4nvzYd8x1xG3n/X4dy/u3adF+u7/osuf7bVf6nI9qeryvaOhu5//mYVRqv0trnOWFK/vHefH4dlB+H0va+hYfXle11W9+auTavt+06GdH20vl6MXL/p9S+zglz+n/tOq1ds617tpdvd+rxGfL5vO3x/C2N21/D3Xgdf5aeR46tY+r/pf7+u6k/4eF+l+bB2nPe9r1T5sjYrq7vqmV3WWj7j+znUrXP/b8dP5cY/9YD3rP0MZozLo+5zzS0avPYru7v9Fli/Vf6/7nbzn/KvevStWdefbkeSs41Q/PP122bqCnHLrar67NLPLvZ1/F7rqH5H7LSvYuxc9WxH5vHsI9vKvWY80/H9UObu4ZaYu461mPzDxppdYY=
   </data>
  </layer>
- <layer name="Walls" width="128" height="128">
-  <data encoding="base64" compression="zlib">
-   eJzt2NuOgyAUBdAm/f9/nqdJGoNy5EAFulZiZrQqyubWvl4AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAwL93YGNftXzlv7f3x99Sv5f/3vT/3yb/3/Y++f/qGOuJrO9r+6znzvc4+e+j5ft76Xz59xH5nSWzlcorlX+2f3WMvB71mM2/xzmjje4nT7XnVfIv/f7zzXocnc8M+fduny3531kT3jmeVaunnvf/puN7Rc5ruffZsdb875TZw1V7q41Xq4z/0fyj79Bzbs+U2cNZPR2f4cksW/Ts/6Pzr5X5rflf/uXPotlGxpJo+Wdll8rMjMHR/GvPMpu7+ZfqKpN/VO/875Rx/CyS/yzze80T4/8T+UfunVn/1O6/Y/6t67/SNa1jcyb/47XZ9n9l1/yj966d01o/PfL/3G9ZG0SecZf8r/pu6Zpov87OC61jx/HzbHusPedses7/WdH20rNf9jbiOUeaKf+MbP/vldns9XR0J//Zt8g7jrZr/isrrRFGl7WKX81/VFtYrQ5XWKNkzTIPzegPS1YGcw==
+ <layer height="128" name="Walls" width="128">
+  <data compression="zlib" encoding="base64">
+   eJzt2NuOgyAUBdAm/f9/nqdJGoNy5IAKrpWYqVccNrf28wEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/n0DG+uq5Sv/tX1//pb6vfzXpv+/m/zf7bvz+egY84ms72v7zOfM9zj5r6Pl+3vpevn3EfmdJbOVyiuVv7d/dIy8HvWYzb/HNaON7id3tedZ8i/9/nNlPY7O5wn5926fLflnM7wi/xFt7in5R65refbesRnz3x6vjVezjP/R/KP/Q8+5vXV+6WWvnrbvcWeWLXr2/9H518q8av6Xf/lcNNvIWBItf6/sUpmZMTiaf+1dnuZs/qW6yuQf1Tv/M2Vsz0Xyf8r8XnPH+H9H/pFnZ9Y/teevmH/r+q90T+vYnMl/e2+2/R9ZNf/os2vXtNZPj/x/91vWBpF3XCX/o75buifar7PzQuvYsT2fbY+193yanvN/Vs91weh7j5751vVf1p39v3ZfdCx7as57zuR/xdby/rV7e2QyW65R0fxnVhojWp+xmrfmf7YtrFw3s85dUXfNTTP4AyRMBis=
   </data>
  </layer>
- <objectgroup name="Spawns" width="128" height="128">
-  <object name="Player Spawn 0" x="77" y="8052" width="100" height="52"/>
-  <object name="ES0" x="1068" y="7186" width="262" height="88">
-   <properties>
-    <property name="DTPathFindZombie" value="0"/>
-    <property name="DTStraightLineZombie" value="6"/>
-   </properties>
-  </object>
-  <object name="ES4" x="2865" y="7876" width="175" height="52">
-   <properties>
-    <property name="DTPathFindZombie" value="0"/>
-    <property name="DTStraightLineZombie" value="8"/>
-   </properties>
-  </object>
-  <object name="ES3" x="1315" y="7816" width="60" height="107">
-   <properties>
-    <property name="DTPathFindZombie" value="2"/>
-    <property name="DTStraightLineZombie" value="5"/>
-   </properties>
-  </object>
-  <object name="ES1" x="1158" y="7419" width="49" height="138">
-   <properties>
-    <property name="DTPathFindZombie" value="3"/>
-    <property name="DTStraightLineZombie" value="0"/>
-   </properties>
-  </object>
-  <object name="ES2" x="1304" y="7227" width="152" height="88">
-   <properties>
-    <property name="DTPathFindZombie" value="1"/>
-    <property name="DTStraightLineZombie" value="3"/>
-   </properties>
-  </object>
-  <object name="ES8" x="2499" y="6931" width="68" height="296">
+ <objectgroup height="128" name="Spawns" width="128">
+  <object height="26" name="Player Spawn 0" width="50" x="38" y="4026"/>
+  <object height="44" name="ES0" width="131" x="534" y="3593">
    <properties>
     <property name="DTPathFindZombie" value="4"/>
     <property name="DTStraightLineZombie" value="0"/>
    </properties>
   </object>
-  <object name="ES9" x="2639" y="7205" width="268" height="68">
+  <object height="53" name="ES3" width="30" x="620" y="3907">
    <properties>
-    <property name="DTPathFindZombie" value="2"/>
-    <property name="DTStraightLineZombie" value="1"/>
+    <property name="DTPathFindZombie" value="5"/>
+    <property name="DTStraightLineZombie" value="0"/>
    </properties>
   </object>
-  <object name="ES6" x="2151" y="7357" width="180" height="47">
+  <object height="69" name="ES1" width="24" x="579" y="3709">
    <properties>
-    <property name="DTPathFindZombie" value="0"/>
-    <property name="DTStraightLineZombie" value="10"/>
+    <property name="DTPathFindZombie" value="3"/>
+    <property name="DTStraightLineZombie" value="0"/>
    </properties>
   </object>
-  <object name="ES5" x="1949" y="7247" width="79" height="319">
+  <object height="44" name="ES2" width="76" x="652" y="3613">
+   <properties>
+    <property name="DTPathFindZombie" value="4"/>
+    <property name="DTStraightLineZombie" value="0"/>
+   </properties>
+  </object>
+  <object height="148" name="ES8" width="34" x="1249" y="3465">
+   <properties>
+    <property name="DTPathFindZombie" value="4"/>
+    <property name="DTStraightLineZombie" value="0"/>
+   </properties>
+  </object>
+  <object height="34" name="ES9" width="134" x="1221" y="3602">
+   <properties>
+    <property name="DTPathFindZombie" value="3"/>
+    <property name="DTStraightLineZombie" value="0"/>
+   </properties>
+  </object>
+  <object height="23" name="ES6" width="90" x="1075" y="3678">
+   <properties>
+    <property name="DTPathFindZombie" value="4"/>
+    <property name="DTStraightLineZombie" value="0"/>
+   </properties>
+  </object>
+  <object height="159" name="ES5" width="39" x="974" y="3623">
    <properties>
     <property name="DTPathFindZombie" value="6"/>
     <property name="DTStraightLineZombie" value="0"/>
    </properties>
   </object>
-  <object name="ES7" x="2413" y="7517" width="248" height="57">
+  <object height="28" name="ES7" width="124" x="1206" y="3758">
    <properties>
-    <property name="DTPathFindZombie" value="1"/>
-    <property name="DTStraightLineZombie" value="2"/>
+    <property name="DTPathFindZombie" value="3"/>
+    <property name="DTStraightLineZombie" value="0"/>
    </properties>
   </object>
-  <object name="ES11" x="3740" y="7772" width="80" height="211">
+  <object height="105" name="ES11" width="40" x="1870" y="3886">
    <properties>
-    <property name="DTPathFindZombie" value="12"/>
-    <property name="DTStraightLineZombie" value="20"/>
+    <property name="DTPathFindZombie" value="6"/>
+    <property name="DTStraightLineZombie" value=""/>
    </properties>
   </object>
-  <object name="ES12" x="5210" y="7732" width="101" height="240">
+  <object height="30" name="ES13" width="73" x="2528" y="3823">
    <properties>
-    <property name="DTPathFindZombie" value="10"/>
-    <property name="DTStraightLineZombie" value="25"/>
+    <property name="DTPathFindZombie" value="4"/>
+    <property name="DTStraightLineZombie" value=""/>
+   </properties>
+  </object>
+  <object height="120" name="ES12" width="50" x="2612" y="3807">
+   <properties>
+    <property name="DTPathFindZombie" value="7"/>
+    <property name="DTStraightLineZombie" value=""/>
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="Triggers" width="128" height="128">
-  <object name="T0" x="644" y="7014" width="54" height="183">
+ <objectgroup height="128" name="Triggers" width="128">
+  <object height="91" name="T0" width="27" x="322" y="3507">
    <properties>
     <property name="ES" value="0"/>
    </properties>
   </object>
-  <object name="T1" x="678" y="7235" width="212" height="72">
+  <object height="36" name="T1" width="106" x="339" y="3617">
    <properties>
     <property name="ES" value="1"/>
    </properties>
   </object>
-  <object name="T2" x="673" y="7753" width="105" height="45">
+  <object height="22" name="T2" width="52" x="336" y="3876">
    <properties>
     <property name="ES" value="1"/>
    </properties>
   </object>
-  <object name="T3" x="1257" y="7557" width="228" height="49">
+  <object height="24" name="T3" width="114" x="628" y="3778">
    <properties>
     <property name="ES" value="2"/>
    </properties>
   </object>
-  <object name="T4" x="1603" y="7795" width="51" height="155">
+  <object height="77" name="T4" width="25" x="801" y="3897">
    <properties>
     <property name="ES" value="3"/>
    </properties>
   </object>
-  <object name="T5" x="2376" y="7857" width="44" height="89">
-   <properties>
-    <property name="ES" value="4"/>
-   </properties>
-  </object>
-  <object name="T8" x="2953" y="7215" width="45" height="103">
+  <object height="51" name="T8" width="22" x="1476" y="3607">
    <properties>
     <property name="ES" value="9"/>
    </properties>
   </object>
-  <object name="T6" x="2160" y="6985" width="165" height="44">
+  <object height="22" name="T6" width="82" x="1080" y="3492">
    <properties>
     <property name="ES" value="5 6 7"/>
    </properties>
   </object>
-  <object name="T7" x="2479" y="6664" width="488" height="67">
+  <object height="33" name="T7" width="244" x="1239" y="3332">
    <properties>
     <property name="ES" value="8"/>
    </properties>
   </object>
-  <object name="T11" x="4367" y="7799" width="130" height="74">
+  <object height="167" name="T11" width="38" x="2183" y="3899">
    <properties>
     <property name="ES" value="11 12"/>
    </properties>
   </object>
-  <object name="End Game" x="6179" y="7094" width="73" height="152"/>
+  <object height="76" name="End Game" width="36" x="2724" y="3547">
+   <properties>
+    <property name="Text" value="My name is David Canavan and I hope you enjoyed my interactive CV. Please contact me at d.i.dave.canavan@gmail.com or by phone on (00353) 85 712 2311."/>
+   </properties>
+  </object>
+  <object height="32" name="Text Box 0" width="91" x="17" y="3729">
+   <properties>
+    <property name="Text" value="Oh no! It looks like I am stuck in this hospital full of zombies that want to eat me! Maybe David Canavan can help me escape?"/>
+   </properties>
+  </object>
+  <object height="20" name="Text Box 1" width="73" x="1036" y="3850">
+   <properties>
+    <property name="Text" value="I hear David Canavan is a masters student at University College Dublin in Ireland. He did an undergraduate in Mathematics and Actuarial Science. He has been an Actuary for the last 2 years before quitting to follow his passion in computer science."/>
+   </properties>
+  </object>
+  <object height="20" name="Text Box 2" width="73" x="1550" y="3697">
+   <properties>
+    <property name="Text" value="He has taught himself Java, C/C++, Objective-C, Python and various web technologies to name a few. He loves making mobile apps for both Android and iOS systems. "/>
+   </properties>
+  </object>
+  <object height="93" name="Text Box x" width="38" x="167" y="3510">
+   <properties>
+    <property name="Text" value="Hold the 'fire' button to stand still while shooting for maximum killing! And be careful... The zombies here have AI, something Dave likes to study."/>
+   </properties>
+  </object>
+  <object height="24" name="T12" width="389" x="2374" y="3762">
+   <properties>
+    <property name="ES" value="13"/>
+   </properties>
+  </object>
+  <object height="104" name="Text Box k" width="34" x="1733" y="3872">
+   <properties>
+    <property name="Text" value="On android he has made an interpreter that parses a self-made language with syntax highlighting. "/>
+   </properties>
+  </object>
+  <object height="328" name="Text Box j" width="34" x="2014" y="3738">
+   <properties>
+    <property name="Text" value="On iOS he has made a calculator but decided to go full swing into building a video game (this game!) using Cocos2D for fun! Hopefully it will be released on the app-store by the end of the Summer. Keep playing for more information..."/>
+   </properties>
+  </object>
+  <object height="31" name="Text Box p" width="475" x="906" y="3678">
+   <properties>
+    <property name="Text" value="He loves computer graphics and video games. He also loves music and is recording an EP as lead guitarist with his band. They made the music for this game!"/>
+   </properties>
+  </object>
  </objectgroup>
- <objectgroup name="Pickups" width="128" height="128">
-  <object name="Health-20" x="955" y="7393" width="70" height="54">
+ <objectgroup height="128" name="Pickups" width="128">
+  <object height="27" name="Health-20" width="35" x="477" y="3696">
    <properties>
     <property name="Class" value="DTHealthPickup"/>
     <property name="Health Change" value="20"/>
    </properties>
   </object>
-  <object name="Shotgun 0" x="1505" y="7850" width="79" height="36">
+  <object height="18" name="Shotgun 0" width="39" x="752" y="3925">
    <properties>
     <property name="Class" value="DTShotgun"/>
    </properties>
   </object>
-  <object name="Machine Gun 0" x="2181" y="7153" width="102" height="45">
+  <object height="22" name="Machine Gun 0" width="51" x="1090" y="3576">
    <properties>
     <property name="Class" value="DTMachineGun"/>
    </properties>
   </object>
-  <object name="Lazer Canon 0" x="4237" y="7808" width="102" height="45">
+  <object height="22" name="Lazer Canon 0" width="51" x="2118" y="3904">
    <properties>
     <property name="Class" value="DTLazerCanon"/>
    </properties>
   </object>
-  <object name="Handgun 0" x="118" y="7963" width="102" height="45">
+  <object height="22" name="Handgun 0" width="51" x="59" y="3981">
    <properties>
     <property name="Class" value="DTHandGun"/>
    </properties>
   </object>
-  <object name="Health-100" x="2288" y="7337" width="73" height="58">
+  <object height="29" name="Health-100" width="36" x="1144" y="3668">
    <properties>
     <property name="Class" value="DTHealthPickup"/>
     <property name="Health Change" value="100"/>
    </properties>
   </object>
-  <object name="Health-20" x="1760" y="7844" width="70" height="54">
+  <object height="27" name="Health-20" width="35" x="880" y="3922">
    <properties>
     <property name="Class" value="DTHealthPickup"/>
     <property name="Health Change" value="20"/>

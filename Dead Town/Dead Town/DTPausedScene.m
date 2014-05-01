@@ -8,19 +8,21 @@
 
 #import "DTPausedScene.h"
 #import "DTPausedLayer.h"
+#import "CCRenderTexture.h"
+#import "CCSprite.h"
 
 @implementation DTPausedScene
 
-+(id)scene
++(id)sceneWithBackgroundSprite:(CCSprite *)backgroundSprite
 {
-    return [[self alloc] init];
+    return [[self alloc] initWithBackgroundSprite:backgroundSprite];
 }
 
--(id)init
+-(id)initWithBackgroundSprite:(CCSprite *)backgroundSprite
 {
     if (self = [super init])
     {
-        DTPausedLayer *layer = [DTPausedLayer node];
+        DTPausedLayer *layer = [DTPausedLayer layerWithBackgroundSprite:backgroundSprite];
         [self addChild:layer];
     }
     

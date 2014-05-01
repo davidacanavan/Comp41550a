@@ -8,8 +8,11 @@
 
 #import "CCScene.h"
 
+@class CCRenderTexture;
+@class CCSprite;
+
 @interface DTPausedScene : CCScene
 
-+(id)scene;
++(id)sceneWithBackgroundSprite:(CCSprite *)backgroundSprite;
 
 @end

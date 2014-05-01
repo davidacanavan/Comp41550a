@@ -19,5 +19,6 @@
 +(float)uniformFrom:(float)min to:(float)max;
 +(void)layoutNode:(CCNode *)node toCorner:(DTLayoutCorner)corner leftPadding:(float)leftPadding rightPadding:(float)rightPadding topPadding:(float)topPadding bottomPadding:(float)bottomPadding;
 +(void)layoutNodeFromGooeyConstants:(CCNode *)node toCorner:(DTLayoutCorner)corner;
++(void)showTextBoxWithText:(NSString *)text fromLayer:(CCLayer *)layer;
 
 @end

@@ -11,16 +11,16 @@
 
 @implementation DTOptionsScene
 
-+(id)scene
++(id)sceneWithBackgroundSprite:(CCSprite *)backgroundSprite;
 {
-    return [[self alloc] init];
+    return [[self alloc] initWithBackgroundSprite:backgroundSprite];
 }
 
--(id)init
+-(id)initWithBackgroundSprite:(CCSprite *)backgroundSprite;
 {
     if (self = [super init])
     {
-        DTOptionsLayer *layer = [DTOptionsLayer node];
+        DTOptionsLayer *layer = [DTOptionsLayer layerWithBackgroundSprite:backgroundSprite];
         [self addChild: layer];
     }
     

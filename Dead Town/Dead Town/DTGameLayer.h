@@ -15,6 +15,7 @@
 #import "DTOptions.h"
 #import "DTControllerDelegate.h"
 #import "DTButtonDelegate.h"
+#import "DTLayer.h"
 
 @class DTPlayer;
 @class DTBullet;
@@ -23,7 +24,7 @@
 @class DTStraightLineZombie;
 @class DTStatusLayer;
 
-@interface DTGameLayer : CCLayer
+@interface DTGameLayer : DTLayer // So we can take screenshots!
 {
     @private
     DTOptions *_options;

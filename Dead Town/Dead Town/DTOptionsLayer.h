@@ -20,4 +20,6 @@
     DTOptions *_options;
 }
 
++(id)layerWithBackgroundSprite:(CCSprite *)backgroundSprite;
+
 @end

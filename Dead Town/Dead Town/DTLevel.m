@@ -118,6 +118,26 @@
     return [dict valueForKey:@"IsWall"] != nil;
 }
 
+-(BOOL)isPositionWalkable:(CGPoint)position
+{
+    return ![self isWallAtPosition:position];
+    NSDictionary *dict = [_map propertiesForGID:[_floor tileGIDAt:[self tileCoordinateForPosition:position]]];
+    
+    if (dict == nil)
+        return ![self isWallAtPosition:position];
+    
+    float xfloor = ((int) (position.x / _tileDimension)) * _tileDimension,
+        yfloor = ((int) (position.y / _tileDimension)) * _tileDimension;
+    float walkableStartX = [[dict objectForKey:@"walkable_start_x"] floatValue];
+    float walkableStartY = [[dict objectForKey:@"walkable_start_y"] floatValue];
+    float walkableEndX = [[dict objectForKey:@"walkable_end_x"] floatValue];
+    float walkableEndY = [[dict objectForKey:@"walkable_end_y"] floatValue];
+    CGRect nonWalkableRect = CGRectMake(xfloor + walkableStartX * _tileDimension, yfloor + walkableStartY * _tileDimension,
+                                        (walkableEndX - walkableStartX) * _tileDimension,
+                                        (walkableEndY - walkableStartY) * _tileDimension);
+    return !CGRectContainsPoint(nonWalkableRect, position); 
+}
+
 -(BOOL)isTileOutOfBounds:(CGPoint)tileCoordinate
 {
     return tileCoordinate.x < 0 || tileCoordinate.y < 0
@@ -178,7 +198,7 @@
     
     [_player turnToFacePosition:newPosition]; // Tell him where to look
     
-    BOOL isWallAtNewPosition = [self isWallAtPosition:newPosition];
+    BOOL isWallAtNewPosition = ![self isPositionWalkable:newPosition];
     
     if (isWallAtNewPosition) // Ok so we'll see if he can move in either of the directions seperately
     {
@@ -186,12 +206,12 @@
         CGPoint xPosition = ccp(oldPosition.x + velocity.x * delta, oldPosition.y);
         CGPoint yPosition = ccp(oldPosition.x, oldPosition.y + velocity.y * delta);
         
-        if (![self isWallAtPosition:xPosition]) // So we can move in the x!
+        if ([self isPositionWalkable:xPosition]) // So we can move in the x!
         {
             velocity.y = 0; // Make sure they can't move in the y at all
             [self moveThePlayerToPosition:xPosition withVelocity:velocity];
         }
-        else if (![self isWallAtPosition:yPosition]) // No x, but the y looks good
+        else if ([self isPositionWalkable:yPosition]) // No x, but the y looks good
         {
             velocity.x = 0;
             [self moveThePlayerToPosition:yPosition withVelocity:velocity];
@@ -233,7 +253,7 @@
         [_player fire];
     }
     else
-        [[CCDirector sharedDirector] pushScene:[DTPausedScene scene]];
+        [[CCDirector sharedDirector] pushScene:[DTPausedScene sceneWithBackgroundSprite:[_gameLayer screenShotAsSprite]]];
 }
 
 -(void)buttonHoldStarted:(DTButton *)button

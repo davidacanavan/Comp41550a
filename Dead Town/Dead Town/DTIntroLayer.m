@@ -10,8 +10,8 @@
 #import "DTGameScene.h"
 #import "HandyFunctions.h"
 #import "DTLevelSelectLevel.h"
-#import "DTOptionsScene.h"
 #import "DTOptions.h"
+#import "DTShowcaseLevel.h"
 
 @implementation DTIntroLayer
 
@@ -29,13 +29,26 @@
         _titleSprite.position = ccp(screen.width / 2, screen.height + _titleSprite.boundingBox.size.height / 2);
         [self addChild: _titleSprite z:1];
         
-        CCMenuItemImage *onePlayerMenuItem = [HandyFunctions menuItemWithImageName:@"intro_one_player.png" target:self selector:@selector(onePlayerModeSelected)];
-        CCMenuItemImage *twoPlayerMenuItem = [HandyFunctions menuItemWithImageName:@"intro_two_player.png" target:self selector:@selector(twoPlayerModeSelected)];
+        //CCMenuItemImage *onePlayerMenuItem = [HandyFunctions menuItemWithImageName:@"intro_one_player.png" target:self selector:@selector(onePlayerModeSelected)];
+        //CCMenuItemImage *twoPlayerMenuItem = [HandyFunctions menuItemWithImageName:@"intro_two_player.png" target:self selector:@selector(twoPlayerModeSelected)];
         
-        _menu = [CCMenu menuWithItems:onePlayerMenuItem, twoPlayerMenuItem, nil];
+        //_menu = [CCMenu menuWithItems:onePlayerMenuItem, twoPlayerMenuItem, nil];
+        
+        CCMenuItemImage *playMenuItem = [HandyFunctions menuItemWithImageName:@"dt_intro_play.png" target:self selector:@selector(playSelected)];
+        CCMenuItemImage *contactMenuItem = [HandyFunctions menuItemWithImageName:@"dt_intro_contact.png" target:self selector:@selector(contactSelected)];
+        _menu = [CCMenu menuWithItems:playMenuItem, contactMenuItem, nil];
+        
         [_menu alignItemsHorizontallyWithPadding:40];
         _menu.position = ccp(screen.width / 2, -_menu.boundingBox.size.height / 2);
         [self addChild:_menu z:2];
+        
+        _nameLabel = [CCLabelTTF labelWithString:@"David Canavan Edition" fontName:@"Marker Felt" fontSize:35];
+        _nameLabel.color = ccc3(255, 255, 255);
+        _nameLabel.opacity = 0;
+        [self addChild:_nameLabel z:1];
+        ///int padding = 5;
+        _nameLabel.rotation = -5;
+        _nameLabel.position = ccp(screen.width / 1.52, screen.height / 1.75);
         
         _options = [DTOptions sharedOptions];
     }
@@ -57,11 +70,17 @@
     [_options playBackgroundTrackIfOptionsAllow:@"backing_track.mp3" onLoop:YES];
 }
 
+-(void)animateStampIn
+{
+    [_nameLabel runAction:[CCFadeIn actionWithDuration:1.5]];
+}
+
 -(void)animateMenuIn
 {
     CGSize screen = [CCDirector sharedDirector].winSize;
     [_menu runAction:[CCSequence actions:
                       [CCMoveTo actionWithDuration:0.2 position:ccp(screen.width / 2, screen.height * .35)],
+                      [CCCallFunc actionWithTarget:self selector:@selector(animateStampIn)],
                       [CCCallFunc actionWithTarget:self selector:@selector(animateTitle)],
                       nil]];
 }
@@ -102,6 +121,18 @@
 
 #pragma mark-
 #pragma mark Button Selectors
+
+-(void)playSelected
+{
+    CCDirector *director = [CCDirector sharedDirector];
+    DTGameScene *scene = [DTGameScene sceneWithLevel:[DTShowcaseLevel level]];
+    [director replaceScene: [CCTransitionFade transitionWithDuration: 1.0 scene:scene withColor:ccWHITE]];
+}
+
+-(void)contactSelected
+{
+    [HandyFunctions showTextBoxWithText:@"My name is David Canavan and I hope you enjoyed my interactive CV. Please contact me at d.i.dave.canavan@gmail.com or by phone on (00353) 85 712 2311." fromLayer:self];
+}
 
 // The one player mode has been selected - now we just have to replace the scene with the level select scene
 -(void)onePlayerModeSelected
@@ -189,7 +220,7 @@
     _playerNumber = 2;
 }
 
--(void) session:(GKSession *)session connectionWithPeerFailed:(NSString *)peerID withError:(NSError *)error
+-(void)session:(GKSession *)session connectionWithPeerFailed:(NSString *)peerID withError:(NSError *)error
 {
     // Connection Failed
     [_peerPicker dismiss];
@@ -197,7 +228,7 @@
     [self invalidateLocalSession];
 }
 
--(void) session:(GKSession *)session didFailWithError:(NSError *)error
+-(void)session:(GKSession *)session didFailWithError:(NSError *)error
 {
     // Connection Failed
     [_peerPicker dismiss];

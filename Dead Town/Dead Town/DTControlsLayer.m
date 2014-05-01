@@ -49,6 +49,12 @@
         [self setUpSneakyFireButton];
         [self setUpSneakyPauseButton];
         
+        _label = [CCLabelBMFont labelWithString:@"Joystick will appear\non left-hand side\nwhen pressed!" fntFile:@"text_font.fnt"];
+        [self addChild:_label];
+        _label.position = ccp(15 + _screen.width / 4, _screen.height / 2);
+        CCBlink *blink = [CCBlink actionWithDuration:10 blinks:10];
+        [_label runAction:blink];
+        
         // The layer essentially begins in a paused state
         [self unpause];
     }
@@ -170,13 +176,14 @@
 
 -(void)setUpSneakyPauseButton
 {
-    int buttonRadius = 12;
+    //int buttonRadius = 12;
     _pauseButtonSkin = [[SneakyButtonSkinnedBase alloc] init];
-    _pauseButtonSkin.defaultSprite = [ColoredCircleSprite circleWithColor: ccc4(255, 255, 0, 255)radius:buttonRadius];
+    CCSprite *sprite = [CCSprite spriteWithFile:@"pause_button.png"];
+    _pauseButtonSkin.defaultSprite = sprite;//[ColoredCircleSprite circleWithColor: ccc4(255, 255, 0, 255)radius:buttonRadius];
 
     [HandyFunctions layoutNodeFromGooeyConstants:_pauseButtonSkin toCorner:DTLayoutCornerTopRight];
     
-    _pauseButton = [DTButton buttonWithRect:CGRectMake(0, 0, buttonRadius * 2, buttonRadius * 2) isHoldable:NO delegate:_buttonDelegate tag:@"pause"];
+    _pauseButton = [DTButton buttonWithRect:CGRectMake(0, 0, sprite.contentSize.width, sprite.contentSize.height) isHoldable:NO delegate:_buttonDelegate tag:@"pause"];
     _pauseButtonSkin.button = _pauseButton;
     [self addChild:_pauseButtonSkin];
 }
@@ -231,6 +238,12 @@
         [_controllerDelegate controllerMoveStarted];
     }
     
+    if (_label)
+    {
+        [_label removeFromParentAndCleanup:NO];
+        _label = nil;
+    }
+    
     return YES;
 }
 
@@ -251,6 +264,13 @@
 -(void)ccTouchMoved:(UITouch *)touch withEvent:(UIEvent *)event {}
 
 #pragma mark-
+
+// This is a fix for when we pop a new scene and the player keeps on moving
+-(void)onExit
+{
+    [super onExit];
+    [_joystick ccTouchEnded:nil withEvent:nil];
+}
 
 @end
 

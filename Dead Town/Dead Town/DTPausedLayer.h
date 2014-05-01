@@ -14,5 +14,11 @@
 @class DTControlsLayer;
 
 @interface DTPausedLayer : CCLayer
+{
+    @private
+    CCSprite *_backgroundSprite;
+}
+
++(id)layerWithBackgroundSprite:(CCSprite *)backgroundSprite;
 
 @end

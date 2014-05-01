@@ -8,6 +8,8 @@
 
 #import "HandyFunctions.h"
 #import "UIKit/UIKit.h"
+#import "DTLayer.h"
+#import "DTSpeechScene.h"
 
 #define ARC4RANDOM_MAX 0x100000000
 
@@ -86,6 +88,16 @@
 +(void)layoutNodeFromGooeyConstants:(CCNode *)node toCorner:(DTLayoutCorner)corner
 {
     return [HandyFunctions layoutNode:node toCorner:corner leftPadding:GOOEY_PADDING_LEFT rightPadding:GOOEY_PADDING_RIGHT topPadding:GOOEY_PADDING_TOP bottomPadding:GOOEY_PADDING_BOTTOM];
+}
+
++(void)showTextBoxWithText:(NSString *)text fromLayer:(CCLayer *)layer
+{
+    CCDirector *director = [CCDirector sharedDirector];
+    
+    if ([layer isKindOfClass:[DTLayer class]])
+        [director pushScene:[DTSpeechScene sceneWithText:text backgroundSprite:[(DTLayer *)layer screenShotAsSprite] darkeningFactor:0.8f]];
+    else
+        [director pushScene:[DTSpeechScene sceneWithText:text]];
 }
 
 @end

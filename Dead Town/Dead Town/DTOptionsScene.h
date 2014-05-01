@@ -10,6 +10,6 @@
 
 @interface DTOptionsScene : CCScene
 
-+(id)scene;
++(id)sceneWithBackgroundSprite:(CCSprite *)backgroundSprite;
 
 @end

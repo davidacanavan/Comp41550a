@@ -9,17 +9,19 @@
 #import <Foundation/Foundation.h>
 #import <GameKit/GameKit.h>
 #import "cocos2d.h"
+#import "DTLayer.h"
 
 #define SESSION_ID_STRING @"dead_town_yo"
 
 @class DTOptions;
 
-@interface DTIntroLayer : CCLayer<GKPeerPickerControllerDelegate, GKSessionDelegate>
+@interface DTIntroLayer : DTLayer<GKPeerPickerControllerDelegate, GKSessionDelegate>
 {
     @private
     // Some of the GUI bits
     CCSprite *_titleSprite;
     CCAnimate *_titleAnimation;
+    CCLabelTTF *_nameLabel;
     NSString *_defaultTitleAnimationFrameName;
     CCMenu *_menu;
     

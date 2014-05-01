@@ -35,6 +35,9 @@
     float _lastAccelerometerTime;
     BOOL _wasTilting;
     CGPoint _tiltControlVelocity;
+    
+    // For Apple demo!
+    CCLabelBMFont *_label;
 }
 
 @property(nonatomic) BOOL isPausing;
